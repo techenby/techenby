@@ -6,5 +6,5 @@
 {{ /if }}
 
 <h2 class="p-4 font-semibold text-lg text-center border-t border-b leading-tight">
-    <a class="hover:text-custom-purple" href="{{ url }}">{{ (link_url | scrape('title') ?? title) | widont }}</a>
+    <a class="hover:text-purple-500" href="{{ url }}">{{ (link_url | scrape('title') ?? title) | widont }}</a>
 </h2>
