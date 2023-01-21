@@ -1,8 +1,10 @@
 title: Global
 data:
-  site_name: 'My Stumblr'
-  tagline: 'Just me posting stuff about everything like such as.'
+  site_name: TechEnby
+  avatar: avatars/andy-avatar-yellow.webp
+  tagline: 'Just me posting stuff about everything that brings me joy like Laravel, Livewire, LEGO, 3D printing and more.'
   social_links:
-    email: 'mailto:hello@statamic.com'
-    twitter: 'https://twitter.com/statamic'
+    email: 'mailto:hi@andymnewhouse.me'
+    instagram: 'https://instagram.com/techenby'
+    twitter: 'https://twitter.com/techenby'
   copyright: 'Stumblr by <a href="https://statamic.com">Statamic</a>.'
