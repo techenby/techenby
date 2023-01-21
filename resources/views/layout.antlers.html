@@ -20,14 +20,14 @@
     {{ vite src="resources/css/tailwind.css|resources/js/site.js" }}
 </head>
 
-<body class="bg-white text-black">
+<body class="bg-white dark:bg-gray-900 dark:text-gray-200 text-black">
     <div class="relative z-10">
         {{ partial:nav }}
         {{ template_content }}
         {{ partial:footer }}
     </div>
     <div class="bg-pattern h-[700px] absolute top-0 inset-x-0 z-[0]">
-        <div class="w-full h-full bg-gradient-to-t from-white"></div>
+        <div class="w-full h-full bg-gradient-to-t from-white dark:from-gray-900"></div>
     </div>
 </body>
 
