@@ -2,7 +2,9 @@ title: Global
 data:
   site_name: TechEnby
   avatar: avatars/andy-avatar-yellow.webp
+  heading: "Hi, I'm Andy Newhouse and online I go by TechEnby"
   tagline: 'Just me posting stuff about everything that brings me joy like Laravel, Livewire, LEGO, 3D printing and more.'
+  bio: "I'm a programmer at [Tighten](https://tighten.com), the Director of Technology for [SGD Institute](https://sgdinstitute.org), and help out my spouse with their small business [Chaotic Notions](https://chaoticnotions.xyz)."
   social_links:
     email: 'mailto:hi@andymnewhouse.me'
     instagram: 'https://instagram.com/techenby'
