@@ -1,5 +1,5 @@
 <div class="card p-0 content max-w-md mx-auto" x-data="{ showList: false }">
-    <div class="py-3 px-4 border-b text-center">
+    <div class="py-3 px-4 border-b dark:border-gray-700 text-center">
         <h1>Welcome to Stumblr!</h1>
         <p>Let's get you out there and posting that sweet, sweet content.</p>
     </div>

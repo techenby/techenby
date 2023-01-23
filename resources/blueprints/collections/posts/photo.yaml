@@ -25,7 +25,6 @@ sections:
           icon: assets
           listable: hidden
           instructions_position: above
-          read_only: false
       -
         import: generic
   sidebar:
@@ -45,7 +44,6 @@ sections:
             - required
           instructions_position: above
           listable: hidden
-          read_only: false
           mode: single
           time_enabled: false
           time_seconds_enabled: false
@@ -61,3 +59,8 @@ sections:
             - tags
           display: Tags
           mode: select
+          instructions_position: above
+          listable: true
+          visibility: visible
+          always_save: false
+          create: true

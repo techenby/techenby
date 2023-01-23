@@ -2,8 +2,9 @@
     <div class="max-w-6xl mx-auto flex items-center justify-between py-8 px-6">
         <nav>
             <ul class="flex items-center space-x-6 font-bold">
-                <li><a class="hover:text-purple-500" href="/">Posts</a></li>
-                <li><a class="hover:text-purple-500" href="/posts/tags">Tags</a></li>
+                {{ nav:main }}
+                <li><a class="hover:text-purple-500" href="{{ url }}">{{ title }}</a></li>
+                {{ /nav:main }}
             </ul>
         </nav>
         <nav>

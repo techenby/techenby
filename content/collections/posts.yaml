@@ -1,5 +1,5 @@
 title: Posts
-template: default
+template: posts/show
 layout: layout
 taxonomies:
   - tags
@@ -10,3 +10,7 @@ sort_dir: desc
 date_behavior:
   past: public
   future: private
+preview_targets:
+  -
+    label: Entry
+    url: '{permalink}'
