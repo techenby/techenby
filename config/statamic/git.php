@@ -95,6 +95,7 @@ return [
     */
 
     'paths' => [
+        base_path('public/assets'),
         base_path('content'),
         base_path('users'),
         resource_path('blueprints'),
