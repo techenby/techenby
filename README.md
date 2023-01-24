@@ -2,7 +2,7 @@
 
 - 😄 Pronouns: they/them
 - I'm a programmer at [Tighten](https://tighten.com)
-_ I'm the Director of Technology at [SGD Institute](https://sgdinstitute.org)
+- I'm the Director of Technology at [SGD Institute](https://sgdinstitute.org)
 - 🔭 I’m currently working on OnRamp, Ozzie, OctoQueue (geez that's a lot of `O` projects)
 - 👯 I’m looking to collaborate on OctoQueue
 - 💬 Ask me about the amazingness of the TALL stack
