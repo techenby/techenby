@@ -1,12 +1,15 @@
 <section class="text-center">
-    <h1 class="text-5xl font-black">{{ type | title }} Posts</h1>
+    <h1 class="text-4xl lg:text-5xl font-black flex items-center space-x-4 justify-center">
+        {{ svg src="assets/icons/{type}" :aria-label="type" role="img" class="w-16 h-16" }}
+        <span>{{ type | title }} Posts</span>
+    </h1>
 </section>
 
 <section class="max-w-lg mx-auto space-y-24 py-24">
     {{ collection:posts :blueprint:is="type" paginate="20" as="posts" }}
-        {{ posts }}
-            {{ partial:card prose="lg:prose-lg" }}
-        {{ /posts }}
-        {{ partial:pagination }}
+    {{ posts }}
+    {{ partial:card prose="lg:prose-lg" }}
+    {{ /posts }}
+    {{ partial:pagination }}
     {{ /collection:posts }}
 </section>

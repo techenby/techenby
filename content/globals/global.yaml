@@ -10,3 +10,12 @@ data:
     instagram: 'https://instagram.com/techenby'
     twitter: 'https://twitter.com/techenby'
   copyright: 'Stumblr by <a href="https://statamic.com">Statamic</a>.'
+  classes:
+    - 'bg-blue-300 dark:bg-blue-500'
+    - 'bg-green-300 dark:bg-green-700'
+    - bg-purple-500
+  blobs:
+    - rounded-blob-1
+    - rounded-blob-2
+    - rounded-blob-3
+    - rounded-blob-4

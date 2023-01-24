@@ -98,3 +98,26 @@ sections:
           icon: text
           listable: hidden
           instructions_position: above
+  random:
+    display: Random
+    fields:
+      -
+        handle: classes
+        field:
+          display: Classes
+          type: list
+          icon: list
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+      -
+        handle: blobs
+        field:
+          display: Blobs
+          type: list
+          icon: list
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
