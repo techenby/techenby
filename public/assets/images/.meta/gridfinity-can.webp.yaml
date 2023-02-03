@@ -1,6 +1,8 @@
-data: {  }
+data:
+  alt: 'Yellow 3D printed soda can holder printed for use with the gridfinity system. The background is a light bamboo desk.'
+  focus: 48-40-1
 size: 163792
-last_modified: 1674352705
+last_modified: 1674575248
 width: 1440
 height: 1920
 mime_type: image/webp
