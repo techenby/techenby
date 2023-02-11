@@ -331,16 +331,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "2.5.2",
+            "version": "2.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "c76c013c555160410af47c03a0e173518e3f5796"
+                "reference": "607a4c04006ce1d2b6fdfd5467bae3d7ad9ce5ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/c76c013c555160410af47c03a0e173518e3f5796",
-                "reference": "c76c013c555160410af47c03a0e173518e3f5796",
+                "url": "https://api.github.com/repos/composer/composer/zipball/607a4c04006ce1d2b6fdfd5467bae3d7ad9ce5ab",
+                "reference": "607a4c04006ce1d2b6fdfd5467bae3d7ad9ce5ab",
                 "shasum": ""
             },
             "require": {
@@ -424,7 +424,7 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/composer/issues",
-                "source": "https://github.com/composer/composer/tree/2.5.2"
+                "source": "https://github.com/composer/composer/tree/2.5.3"
             },
             "funding": [
                 {
@@ -440,7 +440,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-04T13:33:22+00:00"
+            "time": "2023-02-10T12:23:52+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -5106,16 +5106,16 @@
         },
         {
             "name": "statamic/cms",
-            "version": "v3.4.2",
+            "version": "v3.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/statamic/cms.git",
-                "reference": "a701611230232956e8c3703547b440c7d25c7ac6"
+                "reference": "e2cf1992e018e5af312c314d30f9062c6d4af3bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/statamic/cms/zipball/a701611230232956e8c3703547b440c7d25c7ac6",
-                "reference": "a701611230232956e8c3703547b440c7d25c7ac6",
+                "url": "https://api.github.com/repos/statamic/cms/zipball/e2cf1992e018e5af312c314d30f9062c6d4af3bb",
+                "reference": "e2cf1992e018e5af312c314d30f9062c6d4af3bb",
                 "shasum": ""
             },
             "require": {
@@ -5194,7 +5194,7 @@
             ],
             "support": {
                 "issues": "https://github.com/statamic/cms/issues",
-                "source": "https://github.com/statamic/cms/tree/v3.4.2"
+                "source": "https://github.com/statamic/cms/tree/v3.4.3"
             },
             "funding": [
                 {
@@ -5202,7 +5202,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-02T23:46:43+00:00"
+            "time": "2023-02-08T21:59:27+00:00"
         },
         {
             "name": "statamic/stringy",
