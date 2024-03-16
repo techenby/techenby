@@ -10,7 +10,7 @@
             </div>
             <div class="flex-1">
                 <h2 class="text-blue-darkest">Tweak your site details</h2>
-                <p>Customize your site name, tagline, social links, and copyright info.</p>
+                <p>Customize your site name, description, social links, and copyright info.</p>
             </div>
         </a>
         <a href="{{ cp_route('collections.show', 'posts') }}" class="p-2 flex items-start hover:bg-blue-100 rounded-md group">

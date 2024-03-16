@@ -1,123 +1,110 @@
-sections:
+tabs:
   main:
     display: Main
-    fields:
+    sections:
       -
-        handle: site_name
-        field:
-          input_type: text
-          antlers: false
-          display: 'Site Name'
-          type: text
-          icon: text
-          listable: hidden
-          instructions_position: above
-      -
-        handle: avatar
-        field:
-          mode: list
-          container: assets
-          restrict: false
-          allow_uploads: true
-          show_filename: true
-          max_files: 1
-          display: Avatar
-          type: assets
-          icon: assets
-          listable: hidden
-          instructions_position: above
-          visibility: visible
-          always_save: false
-      -
-        handle: heading
-        field:
-          input_type: text
-          antlers: false
-          display: Heading
-          type: text
-          icon: text
-          listable: hidden
-          instructions_position: above
-          visibility: visible
-          always_save: false
-      -
-        handle: tagline
-        field:
-          antlers: false
-          display: Tagline
-          type: textarea
-          icon: textarea
-          listable: hidden
-          instructions_position: above
-      -
-        handle: bio
-        field:
-          restrict: false
-          automatic_line_breaks: true
-          automatic_links: false
-          escape_markup: false
-          smartypants: false
-          antlers: false
-          display: Bio
-          type: markdown
-          icon: markdown
-          listable: hidden
-          instructions_position: above
-          visibility: visible
-          always_save: false
-      -
-        handle: social_links
-        field:
-          mode: keyed
-          display: 'Social Links'
-          type: array
-          keys:
-            discord: Discord
-            dribbble: Dribbble
-            email: Email
-            facebook: Facebook
-            instagram: Instagram
-            kickstarter: Kickstarter
-            patreon: Patreon
-            pinterest: Pinterest
-            snapchat: Snapchat
-            telegram: Telegram
-            tiktok: Tiktok
-            twitch: Twitch
-            twitter: Twitter
-            whatsapp: Whatsapp
-            youtube: YouTube
-            zoom: Zoom
-      -
-        handle: copyright
-        field:
-          input_type: text
-          antlers: false
-          display: 'Footer Copyright'
-          type: text
-          icon: text
-          listable: hidden
-          instructions_position: above
+        fields:
+          -
+            handle: site_name
+            field:
+              input_type: text
+              antlers: false
+              display: 'Site Name'
+              type: text
+              listable: hidden
+              instructions_position: above
+          -
+            handle: avatar
+            field:
+              mode: list
+              container: assets
+              restrict: false
+              allow_uploads: true
+              show_filename: true
+              max_files: 1
+              display: Avatar
+              type: assets
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+          -
+            handle: heading
+            field:
+              input_type: text
+              antlers: false
+              display: Heading
+              type: text
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+          -
+            handle: description
+            field:
+              antlers: false
+              display: Description
+              type: textarea
+              listable: hidden
+              instructions_position: above
+          -
+            handle: bio
+            field:
+              restrict: false
+              automatic_line_breaks: true
+              automatic_links: false
+              escape_markup: false
+              smartypants: false
+              antlers: false
+              display: Bio
+              type: markdown
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+          -
+            handle: social_links
+            field:
+              mode: keyed
+              display: 'Social Links'
+              type: array
+              keys:
+                discord: Discord
+                dribbble: Dribbble
+                email: Email
+                facebook: Facebook
+                instagram: Instagram
+                kickstarter: Kickstarter
+                patreon: Patreon
+                pinterest: Pinterest
+                snapchat: Snapchat
+                telegram: Telegram
+                tiktok: Tiktok
+                twitch: Twitch
+                twitter: Twitter
+                whatsapp: Whatsapp
+                youtube: YouTube
+                zoom: Zoom
   random:
     display: Random
-    fields:
+    sections:
       -
-        handle: classes
-        field:
-          display: Classes
-          type: list
-          icon: list
-          listable: hidden
-          instructions_position: above
-          visibility: visible
-          always_save: false
-      -
-        handle: blobs
-        field:
-          display: Blobs
-          type: list
-          icon: list
-          listable: hidden
-          instructions_position: above
-          visibility: visible
-          always_save: false
+        fields:
+          -
+            handle: classes
+            field:
+              display: Classes
+              type: list
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+          -
+            handle: blobs
+            field:
+              display: Blobs
+              type: list
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
