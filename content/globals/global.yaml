@@ -3,12 +3,12 @@ data:
   site_name: TechEnby
   avatar: avatars/andy-avatar-yellow.webp
   heading: "Hi, I'm Andy Newhouse,<br/> online I go by TechEnby"
-  tagline: 'Just me posting stuff about everything that brings me joy like Laravel, Livewire, LEGO, 3D printing and more.'
-  bio: "I'm a programmer at [Tighten](https://tighten.com), the Director of Technology for [SGD Institute](https://sgdinstitute.org), and help out my spouse with their small business [Chaotic Notions](https://chaoticnotions.xyz)."
+  bio: "I'm a programmer at [Tighten](https://tighten.com), the Director of Technology for [SGD Institute](https://sgdinstitute.org), and help out my spouse with their small business [Chaotic Notions](https://chaoticnotions.xyz). I have many hobbies everything from Livewire to LEGO, and I will share my projects here."
   social_links:
     email: 'mailto:hi@andymnewhouse.me'
     instagram: 'https://instagram.com/techenby'
     twitter: 'https://twitter.com/techenby'
+    youtube: 'https://www.youtube.com/@techenby'
   copyright: 'Stumblr by <a href="https://statamic.com">Statamic</a>.'
   classes:
     - 'bg-blue-300 dark:bg-blue-500'

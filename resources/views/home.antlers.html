@@ -1,8 +1,11 @@
-<section class="max-w-prose mx-auto">
-    <img src="{{ global:avatar }}" alt="{{ global:avatar.alt }}" class="w-48 mx-auto rounded-blob-4">
-    <div class="text-center -mt-8 w-4/5 mx-auto bg-blue-300 dark:bg-blue-500 bg-blend-screen p-12 rounded-blob-3">
+<section class="max-w-lg mx-auto py-8 px-4
+    lg:py-12 lg:px-0 lg:max-w-none lg:flex lg:items-center lg:justify-center lg:space-x-12">
+    <img src="{{ global:avatar }}" class="w-48 h-48 {{ blobs | random }}" alt="{{ global:avatar.alt }}">
+    <div class="mt-8 lg:mt-0 max-w-prose">
         <h1 class="text-xl sm:text-3xl font-black">{{ heading }}</h1>
-        <p class="mt-3 text-lg sm:text-xl font-medium">{{ tagline }}</p>
+        <div class="mt-4 prose lg:prose-xl dark:prose-invert">
+            {{ bio }}
+        </div>
     </div>
 </section>
 
