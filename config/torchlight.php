@@ -11,22 +11,22 @@ return [
 
     // Which theme you want to use. You can find all of the themes at
     // https://torchlight.dev/docs/themes.
-    'theme' => env('TORCHLIGHT_THEME', 'material-theme-palenight'),
+    // 'theme' => env('TORCHLIGHT_THEME', 'atom-one-dark'),
 
     // If you want to use two separate themes for dark and light modes,
     // you can use an array to define both themes. Torchlight renders
     // both on the page, and you will be responsible for hiding one
     // or the other depending on the dark / light mode via CSS.
-    // 'theme' => [
-    //     'dark' => 'github-dark',
-    //     'light' => 'github-light',
-    // ],
+    'theme' => [
+        'dark' => 'atom-one-dark',
+        'light' => 'github-light',
+    ],
 
     // Your API token from torchlight.dev.
     'token' => env('TORCHLIGHT_TOKEN'),
 
     // If you want to register the blade directives, set this to true.
-    'blade_components' => true,
+    'blade_components' => false,
 
     // The Host of the API.
     'host' => env('TORCHLIGHT_HOST', 'https://api.torchlight.dev'),

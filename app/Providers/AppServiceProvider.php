@@ -3,9 +3,12 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use Statamic\Facades\Markdown;
 use Statamic\Statamic;
 use Torchlight\Commonmark\V2\TorchlightExtension;
+use Ueberdosis\CommonMark\HintExtension;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,7 +33,10 @@ class AppServiceProvider extends ServiceProvider
         // Statamic::style('app', 'cp');
 
         Markdown::addExtension(function () {
-            return new TorchlightExtension;
+            return [
+                new TorchlightExtension,
+                new HintExtension,
+            ];
         });
     }
 }
