@@ -1,4 +1,13 @@
-/* This is all you. */
+@font-face {
+    font-family: Brother;
+    src: url('/fonts/Brother-Regular.ttf');
+}
+
+@font-face {
+    font-family: Brother;
+    src: url('/fonts/Brother-Bold.ttf');
+    font-weight: bold;
+}
 
 .bg-pattern {
     @apply bg-cover bg-center;
