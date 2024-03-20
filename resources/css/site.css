@@ -6,8 +6,12 @@
 }
 
 .hint {
-    @apply relative px-4 py-6 my-12 bg-gray-800 border;
+    @apply relative px-4 py-6 my-12 bg-white border;
     box-shadow: 3px 3px 0 theme('colors.gray.600');
+
+    @media (prefers-color-scheme: dark) {
+        @apply bg-gray-800;
+    }
 }
 
 .hint p:last-child {
@@ -23,6 +27,8 @@
     @apply border inline-block text-lg bg-gray-500 text-white m-0 absolute px-2 pt-2 pb-1 -top-4 leading-4 tracking-wide;
     font-family: Brother,sans-serif;
 }
+
+
 
 .hint.question {
     @apply ml-48 -mr-32;
