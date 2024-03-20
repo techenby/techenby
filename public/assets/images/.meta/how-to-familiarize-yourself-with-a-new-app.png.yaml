@@ -1,0 +1,8 @@
+data:
+  alt: 'A window with commands to get a repository up and running the commands are as follows: `git clone git@github.com:org/repo.git` `composer install` `npm install` `cp .env.example .env` `php artisan key:generate`'
+size: 126940
+last_modified: 1710946841
+width: 1817
+height: 1022
+mime_type: image/png
+duration: null

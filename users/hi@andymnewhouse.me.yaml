@@ -9,3 +9,6 @@ preferences:
         - title
         - slug
         - icon
+  collections:
+    posts:
+      after_save: continue_editing
