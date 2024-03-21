@@ -17,3 +17,4 @@ updated_at: 1711044982
 - Update pupper icon (too dark, want to match vibe of other icons)
 - Investigate using doodle icons from Envato
 - Get Lighthouse score up
+- Interactive "Uses" page?
