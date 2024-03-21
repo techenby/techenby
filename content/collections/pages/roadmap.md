@@ -14,7 +14,11 @@ updated_at: 1711044982
 	- if automatically grabbing image doesn't work
 - Figure out why social icons don't work on mobile
 - Update/add social icons
+    - Maybe link to pinkary instead
+    - Maybe add suggest.gg
 - Update pupper icon (too dark, want to match vibe of other icons)
 - Investigate using doodle icons from Envato
 - Get Lighthouse score up
 - Interactive "Uses" page?
+- Link Obsidian?
+- Do we really like the purple?
