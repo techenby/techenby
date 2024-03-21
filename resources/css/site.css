@@ -37,8 +37,6 @@
     font-family: Brother,sans-serif;
 }
 
-
-
 .hint.question {
     @apply ml-48 -mr-32;
     box-shadow: 3px 3px 0 theme('colors.pink.500');
