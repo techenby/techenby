@@ -13,8 +13,8 @@
                 {{ foreach:social_links }}
                 <a href="{{ value }}"
                     class="flex items-center justify-center h-7 w-7 hover:text-purple-600 dark:hover:text-purple-400 scale-100 hover:scale-[1.1] hover:-rotate-2"
-                    title="{{ label }}">
-                    {{ svg src="assets/icons/{key}" :aria-label="label" role="img" }}
+                    title="{{ key }}">
+                    {{ svg src="assets/icons/{key}" :aria-label="key" role="img" }}
                 </a>
                 {{ /foreach:social_links }}
                 <li>
