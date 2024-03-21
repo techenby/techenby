@@ -7,12 +7,12 @@
             alt="{{ cover_photo.alt ?? title }}">
     </a>
     {{ /if }}
-    <div class="px-4 py-6 prose dark:prose-invert">
-        <h2><a href="{{ url }}" class="no-underline font-bold hover:text-purple-500">{{ title }}</a></h2>
+    <div class="px-4 py-6 prose dark:prose-invert prose-purple">
+        <h2><a href="{{ url }}" class="no-underline font-bold hover:text-purple-600 dark:hover:text-purple-400">{{ title }}</a></h2>
     </div>
     {{ /if }}
     {{ if template != "home" }}
-    <div class="prose dark:prose-invert p-8">
+    <div class="prose dark:prose-invert p-8 prose-purple">
         {{ content }}
     </div>
     {{ /if }}
