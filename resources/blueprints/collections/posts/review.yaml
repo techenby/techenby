@@ -11,7 +11,7 @@ sections:
           validate:
             - required
       -
-        handle: cover_photo
+        handle: photo
         field:
           mode: list
           container: assets
