@@ -1,12 +1,14 @@
 <div class="px-4 py-6 space-y-4">
-    <div class="prose dark:prose-invert prose-purple leading-normal">
+    {{ if template == "home" }}
+    <div class="prose dark:prose-invert prose-brand leading-normal">
         {{ caption }}
     </div>
+    {{ /if }}
     {{ if tags }}
     <div class="flex flex-wrap text-sm space-x-4">
         {{ tags }}
         <a href="{{ url }}"
-            class="text-gray-600 dark:text-gray-200 mr-3 hover:text-purple-600 dark:hover:text-purple-400 flex items-center space-x-2">
+            class="text-gray-600 dark:text-gray-200 mr-3 hover:text-java-600 dark:hover:text-java-400 flex items-center space-x-2">
             {{ svg src="{icon}" :aria-label="title" role="img" class="w-6 h-6" }}
             <span>{{ title }}</span>
         </a>

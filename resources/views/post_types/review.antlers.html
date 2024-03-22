@@ -1,4 +1,4 @@
-<div class="border-b dark:border-gray-700">
+<div>
     {{ if template == "home" }}
     {{ if cover_photo }}
     <a href="{{ url }}">
@@ -7,10 +7,10 @@
             alt="{{ cover_photo.alt ?? title }}">
     </a>
     {{ /if }}
-    <div class="px-4 py-6 prose dark:prose-invert prose-purple">
+    <div class="px-4 py-6 prose dark:prose-invert prose-brand">
         <h2 class="font-bold">
             {{ if content }}
-            <a href="{{ url }}" class="no-underline hover:text-purple-600 dark:hover:text-purple-400">
+            <a href="{{ url }}" class="no-underline hover:text-java-600 dark:hover:text-java-400">
                 {{ title }}: {{ rating.label }}
             </a>
             {{ else }}
