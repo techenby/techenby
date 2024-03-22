@@ -7,7 +7,7 @@
                 </span>
                 <span class="leading-none font-black text-3xl text-java-600 dark:text-java-400">{{ date format="j" }}</span>
             </a>
-            <a href="{{$ route('posts.type', $blueprint) $}}">
+            <a href="{{$ route('posts.type', $blueprint) $}}" aria-label="All {{ blueprint }} posts">
                 {{ svg src="assets/icons/{blueprint}" class="h-10 w-10 my-6 mx-auto text-mardi dark:text-yellow scale-100 hover:scale-[1.1] hover:rotate-3" }}
             </a>
         </div>
