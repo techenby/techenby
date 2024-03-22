@@ -3,6 +3,8 @@
         <img class="rounded-t-lg" src="{{ url }}" alt='{{ alt ?? title }}' width="{{ width }}" height="{{ height }}">
     {{ /glide:photo }}
 </a>
+{{ if template != 'home' }}
 <div class="prose dark:prose-invert p-8 prose-brand">
     {{ caption }}
 </div>
+{{ /if }}
