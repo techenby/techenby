@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ title }} | {{ site:name }}</title>
-    <meta name="description" content="{{ global:description ?? "TechEnby's Site" }}">
-    <meta property="og:url" content="{{ url }}">
+    <meta name="description" content="{{ caption | strip_tags ?? global:description ?? "TechEnby's Site" }}">
+    <meta property="og:description" content="{{ caption | strip_tags ?? global:description ?? "TechEnby's Site" }}">
+    <meta property="og:url" content="{{ permalink }}">
     <meta property="og:title" content="{{ title ?? site:name }}">
     <meta property="og:site_name" content="{{ site_name ?? config:app:name }}">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="{{ site:locale }}">
-    <meta property="og:description" content="{{ global:description ?? "TechEnby's Site" }}">
     <meta property="og:image" content="{{ site:permalink }}{{ photo:url }}">
     <meta property="og:image:alt" content='{{ photo:alt }}'>
     <link rel="sitemap" href="/sitemap.xml" type="application/xml">
