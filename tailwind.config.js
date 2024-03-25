@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
     content: [
         './resources/**/*.antlers.html',
@@ -88,6 +90,9 @@ module.exports = {
                     900: '#7c3b0b',
                     950: '#481e00',
                 }
+            },
+            fontFamily: {
+                'brother': ['Brother', ...defaultTheme.fontFamily.sans],
             },
             typography: ({ theme }) => ({
                 brand: {
