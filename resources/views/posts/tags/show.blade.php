@@ -6,8 +6,8 @@
         </h1>
 
         <div class="space-y-16">
-            @foreach($page->entries as $entry)
-                <x-card :image="$entry->photo" :content="$entry->caption" />
+            @foreach($page->entries->sortByDesc('updated_at') as $entry)
+                <x-card :entry="$entry" />
             @endforeach
         </div>
     </x-container>

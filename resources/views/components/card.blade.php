@@ -1,23 +1,14 @@
-@props(['image' => false, 'content' => false, 'tags' => [], 'showTitle' => true])
+@props(['entry'])
 
-<div>
-    @if ($image)
-    <img src="{{ url($image->url) }}"
-        alt="{{ $image->alt }}"
-        class="rounded-t-lg w-full shadow-3xl"
+<a href="{{ $entry->url }}" class="block bg-white rounded-lg shadow-lg dark:bg-mardi-950 overflow-hidden">
+    @if ($entry->photo)
+    <img src="{{ url($entry->photo->url) }}"
+        alt="{{ $entry->photo->alt }}"
+        class="w-full"
     />
     @endif
-
-    <div class="rounded-lg shadow-3xl bg-white dark:bg-mardi-950 px-4 py-6 space-y-6 {{ $image ? 'rounded-t-none' : '' }}">
-
-        <x-content :content="$content" />
-
-        @if (! empty($tags))
-        <div class="flex flex-wrap text-sm space-x-4">
-            @foreach($tags as $tag)
-            <x-tag :tag="$tag" />
-            @endforeach
-        </div>
-        @endif
-    </div>
-</div>
+    <x-content class="px-4 py-6 space-y-6">
+        <h2>{{ $entry->title }}</h2>
+        <p>{{ strip_tags($entry->caption) }}</p>
+    </x-content>
+</a>
