@@ -4,7 +4,7 @@ blueprint: page
 title: 'About Me'
 updated_by: 4e0556b2-7dee-443c-949b-fa0977eaa142
 updated_at: 1675215054
-header_image: ash-andy-jamaica-sunset.webp
+photo: ash-andy-jamaica-sunset.webp
 ---
 👋 Hey, Hi, Hello!
 

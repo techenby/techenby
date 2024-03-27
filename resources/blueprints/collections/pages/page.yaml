@@ -10,7 +10,7 @@ sections:
           validate:
             - required
       -
-        handle: header_image
+        handle: photo
         field:
           mode: list
           container: assets
