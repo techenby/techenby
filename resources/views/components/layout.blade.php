@@ -44,7 +44,9 @@
         {{ partial:nav }}
         @endantlers
 
-        {{ $slot }}
+        <main>
+            {{ $slot }}
+        </main>
 
         @antlers
         {{ partial:footer }}
