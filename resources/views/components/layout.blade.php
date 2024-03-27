@@ -48,9 +48,7 @@
             {{ $slot }}
         </main>
 
-        @antlers
-        {{ partial:footer }}
-        @endantlers
+        <x-footer />
     </div>
     <div class="bg-pattern h-[700px] absolute top-0 inset-x-0 z-[0]">
         <div class="w-full h-full bg-gradient-to-t from-purple-50 dark:from-purple-950"></div>
