@@ -7,7 +7,7 @@
             <li class="text-gray-400 flex items-center justify-between font-medium">
                 <a href="{{ $tag->permalink }}" class="group flex w-full justify-between items-center">
                     <div class="text-3xl flex items-center space-x-4 no-underline font-bold text-black dark:text-gray-200 group-hover:text-java-600 dark:group-hover:text-java-400">
-                        {!! Statamic::tag('svg')->src($tag->icon)->ariaLabel($tag->title)->role('img')->class('size-12') !!}
+                        <x-ant.svg :src="$tag->icon" :aria-label="$tag->title" role="img" class="size-12" />
 
                         <span>{{ $tag->title }}</span>
                     </div>
