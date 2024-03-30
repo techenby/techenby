@@ -22,7 +22,12 @@
         />
         @endif
         <x-content class="px-4 py-6 space-y-6">
-            <h2>{{ $entry->title }}</h2>
+            <h2>
+                {{ $entry->title }}
+                @if ($entry->blueprint->handle === 'review')
+                : {{ $entry->rating->label() }}
+                @endif
+            </h2>
             <p>{{ strip_tags($entry->caption) }}</p>
         </x-content>
     </a>
