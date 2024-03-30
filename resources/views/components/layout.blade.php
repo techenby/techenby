@@ -40,9 +40,7 @@
 
 <body class="bg-purple-50 dark:bg-purple-950 dark:text-gray-200 text-black">
     <div class="relative z-10">
-        @antlers
-        {{ partial:nav }}
-        @endantlers
+        <x-nav />
 
         <main>
             {{ $slot }}
