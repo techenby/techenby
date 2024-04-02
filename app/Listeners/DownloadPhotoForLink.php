@@ -31,8 +31,11 @@ class DownloadPhotoForLink
 
         if (@$dom->loadHTMLFile($url)) {
             foreach($dom->getElementsByTagName('meta') as $meta) {
-                if ($meta->getAttribute('property') == 'og:image') {
+                if ($meta->getAttribute('property') == 'og:image' || $meta->getAttribute('name') == 'og:image') {
                     $data['image'] = $meta->getAttribute('content');
+                }
+                if ($meta->getAttribute('property') == 'og:image:alt' || $meta->getAttribute('name') == 'og:image:alt') {
+                    $data['image_alt'] = $meta->getAttribute('content');
                 }
             }
 
