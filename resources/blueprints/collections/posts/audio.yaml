@@ -1,63 +1,93 @@
 title: Audio
-sections:
+tabs:
   main:
     display: Main
-    fields:
+    sections:
       -
-        handle: title
-        field:
-          type: text
-          required: true
-          validate:
-            - required
-      -
-        handle: audio
-        field:
-          mode: grid
-          container: assets
-          folder: audio
-          restrict: true
-          allow_uploads: true
-          show_filename: true
-          max_files: 1
-          display: Audio
-          type: assets
-          icon: assets
-          listable: hidden
-          instructions_position: above
-          read_only: false
-      -
-        import: generic
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            import: generic
+          -
+            handle: audio
+            field:
+              mode: grid
+              container: assets
+              folder: audio
+              restrict: true
+              allow_uploads: true
+              show_filename: true
+              max_files: 1
+              display: Audio
+              type: assets
+              listable: hidden
+              instructions_position: above
+          -
+            handle: transcript
+            field:
+              restrict: false
+              buttons:
+                - bold
+                - italic
+                - unorderedlist
+                - orderedlist
+                - quote
+                - link
+                - image
+                - table
+              automatic_line_breaks: true
+              automatic_links: false
+              escape_markup: false
+              heading_anchors: false
+              smartypants: false
+              table_of_contents: false
+              antlers: false
+              type: markdown
+              display: Transcript
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              replicator_preview: true
+              hide_display: false
   sidebar:
     display: Sidebar
-    fields:
+    sections:
       -
-        handle: slug
-        field:
-          type: slug
-          localizable: true
-      -
-        handle: date
-        field:
-          type: date
-          required: true
-          validate:
-            - required
-          instructions_position: above
-          listable: hidden
-          read_only: false
-          mode: single
-          time_enabled: false
-          time_seconds_enabled: false
-          full_width: false
-          inline: false
-          columns: 1
-          rows: 1
-      -
-        handle: tags
-        field:
-          type: terms
-          taxonomies:
-            - tags
-          display: Tags
-          mode: select
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: date
+            field:
+              type: date
+              required: true
+              default: now
+              validate:
+                - required
+              instructions_position: above
+              listable: hidden
+              mode: single
+              time_enabled: false
+              time_seconds_enabled: false
+              full_width: false
+              inline: false
+              columns: 1
+              rows: 1
+          -
+            handle: tags
+            field:
+              type: terms
+              taxonomies:
+                - tags
+              display: Tags
+              mode: select
