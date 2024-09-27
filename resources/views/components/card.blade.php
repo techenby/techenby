@@ -1,6 +1,6 @@
 @props(['entry'])
 
-<div class="relative">
+<article class="relative">
     <div class="absolute -left-24 top-16">
         <div class="text-center uppercase">
             <a href="{{ $entry->url }}" class="flex flex-col">
@@ -14,21 +14,34 @@
             </a>
         </div>
     </div>
-    <a href="{{ $entry->url }}" class="block bg-white rounded-lg shadow-lg dark:bg-mardi-950 overflow-hidden">
+    <div class="overflow-hidden rounded-lg shadow-lg">
         @if ($entry->photo)
-        <img src="{{ url($entry->photo->url) }}"
-            alt="{{ $entry->photo->alt }}"
-            class="w-full"
-        />
+        <div class="flex-shrink-0">
+            <img src="{{ url($entry->photo->url) }}"
+                alt="{{ $entry->photo->alt }}"
+                class="w-full" />
+        </div>
         @endif
-        <x-content class="px-4 py-6 space-y-6">
-            <h2>
-                {{ $entry->title }}
-                @if ($entry->blueprint->handle === 'review')
-                : {{ $entry->rating->label() }}
-                @endif
-            </h2>
-            <p>{{ strip_tags($entry->caption) }}</p>
-        </x-content>
-    </a>
-</div>
+        <div class="bg-white dark:bg-mardi-950 p-6">
+            <div class="flex-1">
+                <a href="{{ $entry->url }}" class="mt-2 block">
+                    <h2 class="text-xl font-semibold text-slate-900 dark:text-white">
+                        {{ $entry->title }}
+                        @if ($entry->blueprint->handle === 'review')
+                        : {{ $entry->rating->label() }}
+                        @endif
+                    </h2>
+                    <p class="mt-3 text-base text-slate-500 dark:text-slate-200">{{ strip_tags($entry->caption) }}</p>
+                </a>
+            </div>
+            <div class="mt-6 text-sm font-medium flex flex-wrap gap-4">
+                @foreach ($entry->tags as $tag)
+                <a href="{{ $tag->url }}" class="hover:underline flex space-x-0.5">
+                    <span class="text-blue-700 dark:text-blue-500">#</span>
+                    <span class="text-java-600 dark:text-java-400">{{ $tag->slug }}</span>
+                </a>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</article>
