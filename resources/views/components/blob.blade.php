@@ -14,8 +14,8 @@
         'bg-yellow',
     ];
 
-    $blob = array_rand($blobs);
-    $color = array_rand($colors);
+    $blob = Arr::random($blobs);
+    $color = Arr::random($colors);
 @endphp
 
 <div {{ $attributes->merge(['class' => "$blob $color"]) }}>

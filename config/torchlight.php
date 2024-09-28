@@ -18,8 +18,8 @@ return [
     // both on the page, and you will be responsible for hiding one
     // or the other depending on the dark / light mode via CSS.
     'theme' => [
-        'dark' => 'atom-one-dark',
-        'light' => 'github-light',
+        'dark' => 'night-owl',
+        'light' => 'material-theme-lighter',
     ],
 
     // Your API token from torchlight.dev.
@@ -47,7 +47,7 @@ return [
     // https://torchlight.dev/docs/options
     'options' => [
         // Turn line numbers on or off globally.
-        // 'lineNumbers' => false,
+        'lineNumbers' => false,
 
         // Control the `style` attribute applied to line numbers.
         // 'lineNumbersStyle' => '',
