@@ -14,7 +14,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "statamic/cms": "^5.0",
-        "torchlight/torchlight-commonmark": "^0.5.5",
+        "torchlight/torchlight-laravel": "^0.6",
         "ueberdosis/commonmark-hint-extension": "^0.1.0"
     },
     "require-dev": {
