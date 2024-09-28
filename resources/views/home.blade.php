@@ -1,7 +1,7 @@
 <x-layout :title="$title">
     <section class="max-w-lg mx-auto py-8 px-4
         lg:py-12 lg:px-0 lg:max-w-none lg:flex lg:items-center lg:justify-center lg:space-x-12">
-        <img src="{{ $global->avatar }}" class="w-48 h-48 {{ array_random($global->blobs) }}" alt="{{ $global->avatar->alt }}">
+        <img src="{{ $global->avatar }}" class="w-48 h-48 {{ array_rand($global->blobs) }}" alt="{{ $global->avatar->alt }}">
         <div class="mt-8 lg:mt-0 max-w-prose">
             <h1 class="text-xl sm:text-3xl font-black align-baseline">
                 {!! $heading !!}
