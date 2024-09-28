@@ -11,7 +11,7 @@ class Dark extends Modifier
     {
         [$path, $extension] = explode('.', $value);
 
-        $darkPath = $path . '-dark.' . $extension;
+        $darkPath = $path.'-dark.'.$extension;
 
         if (Storage::disk('assets')->exists(str_replace('/assets/', '', $darkPath))) {
             return $darkPath;

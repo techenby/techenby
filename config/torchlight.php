@@ -18,8 +18,8 @@ return [
     // both on the page, and you will be responsible for hiding one
     // or the other depending on the dark / light mode via CSS.
     'theme' => [
-        'dark' => 'atom-one-dark',
-        'light' => 'github-light',
+        'dark' => 'night-owl',
+        'light' => 'material-theme-lighter',
     ],
 
     // Your API token from torchlight.dev.
@@ -40,14 +40,14 @@ return [
     // block, Torchlight will look for code snippets in the
     // following directories.
     'snippet_directories' => [
-        resource_path()
+        resource_path(),
     ],
 
     // Global options to control blocks-level settings.
     // https://torchlight.dev/docs/options
     'options' => [
         // Turn line numbers on or off globally.
-        // 'lineNumbers' => false,
+        'lineNumbers' => false,
 
         // Control the `style` attribute applied to line numbers.
         // 'lineNumbersStyle' => '',
@@ -62,5 +62,5 @@ return [
         // When lines are collapsed, this is the text that will
         // be shown to indicate that they can be expanded.
         // 'summaryCollapsedIndicator' => '...',
-    ]
+    ],
 ];

@@ -2,12 +2,9 @@
 
 namespace App\Listeners;
 
-use Illuminate\Support\Arr;
-use Statamic\Events\EntrySaving;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Statamic\Facades\Asset;
+use Statamic\Events\EntrySaving;
 
 class DownloadPhotoForLink
 {
@@ -18,19 +15,19 @@ class DownloadPhotoForLink
 
             $filename = Str::afterLast($data['image'], '/');
             $contents = file_get_contents($data['image']);
-            Storage::disk('assets')->put('images/' . $filename, $contents);
+            Storage::disk('assets')->put('images/'.$filename, $contents);
 
-            $event->entry->photo = 'images/' . $filename;
+            $event->entry->photo = 'images/'.$filename;
         }
     }
 
     private function scrapeDataFromUrl($url)
     {
         $data = [];
-        $dom = new \DOMDocument();
+        $dom = new \DOMDocument;
 
         if (@$dom->loadHTMLFile($url)) {
-            foreach($dom->getElementsByTagName('meta') as $meta) {
+            foreach ($dom->getElementsByTagName('meta') as $meta) {
                 if ($meta->getAttribute('property') == 'og:image' || $meta->getAttribute('name') == 'og:image') {
                     $data['image'] = $meta->getAttribute('content');
                 }

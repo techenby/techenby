@@ -65,3 +65,46 @@
         @apply bg-yellow-600;
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    .torchlight[data-theme="light"] {
+        display: none;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .torchlight[data-theme="dark"] {
+        display: none;
+    }
+}
+
+
+pre {
+    @apply my-4 rounded-lg overflow-x-auto border border-java-400 dark:border-java-800;
+}
+
+/*
+ Add some vertical padding and expand the width
+ to fill its container. The horizontal padding
+ comes at the line level so that background
+ colors extend edge to edge.
+*/
+pre code.torchlight {
+    @apply block py-4 min-w-max;
+}
+
+/*
+ Horizontal line padding.
+*/
+pre code.torchlight .line {
+    @apply px-4;
+}
+
+/*
+ Push the code away from the line numbers and
+ summary caret indicators.
+*/
+pre code.torchlight .line-number,
+pre code.torchlight .summary-caret {
+    @apply mr-4;
+}
