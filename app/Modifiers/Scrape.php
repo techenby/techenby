@@ -2,9 +2,9 @@
 
 namespace App\Modifiers;
 
-use Statamic\Support\Arr;
-use Statamic\Modifiers\Modifier;
 use Illuminate\Support\Facades\Cache;
+use Statamic\Modifiers\Modifier;
+use Statamic\Support\Arr;
 
 class Scrape extends Modifier
 {
@@ -17,13 +17,13 @@ class Scrape extends Modifier
 
     private function scrapeDataFromUrl($url, $hours)
     {
-        return Cache::remember('scraped-' . $url, now()->addHours($hours), function () use ($url) {
+        return Cache::remember('scraped-'.$url, now()->addHours($hours), function () use ($url) {
             $data = [];
-            $dom = new \DOMDocument();
+            $dom = new \DOMDocument;
 
             if (@$dom->loadHTMLFile($url)) {
 
-                foreach($dom->getElementsByTagName('meta') as $meta) {
+                foreach ($dom->getElementsByTagName('meta') as $meta) {
                     if ($meta->getAttribute('property') == 'og:image') {
                         $data['og_image'] = $meta->getAttribute('content');
                     }
