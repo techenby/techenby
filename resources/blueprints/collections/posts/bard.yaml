@@ -1,0 +1,190 @@
+title: Bard
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: cover_photo
+            field:
+              max_files: 1
+              container: assets
+              type: assets
+              display: 'Cover Photo'
+              folder: images
+          -
+            import: generic
+          -
+            handle: bard
+            field:
+              buttons:
+                - h2
+                - h3
+                - bold
+                - italic
+                - underline
+                - strikethrough
+                - unorderedlist
+                - orderedlist
+                - removeformat
+                - quote
+                - anchor
+                - image
+                - table
+                - small
+                - superscript
+                - subscript
+                - code
+                - codeblock
+                - horizontalrule
+                - alignleft
+                - aligncenter
+                - alignright
+                - alignjustify
+              smart_typography: true
+              remove_empty_nodes: false
+              link_collections:
+                - pages
+                - posts
+              container: assets
+              collapse: true
+              type: bard
+              display: Bard
+              sets:
+                formatting:
+                  display: Formatting
+                  icon: edit-paint-palette
+                  sets:
+                    hint:
+                      display: Hint
+                      icon: alert-help-question
+                      fields:
+                        -
+                          handle: style
+                          field:
+                            options:
+                              -
+                                key: question
+                                value: null
+                              -
+                                key: tip
+                                value: null
+                              -
+                                key: warning
+                                value: null
+                            taggable: true
+                            push_tags: true
+                            max_items: 1
+                            clearable: true
+                            type: select
+                            display: Style
+                        -
+                          handle: title
+                          field:
+                            type: text
+                            display: Title
+                        -
+                          handle: content
+                          field:
+                            type: markdown
+                            display: Content
+                    heading:
+                      display: 'Heading w/ Anchor'
+                      icon: security-lock
+                      fields:
+                        -
+                          handle: tag
+                          field:
+                            options:
+                              -
+                                key: h1
+                                value: null
+                              -
+                                key: h2
+                                value: null
+                              -
+                                key: h3
+                                value: null
+                              -
+                                key: h4
+                                value: null
+                              -
+                                key: h5
+                                value: null
+                              -
+                                key: h6
+                                value: null
+                            type: select
+                            display: Tag
+                        -
+                          handle: title
+                          field:
+                            type: text
+                            display: Title
+                            width: 50
+                        -
+                          handle: slug
+                          field:
+                            type: slug
+                            display: Slug
+                            width: 50
+                assets:
+                  display: Assets
+                  icon: media-image-picture-gallery
+                  sets:
+                    code_video:
+                      display: 'Code Video'
+                      fields:
+                        -
+                          handle: light_version
+                          field:
+                            max_files: 1
+                            min_files: 1
+                            container: assets
+                            folder: videos
+                            type: assets
+                            display: 'Light Version'
+                        -
+                          handle: dark_version
+                          field:
+                            max_files: 1
+                            min_files: 1
+                            container: assets
+                            folder: videos
+                            type: assets
+                            display: 'Dark Version'
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: date
+            field:
+              type: date
+              required: true
+              default: now
+              validate:
+                - required
+          -
+            handle: tags
+            field:
+              type: terms
+              taxonomies:
+                - tags
+              display: Tags
+              mode: select

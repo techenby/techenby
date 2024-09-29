@@ -12,7 +12,15 @@
             />
             @endif
 
-            <x-content class="p-8" :content="$page->content ?? $page->caption" />
+            <x-content class="p-8">
+                @isset($bard)
+                @foreach ($bard as $set)
+                    <x-dynamic-component :component="'bard.' . $set->type" :set="$set" />
+                @endforeach
+                @else
+                    {!! $page->content ?? $page->caption !!}
+                @endif
+            </x-content>
         </div>
     </x-container>
 </x-layout>

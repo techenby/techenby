@@ -42,7 +42,6 @@
 }
 
 .hint.question {
-    @apply ml-48 -mr-32;
     box-shadow: 3px 3px 0 theme('colors.mardi.500');
 
     .hint-title {
@@ -107,4 +106,8 @@ pre code.torchlight .line {
 pre code.torchlight .line-number,
 pre code.torchlight .summary-caret {
     @apply mr-4;
+}
+
+.prose p:first-of-type {
+    margin-top: 0;
 }
