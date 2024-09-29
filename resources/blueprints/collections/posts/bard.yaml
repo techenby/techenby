@@ -13,12 +13,12 @@ tabs:
               validate:
                 - required
           -
-            handle: cover_photo
+            handle: photo
             field:
               max_files: 1
               container: assets
               type: assets
-              display: 'Cover Photo'
+              display: 'Photo'
               folder: images
           -
             import: generic

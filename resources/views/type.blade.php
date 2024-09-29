@@ -1,7 +1,12 @@
 @php
     $entries = Statamic\Facades\Entry::query()
         ->where("collection", "posts")
-        ->where("blueprint", $type)
+        ->when($type === 'bard' || $type === 'text', function ($query) use ($type) {
+            return $query->where("blueprint", 'text')
+                ->orWhere("blueprint", 'bard');
+        }, function ($query) use ($type) {
+            return $query->where("blueprint", $type);
+        })
         ->orderByDesc('date')
         ->get();
 @endphp
