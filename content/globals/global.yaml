@@ -3,13 +3,25 @@ data:
   site_name: TechEnby
   avatar: avatars/andy-avatar.jpg
   heading: "Hi, I'm Andy Newhouse,<br/> online I go by"
-  description: "I'm a programmer at Tighten and the Director of Technology for SGD Institute. I also help my spouse with their small business, Chaotic Notions. I have many hobbies and projects, from Livewire to LEGO, and I will share my progress and what I've learned along the way with you."
-  bio: "I'm a programmer at [Tighten](https://tighten.com), the Director of Technology for [SGD Institute](https://sgdinstitute.org). I also help out my spouse with their small business, [Chaotic Notions](https://chaoticnotions.xyz).  I have many hobbies and projects, from Livewire to LEGO, and I will share my progress and what I've learned along the way with you."
+  description: "I'm a programmer at Tighten and I help my spouse with their small business, Chaotic Notions. I have many hobbies and projects, from Livewire to LEGO, and I will share my progress and what I've learned along the way with you."
+  bio: "I'm a programmer at [Tighten](https://tighten.com) and I help my spouse with their small business, [Chaotic Notions](https://chaoticnotions.xyz).  I have many hobbies and projects, from Livewire to LEGO, and I will share my progress and what I've learned along the way with you."
   social_links:
+    discord: null
+    dribbble: null
     email: 'mailto:hi@andymnewhouse.me'
+    facebook: null
     instagram: 'https://instagram.com/techenby'
+    kickstarter: null
+    patreon: null
+    pinterest: null
+    snapchat: null
+    telegram: null
+    tiktok: null
+    twitch: null
     twitter: 'https://twitter.com/techenby'
+    whatsapp: null
     youtube: 'https://www.youtube.com/@techenby'
+    zoom: null
   classes:
     - 'bg-blue-300 dark:bg-blue-500'
     - 'bg-green-300 dark:bg-green-700'
