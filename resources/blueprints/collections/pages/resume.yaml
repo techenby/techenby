@@ -1,0 +1,86 @@
+title: Resume
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: foreward
+            field:
+              type: markdown
+              display: Foreward
+          -
+            handle: jobs
+            field:
+              type: replicator
+              display: Jobs
+              sets:
+                new_set_group:
+                  display: 'New Set Group'
+                  sets:
+                    job:
+                      display: Job
+                      fields:
+                        -
+                          handle: start
+                          field:
+                            type: date
+                            display: Start
+                        -
+                          handle: end
+                          field:
+                            type: date
+                            display: End
+                        -
+                          handle: title
+                          field:
+                            type: text
+                            display: Title
+                        -
+                          handle: company
+                          field:
+                            type: text
+                            display: Company
+                        -
+                          handle: description
+                          field:
+                            type: markdown
+                            display: Description
+          -
+            handle: skills
+            field:
+              type: list
+              display: Skills
+          -
+            handle: education
+            field:
+              type: markdown
+              display: Education
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: parent
+            field:
+              type: entries
+              collections:
+                - pages
+              max_items: 1
+              listable: false
+              localizable: true
