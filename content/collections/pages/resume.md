@@ -12,7 +12,7 @@ jobs:
     company: Tighten
     type: job
     enabled: true
-    description: 'Guided clients to find the best posible solution for their individual problems. Leveled up client development teams. Gave talks to coworkers about interesting technical challenges, or new packages that could be useful.'
+    description: 'Guided clients to find the best posible solution for their individual problems. Leveled up client development teams. Gave talks to coworkers about interesting technical challenges, or new packages that could be useful. Helped modernized legacy applications to the latest Laravel version.'
   -
     id: SwmkNYnI
     start: '2017-09-11'
@@ -69,12 +69,13 @@ jobs:
     company: 'Student Affairs IT - Illinois State University'
 skills:
   - Laravel
-  - Statamic
-  - Livewire
+  - Livewire (Class based and Volt)
   - AlpineJS
+  - Inertia
   - VueJS
   - 'React (rusty)'
   - 'React Native (rusty)'
+  - Statamic
   - Slack
   - "Solving Rubik's cubes"
   - 'Drinking Diet Coke'
