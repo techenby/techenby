@@ -3,7 +3,7 @@ id: 44828aa4-9632-48d7-9cf2-62eee5ea9fa3
 blueprint: resume
 title: Resume
 updated_by: 4e0556b2-7dee-443c-949b-fa0977eaa142
-updated_at: 1738596997
+updated_at: 1738597661
 jobs:
   -
     id: ZhbZ8wPX
@@ -83,5 +83,5 @@ education: |-
   2011-2015 Illinois State University
   Bachelor of Science - IT Web Application Development
 template: resume
-foreward: 'Thank you for taking a look at my work experience. I am a very experienced developer specializing in Laravel and associated technologies. Please note that I am trans and AuDHD, and would expect a work environment that is friendly to both.'
+foreward: 'Thank you for taking a look at my work experience. I am programmer with 10+ years of experience specializing in Laravel and associated technologies. Please note that I am trans and AuDHD, and would expect a work environment that is friendly to both.'
 ---

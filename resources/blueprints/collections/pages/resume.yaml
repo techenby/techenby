@@ -13,10 +13,10 @@ tabs:
               validate:
                 - required
           -
-            handle: foreward
+            handle: forward
             field:
               type: markdown
-              display: Foreward
+              display: forward
           -
             handle: jobs
             field:

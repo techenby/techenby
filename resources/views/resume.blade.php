@@ -4,10 +4,14 @@
             <h1 class="text-5xl font-bold leading-none font-display print:text-3xl">Andy Newhouse's {{ $title }}</h1>
         </header>
 
+        <section id="forward" class="bg-white rounded-lg shadow-lg dark:bg-mardi-950 py-4 px-6 print:p-0 print:shadow-none">
+            <div class="text-lg">{!! Statamic::modify($forward)->markdown() !!}</div>
+        </section>
+
 
         <section id="experience">
             <h2 class="text-3xl font-bold leading-none font-display mb-4">Experience</h2>
-            <div class="space-y-6">
+            <div class="space-y-12">
             @foreach ($jobs as $job)
                 <div>
                     <h3 class="text-xl font-bold leading-tight print:text-lg">
