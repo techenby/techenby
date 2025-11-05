@@ -3,12 +3,12 @@ id: 44828aa4-9632-48d7-9cf2-62eee5ea9fa3
 blueprint: resume
 title: Resume
 updated_by: 4e0556b2-7dee-443c-949b-fa0977eaa142
-updated_at: 1738597661
+updated_at: 1762359285
 jobs:
   -
     id: ZhbZ8wPX
     start: '2022-03-14'
-    title: Programmer
+    title: 'Lead Programmer'
     company: Tighten
     type: job
     enabled: true
@@ -69,7 +69,7 @@ jobs:
     company: 'Student Affairs IT - Illinois State University'
 skills:
   - Laravel
-  - Livewire (Class based and Volt)
+  - 'Livewire (Class based and Volt)'
   - AlpineJS
   - Inertia
   - VueJS
