@@ -1,0 +1,9 @@
+title: Talks
+template: default
+layout: layout
+mount: 913a9696-0f7c-4dee-90fb-adeeae139784
+revisions: false
+sort_dir: asc
+date_behavior:
+  past: public
+  future: private

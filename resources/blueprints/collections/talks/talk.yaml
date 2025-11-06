@@ -1,0 +1,50 @@
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+              display: 'Talk Title'
+          -
+            handle: where
+            field:
+              type: text
+              display: Where
+              width: 50
+          -
+            handle: when
+            field:
+              earliest_date: '2025-10-01'
+              type: date
+              display: When
+              width: 50
+          -
+            handle: slides
+            field:
+              input_type: url
+              type: text
+              display: Slides
+          -
+            handle: video_field
+            field:
+              type: video
+              display: 'Video Field'
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+title: Talk
