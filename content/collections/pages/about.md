@@ -1,10 +1,20 @@
 ---
 id: bdd413ea-b698-4e0a-b39f-ae14a853947e
-blueprint: page
+blueprint: about
 title: 'About Me'
 updated_by: 4e0556b2-7dee-443c-949b-fa0977eaa142
-updated_at: 1762359033
-photo: ash-andy-jamaica-sunset.webp
+updated_at: 1762450567
+photos:
+  - images/about/ashar-andy-halloween.webp
+  - images/about/jae-andy-marching-band.webp
+  - images/about/jae-emily-andy-wedding.webp
+  - images/about/velvet.webp
+  - images/about/ashar-andy-orchard.webp
+  - images/about/cori.webp
+  - images/about/jae-andy-caberet.webp
+  - images/about/geo.webp
+  - images/about/ashar-andy-ramen.webp
+template: about
 ---
 👋 Hello,
 
