@@ -1,0 +1,19 @@
+site_name: TechEnby
+avatar: avatar-2025-square.webp
+heading: "Hi, I'm Andy Newhouse,<br/> online I go by"
+description: "I'm a Lead Programmer at Tighten. I have many hobbies and projects, from Livewire to LEGO, and I will share my progress and what I've learned along the way with you."
+bio: "I'm a Lead Programmer at [Tighten](https://tighten.com).  I have many hobbies and projects, from Livewire to LEGO, and I will share my progress and what I've learned along the way with you."
+social_links:
+  email: 'mailto:andy@techenby.com'
+  instagram: 'https://instagram.com/techenby'
+  twitter: 'https://twitter.com/techenby'
+  youtube: 'https://www.youtube.com/@techenby'
+classes:
+  - 'bg-blue-300 dark:bg-blue-500'
+  - 'bg-green-300 dark:bg-green-700'
+  - bg-purple-500
+blobs:
+  - rounded-blob-1
+  - rounded-blob-2
+  - rounded-blob-3
+  - rounded-blob-4
