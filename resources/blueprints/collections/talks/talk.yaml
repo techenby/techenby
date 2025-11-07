@@ -36,6 +36,12 @@ tabs:
             field:
               type: video
               display: 'Video Field'
+          -
+            handle: repo
+            field:
+              input_type: url
+              type: text
+              display: Repo
   sidebar:
     display: Sidebar
     sections:

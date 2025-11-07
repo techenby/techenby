@@ -6,5 +6,6 @@ where: 'Wire:Live'
 when: '2025-10-28'
 slides: 'https://techenby.github.io/livewire-best-practices-talk/'
 updated_by: 4e0556b2-7dee-443c-949b-fa0977eaa142
-updated_at: 1762458528
+updated_at: 1762534221
+repo: 'https://github.com/techenby/livewire-best-practices-talk'
 ---
