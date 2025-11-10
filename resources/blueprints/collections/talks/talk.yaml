@@ -32,10 +32,10 @@ tabs:
               type: text
               display: Slides
           -
-            handle: video_field
+            handle: video
             field:
               type: video
-              display: 'Video Field'
+              display: 'Video'
           -
             handle: repo
             field:

@@ -7,13 +7,11 @@
     @if ($entry->slides)
         <a href="{{ $entry->slides }}" class="text-java-600 dark:text-java-400 hover:underline">Slide deck</a>
     @endif
-|
     @if ($entry->video)
-        <a href="{{ $entry->video }}" class="text-java-600 dark:text-java-400 hover:underline">Video</a>
+        | <a href="{{ $entry->video }}" class="text-java-600 dark:text-java-400 hover:underline">Video</a>
     @endif
-
     @if ($entry->repo)
-        <a href="{{ $entry->repo }}" class="text-java-600 dark:text-java-400 hover:underline">Repo</a>
+        | <a href="{{ $entry->repo }}" class="text-java-600 dark:text-java-400 hover:underline">Repo</a>
     @endif
     </p>
 </article>
