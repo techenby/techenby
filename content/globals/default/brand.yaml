@@ -4,8 +4,10 @@ heading: "Hi, I'm Andy Newhouse,<br/> online I go by"
 description: "I'm a Lead Programmer at Tighten. I have many hobbies and projects, from Livewire to LEGO, and I will share my progress and what I've learned along the way with you."
 bio: "I'm a Lead Programmer at [Tighten](https://tighten.com).  I have many hobbies and projects, from Livewire to LEGO, and I will share my progress and what I've learned along the way with you."
 social_links:
+  bluesky: 'https://bsky.app/profile/techenby.com'
   email: 'mailto:andy@techenby.com'
   instagram: 'https://instagram.com/techenby'
+  twitch: 'https://www.twitch.tv/techenby'
   twitter: 'https://twitter.com/techenby'
   youtube: 'https://www.youtube.com/@techenby'
 classes:
