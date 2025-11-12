@@ -17,3 +17,5 @@ preferences:
       view: tree
     talks:
       view: list
+    half_baked:
+      view: list
