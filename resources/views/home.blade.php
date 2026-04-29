@@ -1,3 +1,6 @@
+@extends('layout')
+
+@section('content')
 <a href="https://statamic.com" class="-mt-[100px] mb-5">
     <svg id="statamic-logo" class="w-full max-w-[200px] mx-auto dark:hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 614.9 112.01">
         <path
@@ -17,5 +20,6 @@
     </svg>
 </a>
 <article class="mt-4 bg-white dark:bg-zinc-950 p-8 shadow-xl rounded-2xl max-w-xl prose prose-zinc dark:prose-invert [&_a]:text-indigo-700 dark:[&_a]:text-indigo-400">
-    {{ content | widont }}
+    {!! Statamic\View\Blade\value(Statamic\View\Blade\modify($content)->widont()) !!}
 </article>
+@endsection
