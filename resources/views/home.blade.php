@@ -23,16 +23,24 @@
                     I&rsquo;m reworking some things. New site germinating in the background &mdash; until then, please enjoy this temporary save screen.
                 </p>
 
-                <form action="#" method="post" class="mt-9 border-t-2 border-dashed border-neutral-300 pt-7 dark:border-white/10">
+                <form action="{{ route('newsletter.store') }}" method="post" class="mt-9 border-t-2 border-dashed border-neutral-300 pt-7 dark:border-white/10">
+                    @csrf
                     <p class="font-['Press_Start_2P'] text-[0.6875rem] text-neutral-900 dark:text-neutral-100">ENBYMAIL &mdash; SUBSCRIBE?</p>
                     <p class="mt-3 max-w-[48ch] font-['Geist'] text-sm text-pretty text-neutral-700 dark:text-neutral-400">Monthly-ish updates: Notes on Laravel, prints in progress, the occasional missing 1&times;2 plate.</p>
-                    <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-stretch">
-                        <label for="newsletter-email" class="sr-only">Email address</label>
-                        <input id="newsletter-email" type="email" name="email" required autocomplete="email" placeholder="trainer@route1.com" class="-outline-offset-1 w-full border-2 border-neutral-900 bg-white px-3 py-3 font-['Geist_Mono'] text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline focus:outline-2 focus:outline-orange-600 max-sm:text-base/6 sm:max-w-xs dark:border-white/15 dark:bg-white/5 dark:text-neutral-100 dark:placeholder:text-neutral-500 dark:focus:outline-orange-400">
-                        <button type="submit" class="inline-flex items-center justify-center gap-2 border-2 border-neutral-900 bg-white px-5 py-3 font-['Press_Start_2P'] text-[0.6875rem] text-neutral-900 shadow-[4px_4px_0_0_#171717] transition hover:-translate-y-0.5 hover:bg-yellow-200 hover:shadow-[6px_6px_0_0_#171717] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 dark:border-white/15 dark:bg-white/5 dark:text-neutral-100 dark:shadow-none dark:hover:bg-white/10">
-                            CATCH ME
-                        </button>
-                    </div>
+                    @if (session('newsletter_status') === 'subscribed')
+                        <p class="mt-4 font-['Press_Start_2P'] text-[0.6875rem] text-orange-700 dark:text-orange-400">&#9654; GOTCHA! CHECK YOUR INBOX.</p>
+                    @else
+                        <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-stretch">
+                            <label for="newsletter-email" class="sr-only">Email address</label>
+                            <input id="newsletter-email" type="email" name="email" required autocomplete="email" value="{{ old('email') }}" placeholder="trainer@route1.com" class="-outline-offset-1 w-full border-2 border-neutral-900 bg-white px-3 py-3 font-['Geist_Mono'] text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline focus:outline-2 focus:outline-orange-600 max-sm:text-base/6 sm:max-w-xs dark:border-white/15 dark:bg-white/5 dark:text-neutral-100 dark:placeholder:text-neutral-500 dark:focus:outline-orange-400">
+                            <button type="submit" class="inline-flex items-center justify-center gap-2 border-2 border-neutral-900 bg-white px-5 py-3 font-['Press_Start_2P'] text-[0.6875rem] text-neutral-900 shadow-[4px_4px_0_0_#171717] transition hover:-translate-y-0.5 hover:bg-yellow-200 hover:shadow-[6px_6px_0_0_#171717] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 dark:border-white/15 dark:bg-white/5 dark:text-neutral-100 dark:shadow-none dark:hover:bg-white/10">
+                                CATCH ME
+                            </button>
+                        </div>
+                        @error('email')
+                            <p class="mt-3 font-['Geist_Mono'] text-xs text-red-700 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    @endif
                 </form>
 
                 <div class="mt-9 grid gap-3 border-t-2 border-dashed border-neutral-300 pt-7 sm:grid-cols-2 dark:border-white/10">

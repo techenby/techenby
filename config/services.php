@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'bento' => [
+        'publishable_key' => env('BENTO_PUBLISHABLE_KEY'),
+        'secret_key' => env('BENTO_SECRET_KEY'),
+        'site_uuid' => env('BENTO_SITE_UUID'),
+    ],
+
 ];
