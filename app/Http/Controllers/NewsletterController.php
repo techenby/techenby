@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Bentonow\BentoLaravel\Facades\Bento;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 
 class NewsletterController extends Controller
 {
