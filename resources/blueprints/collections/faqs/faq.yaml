@@ -1,0 +1,8 @@
+title: FAQ
+fields:
+  -
+    handle: content
+    field:
+      type: markdown
+      display: Answer
+      localizable: true
