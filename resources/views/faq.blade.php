@@ -9,16 +9,12 @@
         ->values();
 @endphp
 
-<x-layout topRight="FAQ Dex · {{ $faqs->count() }} Seen">
-    <p class="font-['Press_Start_2P'] text-[0.625rem] uppercase tracking-wide text-orange-700 dark:text-orange-400">&#9654;&nbsp;ASK TRAINER?</p>
+<x-layout bottomRight="FAQ Dex · {{ $faqs->count() }} Seen">
+    <x-atom.eyebrow>ASK TRAINER?</x-atom.eyebrow>
 
-    <div class="mt-7 grid gap-5 sm:grid-cols-[13fr_7fr] sm:items-end">
-        <h1 class="max-w-[11ch] font-['Instrument_Serif'] text-6xl tracking-tight text-balance text-neutral-900 sm:text-7xl dark:text-neutral-100">
-            FAQ Dex
-        </h1>
-    </div>
+    <x-atom.heading>FAQ Dex</x-atom.heading>
 
-    <div class="mt-9 border-t-2 border-dashed border-neutral-300 pt-7 dark:border-white/10">
+    <div class="section">
         <div class="grid gap-4">
             @foreach ($faqs as $faq)
                 <details class="group border-2 border-neutral-900 bg-stone-50 p-4 shadow-[4px_4px_0_0_#171717] open:bg-yellow-50 dark:border-white/15 dark:bg-white/5 dark:shadow-none dark:open:bg-white/10">
@@ -36,8 +32,4 @@
     </div>
 
     @include('forms.faq-question')
-
-    <x-slot:bottom-right>
-        <div><a href="/">Route 1</a> / FAQ</div>
-    </x-slot:bottom-right>
 </x-layout>

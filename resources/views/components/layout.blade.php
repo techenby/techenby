@@ -18,9 +18,20 @@
                 <div class="w-full">
                     <div class="flex items-center justify-between font-['Geist_Mono'] text-xs tracking-wide text-neutral-500 dark:text-neutral-400">
                         <span><span class="uppercase">Trainer ID</span> @techenby</span>
-                        @isset($topRight)
-                        <span class="uppercase text-orange-700 dark:text-orange-400">{{ $topRight }}</span>
-                        @endisset
+                        <ol role="list" class="flex items-center ">
+                            <s:nav:breadcrumbs>
+                            <li @class(['current' => $is_current])>
+                                <div class="flex items-center">
+                                    @if (! $loop->first)
+                                    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4 shrink-0 text-neutral-300 dark:text-neutral-600">
+                                        <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
+                                    </svg>
+                                    @endif
+                                    <a href="{{ $url }}" class="text-xs font-medium text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200">{{ $title }}</a>
+                                </div>
+                            </li>
+                            </s:nav:breadcrumbs>
+                        </ol>
                     </div>
 
                     <main class="mt-6 border-2 border-neutral-900 bg-white p-8 shadow-[8px_8px_0_0_#171717] sm:p-10 dark:border-white/10 dark:bg-neutral-900 dark:inset-ring dark:inset-ring-white/5 dark:shadow-none">
@@ -30,7 +41,7 @@
                     <div class="mt-6 flex items-center justify-between font-['Geist_Mono'] text-[0.6875rem] uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
                         <span>&copy; {{ date('Y') }} Andy <s>Newhouse</s> Swick</span>
                         @isset($bottomRight)
-                        <span>{{ $bottomRight }}</span>
+                        <span class="uppercase text-orange-700 dark:text-orange-400">{{ $bottomRight }}</span>
                         @endisset
                     </div>
                 </div>

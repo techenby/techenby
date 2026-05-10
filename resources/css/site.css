@@ -11,3 +11,7 @@
         50% { opacity: 0; }
     }
 }
+
+.section {
+    @apply mt-9 border-t-2 border-dashed border-neutral-300 pt-7 dark:border-white/10;
+}
