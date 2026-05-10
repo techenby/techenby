@@ -24,7 +24,7 @@ class FaqQuestionSubmissionTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertSee('SUBMIT QUESTION?')
+            ->assertSee('Submit Question?')
             ->assertSee('/!/forms/faq_questions');
     }
 

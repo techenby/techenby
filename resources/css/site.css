@@ -4,6 +4,7 @@
 @source "../../content";
 
 @theme {
+    --font-press-start: "Press Start 2P", monospace;
     --animate-blink: blink 1s step-end infinite;
 
     @keyframes blink {

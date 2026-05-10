@@ -11,6 +11,6 @@
 @endphp
 
 <div class="relative">
-    <span aria-hidden="true" class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-['Press_Start_2P'] text-[0.625rem] text-orange-700 dark:text-orange-400">&#9654;</span>
+    <span aria-hidden="true" class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-press-start text-[0.625rem] text-orange-700 dark:text-orange-400">&#9654;</span>
     <input {{ $attributes->class($classes) }} />
 </div>

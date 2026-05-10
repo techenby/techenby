@@ -1,0 +1,27 @@
+title: Andy
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: comms
+            field:
+              mode: stacked
+              type: grid
+              display: Comms
+              fields:
+                -
+                  handle: label
+                  field:
+                    type: text
+                    display: Label
+                    width: 25
+                -
+                  handle: url
+                  field:
+                    input_type: url
+                    type: text
+                    display: URL
+                    width: 75

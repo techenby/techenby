@@ -8,7 +8,7 @@
     $classes = Flux::classes()
         ->add("inline-flex relative items-center justify-center gap-2 border-2 transition hover:-translate-y-0.5") // General
         ->add('px-5 py-3') // Spacing
-        ->add("uppercase font-['Press_Start_2P'] text-[0.6875rem]") // Lettering Style
+        ->add("uppercase font-press-start text-[0.6875rem]") // Lettering Style
         ->add('focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500') // Focus
         ->add('shadow-[4px_4px_0_0_#171717] hover:shadow-[6px_6px_0_0_#171717] dark:shadow-none') // Shadows
         ->add(match ($variant) { // Background color

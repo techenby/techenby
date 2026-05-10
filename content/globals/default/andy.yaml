@@ -1,0 +1,21 @@
+comms:
+  -
+    id: FtNMHBRWNEWn73977mr-b
+    label: Bluesky
+    url: 'https://bsky.app/profile/techenby.com'
+  -
+    id: X4fq92zJtQY1FYX7oqTik
+    label: Twitter
+    url: 'https://twitter.com/techenby'
+  -
+    id: umfIoSBacEZfMaZ3eF8S6
+    label: YouTube
+    url: 'https://youtube.com/@techenby'
+  -
+    id: qvqqq8Iz1HN9rMsTOFvUM
+    label: GitHub
+    url: 'https://github.com/techenby'
+  -
+    id: E37dMbjZuN5i1qJEsHJee
+    label: Email
+    url: 'mailto:andy@techenby.com'

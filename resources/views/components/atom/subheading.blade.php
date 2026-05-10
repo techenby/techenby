@@ -1,1 +1,13 @@
-<p {{ $attributes->class("uppercase font-['Press_Start_2P'] text-[0.6875rem] text-neutral-900 dark:text-neutral-100") }}>{{ $slot }}</p>
+@props(['color' => null])
+
+@php
+    $classes = Flux::classes()
+        ->add("uppercase font-press-start text-[0.6875rem] tracking-wide")
+        ->add(match ($color) {
+            'orange' => 'text-orange-700 dark:text-orange-400',
+            default => 'text-neutral-900 dark:text-neutral-100',
+        })
+        ;
+@endphp
+
+<p {{ $attributes->class($classes) }}>{{ $slot }}</p>
