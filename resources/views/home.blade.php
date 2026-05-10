@@ -35,9 +35,10 @@
         <ul role="list" class="grid list-disc grid-cols-2 gap-x-6 gap-y-2 font-['Geist_Mono'] text-xs text-neutral-700 [&_a]:text-orange-700 [&_a]:underline [&_a]:decoration-orange-700/40 [&_a]:underline-offset-4 [&_a:hover]:decoration-orange-700 sm:col-start-2 dark:text-neutral-400 dark:[&_a]:text-orange-400 dark:[&_a]:decoration-orange-400/40 dark:[&_a:hover]:decoration-orange-400">
             <li><a href="https://tighten.com/" target="_blank" rel="noopener">Tighten</a></li>
             <li><a href="https://sunnyhome.app" target="_blank" rel="noopener">Sunny</a></li>
-            <li>One Piece Ep.687</li>
-            <li><a href="https://www.lego.com/en-us/product/lego-titanic-10294" target="_blank" rel="noopener">LEGO 10294</a></li>
-            <li><a href="https://lakesidepride.org/" target="_blank" rel="noopener">LSP</a> <a href="https://calendar.google.com/calendar/u/0/event?eid=MGNlbmVmY3Z2dW01MzA2aWZ1aDM2MHNrN2pfMjAyNjA1MzFUMDAwMDAwWiBjX3F0YWExNjY3b2c0azYzazVrbWNhY2c2ZjhrQGc" target="_blank" rel="noopener">Pops Concert</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            {{-- <li><a href="https://www.lego.com/en-us/product/lego-titanic-10294" target="_blank" rel="noopener">LEGO 10294</a></li> --}}
+            <li>One Piece Ep.743</li>
+            <li><a href="https://lakesidepride.org/" target="_blank" rel="noopener">LSP</a> <a href="https://givebutter.com/pops-what-was-i-made-for" target="_blank" rel="noopener">Pops Concert</a></li>
             <li>Diet Coke</li>
         </ul>
     </div>
