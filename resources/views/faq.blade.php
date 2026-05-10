@@ -53,6 +53,39 @@
                     </div>
                 </div>
 
+                <form action="{{ route('statamic.forms.submit', 'faq_questions') }}" method="post" class="mt-9 border-t-2 border-dashed border-neutral-300 pt-7 dark:border-white/10">
+                    @csrf
+                    <p class="font-['Press_Start_2P'] text-[0.6875rem] text-neutral-900 dark:text-neutral-100">SUBMIT QUESTION?</p>
+
+                    @if (session('form.faq_questions.success'))
+                        <p class="mt-4 font-['Press_Start_2P'] text-[0.6875rem] text-orange-700 dark:text-orange-400">&#9654; SAVED TO BILL&rsquo;S PC.</p>
+                    @else
+                        <div class="mt-4 grid gap-4">
+                            <div>
+                                <label for="faq-question" class="font-['Geist_Mono'] text-[0.6875rem] uppercase tracking-wide text-neutral-500 dark:text-neutral-400">Question</label>
+                                <textarea id="faq-question" name="question" required rows="4" maxlength="500" placeholder="What should I answer next?" class="mt-2 min-h-32 w-full resize-y border-2 border-neutral-900 bg-white px-3 py-3 font-['Geist'] text-base text-neutral-900 placeholder:text-neutral-400 focus:outline focus:outline-2 focus:-outline-offset-1 focus:outline-orange-600 dark:border-white/15 dark:bg-white/5 dark:text-neutral-100 dark:placeholder:text-neutral-500 dark:focus:outline-orange-400">{{ old('question') }}</textarea>
+                                @error('question', 'form.faq_questions')
+                                    <p class="mt-2 font-['Geist_Mono'] text-xs text-red-700 dark:text-red-400">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-start">
+                                <div>
+                                    <label for="faq-email" class="font-['Geist_Mono'] text-[0.6875rem] uppercase tracking-wide text-neutral-500 dark:text-neutral-400">Email optional</label>
+                                    <input id="faq-email" type="email" name="email" autocomplete="email" value="{{ old('email') }}" placeholder="trainer@route1.com" class="mt-2 w-full border-2 border-neutral-900 bg-white px-3 py-3 font-['Geist_Mono'] text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline focus:outline-2 focus:-outline-offset-1 focus:outline-orange-600 max-sm:text-base/6 dark:border-white/15 dark:bg-white/5 dark:text-neutral-100 dark:placeholder:text-neutral-500 dark:focus:outline-orange-400">
+                                    @error('email', 'form.faq_questions')
+                                        <p class="mt-2 font-['Geist_Mono'] text-xs text-red-700 dark:text-red-400">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <button type="submit" class="inline-flex items-center justify-center gap-2 border-2 border-neutral-900 bg-orange-700 px-5 py-3 font-['Press_Start_2P'] text-[0.6875rem] text-white shadow-[4px_4px_0_0_#171717] transition hover:-translate-y-0.5 hover:bg-orange-800 hover:shadow-[6px_6px_0_0_#171717] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 sm:mt-6 dark:border-orange-700 dark:shadow-none">
+                                    SEND IT
+                                </button>
+                            </div>
+                        </div>
+                    @endif
+                </form>
+
                 <div class="mt-8 flex items-center justify-between gap-4">
                     <a href="/" class="inline-flex items-center gap-2 border-2 border-neutral-900 bg-orange-700 px-5 py-3 font-['Press_Start_2P'] text-[0.6875rem] text-white shadow-[4px_4px_0_0_#171717] transition hover:-translate-y-0.5 hover:bg-orange-800 hover:shadow-[6px_6px_0_0_#171717] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 dark:border-orange-700 dark:shadow-none">
                         BACK HOME
