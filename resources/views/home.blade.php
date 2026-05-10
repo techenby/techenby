@@ -1,4 +1,8 @@
-<x-layout bottomRight="Save State · v0.1.0">
+@php
+    $gitHash = trim(exec('git rev-parse --short HEAD')) ?: 'unknown';
+@endphp
+
+<x-layout :bottomRight="'Save State · '.$gitHash">
     <x-atom.eyebrow>A WILD UPDATE APPEARED!</x-atom.eyebrow>
 
     <x-atom.heading>

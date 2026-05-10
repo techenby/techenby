@@ -16,9 +16,9 @@
 
             <div class="relative mx-auto grid min-h-dvh max-w-3xl place-items-center px-6 py-16">
                 <div class="w-full">
-                    <div class="flex items-center justify-between font-['Geist_Mono'] text-xs tracking-wide text-neutral-500 dark:text-neutral-400">
+                    <div class="flex items-center justify-between font-['Geist_Mono'] text-xs tracking-wide text-neutral-500 dark:text-neutral-400 [&_a]:text-orange-700 [&_a]:underline [&_a]:decoration-orange-700/40 [&_a]:underline-offset-4 [&_a:hover]:decoration-orange-700 font-medium">
                         <span><span class="uppercase">Trainer ID</span> @techenby</span>
-                        <ol role="list" class="flex items-center ">
+                        <ol role="list" class="flex items-center">
                             <s:nav:breadcrumbs>
                             <li @class(['current' => $is_current])>
                                 <div class="flex items-center">
@@ -27,7 +27,11 @@
                                         <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
                                     </svg>
                                     @endif
-                                    <a href="{{ $url }}" class="text-xs font-medium text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200">{{ $title }}</a>
+                                    @if ($loop->last)
+                                    <span>{{ $title }}</span>
+                                    @else
+                                    <a href="{{ $url }}">{{ $title }}</a>
+                                    @endif
                                 </div>
                             </li>
                             </s:nav:breadcrumbs>
@@ -41,7 +45,7 @@
                     <div class="mt-6 flex items-center justify-between font-['Geist_Mono'] text-[0.6875rem] uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
                         <span>&copy; {{ date('Y') }} Andy <s>Newhouse</s> Swick</span>
                         @isset($bottomRight)
-                        <span class="uppercase text-orange-700 dark:text-orange-400">{{ $bottomRight }}</span>
+                        <span>{{ $bottomRight }}</span>
                         @endisset
                     </div>
                 </div>
