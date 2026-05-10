@@ -2,7 +2,7 @@
     $classes = Flux::classes()
         ->add('w-full')
         ->add('py-3 pr-3 pl-8')
-        ->add("font-['Geist_Mono'] text-sm max-sm:text-base/6")
+        ->add("font-geist-mono text-sm max-sm:text-base/6")
         ->add('border-2 border-neutral-900 dark:border-white/15')
         ->add('bg-white dark:bg-white/5')
         ->add('text-neutral-900 placeholder:text-neutral-400 dark:text-neutral-100 dark:placeholder:text-neutral-500')

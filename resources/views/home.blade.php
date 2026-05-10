@@ -18,7 +18,7 @@
 
     <div class="mt-9 grid gap-3 border-t-2 border-dashed border-neutral-300 pt-7 sm:grid-cols-2 dark:border-white/10">
         <x-atom.subheading>Current Party:</x-atom.subheading>
-        <ul role="list" class="grid list-disc grid-cols-2 gap-x-6 gap-y-2 font-['Geist_Mono'] text-xs text-neutral-700 [&_a]:text-orange-700 [&_a]:underline [&_a]:decoration-orange-700/40 [&_a]:underline-offset-4 [&_a:hover]:decoration-orange-700 sm:col-start-2 dark:text-neutral-400 dark:[&_a]:text-orange-400 dark:[&_a]:decoration-orange-400/40 dark:[&_a:hover]:decoration-orange-400">
+        <ul role="list" class="grid list-disc grid-cols-2 gap-x-6 gap-y-2 font-geist-mono text-xs text-neutral-700 [&_a]:text-orange-700 [&_a]:underline [&_a]:decoration-orange-700/40 [&_a]:underline-offset-4 [&_a:hover]:decoration-orange-700 sm:col-start-2 dark:text-neutral-400 dark:[&_a]:text-orange-400 dark:[&_a]:decoration-orange-400/40 dark:[&_a:hover]:decoration-orange-400">
             <li><a href="https://tighten.com/" target="_blank" rel="noopener">Tighten</a></li>
             <li><a href="https://sunnyhome.app" target="_blank" rel="noopener">Sunny</a></li>
             <li><a href="/faq">FAQ</a></li>

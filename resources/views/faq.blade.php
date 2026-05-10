@@ -23,7 +23,7 @@
                         <span aria-hidden="true" class="text-orange-700 group-open:hidden dark:text-orange-400">&#9654;</span>
                         <span aria-hidden="true" class="hidden text-orange-700 group-open:inline dark:text-orange-400">&#9660;</span>
                     </summary>
-                    <div class="mt-4 border-t-2 border-dashed border-neutral-300 pt-4 font-['Geist'] text-base text-pretty text-neutral-700 dark:border-white/10 dark:text-neutral-300 [&_a]:text-orange-700 [&_a]:underline [&_a]:decoration-orange-700/40 [&_a]:underline-offset-4 [&_a:hover]:decoration-orange-700 dark:[&_a]:text-orange-400 dark:[&_a]:decoration-orange-400/40 dark:[&_a:hover]:decoration-orange-400 [&_p+p]:mt-4">
+                    <div class="mt-4 border-t-2 border-dashed border-neutral-300 pt-4 font-geist text-base text-pretty text-neutral-700 dark:border-white/10 dark:text-neutral-300 [&_a]:text-orange-700 [&_a]:underline [&_a]:decoration-orange-700/40 [&_a]:underline-offset-4 [&_a:hover]:decoration-orange-700 dark:[&_a]:text-orange-400 dark:[&_a]:decoration-orange-400/40 dark:[&_a:hover]:decoration-orange-400 [&_p+p]:mt-4">
                         {!! Str::markdown($faq->value('content') ?? '') !!}
                     </div>
                 </details>

@@ -6,7 +6,7 @@
 
 @php
     $classes = Flux::classes()
-        ->add("font-['Geist'] text-pretty")
+        ->add("font-geist text-pretty")
         ->add(match ($size) {
             'xl' => 'text-lg',
             'lg' => 'text-base',

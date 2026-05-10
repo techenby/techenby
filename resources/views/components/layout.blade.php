@@ -16,7 +16,7 @@
 
             <div class="relative mx-auto grid min-h-dvh max-w-3xl place-items-center px-6 py-16">
                 <div class="w-full">
-                    <div class="flex items-center justify-between font-['Geist_Mono'] text-xs tracking-wide text-neutral-500 dark:text-neutral-400 [&_a]:text-orange-700 [&_a]:underline [&_a]:decoration-orange-700/40 [&_a]:underline-offset-4 [&_a:hover]:decoration-orange-700 font-medium">
+                    <div class="flex items-center justify-between font-geist-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400 [&_a]:text-orange-700 [&_a]:underline [&_a]:decoration-orange-700/40 [&_a]:underline-offset-4 [&_a:hover]:decoration-orange-700 font-medium">
                         <span><span class="uppercase">Trainer ID</span> @techenby</span>
                         <ol role="list" class="flex items-center">
                             <s:nav:breadcrumbs>
@@ -42,7 +42,7 @@
                         {{ $slot }}
                     </main>
 
-                    <div class="mt-6 flex items-center justify-between font-['Geist_Mono'] text-[0.6875rem] uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                    <div class="mt-6 flex items-center justify-between font-geist-mono text-[0.6875rem] uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
                         <span>&copy; {{ date('Y') }} Andy <s>Newhouse</s> Swick</span>
                         @isset($bottomRight)
                         <span>{{ $bottomRight }}</span>
