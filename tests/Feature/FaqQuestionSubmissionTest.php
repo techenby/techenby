@@ -15,6 +15,7 @@ class FaqQuestionSubmissionTest extends TestCase
         $this->assertNotNull($form);
         $this->assertSame('FAQ Questions', $form->title());
         $this->assertTrue($form->store());
+        $this->assertSame(['question'], $form->blueprint()->fields()->all()->keys()->all());
     }
 
     public function test_faq_page_shows_the_question_submission_form(): void
@@ -33,7 +34,6 @@ class FaqQuestionSubmissionTest extends TestCase
             ->from('/faq')
             ->post(route('statamic.forms.submit', 'faq_questions'), [
                 'question' => '',
-                'email' => 'andy@example.com',
             ]);
 
         $response
@@ -52,7 +52,6 @@ class FaqQuestionSubmissionTest extends TestCase
             ->from('/faq')
             ->post(route('statamic.forms.submit', 'faq_questions'), [
                 'question' => 'What keyboard do you use?',
-                'email' => 'andy@example.com',
             ]);
 
         $response
@@ -64,7 +63,6 @@ class FaqQuestionSubmissionTest extends TestCase
 
         $this->assertCount(1, $createdSubmissions);
         $this->assertSame('What keyboard do you use?', $createdSubmissions->first()->get('question'));
-        $this->assertSame('andy@example.com', $createdSubmissions->first()->get('email'));
 
         $createdSubmissions->each->delete();
     }

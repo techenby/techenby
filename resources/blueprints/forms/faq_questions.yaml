@@ -4,18 +4,9 @@ fields:
     handle: question
     field:
       display: Question
-      type: textarea
+      type: text
       validate:
         - required
         - string
         - 'min:5'
         - 'max:500'
-  -
-    handle: email
-    field:
-      display: Email
-      type: text
-      validate:
-        - nullable
-        - email:rfc
-        - 'max:255'
