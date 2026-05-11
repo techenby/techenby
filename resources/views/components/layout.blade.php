@@ -1,3 +1,5 @@
+@props(['andy'])
+
 <!doctype html>
 <html lang="{{ Statamic\Facades\Site::current()->shortLocale() }}" class="antialiased">
     <head>
@@ -16,26 +18,12 @@
 
             <div class="relative mx-auto grid min-h-dvh max-w-3xl place-items-center px-6 py-16">
                 <div class="w-full">
-                    <div class="flex items-center justify-between font-geist-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400 [&_a]:text-orange-700 [&_a]:underline [&_a]:decoration-orange-700/40 [&_a]:underline-offset-4 [&_a:hover]:decoration-orange-700 font-medium">
-                        <span><span class="uppercase">Trainer ID</span> @techenby</span>
-                        <ol role="list" class="flex items-center">
-                            <s:nav:breadcrumbs>
-                            <li @class(['current' => $is_current])>
-                                <div class="flex items-center">
-                                    @if (! $loop->first)
-                                    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4 shrink-0 text-neutral-300 dark:text-neutral-600">
-                                        <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
-                                    </svg>
-                                    @endif
-                                    @if ($loop->last)
-                                    <span>{{ $title }}</span>
-                                    @else
-                                    <a href="{{ $url }}">{{ $title }}</a>
-                                    @endif
-                                </div>
-                            </li>
-                            </s:nav:breadcrumbs>
-                        </ol>
+                    <div class="flex items-center justify-between mr-2 gap-4 font-geist-mono text-xs font-medium tracking-wide text-neutral-500 dark:text-neutral-400">
+                        <x-atom.nav class="min-w-0 flex-1" />
+
+                        <x-comms align="bottom">
+                            <span class="shrink-0 font-geist-mono"><span class="uppercase">Trainer ID</span> @techenby</span>
+                        </x-comms>
                     </div>
 
                     <main class="mt-6 border-2 border-neutral-900 bg-white p-8 shadow-[8px_8px_0_0_#171717] sm:p-10 dark:border-white/10 dark:bg-neutral-900 dark:inset-ring dark:inset-ring-white/5 dark:shadow-none">

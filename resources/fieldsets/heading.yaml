@@ -1,0 +1,17 @@
+title: Heading
+fields:
+  -
+    handle: eyebrow
+    field:
+      type: text
+      display: Eyebrow
+  -
+    handle: heading
+    field:
+      type: text
+      display: Heading
+  -
+    handle: subheading
+    field:
+      type: text
+      display: Subheading

@@ -9,10 +9,8 @@
         ->values();
 @endphp
 
-<x-layout bottomRight="FAQ Dex · {{ $faqs->count() }} Seen">
-    <x-atom.eyebrow>ASK TRAINER?</x-atom.eyebrow>
-
-    <x-atom.heading>FAQ Dex</x-atom.heading>
+<x-layout :$andy bottomRight="FAQ Dex · {{ $faqs->count() }} Seen">
+    <x-fieldset.heading :$eyebrow :$subheading :heading="$heading ?? $title" />
 
     <div class="section">
         <div class="grid gap-4">

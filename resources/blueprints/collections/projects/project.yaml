@@ -1,0 +1,37 @@
+title: Project
+fields:
+  -
+    handle: header_image
+    field:
+      container: assets
+      max_files: 1
+      type: assets
+      display: 'Header Image'
+      localizable: true
+  -
+    handle: content
+    field:
+      type: markdown
+      display: Description
+      localizable: true
+  -
+    handle: links
+    field:
+      mode: stacked
+      type: grid
+      display: Links
+      localizable: true
+      fields:
+        -
+          handle: label
+          field:
+            type: text
+            display: Label
+            width: 25
+        -
+          handle: url
+          field:
+            input_type: url
+            type: text
+            display: URL
+            width: 75
