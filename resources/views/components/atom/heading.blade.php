@@ -1,3 +1,15 @@
-<h1 {{ $attributes->merge(['class' => "mt-7 max-w-[24ch] leading-[1.02] sm:max-w-[20ch] font-instrument-serif text-6xl tracking-tight text-balance text-neutral-900 sm:text-7xl dark:text-neutral-100"]) }}>
+@props(['size' => 'xl', 'level' => 'h1'])
+
+@php
+    $classes = Flux::classes()
+        ->add('mt-7 font-instrument-serif tracking-tight text-balance')
+        ->add('text-neutral-900 dark:text-neutral-100')
+        ->add(match ($size) {
+            'xl' => 'text-6xl sm:text-7xl max-w-[24ch] leading-[1.02] sm:max-w-[20ch]',
+            default => 'text-3xl sm:text-4xl'
+        })
+@endphp
+
+<{{ $level }} {{ $attributes->class($classes) }}>
     {{ $slot }}
-</h1>
+</{{ $level }}>

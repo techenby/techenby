@@ -25,3 +25,21 @@ tabs:
                     type: text
                     display: URL
                     width: 75
+          -
+            handle: pixelated_avatar
+            field:
+              container: assets
+              max_files: 1
+              min_files: 1
+              type: assets
+              display: 'Pixelated Avatar'
+              width: 50
+          -
+            handle: avatar
+            field:
+              container: assets
+              max_files: 1
+              min_files: 1
+              type: assets
+              display: Avatar
+              width: 50

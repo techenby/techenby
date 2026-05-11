@@ -20,6 +20,7 @@
             'sm' => 'mt-3',
         })
         ->add('text-neutral-700 dark:text-neutral-400')
+        ->add('[&_a]:text-orange-700 [&_a]:underline [&_a]:decoration-orange-700/40 [&_a]:underline-offset-4 [&_a:hover]:decoration-orange-700')
         ;
 @endphp
 
