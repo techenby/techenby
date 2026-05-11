@@ -6,7 +6,7 @@
     <x-atom.eyebrow>A WILD UPDATE APPEARED!</x-atom.eyebrow>
 
     <div class="mt-8 flex space-x-8">
-        <div class="relative w-48 group transition duration-300 ease-in-out">
+        <div class="relative w-48 h-48 group transition duration-300 ease-in-out">
             <img src="{{ $andy->pixelated_avatar->url() }}" alt="Andy Swick" >
 
             <img src="{{ $andy->avatar->url() }}" alt="" class="absolute top-0 invisible group-hover:visible">
@@ -18,13 +18,13 @@
 
         <div>
             <x-atom.heading class="!mt-0">
-                Hey, I'm <em class="italic text-orange-700 dark:text-orange-400">Andy</em>
+                Hey, I'm <em class="italic text-orange-700 dark:text-orange-400">Andy</em><span class="font-geist-mono text-base">(they/them)</span>
             </x-atom.heading>
 
             <x-atom.subheading class="mt-5">Current Party:</x-atom.subheading>
 
             <ul role="list" class="mt-3 ml-6 grid list-disc grid-cols-2 gap-x-6 gap-y-2 font-geist-mono text-xs text-neutral-700 [&_a]:text-orange-700 [&_a]:underline [&_a]:decoration-orange-700/40 [&_a]:underline-offset-4 [&_a:hover]:decoration-orange-700 sm:col-start-2 dark:text-neutral-400 dark:[&_a]:text-orange-400 dark:[&_a]:decoration-orange-400/40 dark:[&_a:hover]:decoration-orange-400">
-                <li><a href="https://tighten.com/" target="_blank" rel="noopener">Tighten</a></li>
+                <li><a href="https://tighten.com/" target="_blank" rel="noopener">Lead Programmer @ Tighten</a></li>
                 <li><a href="https://sunnyhome.app" target="_blank" rel="noopener">Sunny</a></li>
                 <li><a href="https://www.lego.com/en-us/product/lego-titanic-10294" target="_blank" rel="noopener">LEGO 10294</a></li>
                 <li>One Piece Ep.743</li>
