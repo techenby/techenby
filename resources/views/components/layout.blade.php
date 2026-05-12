@@ -31,7 +31,15 @@
                     </main>
 
                     <div class="mt-6 flex items-center justify-between font-geist-mono text-[0.6875rem] uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-                        <span>&copy; {{ date('Y') }} Andy <s>Newhouse</s> Swick</span>
+                        <div class="flex space-x-2">
+                            <span>&copy; {{ date('Y') }}</span>
+                            <details class="group flex space-x-1 normal-case">
+                                <summary class="cursor-pointer list-none hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500 [&::-webkit-details-marker]:hidden dark:hover:text-neutral-100">
+                                    Andy Swick
+                                </summary>
+                                <span> (previously Andy Newhouse)</span>
+                            </details>
+                        </div>
                         @isset($bottomRight)
                         <span>{{ $bottomRight }}</span>
                         @endisset
