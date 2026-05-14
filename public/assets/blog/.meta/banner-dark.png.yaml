@@ -1,4 +1,5 @@
-data: {  }
+data:
+  alt: 'The Docify logo which is a pixelated open book. Docify is to the right in a serif font. On the bottom is the text "A simple markdown viewer for TALL stack applications" on the left and "TechEnby" on the right. The colors and backgrounds are for darkmode.'
 size: 80257
 last_modified: 1778773967
 width: 1660

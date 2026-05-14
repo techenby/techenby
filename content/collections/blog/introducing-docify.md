@@ -11,7 +11,7 @@ tags:
   - laravel
   - livewire
 updated_by: 2de7d260-84a8-4dfc-9a2e-af5aae989cd3
-updated_at: 1778777965
+updated_at: 1778785166
 content:
   -
     type: heading
