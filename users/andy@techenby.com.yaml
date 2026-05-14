@@ -8,3 +8,5 @@ preferences:
       view: list
     pages:
       view: tree
+    blog:
+      view: list

@@ -16,8 +16,8 @@
         <div class="relative isolate min-h-dvh overflow-hidden bg-stone-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
             <div aria-hidden="true" class="pointer-events-none absolute inset-0 [background-image:repeating-linear-gradient(0deg,transparent_0_3px,rgba(0,0,0,0.04)_3px_4px)] dark:[background-image:repeating-linear-gradient(0deg,transparent_0_3px,rgba(255,255,255,0.035)_3px_4px)]"></div>
 
-            <div class="relative mx-auto grid min-h-dvh max-w-3xl place-items-center px-6 py-16">
-                <div class="w-full">
+            <div class="relative mx-auto grid min-h-dvh max-w-3xl items-start px-6 py-16">
+                <div class="min-w-0 w-full">
                     <div class="flex items-center justify-between mr-2 gap-4 font-geist-mono text-xs font-medium tracking-wide text-neutral-500 dark:text-neutral-400">
                         <x-atom.nav class="min-w-0 flex-1" />
 
@@ -26,7 +26,7 @@
                         </x-comms>
                     </div>
 
-                    <main class="mt-6 border-2 border-neutral-900 bg-white p-8 shadow-[8px_8px_0_0_#171717] sm:p-10 dark:border-white/10 dark:bg-neutral-900 dark:inset-ring dark:inset-ring-white/5 dark:shadow-none">
+                    <main class="mt-6 min-w-0 border-2 border-neutral-900 bg-white p-8 shadow-[8px_8px_0_0_#171717] sm:p-10 dark:border-white/10 dark:bg-neutral-900 dark:inset-ring dark:inset-ring-white/5 dark:shadow-none">
                         {{ $slot }}
                     </main>
 
