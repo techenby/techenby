@@ -1,38 +1,14 @@
 @php
+    use Statamic\Facades\Entry;
+
     $deskImage = asset('assets/uses/desk-photo-pixelated.jpg');
     $hasDeskImage = file_exists(public_path('assets/uses/desk-photo-pixelated.jpg'));
 
-    $items = [
-        [
-            'id' => 'computer',
-            'name' => 'Computer',
-            'type' => 'Warp point',
-            'description' => 'Jump into the desktop to see the apps, services, and utilities I reach for most often.',
-            'action' => 'desktop',
-            'position' => 'left: 45%; top: 18%; width: 26%; height: 31%;',
-        ],
-        [
-            'id' => 'keyboard',
-            'name' => 'Keyboard',
-            'type' => 'Input gear',
-            'description' => 'The daily driver for writing code, notes, and tiny commit messages that get longer anyway.',
-            'position' => 'left: 31%; top: 61%; width: 31%; height: 13%;',
-        ],
-        [
-            'id' => 'drink',
-            'name' => 'Desk Drink',
-            'type' => 'Consumable',
-            'description' => 'A permanent party member. Usually cold, caffeinated, and within reach.',
-            'position' => 'left: 74%; top: 48%; width: 12%; height: 22%;',
-        ],
-        [
-            'id' => 'notebook',
-            'name' => 'Notebook',
-            'type' => 'Analog save file',
-            'description' => 'Where loose plans, half-formed UI ideas, and song snippets go before they become real.',
-            'position' => 'left: 10%; top: 56%; width: 17%; height: 24%;',
-        ],
-    ];
+    $items = Entry::query()
+        ->where('collection', 'uses')
+        ->get()
+        ->sortBy(fn ($entry) => (int) ($entry->value('sort_order') ?? 0))
+        ->values();
 
     $apps = [
         ['name' => 'PhpStorm', 'meta' => 'Code editor', 'color' => 'bg-orange-400'],
@@ -66,18 +42,24 @@
                     @endif
 
                     @foreach ($items as $item)
+                        @php
+                            $position = collect(['left', 'top', 'width', 'height'])
+                                ->map(fn ($field) => $field.': '.$item->value($field).'%;')
+                                ->implode(' ');
+                        @endphp
+
                         <button
                             type="button"
                             class="uses-hotspot"
-                            style="{{ $item['position'] }}"
-                            data-uses-item="{{ $item['id'] }}"
-                            data-uses-name="{{ $item['name'] }}"
-                            data-uses-type="{{ $item['type'] }}"
-                            data-uses-description="{{ $item['description'] }}"
-                            @isset($item['action'])
-                                data-uses-action="{{ $item['action'] }}"
-                            @endisset
-                            aria-label="Inspect {{ $item['name'] }}"
+                            style="{{ $position }}"
+                            data-uses-item="{{ $item->slug() }}"
+                            data-uses-name="{{ $item->value('title') }}"
+                            data-uses-type="{{ $item->value('item_type') }}"
+                            data-uses-description="{{ $item->value('content') }}"
+                            @if ($item->value('action'))
+                                data-uses-action="{{ $item->value('action') }}"
+                            @endif
+                            aria-label="Inspect {{ $item->value('title') }}"
                         >
                             <span></span>
                         </button>

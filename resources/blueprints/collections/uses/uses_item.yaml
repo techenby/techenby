@@ -1,0 +1,84 @@
+title: 'Uses Item'
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: item_type
+            field:
+              type: text
+              display: Type
+              width: 50
+          -
+            handle: action
+            field:
+              type: text
+              display: Action
+              instructions: 'Use "desktop" to switch to the desktop view.'
+              width: 50
+          -
+            handle: sort_order
+            field:
+              type: integer
+              display: 'Sort Order'
+              width: 25
+          -
+            handle: left
+            field:
+              type: text
+              display: Left
+              instructions: 'Percentage from the left edge, without the % symbol.'
+              width: 25
+          -
+            handle: top
+            field:
+              type: text
+              display: Top
+              instructions: 'Percentage from the top edge, without the % symbol.'
+              width: 25
+          -
+            handle: width
+            field:
+              type: text
+              display: Width
+              instructions: 'Percentage width, without the % symbol.'
+              width: 25
+          -
+            handle: height
+            field:
+              type: text
+              display: Height
+              instructions: 'Percentage height, without the % symbol.'
+              width: 25
+          -
+            handle: content
+            field:
+              type: markdown
+              display: Description
+              localizable: true
+          -
+            handle: url
+            field:
+              input_type: url
+              type: text
+              display: URL
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'

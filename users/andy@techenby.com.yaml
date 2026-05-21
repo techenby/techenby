@@ -10,3 +10,5 @@ preferences:
       view: tree
     blog:
       view: list
+    uses:
+      view: list
