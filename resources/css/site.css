@@ -91,6 +91,58 @@
     @apply block min-w-max bg-transparent p-0 text-inherit outline-0;
 }
 
+.blog-prose .hljs-comment,
+.blog-prose .hljs-quote {
+    @apply text-neutral-500;
+}
+
+.blog-prose .hljs-keyword,
+.blog-prose .hljs-selector-tag,
+.blog-prose .hljs-subst {
+    @apply text-orange-300;
+}
+
+.blog-prose .hljs-literal,
+.blog-prose .hljs-number,
+.blog-prose .hljs-tag .hljs-attr,
+.blog-prose .hljs-template-variable,
+.blog-prose .hljs-variable {
+    @apply text-yellow-200;
+}
+
+.blog-prose .hljs-doctag,
+.blog-prose .hljs-string,
+.blog-prose .hljs-title,
+.blog-prose .hljs-section,
+.blog-prose .hljs-selector-id {
+    @apply text-red-400;
+}
+
+.blog-prose .hljs-attr,
+.blog-prose .hljs-attribute,
+.blog-prose .hljs-built_in,
+.blog-prose .hljs-class .hljs-title,
+.blog-prose .hljs-function .hljs-title,
+.blog-prose .hljs-name,
+.blog-prose .hljs-type {
+    @apply text-orange-400;
+}
+
+.blog-prose .hljs-meta,
+.blog-prose .hljs-symbol,
+.blog-prose .hljs-bullet,
+.blog-prose .hljs-link {
+    @apply text-neutral-300;
+}
+
+.blog-prose .hljs-emphasis {
+    @apply italic;
+}
+
+.blog-prose .hljs-strong {
+    @apply font-semibold;
+}
+
 .blog-prose img {
     @apply w-full object-contain outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10;
 }

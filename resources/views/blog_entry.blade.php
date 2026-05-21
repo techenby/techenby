@@ -1,4 +1,5 @@
 @php
+    use App\Support\BlogCodeHighlighter;
     use Illuminate\Support\Carbon;
     use Illuminate\Support\Str;
     use Statamic\Facades\Asset;
@@ -21,7 +22,7 @@
     $lightHeaderImage = $headerImages->first(fn ($asset) => Str::contains($asset->path(), '-light')) ?? $headerImages->first();
     $darkHeaderImage = $headerImages->first(fn ($asset) => Str::contains($asset->path(), '-dark')) ?? $headerImages->first();
     $hasModeHeaderImages = $headerImages->count() > 1;
-    $contentHtml = Modify::value($entryContent)->bardHtml()->fetch();
+    $contentHtml = app(BlogCodeHighlighter::class)->highlight(Modify::value($entryContent)->bardHtml()->fetch());
     $contentText = Modify::value($entryContent)->bardText()->fetch();
     $readingMinutes = max(1, (int) ceil(str_word_count($contentText) / 225));
 @endphp

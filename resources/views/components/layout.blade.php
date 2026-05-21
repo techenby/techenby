@@ -21,7 +21,7 @@
                     <div class="flex items-center justify-between mr-2 gap-4 font-geist-mono text-xs font-medium tracking-wide text-neutral-500 dark:text-neutral-400">
                         <x-atom.nav class="min-w-0 flex-1" />
 
-                        <x-comms align="bottom">
+                        <x-comms align="bottom" :andy="$andy">
                             <span class="shrink-0 font-geist-mono"><span class="uppercase">Trainer ID</span> @techenby</span>
                         </x-comms>
                     </div>
