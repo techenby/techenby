@@ -22,16 +22,6 @@
             ->values());
 
     $items = $itemsByScene->get('desk', collect());
-    $sceneOrder = ['desk' => 0, 'gridfinity' => 1, 'buddies' => 2];
-    $hiddenListItems = ['desk-friends', 'gridfinity'];
-    $allItems = $itemsByScene
-        ->flatten(1)
-        ->reject(fn ($item) => in_array($item->slug(), $hiddenListItems, true))
-        ->sortBy([
-            fn ($first, $second) => ($sceneOrder[$first->value('scene')] ?? 99) <=> ($sceneOrder[$second->value('scene')] ?? 99),
-            fn ($first, $second) => ((int) ($first->value('sort_order') ?? 0)) <=> ((int) ($second->value('sort_order') ?? 0)),
-        ])
-        ->values();
 
     $zoomScenes = [
         [
@@ -177,48 +167,7 @@
                 </div>
             </div>
         @endforeach
-
-        <section class="uses-list" aria-labelledby="uses-list-heading">
-            <div class="uses-list-heading">
-                <div>
-                    <p>Complete Inventory</p>
-                    <h2 id="uses-list-heading">All Uses Items</h2>
-                </div>
-                <span>{{ $allItems->count() }} items</span>
-            </div>
-
-            <div class="uses-list-grid">
-                @foreach ($allItems as $item)
-                    @php
-                        $links = $itemLinks($item);
-                    @endphp
-
-                    <article class="uses-list-item">
-                        <div class="uses-list-item-heading">
-                            <div>
-                                <h3>{{ $item->value('title') }}</h3>
-                                <p>{{ $item->value('item_type') }}</p>
-                            </div>
-
-                            <span>{{ Str::of($item->value('scene'))->replace('-', ' ')->title() }}</span>
-                        </div>
-
-                        <p>{{ $item->value('content') }}</p>
-
-                        @if ($links->isNotEmpty())
-                            <ul class="uses-list-links">
-                                @foreach ($links as $link)
-                                    <li>
-                                        <a href="{{ $link['url'] }}" target="_blank" rel="noopener">
-                                            {{ $link['label'] }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    </article>
-                @endforeach
-            </div>
-        </section>
     </section>
+
+    <livewire:uses.list />
 </x-layout>
