@@ -69,14 +69,7 @@ new class extends Component
     <div data-uses-view="desk">
         <div class="uses-scene-grid">
             <div class="uses-scene" aria-label="Interactive desk setup">
-                @if ($hasDeskImage)
-                    <img src="{{ $deskImage }}" alt="Pixelated photo of Andy's desk setup" class="uses-scene-image">
-                @else
-                    <div class="uses-scene-placeholder" role="img" aria-label="Desk photo placeholder">
-                        <span>DROP PHOTO</span>
-                        <strong>public/assets/uses/desk-photo-pixelated.jpg</strong>
-                    </div>
-                @endif
+                <img src="{{ asset('assets/uses/desk-photo-pixelated.jpg') }}" alt="Pixelated photo of Andy's desk setup" class="uses-scene-image">
 
                 @foreach ($items as $item)
                     <x-uses.hotspot :$item />
@@ -126,40 +119,10 @@ new class extends Component
                     </div>
 
                     <div class="uses-zoom-scene">
-                        @if ($scene['exists'])
-                            <img src="{{ $scene['image'] }}" alt="{{ $scene['alt'] }}" class="uses-scene-image">
-                        @else
-                            <div class="uses-scene-placeholder" role="img" aria-label="{{ $scene['label'] }} photo placeholder">
-                                <span>DROP PHOTO</span>
-                                <strong>public/assets/uses/{{ $scene['handle'] }}-photo-pixelated.jpg</strong>
-                            </div>
-                        @endif
+                        <img src="{{ $scene['image'] }}" alt="{{ $scene['alt'] }}" class="uses-scene-image">
 
                         @foreach ($sceneItems as $item)
-                            @php
-                                $position = collect(['left', 'top', 'width', 'height'])
-                                    ->map(fn ($field) => $field.': '.$item->value($field).'%;')
-                                    ->implode(' ');
-
-                                $links = $itemLinks($item);
-                            @endphp
-
-                            <button
-                                type="button"
-                                class="uses-hotspot"
-                                style="{{ $position }}"
-                                data-uses-item="{{ $item->slug() }}"
-                                data-uses-name="{{ $item->value('title') }}"
-                                data-uses-type="{{ $item->value('item_type') }}"
-                                data-uses-description="{{ $item->value('content') }}"
-                                data-uses-links="{{ base64_encode($links->toJson()) }}"
-                                @if ($item->value('action'))
-                                    data-uses-action="{{ $item->value('action') }}"
-                                @endif
-                                aria-label="Inspect {{ $item->value('title') }}"
-                            >
-                                <span></span>
-                            </button>
+                            <x-uses.hotspot :$item />
                         @endforeach
                     </div>
                 </div>
