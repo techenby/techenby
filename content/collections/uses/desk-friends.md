@@ -2,7 +2,7 @@
 id: 8fc75e1a-ae43-41d4-9035-0ae341ac619b
 blueprint: uses_item
 title: 'Desk Friends'
-scene: desk
+scene: e8d0b359-0a07-42c3-8e73-333e03df0436
 item_type: 'Morale boost'
 action: buddies
 left: 42

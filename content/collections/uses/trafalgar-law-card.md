@@ -2,7 +2,7 @@
 id: 278f44c1-606e-4a52-9508-c03ad6e535c3
 blueprint: uses_item
 title: 'Trafalgar Law Card'
-scene: gridfinity
+scene: b2fd7872-16b8-40a6-a541-c91a116123d5
 item_type: Collectible
 sort_order: 10
 left: 32

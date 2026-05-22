@@ -2,7 +2,7 @@
 id: dcb25c09-3316-4f58-a58b-b49182e4113e
 blueprint: uses_item
 title: 'Diet Coke'
-scene: desk
+scene: e8d0b359-0a07-42c3-8e73-333e03df0436
 item_type: Consumable
 sort_order: 50
 left: 75

@@ -2,7 +2,7 @@
 id: ad2507b2-1da1-4920-a2da-360174f7fa3d
 blueprint: uses_item
 title: Trackpad
-scene: desk
+scene: e8d0b359-0a07-42c3-8e73-333e03df0436
 item_type: 'Pointer gear'
 sort_order: 90
 left: '66'

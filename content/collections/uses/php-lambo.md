@@ -2,7 +2,7 @@
 id: f3247e34-29a3-4e42-b330-3d9d36fa96b8
 blueprint: uses_item
 title: 'PHP Lambo'
-scene: buddies
+scene: 2857a7bd-b164-4656-b1d1-5aa2ba0f1a35
 item_type: Toy
 sort_order: 70
 left: 74

@@ -2,7 +2,7 @@
 id: 1ac6cf61-e375-40df-a26d-4dea94033dff
 blueprint: uses_item
 title: reMarkable
-scene: desk
+scene: e8d0b359-0a07-42c3-8e73-333e03df0436
 item_type: Notes
 sort_order: 60
 left: 7

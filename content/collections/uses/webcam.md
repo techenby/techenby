@@ -2,7 +2,7 @@
 id: 78fb3d96-c09d-4411-805c-f7c8163b9401
 blueprint: uses_item
 title: Webcam
-scene: desk
+scene: e8d0b359-0a07-42c3-8e73-333e03df0436
 item_type: 'Party comms'
 sort_order: 30
 left: 51

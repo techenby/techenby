@@ -2,7 +2,7 @@
 id: f9e558e9-00ba-4d16-bc6f-d4e19ad128c2
 blueprint: uses_item
 title: Calendar
-scene: buddies
+scene: 2857a7bd-b164-4656-b1d1-5aa2ba0f1a35
 item_type: Desk gear
 sort_order: 40
 left: 43

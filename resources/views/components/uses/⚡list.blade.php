@@ -1,13 +1,16 @@
 <?php
 
-use Livewire\Component;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Computed;
+use Livewire\Component;
 use Statamic\Facades\Entry;
 
 new class extends Component
 {
     #[Computed]
-    public function items() {
+    public function items(): Collection
+    {
         return Entry::query()
             ->where('collection', 'uses')
             ->get()
@@ -19,6 +22,23 @@ new class extends Component
             ->reject(fn ($item) => in_array($item->slug(), ['desk-friends', 'gridfinity'], true))
             ->sortBy('title')
             ->values();
+    }
+
+    #[Computed]
+    public function scenesById(): Collection
+    {
+        return Entry::query()
+            ->where('collection', 'uses_scenes')
+            ->get()
+            ->keyBy(fn ($entry) => $entry->id());
+    }
+
+    public function sceneTitle($item): string
+    {
+        $scene = $item->value('scene');
+        $sceneId = is_array($scene) ? collect($scene)->first() : $scene;
+
+        return (string) ($this->scenesById->get($sceneId)?->value('title') ?? Str::of($sceneId ?? '')->replace('-', ' ')->title());
     }
 };
 ?>
@@ -51,7 +71,7 @@ new class extends Component
                         <p>{{ $item->value('item_type') }}</p>
                     </div>
 
-                    <span>{{ Str::of($item->value('scene'))->replace('-', ' ')->title() }}</span>
+                    <span>{{ $this->sceneTitle($item) }}</span>
                 </div>
 
                 <p>{{ $item->value('content') }}</p>

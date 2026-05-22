@@ -16,7 +16,10 @@ tabs:
           -
             handle: scene
             field:
-              type: text
+              collections:
+                - uses_scenes
+              max_items: 1
+              type: entries
               display: Scene
               width: 33
               listable: true

@@ -2,7 +2,7 @@
 id: 47b57716-5d3a-4d4c-a2cf-343841e722e2
 blueprint: uses_item
 title: 'LEGO 3x3 Cube'
-scene: gridfinity
+scene: b2fd7872-16b8-40a6-a541-c91a116123d5
 item_type: Bricks
 sort_order: 50
 left: 44

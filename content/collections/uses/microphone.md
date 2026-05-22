@@ -2,7 +2,7 @@
 id: b133c356-61ef-4cc1-a3f4-9ad1904ea488
 blueprint: uses_item
 title: Microphone
-scene: desk
+scene: e8d0b359-0a07-42c3-8e73-333e03df0436
 item_type: 'Audio gear'
 sort_order: 70
 left: 0

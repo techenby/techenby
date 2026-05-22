@@ -1,56 +1,27 @@
 <?php
 
+use Livewire\Attributes\Computed;
 use Livewire\Component;
+use Statamic\Facades\Entry;
 
 new class extends Component
 {
-    //
-};
-?>
-
-@php
-    use Statamic\Facades\Entry;
-    use Illuminate\Support\Str;
-
-    $deskImage = asset('assets/uses/desk-photo-pixelated.jpg');
-    $hasDeskImage = file_exists(public_path('assets/uses/desk-photo-pixelated.jpg'));
-
-    $itemLinks = fn ($item) => collect($item->value('links') ?? [])
-        ->filter(fn ($link) => filled($link['label'] ?? null) && filled($link['url'] ?? null))
-        ->map(fn ($link) => [
-            'label' => $link['label'],
-            'url' => $link['url'],
-        ])
-        ->values();
-
-    $itemsByScene = Entry::query()
-        ->where('collection', 'uses')
-        ->get()
-        ->groupBy(fn ($entry) => $entry->value('scene'))
-        ->map(fn ($entries) => $entries
-            ->sortBy(fn ($entry) => (int) ($entry->value('sort_order') ?? 0))
-            ->values());
-
-    $items = $itemsByScene->get('desk', collect());
-
-    $zoomScenes = [
+    public $zoomScenes = [
         [
             'handle' => 'gridfinity',
             'label' => 'Gridfinity',
-            'image' => asset('assets/uses/grid-photo-pixelated.jpg'),
-            'exists' => file_exists(public_path('assets/uses/grid-photo-pixelated.jpg')),
+            'image' => 'assets/uses/grid-photo-pixelated.jpg',
             'alt' => 'Pixelated close-up of the Gridfinity section of Andy\'s desk',
         ],
         [
             'handle' => 'buddies',
             'label' => 'Buddies',
-            'image' => asset('assets/uses/buddies-photo-pixelated.jpg'),
-            'exists' => file_exists(public_path('assets/uses/buddies-photo-pixelated.jpg')),
+            'image' => 'assets/uses/buddies-photo-pixelated.jpg',
             'alt' => 'Pixelated close-up of desk buddies and figures',
         ],
     ];
 
-    $apps = [
+    public $apps = [
         ['name' => 'PhpStorm', 'meta' => 'Code editor', 'color' => 'bg-orange-400'],
         ['name' => 'Terminal', 'meta' => 'Shell + scripts', 'color' => 'bg-neutral-900 dark:bg-neutral-100'],
         ['name' => 'TablePlus', 'meta' => 'Database checks', 'color' => 'bg-yellow-300'],
@@ -58,7 +29,30 @@ new class extends Component
         ['name' => 'Arc', 'meta' => 'Browser', 'color' => 'bg-sky-400'],
         ['name' => 'Things', 'meta' => 'Tasks', 'color' => 'bg-emerald-400'],
     ];
-@endphp
+
+    #[Computed]
+    public function itemsByScene()
+    {
+        $scenesById = Entry::query()
+            ->where('collection', 'uses_scenes')
+            ->get()
+            ->keyBy(fn ($entry) => $entry->id());
+
+        return Entry::query()
+            ->where('collection', 'uses')
+            ->get()
+            ->groupBy(function ($entry) use ($scenesById) {
+                $scene = $entry->value('scene');
+                $sceneId = is_array($scene) ? collect($scene)->first() : $scene;
+
+                return $scenesById->get($sceneId)?->slug() ?? $sceneId;
+            })
+            ->map(fn ($entries) => $entries
+                ->sortBy(fn ($entry) => (int) ($entry->value('sort_order') ?? 0))
+                ->values());
+    }
+};
+?>
 
 <section class="section uses-shell" data-uses>
     <div class="uses-toolbar" aria-label="Uses view controls">
@@ -71,7 +65,7 @@ new class extends Component
             <div class="uses-scene" aria-label="Interactive desk setup">
                 <img src="{{ asset('assets/uses/desk-photo-pixelated.jpg') }}" alt="Pixelated photo of Andy's desk setup" class="uses-scene-image">
 
-                @foreach ($items as $item)
+                @foreach ($this->itemsByScene->get('desk', collect()) as $item)
                     <x-uses.hotspot :$item />
                 @endforeach
             </div>
@@ -106,10 +100,6 @@ new class extends Component
     </div>
 
     @foreach ($zoomScenes as $scene)
-        @php
-            $sceneItems = $itemsByScene->get($scene['handle'], collect());
-        @endphp
-
         <div data-uses-view="{{ $scene['handle'] }}" hidden>
             <div class="uses-scene-grid">
                 <div class="uses-zoom">
@@ -119,9 +109,9 @@ new class extends Component
                     </div>
 
                     <div class="uses-zoom-scene">
-                        <img src="{{ $scene['image'] }}" alt="{{ $scene['alt'] }}" class="uses-scene-image">
+                        <img src="{{ asset($scene['image']) }}" alt="{{ $scene['alt'] }}" class="uses-scene-image">
 
-                        @foreach ($sceneItems as $item)
+                        @foreach ($this->itemsByScene->get($scene['handle'], collect()) as $item)
                             <x-uses.hotspot :$item />
                         @endforeach
                     </div>

@@ -2,7 +2,7 @@
 id: 237cfeed-219f-4179-8a15-7af79f90a997
 blueprint: uses_item
 title: 'Happy Plant'
-scene: buddies
+scene: 2857a7bd-b164-4656-b1d1-5aa2ba0f1a35
 item_type: Bricks
 sort_order: 60
 left: 62

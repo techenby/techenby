@@ -2,7 +2,7 @@
 id: 2ba38665-cd14-429c-9b82-4aa8450a6380
 blueprint: uses_item
 title: 'Main Display'
-scene: desk
+scene: e8d0b359-0a07-42c3-8e73-333e03df0436
 item_type: 'Warp point'
 action: desktop
 sort_order: 10

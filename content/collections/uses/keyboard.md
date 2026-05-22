@@ -2,7 +2,7 @@
 id: cb33a650-4fa8-489a-aee8-42525d1e30bf
 blueprint: uses_item
 title: Keyboard
-scene: desk
+scene: e8d0b359-0a07-42c3-8e73-333e03df0436
 item_type: 'Input gear'
 sort_order: 40
 left: 38

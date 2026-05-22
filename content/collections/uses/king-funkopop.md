@@ -2,7 +2,7 @@
 id: c6038e1e-ae74-4060-b2e9-87a656bbe29d
 blueprint: uses_item
 title: 'King Funkopop'
-scene: buddies
+scene: 2857a7bd-b164-4656-b1d1-5aa2ba0f1a35
 item_type: Figure
 sort_order: 30
 left: 44

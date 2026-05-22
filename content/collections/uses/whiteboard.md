@@ -2,7 +2,7 @@
 id: 306cafd7-4303-48b7-8c44-4c154d0a9df9
 blueprint: uses_item
 title: Whiteboard
-scene: desk
+scene: e8d0b359-0a07-42c3-8e73-333e03df0436
 item_type: Notes
 sort_order: 25
 left: '6'
