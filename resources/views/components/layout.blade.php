@@ -11,6 +11,8 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@300..900&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Lora:wght@400..700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
         @vite(['resources/js/site.js', 'resources/css/site.css'])
+
+        @fluxAppearance
     </head>
     <body class="font-sans">
         <div class="relative isolate min-h-dvh overflow-hidden bg-stone-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
@@ -47,5 +49,8 @@
                 </div>
             </div>
         </div>
+
+        @livewireScripts
+        @fluxScripts
     </body>
 </html>
