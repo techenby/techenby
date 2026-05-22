@@ -1,0 +1,15 @@
+---
+id: ed8f3418-f7a4-4803-812d-57924258a836
+blueprint: uses_item
+title: 'Rubber Duck'
+scene: buddies
+item_type: Debugging
+sort_order: 50
+left: 56
+top: 43
+width: 18
+height: 21
+updated_by: 2de7d260-84a8-4dfc-9a2e-af5aae989cd3
+updated_at: 1779467690
+---
+The required debugging companion. Taken from my Grandmother's house before my family sold her place after her passing.

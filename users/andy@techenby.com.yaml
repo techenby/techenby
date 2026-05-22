@@ -12,3 +12,4 @@ preferences:
       view: list
     uses:
       view: list
+      after_save: continue_editing
