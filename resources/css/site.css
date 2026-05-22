@@ -345,3 +345,59 @@
 .uses-app p {
     @apply font-geist-mono text-[0.6875rem] uppercase tracking-wide text-neutral-500 dark:text-neutral-400;
 }
+
+.uses-list {
+    @apply mt-6 grid gap-4 border-t-2 border-dashed border-neutral-300 pt-6 dark:border-white/10;
+}
+
+.uses-list-heading {
+    @apply flex flex-wrap items-end justify-between gap-3;
+}
+
+.uses-list-heading p {
+    @apply font-press-start text-[0.625rem] uppercase text-orange-700 dark:text-orange-400;
+}
+
+.uses-list-heading h2 {
+    @apply mt-2 font-geist-mono text-2xl font-semibold text-neutral-900 dark:text-neutral-100;
+}
+
+.uses-list-heading span {
+    @apply border-2 border-neutral-900 bg-yellow-100 px-3 py-2 font-geist-mono text-[0.6875rem] uppercase text-neutral-900 shadow-[3px_3px_0_0_#171717] dark:border-white/15 dark:bg-orange-400/10 dark:text-orange-300 dark:shadow-none;
+}
+
+.uses-list-grid {
+    @apply grid gap-3 md:grid-cols-2 xl:grid-cols-3;
+}
+
+.uses-list-item {
+    @apply grid content-start gap-3 border-2 border-neutral-900 bg-white p-4 shadow-[4px_4px_0_0_#171717] dark:border-white/15 dark:bg-neutral-900 dark:shadow-none;
+}
+
+.uses-list-item-heading {
+    @apply flex items-start justify-between gap-3;
+}
+
+.uses-list-item-heading h3 {
+    @apply font-geist-mono text-base font-semibold text-neutral-900 dark:text-neutral-100;
+}
+
+.uses-list-item-heading p {
+    @apply mt-1 font-geist-mono text-[0.6875rem] uppercase tracking-wide text-neutral-500 dark:text-neutral-400;
+}
+
+.uses-list-item-heading span {
+    @apply shrink-0 border-2 border-neutral-900 bg-stone-100 px-2 py-1 font-geist-mono text-[0.625rem] uppercase text-neutral-700 dark:border-white/15 dark:bg-neutral-950 dark:text-neutral-300;
+}
+
+.uses-list-item > p {
+    @apply font-geist text-sm/6 text-neutral-700 dark:text-neutral-300;
+}
+
+.uses-list-links {
+    @apply flex flex-wrap gap-2 border-t-2 border-dashed border-neutral-300 pt-3 dark:border-white/10;
+}
+
+.uses-list-links a {
+    @apply inline-flex border-2 border-neutral-900 bg-white px-3 py-2 font-geist-mono text-[0.6875rem] uppercase text-neutral-900 shadow-[2px_2px_0_0_#171717] hover:-translate-y-px hover:text-orange-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500 dark:border-white/15 dark:bg-neutral-950 dark:text-neutral-100 dark:shadow-none dark:hover:text-orange-400;
+}
