@@ -82,30 +82,7 @@
                     @endif
 
                     @foreach ($items as $item)
-                        @php
-                            $position = collect(['left', 'top', 'width', 'height'])
-                                ->map(fn ($field) => $field.': '.$item->value($field).'%;')
-                                ->implode(' ');
-
-                            $links = $itemLinks($item);
-                        @endphp
-
-                        <button
-                            type="button"
-                            class="uses-hotspot"
-                            style="{{ $position }}"
-                            data-uses-item="{{ $item->slug() }}"
-                            data-uses-name="{{ $item->value('title') }}"
-                            data-uses-type="{{ $item->value('item_type') }}"
-                            data-uses-description="{{ $item->value('content') }}"
-                            data-uses-links="{{ base64_encode($links->toJson()) }}"
-                            @if ($item->value('action'))
-                                data-uses-action="{{ $item->value('action') }}"
-                            @endif
-                            aria-label="Inspect {{ $item->value('title') }}"
-                        >
-                            <span></span>
-                        </button>
+                        <x-uses.hotspot :$item />
                     @endforeach
                 </div>
 
