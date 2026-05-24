@@ -20,9 +20,14 @@ tabs:
               type: assets
               display: Background
               folder: uses
-              required: true
               validate:
                 - required
+          -
+            handle: component
+            field:
+              default: uses.scene.zoom
+              type: text
+              display: Component
   sidebar:
     display: Sidebar
     sections:
