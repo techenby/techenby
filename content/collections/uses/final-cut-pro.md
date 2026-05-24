@@ -10,6 +10,6 @@ sort_order: 350
 links:
   -
     id: d466640d-70c0-4ac3-997d-a5303afb14a6
-    label: 'Final Cut Pro'
+    label: Website
     url: 'https://www.apple.com/final-cut-pro/'
 ---

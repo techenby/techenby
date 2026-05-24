@@ -10,6 +10,6 @@ sort_order: 440
 links:
   -
     id: 86335d17-b202-44ba-af79-96005e8af4ad
-    label: Vanilla
+    label: Website
     url: 'https://matthewpalmer.net/vanilla/'
 ---

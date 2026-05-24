@@ -10,6 +10,6 @@ sort_order: 420
 links:
   -
     id: 1914747f-4e85-4d6f-8402-b4afac6bb61c
-    label: OBS
+    label: Website
     url: 'https://obsproject.com/'
 ---

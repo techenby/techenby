@@ -10,6 +10,6 @@ sort_order: 310
 links:
   -
     id: 822f002d-8cad-4419-adae-332479a2aca7
-    label: AppCleaner
+    label: Website
     url: 'https://freemacsoft.net/appcleaner/'
 ---

@@ -10,6 +10,6 @@ sort_order: 410
 links:
   -
     id: f688aa70-7345-462c-ae99-e00d1f982f5f
-    label: Monodraw
+    label: Website
     url: 'https://monodraw.helftone.com/'
 ---

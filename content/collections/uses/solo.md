@@ -10,6 +10,6 @@ sort_order: 210
 links:
   -
     id: 16619845-2054-4bee-8a02-2f86b9126d8f
-    label: Solo
+    label: Website
     url: 'https://soloterm.com/'
 ---

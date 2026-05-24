@@ -10,6 +10,6 @@ sort_order: 290
 links:
   -
     id: 933b8bb3-09b3-49d4-9a2d-4e61e4405959
-    label: Bunch
+    label: Website
     url: 'https://bunchapp.co/'
 ---

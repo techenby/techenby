@@ -10,6 +10,6 @@ sort_order: 270
 links:
   -
     id: a7421cb6-63fd-4612-9da3-a5bde339ca13
-    label: Affinity
+    label: Website
     url: 'https://affinity.studio/'
 ---

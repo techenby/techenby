@@ -10,6 +10,6 @@ sort_order: 220
 links:
   -
     id: 444104cc-b428-4a6b-8a30-a57ed482aa4b
-    label: Arc
+    label: Website
     url: 'https://arc.net/'
 ---

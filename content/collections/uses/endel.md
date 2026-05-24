@@ -10,6 +10,6 @@ sort_order: 340
 links:
   -
     id: 24c0ffb6-96e1-47ae-8583-97259dc0525f
-    label: Endel
+    label: Website
     url: 'https://endel.io/'
 ---

@@ -10,6 +10,6 @@ sort_order: 370
 links:
   -
     id: 55095b9c-e676-4b54-8143-618f593f7f6c
-    label: Herd
+    label: Website
     url: 'https://herd.laravel.com/'
 ---

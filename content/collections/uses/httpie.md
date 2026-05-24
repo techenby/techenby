@@ -10,6 +10,6 @@ sort_order: 380
 links:
   -
     id: ffca1a3f-d0a6-43b4-833b-acb9155727f7
-    label: HTTPie
+    label: Website
     url: 'https://httpie.io/'
 ---

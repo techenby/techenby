@@ -10,6 +10,6 @@ sort_order: 360
 links:
   -
     id: b4dbf298-8a55-42a6-8f36-c735fce5014a
-    label: 'Hand Mirror'
+    label: Website
     url: 'https://handmirror.app/'
 ---

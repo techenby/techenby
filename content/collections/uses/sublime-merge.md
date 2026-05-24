@@ -10,6 +10,6 @@ sort_order: 230
 links:
   -
     id: 32e17e47-5d01-4764-abcc-574a9b64c924
-    label: 'Sublime Merge'
+    label: Website
     url: 'https://www.sublimemerge.com/'
 ---

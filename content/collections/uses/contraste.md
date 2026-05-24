@@ -10,6 +10,6 @@ sort_order: 320
 links:
   -
     id: 20d55f52-d513-4224-977b-1a0bdcbf02e5
-    label: Contraste
+    label: Website
     url: 'https://contrasteapp.com/'
 ---

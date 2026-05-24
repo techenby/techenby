@@ -10,6 +10,6 @@ sort_order: 300
 links:
   -
     id: 3d133aff-e642-4e61-9005-15684ff1bb5d
-    label: Raycast
+    label: Website
     url: 'https://www.raycast.com/'
 ---

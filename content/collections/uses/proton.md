@@ -10,6 +10,6 @@ sort_order: 250
 links:
   -
     id: 641a6efd-82bd-4817-a99c-660b10c29264
-    label: Proton
+    label: Website
     url: 'https://proton.me/'
 ---

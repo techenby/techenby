@@ -8,7 +8,7 @@ sort_order: 400
 links:
   -
     id: 69b383ba-1b86-447c-87f6-eb8bdd0fc528
-    label: 'Apple Journal'
+    label: Website
     url: 'https://apps.apple.com/us/app/journal/id6447391597'
 updated_by: 2de7d260-84a8-4dfc-9a2e-af5aae989cd3
 updated_at: 1779590562

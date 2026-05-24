@@ -10,6 +10,6 @@ sort_order: 200
 links:
   -
     id: fe567715-50f0-4d2d-823c-932518c1e78b
-    label: 'Visual Studio Code'
+    label: Website
     url: 'https://code.visualstudio.com/'
 ---

@@ -10,6 +10,6 @@ sort_order: 390
 links:
   -
     id: fdcab9e8-3405-4261-ad1b-84f5fa348e08
-    label: ImageOptim
+    label: Website
     url: 'https://imageoptim.com/'
 ---

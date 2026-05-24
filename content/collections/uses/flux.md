@@ -10,6 +10,6 @@ sort_order: 330
 links:
   -
     id: 8dfa4f5e-2f27-461f-abbd-efb3c9588299
-    label: Flux
+    label: Website
     url: 'https://justgetflux.com/'
 ---

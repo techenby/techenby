@@ -10,6 +10,6 @@ sort_order: 240
 links:
   -
     id: 8f6d716d-3af9-49ee-a0c0-355864ca70d7
-    label: Ghostty
+    label: Website
     url: 'https://ghostty.org/'
 ---

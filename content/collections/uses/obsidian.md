@@ -10,6 +10,6 @@ sort_order: 430
 links:
   -
     id: 1d0aa81e-6483-4146-9ed8-59619e69eac9
-    label: Obsidian
+    label: Website
     url: 'https://obsidian.md/'
 ---
