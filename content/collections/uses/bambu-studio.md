@@ -1,0 +1,14 @@
+---
+id: 9426eda6-2120-4e98-bc81-4017ed634fb5
+blueprint: uses_item
+title: 'Bambu Studio'
+types:
+  - software
+icon: uses/software-icons/bambu-studio.png
+sort_order: 280
+links:
+  -
+    id: c2d09701-feb5-4c71-a5bc-3a758916093e
+    label: 'Bambu Studio'
+    url: 'https://bambulab.com/download/studio'
+---

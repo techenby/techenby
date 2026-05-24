@@ -41,6 +41,14 @@ tabs:
               width: 25
               listable: true
           -
+            handle: icon
+            field:
+              container: assets
+              max_files: 1
+              type: assets
+              display: Icon
+              width: 25
+          -
             handle: sort_order
             field:
               type: integer
