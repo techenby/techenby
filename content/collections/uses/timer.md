@@ -3,7 +3,8 @@ id: c5b4363f-e96b-471c-859a-217c901535db
 blueprint: uses_item
 title: Timer
 scene: b2fd7872-16b8-40a6-a541-c91a116123d5
-item_type: Utility
+types:
+  - utility
 sort_order: 40
 left: 64
 top: 23

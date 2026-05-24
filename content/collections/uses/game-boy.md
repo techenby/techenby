@@ -3,7 +3,8 @@ id: e3d49551-dd6b-4844-8461-dbb85a5bde8e
 blueprint: uses_item
 title: 'LEGO Game Boy'
 scene: e8d0b359-0a07-42c3-8e73-333e03df0436
-item_type: Bricks
+types:
+  - bricks
 sort_order: 80
 left: '85'
 top: 48

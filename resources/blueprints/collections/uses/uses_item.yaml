@@ -24,11 +24,15 @@ tabs:
               width: 33
               listable: true
           -
-            handle: item_type
+            handle: types
             field:
-              type: text
-              display: Type
+              taxonomies:
+                - types
+              max_items: 1
+              type: terms
+              display: Types
               width: 50
+              listable: true
           -
             handle: action
             field:

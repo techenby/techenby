@@ -3,7 +3,8 @@ id: ed8f3418-f7a4-4803-812d-57924258a836
 blueprint: uses_item
 title: 'Rubber Duck'
 scene: 2857a7bd-b164-4656-b1d1-5aa2ba0f1a35
-item_type: Debugging
+types:
+  - debugging
 sort_order: 50
 left: 56
 top: 43

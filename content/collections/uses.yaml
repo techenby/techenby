@@ -1,2 +1,4 @@
 title: 'Uses Items'
 propagate: true
+taxonomies:
+  - types

@@ -5,6 +5,7 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Statamic\Facades\Entry;
+use Statamic\Facades\Term;
 
 new class extends Component
 {
@@ -40,6 +41,13 @@ new class extends Component
 
         return (string) ($this->scenesById->get($sceneId)?->value('title') ?? Str::of($sceneId ?? '')->replace('-', ' ')->title());
     }
+
+    public function typeTitle(mixed $item): string
+    {
+        $type = collect($item->value('types') ?? [])->first();
+
+        return (string) (Term::find('types::'.$type)?->title() ?? Str::of($type ?? '')->replace('-', ' ')->title());
+    }
 };
 ?>
 
@@ -47,47 +55,33 @@ new class extends Component
     <div class="uses-list-heading">
         <div>
             <p>Complete Inventory</p>
-            <h2 id="uses-list-heading">All Uses Items</h2>
+            <h2 id="uses-list-heading">Everything I Use</h2>
         </div>
-        <span>{{ $this->items->count() }} items</span>
     </div>
 
-    <div class="uses-list-grid">
-        @foreach ($this->items as $item)
-            @php
-                $links = collect($item->value('links') ?? [])
-                    ->filter(fn ($link) => filled($link['label'] ?? null) && filled($link['url'] ?? null))
-                    ->map(fn ($link) => [
-                        'label' => $link['label'],
-                        'url' => $link['url'],
-                    ])
-                    ->values();
-            @endphp
+    <div class="min-w-0 max-w-full">
+        <flux:table>
+            <flux:table.columns>
+                <flux:table.column>Item</flux:table.column>
+                <flux:table.column>Type</flux:table.column>
+                <flux:table.column>Links</flux:table.column>
+            </flux:table.columns>
 
-            <article class="uses-list-item">
-                <div class="uses-list-item-heading">
-                    <div>
-                        <h3>{{ $item->value('title') }}</h3>
-                        <p>{{ $item->value('item_type') }}</p>
-                    </div>
+            <flux:table.rows>
+                @foreach ($this->items as $item)
+                    <flux:table.row :key="$item->id">
+                        <flux:table.cell>{{ $item->title }}</flux:table.cell>
 
-                    <span>{{ $this->sceneTitle($item) }}</span>
-                </div>
+                        <flux:table.cell>{{ $this->typeTitle($item) }}</flux:table.cell>
 
-                <p>{{ $item->value('content') }}</p>
-
-                @if ($links->isNotEmpty())
-                    <ul class="uses-list-links">
-                        @foreach ($links as $link)
-                            <li>
-                                <a href="{{ $link['url'] }}" target="_blank" rel="noopener">
-                                    {{ $link['label'] }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endif
-            </article>
-        @endforeach
+                        <flux:table.cell>
+                            @foreach ($item->links as $link)
+                            <flux:button :href="$link->url" variant="ghost" size="sm" inset="top bottom">{{ $link->label }}</flux:button>
+                            @endforeach
+                        </flux:table.cell>
+                    </flux:table.row>
+                @endforeach
+            </flux:table.rows>
+        </flux:table>
     </div>
 </section>

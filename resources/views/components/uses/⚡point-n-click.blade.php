@@ -55,11 +55,6 @@ new class extends Component
 ?>
 
 <section class="section uses-shell" data-uses>
-    <div class="uses-toolbar" aria-label="Uses view controls">
-        <button type="button" class="uses-tab is-active" data-uses-view-button="desk">Desk</button>
-        <button type="button" class="uses-tab" data-uses-view-button="desktop">Desktop</button>
-    </div>
-
     <div data-uses-view="desk">
         <div class="uses-scene-grid">
             <div class="uses-scene" aria-label="Interactive desk setup">

@@ -3,7 +3,8 @@ id: 9e48af62-a8d3-4d13-9cb8-d7526970eb3b
 blueprint: uses_item
 title: '4x4 Cube'
 scene: b2fd7872-16b8-40a6-a541-c91a116123d5
-item_type: Puzzle
+types:
+  - puzzle
 sort_order: 60
 left: 10
 top: 21

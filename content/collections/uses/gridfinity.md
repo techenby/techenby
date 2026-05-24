@@ -3,7 +3,8 @@ id: 7d3b628f-4b05-4d3e-8901-11a37b1ee0ac
 blueprint: uses_item
 title: Gridfinity
 scene: e8d0b359-0a07-42c3-8e73-333e03df0436
-item_type: 'Organized Chaos'
+types:
+  - organized-chaos
 sort_order: 100
 left: 22
 top: 52

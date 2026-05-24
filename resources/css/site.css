@@ -2,6 +2,7 @@
 @source "../views";
 @source "../../content";
 @import '../../vendor/livewire/flux/dist/flux.css';
+@import "./tweakflux-theme.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 

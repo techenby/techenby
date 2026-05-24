@@ -3,7 +3,8 @@ id: e986f7e0-f994-4078-8df5-e7828649e541
 blueprint: uses_item
 title: '3D Printed Phone & Watch Charger'
 scene: 2857a7bd-b164-4656-b1d1-5aa2ba0f1a35
-item_type: Print
+types:
+  - print
 sort_order: 20
 left: 23
 top: 28

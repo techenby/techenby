@@ -1,9 +1,15 @@
 @props(['item' => false])
 
 @php
+    use Illuminate\Support\Str;
+    use Statamic\Facades\Term;
+
     $position = collect(['left', 'top', 'width', 'height'])
         ->map(fn ($field) => $field.': '.$item->value($field).'%;')
         ->implode(' ');
+
+    $type = collect($item->value('types') ?? [])->first();
+    $typeTitle = (string) (Term::find('types::'.$type)?->title() ?? Str::of($type ?? '')->replace('-', ' ')->title());
 
     $links = collect($item->value('links') ?? [])
         ->filter(fn ($link) => filled($link['label'] ?? null) && filled($link['url'] ?? null))
@@ -20,7 +26,7 @@
     style="{{ $position }}"
     data-uses-item="{{ $item->slug() }}"
     data-uses-name="{{ $item->value('title') }}"
-    data-uses-type="{{ $item->value('item_type') }}"
+    data-uses-type="{{ $typeTitle }}"
     data-uses-description="{{ $item->value('content') }}"
     data-uses-links="{{ base64_encode($links->toJson()) }}"
     @if ($item->value('action'))

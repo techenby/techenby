@@ -3,7 +3,8 @@ id: 2ba38665-cd14-429c-9b82-4aa8450a6380
 blueprint: uses_item
 title: 'Main Display'
 scene: e8d0b359-0a07-42c3-8e73-333e03df0436
-item_type: 'Warp point'
+types:
+  - gear
 action: desktop
 sort_order: 10
 left: 28
@@ -20,6 +21,6 @@ links:
     label: Mount
     url: 'https://www.amazon.com/dp/B07T3KCQ94'
 updated_by: 2de7d260-84a8-4dfc-9a2e-af5aae989cd3
-updated_at: 1779399170
+updated_at: 1779483850
 ---
 This disply is a LG 27" 4K UHD UltraFine monitor, that I've had for years and still think is doing great! Click to see what software I use.
