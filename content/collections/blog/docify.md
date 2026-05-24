@@ -1,5 +1,6 @@
 ---
 id: 16faf7f8-9c95-486c-add4-01ffd06c03f6
+published: false
 blueprint: blog
 title: 'Introducing Docify: A simple markdown viewer for TALL stack applications'
 header_image:
