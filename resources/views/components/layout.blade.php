@@ -28,7 +28,7 @@
                         </x-comms>
                     </div>
 
-                    <main class="mt-6 min-w-0 border-2 border-neutral-900 bg-white p-8 shadow-[8px_8px_0_0_#171717] sm:p-10 dark:border-white/10 dark:bg-neutral-900 dark:inset-ring dark:inset-ring-white/5 dark:shadow-none">
+                    <main class="mt-6 min-w-0 border-2 border-neutral-900 bg-white p-5 shadow-[6px_6px_0_0_#171717] sm:p-10 sm:shadow-[8px_8px_0_0_#171717] dark:border-white/10 dark:bg-neutral-900 dark:inset-ring dark:inset-ring-white/5 dark:shadow-none">
                         {{ $slot }}
                     </main>
 

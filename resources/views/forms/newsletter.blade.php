@@ -8,7 +8,7 @@
     @else
         <label for="newsletter-email" class="sr-only">Email address</label>
         <div class="mt-4 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-stretch">
-            <x-atom.input id="newsletter-email" type="email" name="email" required autocomplete="email" value="{{ old('email') }}" placeholder="trainer@route1.com" />
+            <flux:input id="newsletter-email" type="email" name="email" required autocomplete="email" placeholder="trainer@route1.com" />
             <x-atom.button type="submit" variant="primary">Catch Me</x-atom.button>
         </div>
         <x-atom.error name="email"/>

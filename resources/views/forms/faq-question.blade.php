@@ -7,7 +7,7 @@
     @else
         <label for="faq-question" class="sr-only">Question</label>
         <div class="mt-4 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-stretch">
-            <x-atom.input id="faq-question" type="text" name="question" value="{{ old('question') }}" required maxlength="500" placeholder="What should I answer next?" class="min-h-12 focus:outline focus:-outline-offset-1" />
+            <flux:input id="faq-question" type="text" name="question" value="{{ old('question') }}" required maxlength="500" placeholder="What should I answer next?" class="min-h-12 focus:outline focus:-outline-offset-1" />
             <x-atom.button type="submit" variant="primary">Ask It</x-atom.button>
         </div>
         <x-atom.error name="question" />

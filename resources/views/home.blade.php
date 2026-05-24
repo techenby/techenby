@@ -5,25 +5,25 @@
 <x-layout :$andy :bottomRight="'Save State · '.$gitHash">
     <x-atom.eyebrow>A WILD UPDATE APPEARED!</x-atom.eyebrow>
 
-    <div class="mt-8 flex space-x-8">
-        <div class="relative w-48 h-48 group transition duration-300 ease-in-out">
-            <img src="{{ $andy->pixelated_avatar->url() }}" alt="Andy Swick" >
+    <div class="mt-7 grid justify-items-center gap-7 sm:mt-8 sm:grid-cols-[12rem_minmax(0,1fr)] sm:items-start sm:justify-items-start sm:gap-8">
+        <button type="button" data-avatar-toggle class="group relative block size-36 cursor-pointer transition duration-300 ease-in-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500 sm:size-48" aria-label="Swap avatar style" aria-pressed="false">
+            <img src="{{ $andy->pixelated_avatar->url() }}" alt="Andy Swick" class="h-full w-full object-cover">
 
-            <img src="{{ $andy->avatar->url() }}" alt="" class="absolute top-0 invisible group-hover:visible">
+            <img src="{{ $andy->avatar->url() }}" alt="" data-avatar-alternate class="absolute inset-0 invisible h-full w-full object-cover group-hover:visible group-focus-visible:visible">
             <div class="box__line box__line--top"></div>
             <div class="box__line box__line--bottom"></div>
             <div class="box__line box__line--right"></div>
             <div class="box__line box__line--left"></div>
-        </div>
+        </button>
 
-        <div>
-            <x-atom.heading class="!mt-0">
-                Hey, I'm <em class="italic text-orange-700 dark:text-orange-400">Andy</em><span class="font-geist-mono text-base">(they/them)</span>
+        <div class="w-full min-w-0 text-center sm:text-left">
+            <x-atom.heading class="mt-0! max-w-none text-[clamp(3.5rem,18vw,4.5rem)] sm:text-7xl">
+                Hey, I'm <span class="block sm:inline"><em class="italic text-orange-700 dark:text-orange-400">Andy</em><span class="mt-1 font-geist-mono text-base not-italic sm:ml-1 sm:inline">(they/them)</span></span>
             </x-atom.heading>
 
             <x-atom.subheading class="mt-5">Current Party:</x-atom.subheading>
 
-            <ul role="list" class="mt-3 ml-6 grid list-disc grid-cols-2 gap-x-6 gap-y-2 font-geist-mono text-xs text-neutral-700 [&_a]:text-orange-700 [&_a]:underline [&_a]:decoration-orange-700/40 [&_a]:underline-offset-4 [&_a:hover]:decoration-orange-700 sm:col-start-2 dark:text-neutral-400 dark:[&_a]:text-orange-400 dark:[&_a]:decoration-orange-400/40 dark:[&_a:hover]:decoration-orange-400">
+            <ul role="list" class="mx-auto mt-3 grid max-w-64 list-disc gap-y-2 pl-5 text-left font-geist-mono text-xs text-neutral-700 sm:mx-0 sm:max-w-none sm:grid-cols-2 sm:gap-x-6 dark:text-neutral-400 [&_a]:text-orange-700 [&_a]:underline [&_a]:decoration-orange-700/40 [&_a]:underline-offset-4 [&_a:hover]:decoration-orange-700 dark:[&_a]:text-orange-400 dark:[&_a]:decoration-orange-400/40 dark:[&_a:hover]:decoration-orange-400">
                 <li><a href="https://tighten.com/" target="_blank" rel="noopener">Lead Programmer @ Tighten</a></li>
                 <li><a href="https://sunnyhome.app" target="_blank" rel="noopener">Sunny</a></li>
                 <li><a href="https://www.lego.com/en-us/product/lego-titanic-10294" target="_blank" rel="noopener">LEGO 10294</a></li>

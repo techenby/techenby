@@ -115,3 +115,9 @@ document.querySelectorAll('[data-uses]').forEach((uses) => {
         setView(sceneFromUrl())
     })
 })
+
+document.querySelectorAll('[data-avatar-toggle]').forEach((avatarToggle) => {
+    avatarToggle.addEventListener('click', () => {
+        avatarToggle.setAttribute('aria-pressed', avatarToggle.getAttribute('aria-pressed') === 'true' ? 'false' : 'true')
+    })
+})

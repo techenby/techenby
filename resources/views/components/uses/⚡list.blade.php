@@ -11,11 +11,11 @@ new class extends Component
 };
 ?>
 
-<section class="uses-list" aria-labelledby="uses-list-heading">
-    <div class="uses-list-heading">
+<section class="mt-6 grid gap-4 border-t-2 border-dashed border-neutral-300 pt-6 dark:border-white/10" aria-labelledby="uses-list-heading">
+    <div class="flex flex-wrap items-end justify-between gap-3">
         <div>
-            <p>Complete Inventory</p>
-            <h2 id="uses-list-heading">Everything I Use</h2>
+            <p class="font-press-start text-[0.625rem] uppercase text-orange-700 dark:text-orange-400">Complete Inventory</p>
+            <h2 id="uses-list-heading" class="mt-2 font-geist-mono text-2xl font-semibold text-neutral-900 dark:text-neutral-100">Everything I Use</h2>
         </div>
     </div>
 
