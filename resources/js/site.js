@@ -2,6 +2,32 @@ document.querySelectorAll('[data-uses]').forEach((uses) => {
     const views = uses.querySelectorAll('[data-uses-view]')
     const viewButtons = uses.querySelectorAll('[data-uses-view-button]')
     const hotspots = uses.querySelectorAll('[data-uses-item]')
+    const defaultView = 'desk'
+    const sceneParam = 'scene'
+
+    const hasView = (viewName) => Array.from(views).some((view) => view.dataset.usesView === viewName)
+
+    const sceneFromUrl = () => {
+        const requestedScene = new URL(window.location.href).searchParams.get(sceneParam)
+
+        return requestedScene && hasView(requestedScene) ? requestedScene : defaultView
+    }
+
+    const updateSceneUrl = (viewName, mode = 'push') => {
+        const url = new URL(window.location.href)
+
+        if (viewName === defaultView) {
+            url.searchParams.delete(sceneParam)
+        } else {
+            url.searchParams.set(sceneParam, viewName)
+        }
+
+        if (url.href === window.location.href) {
+            return
+        }
+
+        window.history[`${mode}State`]({}, '', url)
+    }
 
     const parseLinks = (encodedLinks) => {
         if (!encodedLinks) {
@@ -15,14 +41,20 @@ document.querySelectorAll('[data-uses]').forEach((uses) => {
         }
     }
 
-    const setView = (viewName) => {
+    const setView = (viewName, options = {}) => {
+        const nextView = hasView(viewName) ? viewName : defaultView
+
         views.forEach((view) => {
-            view.hidden = view.dataset.usesView !== viewName
+            view.hidden = view.dataset.usesView !== nextView
         })
 
         viewButtons.forEach((button) => {
-            button.classList.toggle('is-active', button.dataset.usesViewButton === viewName)
+            button.classList.toggle('is-active', button.dataset.usesViewButton === nextView)
         })
+
+        if (options.history) {
+            updateSceneUrl(nextView, options.history)
+        }
     }
 
     const inspectItem = (hotspot) => {
@@ -62,7 +94,7 @@ document.querySelectorAll('[data-uses]').forEach((uses) => {
     }
 
     viewButtons.forEach((button) => {
-        button.addEventListener('click', () => setView(button.dataset.usesViewButton))
+        button.addEventListener('click', () => setView(button.dataset.usesViewButton, { history: 'push' }))
     })
 
     hotspots.forEach((hotspot) => {
@@ -72,8 +104,14 @@ document.querySelectorAll('[data-uses]').forEach((uses) => {
             inspectItem(hotspot)
 
             if (hotspot.dataset.usesAction) {
-                setView(hotspot.dataset.usesAction)
+                setView(hotspot.dataset.usesAction, { history: 'push' })
             }
         })
+    })
+
+    setView(sceneFromUrl(), { history: 'replace' })
+
+    window.addEventListener('popstate', () => {
+        setView(sceneFromUrl())
     })
 })

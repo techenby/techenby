@@ -1,6 +1,6 @@
-@props(['scene'])
+@props(['scene', 'activeScene' => 'desk'])
 
-<div data-uses-view="{{ $scene->slug }}">
+<div data-uses-view="{{ $scene->slug }}" @if ($activeScene !== $scene->slug) hidden @endif>
     <div class="uses-scene-grid">
         <div class="uses-scene" aria-label="Interactive desk setup">
             <img src="{{ $scene->background->url }}" alt="{{ $scene->background->alt }}" class="uses-scene-image">

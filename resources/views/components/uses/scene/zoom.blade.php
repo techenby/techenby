@@ -1,6 +1,6 @@
-@props(['scene'])
+@props(['scene', 'activeScene' => 'desk'])
 
-<div data-uses-view="{{ $scene->slug }}" hidden>
+<div data-uses-view="{{ $scene->slug }}" @if ($activeScene !== $scene->slug) hidden @endif>
     <div class="uses-scene-grid">
         <div class="uses-zoom">
             <div class="uses-desktop-bar">
