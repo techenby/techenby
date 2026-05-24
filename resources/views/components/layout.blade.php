@@ -18,9 +18,9 @@
         <div class="relative isolate min-h-dvh overflow-hidden bg-stone-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
             <div aria-hidden="true" class="pointer-events-none absolute inset-0 [background-image:repeating-linear-gradient(0deg,transparent_0_3px,rgba(0,0,0,0.04)_3px_4px)] dark:[background-image:repeating-linear-gradient(0deg,transparent_0_3px,rgba(255,255,255,0.035)_3px_4px)]"></div>
 
-            <div class="relative mx-auto grid min-h-dvh max-w-3xl items-start px-6 py-16">
+            <div class="relative mx-auto grid min-h-dvh max-w-3xl items-start lg:px-6 lg:py-16">
                 <div class="min-w-0 w-full">
-                    <div class="flex items-center justify-between mr-2 gap-4 font-geist-mono text-xs font-medium tracking-wide text-neutral-500 dark:text-neutral-400">
+                    <div class="flex items-center justify-between px-6 pt-6 lg:p-0 lg:mr-2 gap-4 font-geist-mono text-xs font-medium tracking-wide text-neutral-500 dark:text-neutral-400">
                         <x-atom.nav class="min-w-0 flex-1" />
 
                         <x-comms align="bottom" :andy="$andy">
