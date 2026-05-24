@@ -44,7 +44,7 @@ class BlogCodeHighlighter
         $document = new DOMDocument('1.0', 'UTF-8');
 
         libxml_use_internal_errors(true);
-        $document->loadHTML('<?xml encoding="UTF-8"><div id="blog-code-root">'.$html.'</div>', LIBXML_HTML_NODEFDTD | LIBXML_HTML_NOIMPLIED);
+        $document->loadHTML('<?xml encoding="UTF-8"><div id="blog-code-root">' . $html . '</div>', LIBXML_HTML_NODEFDTD | LIBXML_HTML_NOIMPLIED);
         libxml_clear_errors();
 
         $xpath = new DOMXPath($document);
@@ -98,7 +98,7 @@ class BlogCodeHighlighter
         }
 
         $codeNode->appendChild($fragment);
-        $codeNode->setAttribute('class', trim('hljs language-'.$highlighted->language));
+        $codeNode->setAttribute('class', trim('hljs language-' . $highlighted->language));
     }
 
     private function languageFromClass(string $class): ?string
