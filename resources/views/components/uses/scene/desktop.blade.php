@@ -1,15 +1,15 @@
 @props(['scene'])
 
-<div data-uses-view="{{ $scene['handle'] }}" hidden>
+<div data-uses-view="{{ $scene->slug }}" hidden>
     <div class="uses-scene-grid">
         <div class="uses-zoom">
             <div class="uses-desktop-bar">
-                <span>{{ $scene['label'] }}</span>
+                <span>{{ $scene->title }}</span>
                 <button type="button" data-uses-view-button="desk">Back to desk</button>
             </div>
 
             <div class="uses-zoom-scene">
-                <img src="{{ asset($scene['image']) }}" alt="{{ $scene['alt'] }}" class="uses-scene-image">
+                <img src="{{ $scene->background->url }}" alt="{{ $scene->background->alt }}" class="uses-scene-image">
 
                 <div class="absolute inset-0 z-10 flex items-center justify-center p-4 sm:p-6">
                     <div class="grid max-h-full w-full max-w-184 overflow-y-auto rounded-[1.75rem] border border-white/45 bg-neutral-100/70 shadow-[0_24px_70px_rgba(0,0,0,0.28)] backdrop-blur-xl p-5 dark:border-white/15 dark:bg-neutral-900/65" aria-label="Applications">
@@ -18,22 +18,23 @@
                         </div>
 
                         <div class="grid grid-cols-4 gap-x-5 gap-y-4 pt-5 sm:grid-cols-5 lg:grid-cols-4">
-                            @foreach ($this->itemsByScene->get($scene['handle'], collect()) as $item)
+                            <s:collection:uses :scene:is="$scene->id" >
                                 <button class="grid min-w-0 justify-items-center gap-2 text-center"
-                                    data-uses-item="{{ $item->slug() }}"
-                                    data-uses-name="{{ $item->value('title') }}"
-                                    data-uses-type="{{ $item->types->title }}"
-                                    data-uses-description="{{ $item->value('content') }}"
-                                    data-uses-links="{{ base64_encode(json_encode($item->links)) }}"
-                                    @if ($item->value('action'))
-                                        data-uses-action="{{ $item->value('action') }}"
+                                    data-uses-item="{{ $slug }}"
+                                    data-uses-name="{{ $title }}"
+                                    data-uses-type="{{ $types->title }}"
+                                    data-uses-description="{{ $content }}"
+                                    data-uses-links="{{ base64_encode(json_encode($links)) }}"
+                                    @if ($action)
+                                        data-uses-action="{{ $action }}"
                                     @endif
-                                    aria-label="Inspect {{ $item->value('title') }}"
+                                    aria-label="Inspect {{ $title }}"
                                 >
-                                    <img src="{{ $item->icon->url }}" alt="" class="size-14 rounded-2xl object-contain ">
-                                    <span class="max-w-full truncate font-geist text-sm font-medium text-neutral-800 dark:text-neutral-100">{{ $item->title }}</span>
+
+                                    <img src="{{ $icon->url }}" alt="" class="size-14 rounded-2xl object-contain ">
+                                    <span class="max-w-full truncate font-geist text-sm font-medium text-neutral-800 dark:text-neutral-100">{{ $title }}</span>
                                 </button>
-                            @endforeach
+                            </s:collection:uses>
                         </div>
                     </div>
                 </div>

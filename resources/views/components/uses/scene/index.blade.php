@@ -1,13 +1,13 @@
 @props(['scene'])
 
-<div data-uses-view="desk">
+<div data-uses-view="{{ $scene->slug }}">
     <div class="uses-scene-grid">
         <div class="uses-scene" aria-label="Interactive desk setup">
-            <img src="{{ asset('assets/uses/desk-photo-pixelated.jpg') }}" alt="Pixelated photo of Andy's desk setup" class="uses-scene-image">
+            <img src="{{ $scene->background->url }}" alt="{{ $scene->background->alt }}" class="uses-scene-image">
 
-            @foreach ($this->itemsByScene->get('desk', collect()) as $item)
+            <s:collection:uses :scene:is="$scene->id" scope="item">
                 <x-uses.hotspot :$item />
-            @endforeach
+            </s:collection:uses>
         </div>
 
         <aside class="uses-panel" aria-live="polite" data-uses-panel>
