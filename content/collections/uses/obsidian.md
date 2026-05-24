@@ -2,6 +2,7 @@
 id: 3b9c473a-a693-43a3-bb2b-02eb0a17ef6d
 blueprint: uses_item
 title: Obsidian
+scene: e9a0959a-8c04-4a18-bf19-9b1943172f14
 types:
   - software
 icon: uses/software-icons/obsidian.png

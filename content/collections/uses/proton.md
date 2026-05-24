@@ -2,6 +2,7 @@
 id: 35ce17f0-5751-42b1-be18-12708811af54
 blueprint: uses_item
 title: Proton
+scene: e9a0959a-8c04-4a18-bf19-9b1943172f14
 types:
   - software
 icon: uses/software-icons/proton.png

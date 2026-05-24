@@ -2,6 +2,7 @@
 id: 49908c8a-913c-4cee-af17-385e116446b1
 blueprint: uses_item
 title: HTTPie
+scene: e9a0959a-8c04-4a18-bf19-9b1943172f14
 types:
   - software
 icon: uses/software-icons/httpie.png

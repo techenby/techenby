@@ -2,6 +2,7 @@
 id: 39bebec1-c201-4826-afa5-a77253e57557
 blueprint: uses_item
 title: Herd
+scene: e9a0959a-8c04-4a18-bf19-9b1943172f14
 types:
   - software
 icon: uses/software-icons/herd.png
