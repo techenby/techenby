@@ -1,53 +1,13 @@
 <?php
 
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
-use Livewire\Attributes\Computed;
 use Livewire\Component;
-use Statamic\Facades\Entry;
-use Statamic\Facades\Term;
 
 new class extends Component
 {
-    #[Computed]
-    public function items(): Collection
-    {
-        return Entry::query()
-            ->where('collection', 'uses')
-            ->get()
-            ->groupBy(fn ($entry) => $entry->value('scene'))
-            ->map(fn ($entries) => $entries
-                ->sortBy(fn ($entry) => (int) ($entry->value('sort_order') ?? 0))
-            ->values())
-            ->flatten(1)
-            ->reject(fn ($item) => in_array($item->slug(), ['desk-friends', 'gridfinity'], true))
-            ->sortBy('title')
-            ->values();
-    }
-
-    #[Computed]
-    public function scenesById(): Collection
-    {
-        return Entry::query()
-            ->where('collection', 'uses_scenes')
-            ->get()
-            ->keyBy(fn ($entry) => $entry->id());
-    }
-
-    public function sceneTitle($item): string
-    {
-        $scene = $item->value('scene');
-        $sceneId = is_array($scene) ? collect($scene)->first() : $scene;
-
-        return (string) ($this->scenesById->get($sceneId)?->value('title') ?? Str::of($sceneId ?? '')->replace('-', ' ')->title());
-    }
-
-    public function typeTitle(mixed $item): string
-    {
-        $type = collect($item->value('types') ?? [])->first();
-
-        return (string) (Term::find('types::'.$type)?->title() ?? Str::of($type ?? '')->replace('-', ' ')->title());
-    }
+    public array $filters = [
+        'search' => '',
+        'types' => [],
+    ];
 };
 ?>
 
@@ -59,6 +19,22 @@ new class extends Component
         </div>
     </div>
 
+    <div class="flex gap-4">
+        <flux:input wire:model.live="filters.search" placeholder="looking for something?" aria-label="Search" icon="magnifying-glass" />
+
+        <flux:dropdown>
+            <flux:button icon="funnel" icon:variant="outline">Filter</flux:button>
+
+            <flux:menu keep-open>
+                <flux:menu.checkbox.group wire:model.live="filters.types">
+                    <s:taxonomy:types>
+                        <flux:menu.checkbox :value="$id">{{ $title }}</flux:menu.checkbox>
+                    </s:taxonomy:types>
+                </flux:menu.checkbox.group>
+            </flux:menu>
+        </flux:dropdown>
+    </div>
+
     <div class="min-w-0 max-w-full">
         <flux:table>
             <flux:table.columns>
@@ -68,19 +44,22 @@ new class extends Component
             </flux:table.columns>
 
             <flux:table.rows>
-                @foreach ($this->items as $item)
-                    <flux:table.row :key="$item->id">
-                        <flux:table.cell>{{ $item->title }}</flux:table.cell>
+                <s:collection:uses
+                    title:contains="{{ $filters['search'] }}"
+                    taxonomy:types="{{ implode('|', $filters['types']) }}"
+                >
+                    <flux:table.row :key="$id">
+                        <flux:table.cell>{{ $title }}</flux:table.cell>
 
-                        <flux:table.cell>{{ $this->typeTitle($item) }}</flux:table.cell>
+                        <flux:table.cell>{{ $types->title }}</flux:table.cell>
 
                         <flux:table.cell>
-                            @foreach ($item->links as $link)
+                            @foreach ($links as $link)
                             <flux:button :href="$link->url" variant="ghost" size="sm" inset="top bottom">{{ $link->label }}</flux:button>
                             @endforeach
                         </flux:table.cell>
                     </flux:table.row>
-                @endforeach
+                </s:collection:uses>
             </flux:table.rows>
         </flux:table>
     </div>
