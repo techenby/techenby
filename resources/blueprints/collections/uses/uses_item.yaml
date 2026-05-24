@@ -1,0 +1,125 @@
+title: 'Uses Item'
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+              width: 66
+          -
+            handle: scene
+            field:
+              collections:
+                - uses_scenes
+              max_items: 1
+              type: entries
+              display: Scene
+              width: 33
+              listable: true
+          -
+            handle: types
+            field:
+              taxonomies:
+                - types
+              max_items: 1
+              type: terms
+              display: Types
+              width: 50
+              listable: true
+          -
+            handle: action
+            field:
+              type: text
+              display: Action
+              width: 25
+              listable: true
+          -
+            handle: icon
+            field:
+              container: assets
+              max_files: 1
+              type: assets
+              display: Icon
+              width: 25
+          -
+            handle: sort_order
+            field:
+              type: integer
+              display: 'Sort Order'
+              width: 25
+          -
+            handle: left
+            field:
+              type: text
+              display: Left
+              instructions: 'Percentage from the left edge, without the % symbol.'
+              width: 25
+              input_type: number
+          -
+            handle: top
+            field:
+              type: text
+              display: Top
+              instructions: 'Percentage from the top edge, without the % symbol.'
+              width: 25
+              input_type: number
+          -
+            handle: width
+            field:
+              type: text
+              display: Width
+              instructions: 'Percentage width, without the % symbol.'
+              width: 25
+              input_type: number
+          -
+            handle: height
+            field:
+              type: text
+              display: Height
+              instructions: 'Percentage height, without the % symbol.'
+              width: 25
+              input_type: number
+          -
+            handle: content
+            field:
+              type: markdown
+              display: Description
+              localizable: true
+          -
+            handle: links
+            field:
+              mode: stacked
+              type: grid
+              display: Links
+              fields:
+                -
+                  handle: label
+                  field:
+                    type: text
+                    display: Label
+                    width: 25
+                -
+                  handle: url
+                  field:
+                    input_type: url
+                    type: text
+                    display: URL
+                    width: 75
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'

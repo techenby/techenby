@@ -1,0 +1,41 @@
+title: 'Uses Scene'
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: background
+            field:
+              container: assets
+              max_files: 1
+              type: assets
+              display: Background
+              folder: uses
+              validate:
+                - required
+          -
+            handle: component
+            field:
+              default: uses.scene.zoom
+              type: text
+              display: Component
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'

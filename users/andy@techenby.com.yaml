@@ -8,3 +8,8 @@ preferences:
       view: list
     pages:
       view: tree
+    blog:
+      view: list
+    uses:
+      view: list
+      after_save: continue_editing

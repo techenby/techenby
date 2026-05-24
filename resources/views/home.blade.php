@@ -45,7 +45,7 @@
         </x-atom.text>
 
         <div class="mt-8 flex items-center justify-end gap-4">
-            <x-comms>
+            <x-comms :andy="$andy">
                 <span aria-hidden="true" class="text-orange-700 group-open:hidden [animation:blink_1s_step-end_infinite] dark:text-orange-400">&#9654;</span><span aria-hidden="true" class="hidden text-orange-700 group-open:inline dark:text-orange-400">&#9660;</span>
                 PRESS START
             </x-comms>

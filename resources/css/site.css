@@ -1,7 +1,10 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
 @source "../views";
 @source "../../content";
+@import '../../vendor/livewire/flux/dist/flux.css';
+@import "./tweakflux-theme.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
     --font-geist: Geist, sans-serif;
@@ -18,6 +21,150 @@
 
 .section {
     @apply mt-9 border-dashed border-neutral-300 pt-7 dark:border-white/10;
+}
+
+.blog-prose {
+    @apply min-w-0 max-w-full font-geist text-base/7 text-pretty text-neutral-700 dark:text-neutral-300;
+}
+
+.blog-prose > * + * {
+    @apply mt-6;
+}
+
+.blog-prose h1,
+.blog-prose h2,
+.blog-prose h3,
+.blog-prose h4,
+.blog-prose h5,
+.blog-prose h6 {
+    @apply font-geist font-semibold tracking-tight text-pretty text-neutral-900 dark:text-neutral-100;
+}
+
+.blog-prose h1 {
+    @apply mt-12 text-3xl;
+}
+
+.blog-prose h2 {
+    @apply mt-12 text-2xl;
+}
+
+.blog-prose h3 {
+    @apply mt-9 text-xl;
+}
+
+.blog-prose h4,
+.blog-prose h5,
+.blog-prose h6 {
+    @apply mt-8 text-lg;
+}
+
+.blog-prose a {
+    @apply text-orange-700 underline decoration-orange-700/40 underline-offset-4 hover:decoration-orange-700 dark:text-orange-400 dark:decoration-orange-400/40 dark:hover:decoration-orange-400;
+}
+
+.blog-prose ul,
+.blog-prose ol {
+    @apply ml-6 grid gap-3;
+}
+
+.blog-prose ul {
+    @apply list-disc;
+}
+
+.blog-prose ol {
+    @apply list-decimal;
+}
+
+.blog-prose strong {
+    @apply font-semibold text-neutral-900 dark:text-neutral-100;
+}
+
+.blog-prose blockquote {
+    @apply border-l-4 border-orange-700 bg-orange-50 px-5 py-4 text-neutral-800 italic dark:border-orange-400 dark:bg-orange-400/10 dark:text-neutral-200;
+}
+
+.blog-prose :not(pre) > code {
+    @apply bg-stone-100 px-1.5 py-0.5 font-geist-mono text-[0.9375em] text-orange-800 outline-1 -outline-offset-1 outline-black/10 dark:bg-white/10 dark:text-orange-300 dark:outline-white/10;
+}
+
+.blog-prose pre {
+    @apply max-w-full overflow-x-auto bg-neutral-950 p-4 font-geist-mono text-sm/6 text-neutral-100 outline-2 outline-neutral-900 dark:outline-white/10;
+}
+
+.blog-prose pre code {
+    @apply block min-w-max bg-transparent p-0 text-inherit outline-0;
+}
+
+.blog-prose .hljs-comment,
+.blog-prose .hljs-quote {
+    @apply text-neutral-500;
+}
+
+.blog-prose .hljs-keyword,
+.blog-prose .hljs-selector-tag,
+.blog-prose .hljs-subst {
+    @apply text-orange-300;
+}
+
+.blog-prose .hljs-literal,
+.blog-prose .hljs-number,
+.blog-prose .hljs-tag .hljs-attr,
+.blog-prose .hljs-template-variable,
+.blog-prose .hljs-variable {
+    @apply text-yellow-200;
+}
+
+.blog-prose .hljs-doctag,
+.blog-prose .hljs-string,
+.blog-prose .hljs-title,
+.blog-prose .hljs-section,
+.blog-prose .hljs-selector-id {
+    @apply text-red-400;
+}
+
+.blog-prose .hljs-attr,
+.blog-prose .hljs-attribute,
+.blog-prose .hljs-built_in,
+.blog-prose .hljs-class .hljs-title,
+.blog-prose .hljs-function .hljs-title,
+.blog-prose .hljs-name,
+.blog-prose .hljs-type {
+    @apply text-orange-400;
+}
+
+.blog-prose .hljs-meta,
+.blog-prose .hljs-symbol,
+.blog-prose .hljs-bullet,
+.blog-prose .hljs-link {
+    @apply text-neutral-300;
+}
+
+.blog-prose .hljs-emphasis {
+    @apply italic;
+}
+
+.blog-prose .hljs-strong {
+    @apply font-semibold;
+}
+
+.blog-prose img {
+    @apply w-full object-contain outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10;
+}
+
+.blog-prose table {
+    @apply w-full border-collapse font-geist text-sm;
+}
+
+.blog-prose th {
+    @apply border-b-2 border-neutral-900 px-3 py-2 text-left font-semibold text-neutral-900 dark:border-white/15 dark:text-neutral-100;
+}
+
+.blog-prose td {
+    @apply border-b border-neutral-200 px-3 py-2 align-top dark:border-white/10;
+}
+
+.blog-prose hr {
+    @apply my-8 border-0 border-t-2 border-dashed border-neutral-300 dark:border-white/10;
 }
 
 .box__line {
@@ -61,4 +208,200 @@
 
 .box__line--left {
     @apply w-2 h-full -left-2 top-0;
+}
+
+.uses-shell {
+    @apply grid gap-4;
+}
+
+.uses-toolbar {
+    @apply flex flex-wrap gap-2;
+}
+
+.uses-tab {
+    @apply border-2 border-neutral-900 bg-white px-3 py-2 font-press-start text-[0.625rem] uppercase text-neutral-700 shadow-[3px_3px_0_0_#171717] transition hover:-translate-y-px hover:text-orange-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500 dark:border-white/15 dark:bg-neutral-900 dark:text-neutral-300 dark:shadow-none dark:hover:text-orange-400;
+}
+
+.uses-tab.is-active {
+    @apply bg-yellow-100 text-neutral-900 dark:bg-orange-400/10 dark:text-orange-300;
+}
+
+.uses-scene-grid {
+    @apply grid gap-4 lg:grid-cols-[minmax(0,1fr)_16rem];
+}
+
+.uses-scene {
+    @apply relative aspect-[4/3] overflow-hidden border-2 border-neutral-900 bg-stone-200 shadow-[6px_6px_0_0_#171717] dark:border-white/15 dark:bg-neutral-950 dark:shadow-none;
+}
+
+.uses-scene::after,
+.uses-desktop::after {
+    content: "";
+    @apply pointer-events-none absolute inset-0 bg-[linear-gradient(transparent_0_50%,rgba(0,0,0,0.08)_50%_100%)] bg-[length:100%_4px] mix-blend-multiply dark:mix-blend-screen;
+}
+
+.uses-scene-image {
+    image-rendering: pixelated;
+    @apply h-full w-full object-cover;
+}
+
+.uses-scene-placeholder {
+    @apply grid h-full place-items-center gap-3 bg-[linear-gradient(135deg,#fef3c7_25%,#e7e5e4_25%,#e7e5e4_50%,#fef3c7_50%,#fef3c7_75%,#e7e5e4_75%)] bg-[length:32px_32px] p-6 text-center font-geist-mono text-xs uppercase text-neutral-700 dark:bg-[linear-gradient(135deg,rgba(251,146,60,0.18)_25%,rgba(255,255,255,0.06)_25%,rgba(255,255,255,0.06)_50%,rgba(251,146,60,0.18)_50%,rgba(251,146,60,0.18)_75%,rgba(255,255,255,0.06)_75%)] dark:text-neutral-300;
+}
+
+.uses-scene-placeholder span {
+    @apply font-press-start text-sm text-orange-700 dark:text-orange-400;
+}
+
+.uses-scene-placeholder strong {
+    @apply max-w-full break-all border-2 border-neutral-900 bg-white px-3 py-2 text-[0.6875rem] font-medium normal-case shadow-[3px_3px_0_0_#171717] dark:border-white/15 dark:bg-neutral-900 dark:shadow-none;
+}
+
+.uses-hotspot {
+    @apply absolute border-2 border-orange-700/0 bg-orange-400/0 transition focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500;
+}
+
+.uses-hotspot span {
+    @apply absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 bg-orange-600 shadow-[0_0_0_2px_#fff,0_0_0_4px_#c2410c] opacity-85 dark:bg-orange-300 dark:shadow-[0_0_0_2px_#171717,0_0_0_4px_#fb923c];
+}
+
+.uses-hotspot[data-uses-action] span {
+    @apply bg-sky-600 shadow-[0_0_0_2px_#fff,0_0_0_4px_#0284c7] dark:bg-sky-300 dark:shadow-[0_0_0_2px_#171717,0_0_0_4px_#38bdf8];
+}
+
+.uses-hotspot:hover,
+.uses-hotspot:focus-visible,
+.uses-hotspot.is-selected {
+    @apply border-orange-700 bg-orange-400/20 dark:border-orange-400 dark:bg-orange-400/10;
+}
+
+.uses-hotspot[data-uses-action]:hover,
+.uses-hotspot[data-uses-action]:focus-visible,
+.uses-hotspot[data-uses-action].is-selected {
+    @apply border-sky-700 bg-sky-400/20 dark:border-sky-400 dark:bg-sky-400/10;
+}
+
+.uses-panel {
+    @apply border-2 border-neutral-900 bg-white p-4 shadow-[6px_6px_0_0_#171717] dark:border-white/15 dark:bg-neutral-900 dark:shadow-none;
+}
+
+.uses-panel-label {
+    @apply font-press-start text-[0.625rem] uppercase text-orange-700 dark:text-orange-400;
+}
+
+.uses-panel h2 {
+    @apply mt-3 font-geist-mono text-xl font-semibold text-neutral-900 dark:text-neutral-100;
+}
+
+.uses-panel p {
+    @apply mt-3 font-geist text-sm/6 text-neutral-700 dark:text-neutral-300;
+}
+
+.uses-panel .uses-panel-type {
+    @apply font-geist-mono text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400;
+}
+
+.uses-panel-links {
+    @apply mt-4 flex flex-wrap gap-2 border-t-2 border-dashed border-neutral-300 pt-4 dark:border-white/10;
+}
+
+.uses-panel-links a {
+    @apply inline-flex border-2 border-neutral-900 bg-white px-3 py-2 font-geist-mono text-[0.6875rem] uppercase text-neutral-900 shadow-[2px_2px_0_0_#171717] hover:-translate-y-px hover:text-orange-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500 dark:border-white/15 dark:bg-neutral-950 dark:text-neutral-100 dark:shadow-none dark:hover:text-orange-400;
+}
+
+.uses-desktop {
+    @apply relative overflow-hidden border-2 border-neutral-900 bg-sky-100 p-3 shadow-[6px_6px_0_0_#171717] dark:border-white/15 dark:bg-neutral-950 dark:shadow-none;
+}
+
+.uses-zoom {
+    @apply overflow-hidden border-2 border-neutral-900 bg-stone-200 p-3 shadow-[6px_6px_0_0_#171717] dark:border-white/15 dark:bg-neutral-950 dark:shadow-none;
+}
+
+.uses-zoom-scene {
+    @apply relative mt-3 aspect-[4/3] overflow-hidden border-2 border-neutral-900 bg-stone-200 dark:border-white/15 dark:bg-neutral-950;
+}
+
+.uses-desktop-bar {
+    @apply relative z-10 flex items-center justify-between border-2 border-neutral-900 bg-neutral-900 px-3 py-2 font-press-start text-[0.625rem] uppercase text-white dark:border-white/15;
+}
+
+.uses-desktop-bar button {
+    @apply text-orange-300 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500;
+}
+
+.uses-app-grid {
+    @apply relative z-10 grid min-h-96 grid-cols-2 gap-3 p-4 sm:grid-cols-3;
+}
+
+.uses-app {
+    @apply grid content-start gap-2 border-2 border-neutral-900 bg-white/90 p-3 shadow-[4px_4px_0_0_#171717] dark:border-white/15 dark:bg-neutral-900/90 dark:shadow-none;
+}
+
+.uses-app-icon {
+    image-rendering: pixelated;
+    @apply h-10 w-10 border-2 border-neutral-900 shadow-[2px_2px_0_0_#171717] dark:border-white/15 dark:shadow-none;
+}
+
+.uses-app h2 {
+    @apply font-geist-mono text-sm font-semibold text-neutral-900 dark:text-neutral-100;
+}
+
+.uses-app p {
+    @apply font-geist-mono text-[0.6875rem] uppercase tracking-wide text-neutral-500 dark:text-neutral-400;
+}
+
+.uses-list {
+    @apply mt-6 grid gap-4 border-t-2 border-dashed border-neutral-300 pt-6 dark:border-white/10;
+}
+
+.uses-list-heading {
+    @apply flex flex-wrap items-end justify-between gap-3;
+}
+
+.uses-list-heading p {
+    @apply font-press-start text-[0.625rem] uppercase text-orange-700 dark:text-orange-400;
+}
+
+.uses-list-heading h2 {
+    @apply mt-2 font-geist-mono text-2xl font-semibold text-neutral-900 dark:text-neutral-100;
+}
+
+.uses-list-heading span {
+    @apply border-2 border-neutral-900 bg-yellow-100 px-3 py-2 font-geist-mono text-[0.6875rem] uppercase text-neutral-900 shadow-[3px_3px_0_0_#171717] dark:border-white/15 dark:bg-orange-400/10 dark:text-orange-300 dark:shadow-none;
+}
+
+.uses-list-grid {
+    @apply grid gap-3 md:grid-cols-2 xl:grid-cols-3;
+}
+
+.uses-list-item {
+    @apply grid content-start gap-3 border-2 border-neutral-900 bg-white p-4 shadow-[4px_4px_0_0_#171717] dark:border-white/15 dark:bg-neutral-900 dark:shadow-none;
+}
+
+.uses-list-item-heading {
+    @apply flex items-start justify-between gap-3;
+}
+
+.uses-list-item-heading h3 {
+    @apply font-geist-mono text-base font-semibold text-neutral-900 dark:text-neutral-100;
+}
+
+.uses-list-item-heading p {
+    @apply mt-1 font-geist-mono text-[0.6875rem] uppercase tracking-wide text-neutral-500 dark:text-neutral-400;
+}
+
+.uses-list-item-heading span {
+    @apply shrink-0 border-2 border-neutral-900 bg-stone-100 px-2 py-1 font-geist-mono text-[0.625rem] uppercase text-neutral-700 dark:border-white/15 dark:bg-neutral-950 dark:text-neutral-300;
+}
+
+.uses-list-item > p {
+    @apply font-geist text-sm/6 text-neutral-700 dark:text-neutral-300;
+}
+
+.uses-list-links {
+    @apply flex flex-wrap gap-2 border-t-2 border-dashed border-neutral-300 pt-3 dark:border-white/10;
+}
+
+.uses-list-links a {
+    @apply inline-flex border-2 border-neutral-900 bg-white px-3 py-2 font-geist-mono text-[0.6875rem] uppercase text-neutral-900 shadow-[2px_2px_0_0_#171717] hover:-translate-y-px hover:text-orange-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500 dark:border-white/15 dark:bg-neutral-950 dark:text-neutral-100 dark:shadow-none dark:hover:text-orange-400;
 }

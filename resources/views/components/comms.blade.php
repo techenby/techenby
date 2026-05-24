@@ -1,5 +1,4 @@
-@props(['align' => 'top'])
-@aware(['andy'])
+@props(['align' => 'top', 'andy' => null])
 
 
 <details class="group relative">

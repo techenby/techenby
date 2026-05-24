@@ -1,0 +1,6 @@
+title: Blog
+route: '/blog/{slug}'
+template: blog_entry
+propagate: true
+taxonomies:
+  - tags
