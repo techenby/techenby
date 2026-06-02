@@ -27,7 +27,7 @@
                 <li><a href="https://tighten.com/" target="_blank" rel="noopener">Lead Programmer @ Tighten</a></li>
                 <li><a href="https://sunnyhome.app" target="_blank" rel="noopener">Sunny</a></li>
                 <li><a href="https://www.lego.com/en-us/product/lego-titanic-10294" target="_blank" rel="noopener">LEGO 10294</a></li>
-                <li>One Piece Ep.912</li>
+                <li>One Piece Ep.1028</li>
                 <li><a href="https://lakesidepride.org/" target="_blank" rel="noopener">LSP</a> <a href="https://givebutter.com/pops-what-was-i-made-for" target="_blank" rel="noopener">Pops Concert</a></li>
                 <li>Diet Coke</li>
             </ul>
