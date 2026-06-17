@@ -1,5 +1,3 @@
-@extends('layout')
-
-@section('content')
+<x-layout :$andy bottomRight="404">
     <p>404 Page not found.</p>
-@endsection
+</x-layout>
