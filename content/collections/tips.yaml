@@ -1,0 +1,6 @@
+title: 'Tips & Tricks'
+route: '/tips/{slug}'
+template: tips_entry
+propagate: true
+taxonomies:
+  - tags
