@@ -29,7 +29,7 @@ class Lately
 
     /**
      * @param  list<string>  $collections
-     * @return Collection<int, array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, photos: list<array{large: string, square: string, full: string, width: int, height: int, alt: string}>}>
+     * @return Collection<int, array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>}>
      */
     public function items(array $collections, int $limit = 5): Collection
     {
@@ -48,7 +48,7 @@ class Lately
     }
 
     /**
-     * @return array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, photos: list<array{large: string, square: string, full: string, width: int, height: int, alt: string}>}
+     * @return array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>}
      */
     public function item(Entry $entry): array
     {
@@ -79,7 +79,7 @@ class Lately
     }
 
     /**
-     * @return list<array{large: string, square: string, full: string, width: int, height: int, alt: string}>
+     * @return list<array{square: string, full: string, width: int, height: int, alt: string}>
      */
     public function photos(Entry $entry): array
     {
@@ -87,7 +87,6 @@ class Lately
             ->map(fn ($path) => Asset::find("assets::{$path}"))
             ->filter()
             ->map(fn ($asset) => [
-                'large' => $this->glide($asset, ['width' => 1200]),
                 'square' => $this->glide($asset, ['width' => 400, 'height' => 400, 'fit' => 'crop_focal']),
                 'full' => $this->glide($asset, ['width' => 2000]),
                 'width' => (int) $asset->width(),

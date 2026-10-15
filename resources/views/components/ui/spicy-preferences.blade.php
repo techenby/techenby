@@ -8,7 +8,12 @@
         remember(key, value) {
             try { localStorage.setItem(key, value) } catch {}
         },
+        syncCarousels(reduce) {
+            document.querySelectorAll('ui-carousel').forEach((carousel) => carousel.setAttribute('scroll', reduce ? 'instant' : 'smooth'))
+        },
         init() {
+            this.syncCarousels(this.reduceMotion)
+
             this.$watch('textSize', (size) => {
                 document.documentElement.dataset.textSize = size
                 this.remember('techenby:text-size', size)
@@ -17,6 +22,7 @@
             this.$watch('reduceMotion', (reduce) => {
                 document.documentElement.classList.toggle('reduce-motion', reduce)
                 this.remember('techenby:reduce-motion', reduce)
+                this.syncCarousels(reduce)
             })
         },
     }"

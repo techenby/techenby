@@ -85,6 +85,8 @@
         <flux:main inset class="lg:ms-0">
             {{ $slot }}
         </flux:main>
+
+        @livewireScripts
         @fluxScripts
     </body>
 </html>
