@@ -26,6 +26,36 @@ tabs:
                     display: URL
                     width: 75
           -
+            handle: current_party
+            field:
+              mode: stacked
+              type: grid
+              display: 'Current Party'
+              instructions: 'Six real, current things. Notes are optional, one short line in your voice.'
+              max_rows: 6
+              fields:
+                -
+                  handle: label
+                  field:
+                    type: text
+                    display: Label
+                    width: 33
+                    validate:
+                      - required
+                -
+                  handle: url
+                  field:
+                    input_type: url
+                    type: text
+                    display: URL
+                    width: 33
+                -
+                  handle: note
+                  field:
+                    type: text
+                    display: Note
+                    width: 33
+          -
             handle: pixelated_avatar
             field:
               container: assets

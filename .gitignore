@@ -40,3 +40,4 @@ GEMINI.md
 opencode.json
 .vapor/
 .env.staging
+/.playwright-mcp

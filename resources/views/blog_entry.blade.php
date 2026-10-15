@@ -1,5 +1,6 @@
 @php
-    use App\Support\BlogCodeHighlighter;
+    use App\Support\BlogContent;
+    use App\Support\BlogSeries;
     use Illuminate\Support\Carbon;
     use Illuminate\Support\Str;
     use Statamic\Facades\Asset;
@@ -22,19 +23,29 @@
     $lightHeaderImage = $headerImages->first(fn ($asset) => Str::contains($asset->path(), '-light')) ?? $headerImages->first();
     $darkHeaderImage = $headerImages->first(fn ($asset) => Str::contains($asset->path(), '-dark')) ?? $headerImages->first();
     $hasModeHeaderImages = $headerImages->count() > 1;
-    $contentHtml = app(BlogCodeHighlighter::class)->highlight(Modify::value($entryContent)->bardHtml()->fetch());
+    $contentBlocks = app(BlogContent::class)->blocks($entryContent);
     $contentText = Modify::value($entryContent)->bardText()->fetch();
     $readingMinutes = max(1, (int) ceil(str_word_count($contentText) / 225));
+    $series = $entry ? app(BlogSeries::class)->for($entry) : null;
 @endphp
 
-<x-layout :$andy bottomRight="Blog Entry · {{ $readingMinutes }} Min">
+<x-layout :$andy :description="$entry?->get('description')" bottomRight="Blog Entry · {{ $readingMinutes }} Min">
     <article class="min-w-0 space-y-8">
         <header>
             <x-atom.button variant="ghost" size="sm" href="/blog">
                 &larr; Blog
             </x-atom.button>
 
-            <h1 class="mt-8 max-w-[21ch] font-instrument-serif text-5xl tracking-tight text-pretty text-neutral-900 sm:text-6xl dark:text-neutral-100">
+            @if ($series)
+                <div class="mt-8">
+                    <x-atom.eyebrow>{{ $series['title'] }}@isset($series['part']) &middot; Part {{ $series['part'] }}@endisset</x-atom.eyebrow>
+                </div>
+            @endif
+
+            <h1 @class([
+                'max-w-[21ch] font-instrument-serif text-5xl tracking-tight text-pretty text-neutral-900 sm:text-6xl dark:text-neutral-100',
+                $series ? 'mt-3' : 'mt-8',
+            ])>
                 {{ $entryTitle }}
             </h1>
 
@@ -65,7 +76,17 @@
         @endif
 
         <div class="blog-prose">
-            {!! $contentHtml !!}
+            @foreach ($contentBlocks as $block)
+                @if ($block['type'] === 'html')
+                    {!! $block['html'] !!}
+                @else
+                    @includeIf('blog.sets.'.$block['set'], $block['values'])
+                @endif
+            @endforeach
         </div>
+
+        @if ($series && $series['parts']->count() > 1)
+            <x-blog.series-nav :$series :current="$entry" />
+        @endif
     </article>
 </x-layout>

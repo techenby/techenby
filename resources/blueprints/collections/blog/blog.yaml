@@ -49,6 +49,59 @@ tabs:
                 - horizontalrule
               container: assets
               remove_empty_nodes: false
+              sets:
+                fillers:
+                  display: Fillers
+                  sets:
+                    new_set:
+                      display: 'New Set'
+                      fields:
+                        -
+                          handle: code
+                          field:
+                            type: code
+                            display: Code
+                    image:
+                      display: Image
+                      fields:
+                        -
+                          handle: image
+                          field:
+                            container: assets
+                            folder: blog
+                            dynamic: slug
+                            max_files: 1
+                            min_files: 1
+                            type: assets
+                            display: Image
+                    gif:
+                      display: GIF
+                      instructions: 'Paste any GIPHY link: the page, the embed or the media URL.'
+                      fields:
+                        -
+                          handle: url
+                          field:
+                            type: text
+                            display: 'GIPHY URL'
+                            validate:
+                              - required
+                              - url
+                        -
+                          handle: alt
+                          field:
+                            type: text
+                            display: 'Alt Text'
+                            instructions: 'Describe what happens in the GIF for people who can''t see it.'
+                            validate:
+                              - required
+                    video:
+                      display: Video
+                      fields:
+                        -
+                          handle: video
+                          field:
+                            type: video
+                            display: Video
   sidebar:
     display: Sidebar
     sections:
@@ -61,6 +114,13 @@ tabs:
               localizable: true
               validate: 'max:200'
           -
+            handle: description
+            field:
+              type: textarea
+              display: Description
+              instructions: 'A sentence or two about the post. Used for search results and link previews; aim for about 160 characters.'
+              localizable: true
+          -
             handle: tags
             field:
               taxonomies:
@@ -68,3 +128,20 @@ tabs:
               type: terms
               display: Tags
               localizable: true
+          -
+            handle: series
+            field:
+              taxonomies:
+                - series
+              type: terms
+              display: Series
+              max_items: 1
+              mode: select
+          -
+            handle: series_part
+            field:
+              type: integer
+              display: Part
+              instructions: 'Where this post falls in the series. Parts are listed in this order.'
+              if:
+                series: 'not empty'

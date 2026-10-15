@@ -19,5 +19,29 @@ comms:
     id: E37dMbjZuN5i1qJEsHJee
     label: Email
     url: 'mailto:andy@techenby.com'
+current_party:
+  -
+    id: cp-tighten-Lq7v2Xh9Rk
+    label: 'Lead Programmer @ Tighten'
+    url: 'https://tighten.com/'
+  -
+    id: cp-sunny-Vb3nT8wQz1
+    label: Sunny
+    url: 'https://sunnyhome.app'
+  -
+    id: cp-lego-Hm5pK2yJd6
+    label: 'LEGO 10294'
+    url: 'https://www.lego.com/en-us/product/lego-titanic-10294'
+    note: 'still missing one 1×2 plate'
+  -
+    id: cp-onepiece-Rt9sF4cGx0
+    label: 'One Piece Ep.1157'
+  -
+    id: cp-lakeside-Ny6wB1eLu3
+    label: 'Lakeside Pride'
+    url: 'https://lakesidepride.org/'
+  -
+    id: cp-dietcoke-Pz8dM7aKs5
+    label: 'Diet Coke'
 pixelated_avatar: avatar-2025-square-pizelated.jpeg
 avatar: avatar-2025-square.jpeg
