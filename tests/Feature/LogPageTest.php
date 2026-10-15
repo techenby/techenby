@@ -94,7 +94,7 @@ class LogPageTest extends TestCase
             ->assertSee('first try was stringy')
             ->assertSee('aria-label="Photos of Log test make"', false)
             ->assertSee('alt="A finished jigsaw puzzle of an illustrated fantasy city by the sea, on a wooden table."', false)
-            ->assertSee('<figcaption class="text-sm text-zinc-600 dark:text-zinc-300">A finished jigsaw puzzle of an illustrated fantasy city by the sea, on a wooden table.</figcaption>', false)
+            ->assertSeeInOrder(['<figcaption', 'A finished jigsaw puzzle of an illustrated fantasy city by the sea, on a wooden table.', '</figcaption>'], false)
             ->assertSee('/img/asset/', false)
             ->assertDontSee('Log test post')
             ->assertDontSee('Log test tip');

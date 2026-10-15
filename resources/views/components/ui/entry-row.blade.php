@@ -25,7 +25,7 @@
                         <flux:modal.trigger :name="$modal">
                             <button
                                 type="button"
-                                x-on:click="setTimeout(() => document.getElementById('{{ $modal }}-{{ $loop->index }}')?.scrollIntoView({ block: 'start' }), 100)"
+                                x-on:click="setTimeout(() => document.getElementById('{{ $modal }}-{{ $loop->index }}')?.scrollIntoView({ block: 'nearest', inline: 'start', behavior: 'instant' }), 50)"
                                 class="block w-full rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-enby-purple"
                             >
                                 <span class="sr-only">View larger:</span>
@@ -61,16 +61,39 @@
     </div>
 
     @if ($photos->isNotEmpty())
-        <flux:modal :name="$modal" scroll="body" class="w-full max-w-4xl">
-            <div class="space-y-6">
-                <flux:heading size="lg" level="2" class="font-display">{{ $item['title'] }}</flux:heading>
+        <flux:modal :name="$modal" variant="bare" class="m-0 h-dvh max-h-none w-full max-w-none overflow-hidden p-0 text-white backdrop:bg-zinc-950/95!">
+            <div
+                class="flex h-full flex-col"
+                x-on:keydown.right="$el.querySelector('ui-carousel').next()"
+                x-on:keydown.left="$el.querySelector('ui-carousel').previous()"
+            >
+                <div class="flex items-center justify-between gap-4 px-4 py-3 sm:px-6">
+                    <h2 class="font-display text-lg font-semibold tracking-tight">{{ $item['title'] }}</h2>
 
-                @foreach ($photos as $photo)
-                    <figure id="{{ $modal }}-{{ $loop->index }}" class="scroll-mt-6 space-y-2">
-                        <img src="{{ $photo['full'] }}" alt="" width="{{ $photo['width'] }}" height="{{ $photo['height'] }}" loading="lazy" class="mx-auto h-auto max-h-[85dvh] w-auto max-w-full rounded-lg">
-                        <figcaption class="text-sm text-zinc-600 dark:text-zinc-300">{{ $photo['alt'] }}</figcaption>
-                    </figure>
-                @endforeach
+                    <flux:modal.close>
+                        <flux:button variant="ghost" icon="x-mark" aria-label="Close photos" class="text-white! hover:bg-white/10!" />
+                    </flux:modal.close>
+                </div>
+
+                <flux:carousel snap="mandatory" aria-label="Photos of {{ $item['title'] }}" :arrows="$photos->count() > 1" arrows:class="max-sm:hidden" class="min-h-0 flex-1 [&>[data-flux-carousel-viewport]]:h-full" track:class="h-full gap-0">
+                    @foreach ($photos as $photo)
+                        <flux:carousel.slide id="{{ $modal }}-{{ $loop->index }}" class="w-full">
+                            <figure
+                                class="flex h-full flex-col items-center justify-center gap-4 px-4 pb-6 sm:px-16"
+                                x-on:click.self="$flux.modal('{{ $modal }}').close()"
+                            >
+                                <img src="{{ $photo['full'] }}" alt="" width="{{ $photo['width'] }}" height="{{ $photo['height'] }}" loading="lazy" class="min-h-0 w-auto max-w-full flex-1 rounded-lg object-contain">
+                                <figcaption class="max-w-prose text-center text-sm text-pretty text-zinc-300">
+                                    @if ($photos->count() > 1)
+                                        <span class="font-semibold text-white">{{ $loop->iteration }} of {{ $photos->count() }}</span>
+                                        <span aria-hidden="true" class="text-zinc-500">·</span>
+                                    @endif
+                                    {{ $photo['alt'] }}
+                                </figcaption>
+                            </figure>
+                        </flux:carousel.slide>
+                    @endforeach
+                </flux:carousel>
             </div>
         </flux:modal>
     @endif
