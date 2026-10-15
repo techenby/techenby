@@ -4,3 +4,4 @@ template: blog_entry
 propagate: true
 taxonomies:
   - tags
+  - series
