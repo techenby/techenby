@@ -13,3 +13,7 @@ preferences:
     uses:
       view: list
       after_save: continue_editing
+    moments:
+      view: list
+    makes:
+      view: list

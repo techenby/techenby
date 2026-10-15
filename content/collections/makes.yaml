@@ -1,0 +1,7 @@
+title: Makes
+propagate: true
+date: true
+sort_dir: desc
+date_behavior:
+  past: public
+  future: private

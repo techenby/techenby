@@ -78,6 +78,42 @@ class LogPageTest extends TestCase
     }
 
     #[Test]
+    public function makes_show_their_kind_photos_and_note_without_a_link(): void
+    {
+        $this->makeEntry('makes', 'log-test-make', [
+            'title' => 'Log test make',
+            'kind' => '3d-print',
+            'note' => 'first try was stringy',
+            'photos' => ['makes/puzzle/puzzle-01.jpg'],
+        ], date: Carbon::parse('2026-07-20'));
+
+        $response = $this->get('/log?type=makes')
+            ->assertOk()
+            ->assertSee('Log test make')
+            ->assertSee('3D print')
+            ->assertSee('first try was stringy')
+            ->assertSee('aria-label="View larger: A finished jigsaw puzzle of an illustrated fantasy city by the sea, on a wooden table."', false)
+            ->assertSee('<figcaption class="text-sm text-zinc-600 dark:text-zinc-300">A finished jigsaw puzzle of an illustrated fantasy city by the sea, on a wooden table.</figcaption>', false)
+            ->assertSee('/img/asset/', false)
+            ->assertDontSee('Log test post')
+            ->assertDontSee('Log test tip');
+
+        $this->assertStringNotContainsString('>Log test make</a>', $response->getContent());
+    }
+
+    #[Test]
+    public function the_moments_filter_only_shows_moments(): void
+    {
+        $this->makeEntry('moments', 'log-test-moment', ['title' => 'Log test moment'], date: Carbon::parse('2026-07-21'));
+
+        $this->get('/log?type=moments')
+            ->assertOk()
+            ->assertSee('Log test moment')
+            ->assertSee('Moment')
+            ->assertDontSee('Log test post');
+    }
+
+    #[Test]
     public function drafts_and_scheduled_entries_are_hidden(): void
     {
         $this->makeEntry('blog', 'log-test-draft', ['title' => 'Log test draft'], published: false);
@@ -96,7 +132,7 @@ class LogPageTest extends TestCase
     {
         $entry = Entry::make()
             ->collection($collection)
-            ->blueprint($collection === 'blog' ? 'blog' : 'tip')
+            ->blueprint(['blog' => 'blog', 'tips' => 'tip', 'makes' => 'make', 'moments' => 'moment'][$collection])
             ->slug($slug)
             ->published($published)
             ->date($date ?? now()->subMinute())

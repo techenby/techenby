@@ -1,0 +1,60 @@
+title: Make
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: kind
+            field:
+              type: select
+              display: Kind
+              options:
+                lego: LEGO
+                3d-print: '3D print'
+                art: Art
+                baking: Baking
+                puzzle: Puzzle
+              validate:
+                - required
+          -
+            handle: photos
+            field:
+              type: assets
+              display: Photos
+              container: assets
+              folder: makes
+              instructions: 'The first photo leads. Give every photo alt text.'
+              min_files: 1
+          -
+            handle: note
+            field:
+              type: text
+              display: Note
+              instructions: 'Optional handwritten note, one short line in your voice.'
+          -
+            handle: content
+            field:
+              type: markdown
+              display: Caption
+              instructions: 'One or two sentences: what it is, and what went wrong the first time.'
+              localizable: true
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'

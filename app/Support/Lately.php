@@ -6,29 +6,30 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Statamic\Contracts\Assets\Asset as AssetContract;
 use Statamic\Contracts\Entries\Entry;
+use Statamic\Facades\Asset;
 use Statamic\Facades\Entry as EntryFacade;
 use Statamic\Facades\Term;
+use Statamic\Statamic;
 
 class Lately
 {
     /**
-     * Labels shown beside each entry, keyed by collection handle.
-     *
      * @var array<string, string>
      */
     public const TYPES = [
         'blog' => 'Writing',
         'tips' => 'Tip',
+        'makes' => 'Make',
+        'moments' => 'Moment',
     ];
 
     public function __construct(public BlogSeries $series) {}
 
     /**
-     * The most recent published entries across the given collections, newest first.
-     *
      * @param  list<string>  $collections
-     * @return Collection<int, array{type: string, date: ?Carbon, title: string, url: string, summary: ?string, series: ?string, part: ?int}>
+     * @return Collection<int, array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, photos: list<array{large: string, square: string, full: string, width: int, height: int, alt: string}>}>
      */
     public function items(array $collections, int $limit = 5): Collection
     {
@@ -47,21 +48,62 @@ class Lately
     }
 
     /**
-     * Everything a list row needs to show one entry.
-     *
-     * @return array{type: string, date: ?Carbon, title: string, url: string, summary: ?string, series: ?string, part: ?int}
+     * @return array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, photos: list<array{large: string, square: string, full: string, width: int, height: int, alt: string}>}
      */
     public function item(Entry $entry): array
     {
         return [
+            'id' => (string) $entry->id(),
             'type' => self::TYPES[$entry->collectionHandle()] ?? Str::singular($entry->collection()->title()),
             'date' => $this->date($entry),
             'title' => (string) $entry->get('title'),
-            'url' => (string) $entry->url(),
+            'url' => $entry->url() ?: null,
             'summary' => $this->summary($entry),
             'series' => $this->seriesTitle($entry),
             'part' => $this->series->part($entry),
+            'kind' => $this->kind($entry),
+            'note' => filled($entry->value('note')) ? (string) $entry->value('note') : null,
+            'photos' => $this->photos($entry),
         ];
+    }
+
+    public function kind(Entry $entry): ?string
+    {
+        $kind = $entry->value('kind');
+
+        if (! is_string($kind) || $kind === '') {
+            return null;
+        }
+
+        return $entry->blueprint()->field('kind')?->get('options')[$kind] ?? $kind;
+    }
+
+    /**
+     * @return list<array{large: string, square: string, full: string, width: int, height: int, alt: string}>
+     */
+    public function photos(Entry $entry): array
+    {
+        return collect(Arr::wrap($entry->value('photos')))
+            ->map(fn ($path) => Asset::find("assets::{$path}"))
+            ->filter()
+            ->map(fn ($asset) => [
+                'large' => $this->glide($asset, ['width' => 1200]),
+                'square' => $this->glide($asset, ['width' => 400, 'height' => 400, 'fit' => 'crop_focal']),
+                'full' => $this->glide($asset, ['width' => 2000]),
+                'width' => (int) $asset->width(),
+                'height' => (int) $asset->height(),
+                'alt' => (string) $asset->get('alt'),
+            ])
+            ->values()
+            ->all();
+    }
+
+    /**
+     * @param  array<string, mixed>  $params
+     */
+    private function glide(AssetContract $asset, array $params): string
+    {
+        return (string) Statamic::tag('glide')->params(['src' => $asset, ...$params])->fetch();
     }
 
     public function date(Entry $entry): ?Carbon
@@ -75,9 +117,6 @@ class Lately
         return is_numeric($updatedAt) ? Carbon::createFromTimestamp($updatedAt) : null;
     }
 
-    /**
-     * The entry's description, or the first sentence of its content when it has none.
-     */
     public function summary(Entry $entry): ?string
     {
         $description = $entry->value('description');

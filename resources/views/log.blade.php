@@ -4,6 +4,8 @@
     $filters = [
         'writing' => ['label' => 'Writing', 'from' => 'blog'],
         'tips' => ['label' => 'Tips', 'from' => 'tips'],
+        'makes' => ['label' => 'Makes', 'from' => 'makes'],
+        'moments' => ['label' => 'Moments', 'from' => 'moments'],
     ];
 
     $activeFilter = array_key_exists((string) request('type'), $filters) ? request('type') : null;

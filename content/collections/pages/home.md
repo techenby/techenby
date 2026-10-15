@@ -8,6 +8,8 @@ subheading: "I'm Andy: queer, nonbinary, neurodivergent, and a big fan of clear 
 lately:
   - blog
   - tips
+  - makes
+  - moments
 projects:
   - projects
 updated_by: 2de7d260-84a8-4dfc-9a2e-af5aae989cd3
