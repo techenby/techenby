@@ -18,6 +18,12 @@ tabs:
               type: textarea
               display: Description
               instructions: 'A sentence or two about what the series covers.'
+          -
+            handle: up_next
+            field:
+              type: text
+              display: 'Up next'
+              instructions: 'Optional teaser for the next part, shown as "coming soon" in the series box. Leave empty once it''s published.'
   sidebar:
     display: Sidebar
     sections:

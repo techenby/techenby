@@ -88,17 +88,19 @@
         </flux:sidebar>
 
         <flux:header class="lg:hidden bg-white dark:bg-zinc-800">
-            <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
-            <a href="/" class="ms-2 flex items-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-enby-purple">
+            <a href="/" class="flex items-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-enby-purple">
                 <x-ui.wordmark class="h-7 w-auto" />
             </a>
             <flux:spacer />
+            <flux:button variant="outline" size="sm" icon="bars-2" x-data x-on:click="$dispatch('flux-sidebar-toggle')" data-flux-sidebar-toggle>Menu</flux:button>
         </flux:header>
 
         <flux:main inset class="lg:ms-0 xl:px-20 lg:overscroll-x-auto! has-[[data-sticky-heading]]:scroll-pt-16">
             {{ $slot }}
 
             <x-ui.site-footer :$comms :$updatedAt class="mt-16" />
+
+            <x-ui.spicy-preferences class="mt-10 lg:hidden" />
         </flux:main>
 
         @livewireScripts

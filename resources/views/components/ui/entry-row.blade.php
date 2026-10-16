@@ -10,13 +10,16 @@
 
 <li {{ $attributes->class('grid gap-x-6 gap-y-1 py-5 sm:grid-cols-[7rem_minmax(0,1fr)]') }}>
     <div class="flex flex-wrap items-center gap-2 sm:flex-col sm:items-start">
-        <flux:text size="sm">
-            {{ $item['type'] }}
+        <p class="text-sm/5 text-zinc-500 dark:text-zinc-400">
+            <span class="font-semibold text-zinc-700 sm:block dark:text-zinc-200">{{ $item['type'] }}</span>
             @if ($item['date'])
-                <span aria-hidden="true">·</span>
-                <time datetime="{{ $item['date']->toDateString() }}">{{ $item['date']->format($dateFormat) }}</time>
+                <span aria-hidden="true" class="sm:hidden">·</span>
+                <time datetime="{{ $item['date']->toDateString() }}" class="sm:block">{{ $item['date']->format($dateFormat) }}</time>
             @endif
-        </flux:text>
+            @if ($item['minutes'] ?? null)
+                <span class="sm:hidden"><span aria-hidden="true">·</span> {{ $item['minutes'] }} min read</span>
+            @endif
+        </p>
 
         @if ($item['kind'] ?? null)
             <flux:badge size="sm">{{ $item['kind'] }}</flux:badge>
@@ -48,13 +51,29 @@
                 <x-ui.series-badge>{{ $series }}</x-ui.series-badge>
             @endif
 
-            <h3 class="font-display text-xl font-semibold tracking-tight text-zinc-800 dark:text-white">
-                @if ($item['url'])
-                    <flux:link :href="$item['url']" variant="ghost" class="text-inherit hover:decoration-enby-purple">{{ $item['title'] }}</flux:link>
-                @else
-                    {{ $item['title'] }}
+            <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+                <div class="min-w-0 space-y-1">
+                    <h3 class="font-display text-xl font-semibold tracking-[-0.01em] text-zinc-800 sm:text-[1.375rem]/7 dark:text-white">
+                        @if ($item['url'])
+                            <flux:link :href="$item['url']" variant="ghost" class="font-semibold! text-inherit hover:decoration-enby-purple">{{ $item['title'] }}</flux:link>
+                        @else
+                            {{ $item['title'] }}
+                        @endif
+                    </h3>
+
+                    @if ($item['event'] ?? null)
+                        <p class="text-base text-zinc-600 dark:text-zinc-300">{{ $item['event'] }}</p>
+                    @endif
+                </div>
+
+                @if ($item['links'] ?? [])
+                    <ul role="list" class="flex shrink-0 gap-5 max-sm:order-last max-sm:basis-full">
+                        @foreach ($item['links'] as $link)
+                            <li><a href="{{ $link['url'] }}" target="_blank" rel="noopener" class="text-[0.9375rem] font-bold text-zinc-800 underline decoration-3 underline-offset-5 dark:text-white {{ $loop->odd ? 'decoration-enby-yellow' : 'decoration-enby-purple' }}">{{ $link['label'] }}</a></li>
+                        @endforeach
+                    </ul>
                 @endif
-            </h3>
+            </div>
 
             @if ($item['note'] ?? null)
                 <flux:text class="font-hand text-lg/5 text-enby-purple-text">{{ $item['note'] }}</flux:text>
@@ -66,6 +85,10 @@
                 </div>
             @elseif ($item['summary'])
                 <flux:text class="max-w-[65ch] text-base text-pretty text-zinc-600 dark:text-zinc-300">{{ $item['summary'] }}</flux:text>
+            @endif
+
+            @if ($item['minutes'] ?? null)
+                <p class="hidden text-sm text-zinc-500 sm:block dark:text-zinc-400">{{ $item['minutes'] }} min read</p>
             @endif
         </div>
     </div>

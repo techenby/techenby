@@ -110,12 +110,39 @@ class BlogSeriesTest extends TestCase
             ->assertSee('you are here');
     }
 
-    private function makeTerm(): void
+    #[Test]
+    public function the_series_box_teases_the_next_part_when_one_is_up_next(): void
+    {
+        $this->makeTerm(['up_next' => 'how the offline sync works']);
+
+        $this->makeEntry('test-series-teaser', 'Teaser part', ['series' => 'test-series', 'series_part' => 1]);
+
+        $this->get('/log/test-series-teaser')
+            ->assertOk()
+            ->assertSeeInOrder(['Teaser part', 'you are here', '2', 'coming soon: how the offline sync works']);
+    }
+
+    #[Test]
+    public function the_series_box_has_no_teaser_without_an_up_next(): void
+    {
+        $this->makeTerm();
+
+        $this->makeEntry('test-series-no-teaser', 'No teaser part', ['series' => 'test-series', 'series_part' => 1]);
+
+        $this->get('/log/test-series-no-teaser')
+            ->assertOk()
+            ->assertDontSee('coming soon:');
+    }
+
+    /**
+     * @param  array<string, mixed>  $data
+     */
+    private function makeTerm(array $data = []): void
     {
         $this->createdTerm = Term::make('test-series')
             ->taxonomy('series')
             ->blueprint('series')
-            ->data(['title' => 'Test Series']);
+            ->data(['title' => 'Test Series', ...$data]);
 
         $this->createdTerm->save();
     }

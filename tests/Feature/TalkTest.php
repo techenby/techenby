@@ -35,14 +35,15 @@ class TalkTest extends TestCase
     }
 
     #[Test]
-    public function talks_get_their_own_log_filter_with_the_event_as_a_badge(): void
+    public function talks_get_their_own_log_filter_with_the_event_and_links_under_the_title(): void
     {
         $this->makeTalk();
 
         $this->get('/log/talks')
             ->assertOk()
-            ->assertSeeInOrder(['Talk', 'Test Event 2026', 'Talk test'])
-            ->assertSee('href="/log/talk-test"', false);
+            ->assertSeeInOrder(['Talk', 'Talk test', 'Test Event 2026'])
+            ->assertSee('href="/log/talk-test"', false)
+            ->assertSeeInOrder(['href="https://github.com/techenby/livewire-best-practices-talk"', 'Slides', 'href="https://www.youtube.com/watch?v=sDEohTrNVvc&amp;list=PLUA0-roTCM999jd102QKYtdOZjzqWpSQ4"', 'Video'], false);
 
         $this->assertSame('Talk', app(Lately::class)->type($this->talk));
     }

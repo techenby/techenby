@@ -96,7 +96,7 @@
 
 @layer components {
     .article-prose {
-        @apply min-w-0 text-lg/[1.875rem] text-pretty text-zinc-700 dark:text-zinc-300;
+        @apply min-w-0 text-[1.0625rem]/7 text-pretty text-zinc-700 sm:text-lg/[1.875rem] dark:text-zinc-300;
     }
 
     .article-prose > * + * {
@@ -104,12 +104,12 @@
     }
 
     .article-prose > p:first-child {
-        @apply border-t border-zinc-200 pt-7 text-[1.4375rem]/9 text-zinc-800 dark:border-white/10 dark:text-white;
+        @apply border-t border-zinc-200 pt-7 text-xl/[1.9375rem] text-zinc-800 sm:text-[1.4375rem]/9 dark:border-white/10 dark:text-white;
     }
 
     /* Short answers (like the FAQ) skip the article lede. */
     .article-prose.no-lede > p:first-child {
-        @apply border-0 pt-0 text-lg/[1.875rem] text-zinc-700 dark:text-zinc-300;
+        @apply border-0 pt-0 text-[1.0625rem]/7 text-zinc-700 sm:text-lg/[1.875rem] dark:text-zinc-300;
     }
 
     .article-prose :is(h2, h3) {
@@ -177,6 +177,20 @@
     .article-prose pre[data-language]::before {
         @apply -mx-5 -mt-5 mb-5 block border-b border-zinc-700 bg-zinc-800 px-4 py-2 text-xs/4 font-semibold tracking-[0.04em] text-zinc-400 dark:border-white/10 dark:bg-zinc-900;
         content: attr(data-language);
+    }
+
+    .article-prose [data-code-block] figcaption {
+        @apply flex justify-between gap-4 rounded-t-xl border border-b-0 border-zinc-800 bg-zinc-800 px-4 py-2 text-xs/4 font-semibold tracking-[0.04em] text-zinc-400 dark:border-white/10 dark:bg-zinc-900;
+        font-family: var(--font-display);
+        font-variation-settings: 'MONO' 1;
+    }
+
+    .article-prose [data-code-block] figcaption + pre {
+        @apply rounded-t-none border-t-zinc-700 dark:border-t-white/10;
+    }
+
+    .article-prose [data-code-block] figcaption + pre::before {
+        content: none;
     }
 
     .article-prose pre :is(.hljs-comment, .hljs-quote) {

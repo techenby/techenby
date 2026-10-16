@@ -1,7 +1,7 @@
 <flux:card
     variant="outline"
     size="sm"
-    class="flex flex-col gap-4"
+    :attributes="$attributes->class('flex flex-col gap-4')"
     x-data="{
         textSize: document.documentElement.dataset.textSize ?? 'base',
         reduceMotion: document.documentElement.classList.contains('reduce-motion'),
@@ -17,15 +17,18 @@
             this.$watch('textSize', (size) => {
                 document.documentElement.dataset.textSize = size
                 this.remember('techenby:text-size', size)
+                this.$dispatch('techenby-preferences', { textSize: size })
             })
 
             this.$watch('reduceMotion', (reduce) => {
                 document.documentElement.classList.toggle('reduce-motion', reduce)
                 this.remember('techenby:reduce-motion', reduce)
                 this.syncCarousels(reduce)
+                this.$dispatch('techenby-preferences', { reduceMotion: reduce })
             })
         },
     }"
+    x-on:techenby-preferences.window="Object.assign($data, $event.detail)"
 >
     <flux:heading class="font-semibold">Reading comfort</flux:heading>
 

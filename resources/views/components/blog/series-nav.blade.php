@@ -38,5 +38,12 @@
                 @endif
             </li>
         @endforeach
+
+        @if ($series['upNext'] ?? null)
+            <li class="flex items-center gap-3 px-3 py-2.5">
+                <span class="w-5 shrink-0 text-sm font-bold text-zinc-400 dark:text-zinc-500">{{ $partCount + 1 }}</span>
+                <span class="font-hand text-[1.1875rem]/[1.375rem] text-zinc-500 dark:text-zinc-400">coming soon: {{ $series['upNext'] }}</span>
+            </li>
+        @endif
     </ol>
 </nav>

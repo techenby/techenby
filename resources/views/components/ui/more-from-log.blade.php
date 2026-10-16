@@ -35,7 +35,7 @@
                         </p>
                         <h3 class="font-display text-lg/6 font-semibold tracking-tight text-zinc-800 dark:text-white">
                             @if ($item['url'])
-                                <flux:link :href="$item['url']" variant="ghost" class="text-inherit hover:decoration-enby-purple">{{ $item['title'] }}</flux:link>
+                                <flux:link :href="$item['url']" variant="ghost" class="font-semibold! text-inherit hover:decoration-enby-purple">{{ $item['title'] }}</flux:link>
                             @else
                                 {{ $item['title'] }}
                             @endif

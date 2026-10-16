@@ -52,6 +52,23 @@ class LogPageTest extends TestCase
     }
 
     #[Test]
+    public function writing_rows_show_their_reading_time_but_tips_do_not(): void
+    {
+        $this->makeEntry('post', 'log-test-long-post', [
+            'title' => 'Log test long post',
+            'content' => [['type' => 'paragraph', 'content' => [['type' => 'text', 'text' => str_repeat('word ', 700)]]]],
+        ], date: Carbon::parse('2026-09-13'));
+
+        $this->get('/log/writing')
+            ->assertOk()
+            ->assertSeeInOrder(['Writing', 'Sep 13', 'Log test long post', '4 min read']);
+
+        $this->get('/log/tips')
+            ->assertOk()
+            ->assertDontSee('min read');
+    }
+
+    #[Test]
     public function the_writing_filter_only_shows_posts(): void
     {
         $this->get('/log/writing')

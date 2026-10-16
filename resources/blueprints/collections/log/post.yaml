@@ -44,14 +44,32 @@ tabs:
                 fillers:
                   display: Fillers
                   sets:
-                    new_set:
-                      display: 'New Set'
+                    code:
+                      display: Code
+                      instructions: 'A code block with a labelled header.'
                       fields:
+                        -
+                          handle: language
+                          field:
+                            type: text
+                            display: Language
+                            instructions: 'Shown on the left of the header, like PHP or SwiftUI. Also used for syntax highlighting.'
+                            width: 50
+                        -
+                          handle: note
+                          field:
+                            type: text
+                            display: Note
+                            instructions: 'Optional. Shown on the right of the header, like "the one-line fix".'
+                            width: 50
                         -
                           handle: code
                           field:
                             type: code
                             display: Code
+                            mode_selectable: false
+                            validate:
+                              - required
                     image:
                       display: Image
                       fields:

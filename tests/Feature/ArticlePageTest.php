@@ -124,6 +124,46 @@ class ArticlePageTest extends TestCase
     }
 
     #[Test]
+    public function a_post_shows_a_byline_with_the_date_and_reading_time(): void
+    {
+        $this->makeEntry('post', 'article-test-byline', [
+            'title' => 'Article test byline',
+            'content' => [$this->paragraph('A short post.')],
+        ], date: Carbon::parse('2026-09-12'));
+
+        $this->get('/log/article-test-byline')
+            ->assertOk()
+            ->assertSeeInOrder(['Article test byline', 'Andy Swick', 'Sep 12, 2026', '1 min read']);
+    }
+
+    #[Test]
+    public function a_code_set_shows_its_language_and_note_in_the_header(): void
+    {
+        $this->makeEntry('post', 'article-test-code-set', [
+            'title' => 'Article test code set',
+            'content' => [
+                $this->paragraph('Before the code.'),
+                [
+                    'type' => 'set',
+                    'attrs' => ['id' => 'code-set', 'values' => [
+                        'type' => 'code',
+                        'language' => 'PHP',
+                        'note' => 'the one-line fix',
+                        'code' => '<?php return $fix;',
+                    ]],
+                ],
+            ],
+        ]);
+
+        $this->get('/log/article-test-code-set')
+            ->assertOk()
+            ->assertSee('data-code-block', false)
+            ->assertSeeInOrder(['<figcaption>', 'PHP', 'the one-line fix', '</figcaption>', '<pre'], false)
+            ->assertSee('hljs language-php', false)
+            ->assertDontSee('<?php return', false);
+    }
+
+    #[Test]
     public function highlighted_code_blocks_are_labelled_with_their_language(): void
     {
         $html = app(BlogCodeHighlighter::class)->highlight('<pre><code class="language-js">const a = 1;</code></pre>');

@@ -13,14 +13,25 @@
 
 <x-layout :title="($activeFilter ? $filters[$activeFilter]['label'].' · ' : '').($logPage?->get('title') ?? 'Log')" :updated-at="$logPage?->lastModified()">
     <div class="space-y-10">
-        <header class="space-y-4">
-            <h1 class="font-display text-4xl font-semibold tracking-tight text-zinc-800 xl:text-5xl dark:text-white">{{ $logPage?->get('title') ?? 'Log' }}</h1>
-            @if (filled($logPage?->get('subheading')))
-                <flux:text class="max-w-[60ch] text-lg text-pretty text-zinc-600 dark:text-zinc-300">{{ $logPage->get('subheading') }}</flux:text>
-            @endif
+        <header class="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
+            <div class="space-y-4">
+                <h1 class="font-display text-4xl font-semibold tracking-tight text-zinc-800 xl:text-5xl dark:text-white">{{ $logPage?->get('title') ?? 'Log' }}</h1>
+                @if (filled($logPage?->get('subheading')))
+                    <flux:text class="max-w-[60ch] text-lg text-pretty text-zinc-600 dark:text-zinc-300">{{ $logPage->get('subheading') }}</flux:text>
+                @endif
+            </div>
+
+            <div class="space-y-1 sm:text-right">
+                <a href="{{ $activeFilter ? route('log.feed.type', $activeFilter, absolute: false) : route('log.feed', absolute: false) }}" class="text-[0.9375rem] font-bold text-zinc-800 underline decoration-enby-purple decoration-3 underline-offset-5 dark:text-white">
+                    {{ $activeFilter ? 'Subscribe to '.$filters[$activeFilter]['label'] : 'Subscribe to everything' }}
+                </a>
+                @unless ($activeFilter)
+                    <p class="max-sm:hidden text-[0.8125rem] text-zinc-500 dark:text-zinc-400">or pick a feed per type below</p>
+                @endunless
+            </div>
         </header>
 
-        <nav aria-label="Filter the log" class="border-b border-zinc-950/10 pb-6 dark:border-white/10">
+        <nav aria-label="Filter the log" class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-zinc-950/10 pb-6 dark:border-white/10">
             <ul role="list" class="flex flex-wrap gap-2">
                 <li>
                     <a href="/log" @if (! $activeFilter) aria-current="page" @endif @class([
@@ -39,6 +50,8 @@
                     </li>
                 @endforeach
             </ul>
+
+            <p class="max-sm:hidden text-[0.8125rem] text-zinc-500 dark:text-zinc-400">Each filter has its own RSS feed</p>
         </nav>
 
         <s:collection :from="Lately::COLLECTION" :blueprint:in="$blueprints" sort="date:desc" paginate="20" as="entries">

@@ -10,6 +10,7 @@ use Statamic\Contracts\Assets\Asset as AssetContract;
 use Statamic\Contracts\Entries\Entry;
 use Statamic\Facades\Entry as EntryFacade;
 use Statamic\Facades\Term;
+use Statamic\Modifiers\Modify;
 use Statamic\Statamic;
 
 class Lately
@@ -47,7 +48,7 @@ class Lately
 
     /**
      * @param  list<string>  $blueprints
-     * @return Collection<int, array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>}>
+     * @return Collection<int, array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, minutes: ?int, event: ?string, links: list<array{label: string, url: string}>, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>}>
      */
     public function items(array $blueprints, int $limit = 5): Collection
     {
@@ -67,7 +68,7 @@ class Lately
     }
 
     /**
-     * @return array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>}
+     * @return array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, minutes: ?int, event: ?string, links: list<array{label: string, url: string}>, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>}
      */
     public function item(Entry $entry): array
     {
@@ -81,8 +82,11 @@ class Lately
             'caption' => in_array($entry->blueprint()->handle(), self::INLINE_CAPTIONS, true) ? $this->caption($entry) : null,
             'series' => $this->seriesTitle($entry),
             'part' => $this->series->part($entry),
-            'kind' => $this->kind($entry),
+            'kind' => $entry->blueprint()->handle() === 'talk' ? null : $this->kind($entry),
             'note' => filled($entry->value('note')) ? (string) $entry->value('note') : null,
+            'minutes' => $this->readingMinutes($entry),
+            'event' => $entry->blueprint()->handle() === 'talk' ? $this->kind($entry) : null,
+            'links' => $this->links($entry),
             'photos' => $this->photos($entry),
         ];
     }
@@ -133,6 +137,44 @@ class Lately
     private function glide(AssetContract $asset, array $params): string
     {
         return (string) Statamic::tag('glide')->params(['src' => $asset, ...$params])->fetch();
+    }
+
+    /**
+     * Links worth surfacing straight from the Log, like a talk's slides and video.
+     *
+     * @return list<array{label: string, url: string}>
+     */
+    public function links(Entry $entry): array
+    {
+        if ($entry->blueprint()->handle() !== 'talk') {
+            return [];
+        }
+
+        $slides = $entry->value('slides');
+        $video = $entry->augmentedValue('video')->value();
+
+        return array_values(array_filter([
+            is_string($slides) && $slides !== '' ? ['label' => 'Slides', 'url' => $slides] : null,
+            $video ? ['label' => 'Video', 'url' => (string) $video->url()] : null,
+        ]));
+    }
+
+    /**
+     * How long a post takes to read, at the same pace the article page uses.
+     */
+    public function readingMinutes(Entry $entry): ?int
+    {
+        if ($entry->blueprint()->handle() !== 'post') {
+            return null;
+        }
+
+        $content = $entry->augmentedValue('content')->value();
+
+        if (blank($content)) {
+            return null;
+        }
+
+        return max(1, (int) Modify::value(collect($content)->all())->readTime(225)->fetch());
     }
 
     public function date(Entry $entry): ?Carbon
