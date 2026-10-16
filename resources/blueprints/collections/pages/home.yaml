@@ -40,7 +40,7 @@ tabs:
             field:
               default: '5'
               type: integer
-              display: Count
+              display: Limit
               width: 33
           -
             handle: projects
