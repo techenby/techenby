@@ -4,7 +4,7 @@
     $underlines = ['decoration-enby-yellow', 'decoration-enby-purple', 'decoration-enby-black dark:decoration-white'];
 @endphp
 
-<x-layout :$title>
+<x-layout :$title :updated-at="$updated_at ?? null">
     <div class="max-w-4xl space-y-10">
         <x-ui.page-header :heading="$heading ?? $title" :$subheading />
 

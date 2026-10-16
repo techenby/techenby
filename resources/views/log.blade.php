@@ -11,7 +11,7 @@
     $logPage = Entry::findByUri('/log');
 @endphp
 
-<x-layout :title="($activeFilter ? $filters[$activeFilter]['label'].' · ' : '').($logPage?->get('title') ?? 'Log')">
+<x-layout :title="($activeFilter ? $filters[$activeFilter]['label'].' · ' : '').($logPage?->get('title') ?? 'Log')" :updated-at="$logPage?->value('updated_at')">
     <div class="max-w-4xl space-y-10">
         <header class="space-y-4">
             <h1 class="font-display text-4xl font-semibold tracking-tight text-zinc-800 xl:text-5xl dark:text-white">{{ $logPage?->get('title') ?? 'Log' }}</h1>

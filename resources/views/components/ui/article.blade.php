@@ -5,15 +5,12 @@
     'readingMinutes' => 1,
     'headings' => [],
     'series' => null,
-    'comms' => [],
 ])
 
 @php
     use App\Support\Lately;
-    use Illuminate\Support\Carbon;
 
     $date = app(Lately::class)->date($entry);
-    $updatedAt = is_numeric($entry->value('updated_at')) ? Carbon::createFromTimestamp($entry->value('updated_at')) : null;
 @endphp
 
 <article class="space-y-10">
@@ -64,6 +61,4 @@
             <x-ui.on-this-page :items="[['id' => 'intro', 'text' => 'Intro'], ...$headings]" class="hidden xl:block" />
         @endif
     </div>
-
-    <x-ui.site-footer :$comms :$updatedAt />
 </article>

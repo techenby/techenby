@@ -22,6 +22,7 @@
     :description="$entry->get('description')"
     :social-title="$entry->get('title')"
     :social-image="app(App\Support\SocialCard::class)->url($entry)"
+    :updated-at="$entry->value('updated_at')"
 >
     <x-ui.article
         :$entry
@@ -30,7 +31,6 @@
         :$readingMinutes
         :headings="$outline->headings()"
         :$series
-        :comms="$andy->comms ?? []"
     >
         @foreach ($contentBlocks as $block)
             @if ($block['type'] === 'html')

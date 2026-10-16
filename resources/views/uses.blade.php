@@ -1,4 +1,4 @@
-<x-layout :$title>
+<x-layout :$title :updated-at="$updated_at ?? null">
     <div class="space-y-10">
         <x-ui.page-header :heading="$heading ?? $title" :$subheading />
 

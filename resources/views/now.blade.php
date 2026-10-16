@@ -4,11 +4,10 @@
 
     $entry = Entry::find($id);
     $asOf = $entry->value('as_of') ? Carbon::parse($entry->value('as_of')) : null;
-    $updatedAt = is_numeric($entry->value('updated_at')) ? Carbon::createFromTimestamp($entry->value('updated_at')) : null;
     $sections = collect($entry->value('sections') ?? [])->filter(fn (array $section) => filled($section['heading'] ?? null));
 @endphp
 
-<x-layout :$title>
+<x-layout :$title :updated-at="$entry->value('updated_at')">
     <div class="max-w-4xl space-y-12">
         <x-ui.page-header
             :heading="$entry->get('title')"
@@ -28,7 +27,5 @@
                 @endforeach
             </dl>
         @endif
-
-        <x-ui.site-footer :comms="$andy->comms ?? []" :$updatedAt />
     </div>
 </x-layout>

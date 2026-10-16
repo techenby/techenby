@@ -5,7 +5,6 @@
 
     $entry = Entry::find($id);
     $asOf = $entry->value('as_of') ? Carbon::parse($entry->value('as_of')) : null;
-    $updatedAt = is_numeric($entry->value('updated_at')) ? Carbon::createFromTimestamp($entry->value('updated_at')) : null;
     $tldr = collect($entry->value('tldr') ?? [])->filter();
 
     $sections = collect($entry->value('sections') ?? [])
@@ -24,7 +23,7 @@
     $isPrompt = fn (?string $text) => Str::startsWith(trim((string) $text), 'Prompt:');
 @endphp
 
-<x-layout :$title>
+<x-layout :$title :updated-at="$entry->value('updated_at')">
     <div class="space-y-12">
         <div class="grid gap-x-16 xl:grid-cols-[minmax(0,42.5rem)_12.5rem]">
             <div class="min-w-0 space-y-10">
@@ -101,7 +100,5 @@
                 <x-ui.on-this-page :items="$toc" class="hidden pt-32 xl:block" />
             @endif
         </div>
-
-        <x-ui.site-footer :comms="$andy->comms ?? []" :$updatedAt />
     </div>
 </x-layout>

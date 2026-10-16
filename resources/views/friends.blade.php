@@ -1,11 +1,9 @@
 @php
-    use Illuminate\Support\Carbon;
     use Illuminate\Support\Str;
     use Statamic\Facades\Asset;
     use Statamic\Facades\Entry;
 
     $entry = Entry::find($id);
-    $updatedAt = is_numeric($entry->value('updated_at')) ? Carbon::createFromTimestamp($entry->value('updated_at')) : null;
 
     $groups = collect($entry->value('groups') ?? [])
         ->map(fn (array $group) => [
@@ -23,7 +21,7 @@
     $hasFeeds = $groups->flatMap(fn (array $group) => $group['friends'])->contains(fn (array $friend) => filled($friend['rss'] ?? null));
 @endphp
 
-<x-layout :$title>
+<x-layout :$title :updated-at="$entry->value('updated_at')">
     <div class="space-y-12">
         <div class="flex flex-col gap-6 border-b border-zinc-950/10 pb-7 lg:flex-row lg:items-end lg:justify-between lg:gap-10 dark:border-white/10">
             <x-ui.page-header :heading="$entry->get('title')" :subheading="$entry->get('subheading')" class="max-w-[38.75rem]" />
@@ -86,7 +84,5 @@
                 <p class="text-base/[1.625rem] text-pretty text-zinc-600 dark:text-zinc-300">{{ $entry->get('outro') }}</p>
             </section>
         @endif
-
-        <x-ui.site-footer :comms="$andy->comms ?? []" :$updatedAt />
     </div>
 </x-layout>

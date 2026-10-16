@@ -1,4 +1,21 @@
-@props(['title' => null, 'description' => null, 'socialTitle' => null, 'socialImage' => null])
+@props(['title' => null, 'description' => null, 'socialTitle' => null, 'socialImage' => null, 'updatedAt' => null, 'hideEmail' => false])
+
+@php
+    use Carbon\CarbonInterface;
+    use Illuminate\Support\Carbon;
+    use Statamic\Facades\GlobalSet;
+    use Statamic\Fields\Value;
+
+    $updatedAt = $updatedAt instanceof Value ? $updatedAt->raw() : $updatedAt;
+    $updatedAt = match (true) {
+        $updatedAt instanceof CarbonInterface => $updatedAt,
+        is_numeric($updatedAt) => Carbon::createFromTimestamp($updatedAt),
+        default => null,
+    };
+
+    $comms = collect(GlobalSet::findByHandle('andy')?->inCurrentSite()?->toAugmentedCollection()->get('comms')?->value() ?? [])
+        ->when($hideEmail, fn ($comms) => $comms->reject(fn ($method) => str_starts_with((string) $method->url, 'mailto:')));
+@endphp
 
 <!doctype html>
 <html lang="{{ Statamic\Facades\Site::current()->shortLocale() }}" class="antialiased has-[[data-sticky-heading]]:scroll-pt-16">
@@ -85,6 +102,8 @@
 
         <flux:main inset class="lg:ms-0 has-[[data-sticky-heading]]:scroll-pt-16">
             {{ $slot }}
+
+            <x-ui.site-footer :$comms :$updatedAt class="mt-16" />
         </flux:main>
 
         @livewireScripts

@@ -17,13 +17,13 @@
     :description="$entry->get('description')"
     :social-title="$entry->get('title')"
     :social-image="app(App\Support\SocialCard::class)->url($entry)"
+    :updated-at="$entry->value('updated_at')"
 >
     <x-ui.article
         :$entry
         badge="Tip"
         :$readingMinutes
         :headings="$outline->headings()"
-        :comms="$andy->comms ?? []"
     >
         {!! $html !!}
     </x-ui.article>
