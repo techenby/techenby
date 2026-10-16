@@ -50,7 +50,9 @@
 
             @forelse ($months as $month => $monthEntries)
                 <section aria-labelledby="log-{{ Str::slug($month) }}">
-                    <h2 id="log-{{ Str::slug($month) }}" class="font-display text-xl font-semibold tracking-tight text-zinc-800 dark:text-white">{{ $month }}</h2>
+                    <h2 id="log-{{ Str::slug($month) }}" data-sticky-heading class="sticky top-0 z-10 bg-white font-display text-xl font-semibold tracking-tight text-zinc-800 @container-[scroll-state] lg:-top-10 dark:bg-zinc-800 dark:text-white">
+                        <span class="block border-b border-transparent py-3 stuck:border-zinc-950/5 dark:stuck:border-white/10">{{ $month }}</span>
+                    </h2>
 
                     <ol role="list" class="divide-y divide-zinc-950/10 dark:divide-white/10">
                         @foreach ($monthEntries as $entry)

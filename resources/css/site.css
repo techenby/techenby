@@ -6,6 +6,11 @@
 @custom-variant dark (&:where(.dark, .dark *));
 @custom-variant reduced (&:where(.reduce-motion, .reduce-motion *));
 @custom-variant motion-ok (&:not(.reduce-motion *));
+@custom-variant stuck {
+    @container scroll-state(stuck: top) {
+        @slot;
+    }
+}
 
 @layer base {
     html[data-text-size="sm"] {

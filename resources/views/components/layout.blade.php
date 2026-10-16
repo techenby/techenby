@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ Statamic\Facades\Site::current()->shortLocale() }}" class="antialiased">
+<html lang="{{ Statamic\Facades\Site::current()->shortLocale() }}" class="antialiased has-[[data-sticky-heading]]:scroll-pt-16">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -82,7 +82,7 @@
             </flux:dropdown>
         </flux:header>
 
-        <flux:main inset class="lg:ms-0">
+        <flux:main inset class="lg:ms-0 has-[[data-sticky-heading]]:scroll-pt-16">
             {{ $slot }}
         </flux:main>
 
