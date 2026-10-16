@@ -29,7 +29,7 @@ class Lately
 
     /**
      * @param  list<string>  $collections
-     * @return Collection<int, array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>}>
+     * @return Collection<int, array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>}>
      */
     public function items(array $collections, int $limit = 5): Collection
     {
@@ -48,7 +48,7 @@ class Lately
     }
 
     /**
-     * @return array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>}
+     * @return array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>}
      */
     public function item(Entry $entry): array
     {
@@ -59,6 +59,7 @@ class Lately
             'title' => (string) $entry->get('title'),
             'url' => $entry->url() ?: null,
             'summary' => $this->summary($entry),
+            'caption' => $entry->url() ? null : $this->caption($entry),
             'series' => $this->seriesTitle($entry),
             'part' => $this->series->part($entry),
             'kind' => $this->kind($entry),
@@ -137,6 +138,20 @@ class Lately
         }
 
         return Str::limit($text, 160);
+    }
+
+    /**
+     * The full caption as HTML, for entries without a page of their own.
+     */
+    public function caption(Entry $entry): ?string
+    {
+        $content = $entry->value('content');
+
+        if (! is_string($content) || trim($content) === '') {
+            return null;
+        }
+
+        return trim(Str::markdown($content, ['html_input' => 'strip', 'allow_unsafe_links' => false]));
     }
 
     public function seriesTitle(Entry $entry): ?string

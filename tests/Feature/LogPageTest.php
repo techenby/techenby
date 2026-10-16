@@ -103,6 +103,35 @@ class LogPageTest extends TestCase
     }
 
     #[Test]
+    public function makes_and_moments_show_their_full_caption_as_markdown(): void
+    {
+        $this->makeEntry('moments', 'log-test-caption', [
+            'title' => 'Log test caption',
+            'content' => "First sentence here. Second sentence with a [link](https://example.com).\n\n<script>alert(1)</script>\n\nAnother paragraph.",
+        ], date: Carbon::parse('2026-07-22'));
+
+        $this->get('/log?type=moments')
+            ->assertOk()
+            ->assertSee('Second sentence with a <a href="https://example.com">link</a>.', false)
+            ->assertSee('<p>Another paragraph.</p>', false)
+            ->assertDontSee('<script>alert(1)</script>', false);
+    }
+
+    #[Test]
+    public function posts_only_show_the_first_sentence(): void
+    {
+        $this->makeEntry('tips', 'log-test-long-tip', [
+            'title' => 'Log test long tip',
+            'content' => 'The teaser sentence. The rest stays on the tip page.',
+        ], date: Carbon::parse('2026-08-04'));
+
+        $this->get('/log?type=tips')
+            ->assertOk()
+            ->assertSee('The teaser sentence.')
+            ->assertDontSee('The rest stays on the tip page.');
+    }
+
+    #[Test]
     public function the_moments_filter_only_shows_moments(): void
     {
         $this->makeEntry('moments', 'log-test-moment', ['title' => 'Log test moment'], date: Carbon::parse('2026-07-21'));

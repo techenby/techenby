@@ -34,6 +34,8 @@ class LatelyTest extends TestCase
             'series_part' => 1,
         ], date: now()->subMinute());
 
+        $this->makeEntry('tips', 'lately-test-tip', ['title' => 'Lately test tip'], date: now()->subMinutes(2));
+
         $this->get('/')
             ->assertOk()
             ->assertSee('id="lately-heading"', false)
@@ -41,7 +43,7 @@ class LatelyTest extends TestCase
             ->assertSee('href="/blog/lately-test-post"', false)
             ->assertSee('A description written for the homepage.')
             ->assertSee('Sunny Goes Native · Part 1')
-            ->assertSee('Keep Factories Simple');
+            ->assertSee('Lately test tip');
     }
 
     #[Test]

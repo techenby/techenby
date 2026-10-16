@@ -51,10 +51,14 @@
             </h3>
 
             @if ($item['note'] ?? null)
-                <p class="font-hand text-lg/5 text-enby-purple-text">{{ $item['note'] }}</p>
+                <flux:text class="font-hand text-lg/5 text-enby-purple-text">{{ $item['note'] }}</flux:text>
             @endif
 
-            @if ($item['summary'])
+            @if ($item['caption'] ?? null)
+                <flux:text class="max-w-[65ch] space-y-3 text-base text-pretty text-zinc-600 dark:text-zinc-300 [&_a]:font-semibold [&_a]:text-zinc-800 [&_a]:underline [&_a]:decoration-enby-purple [&_a]:decoration-[3px] [&_a]:underline-offset-[5px] dark:[&_a]:text-white">
+                    {!! $item['caption'] !!}
+                </flux:text>
+            @elseif ($item['summary'])
                 <flux:text class="max-w-[65ch] text-base text-pretty text-zinc-600 dark:text-zinc-300">{{ $item['summary'] }}</flux:text>
             @endif
         </div>
