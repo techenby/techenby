@@ -37,8 +37,12 @@ tabs:
           -
             handle: projects
             field:
-              type: collections
+              type: entries
               display: Projects
+              instructions: 'Projects to feature under "Things I build", in this order. Unpublished picks stay hidden until they go live.'
+              collections:
+                - projects
+              mode: stack
   sidebar:
     display: Sidebar
     sections:

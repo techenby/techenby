@@ -16,5 +16,7 @@
         </div>
 
         <x-ui.lately :items="$lately" />
+
+        <x-ui.projects :ids="Entry::find($id)?->value('projects') ?? []" />
     </div>
 </x-layout>
