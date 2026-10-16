@@ -107,6 +107,28 @@ class LogFeedTest extends TestCase
     }
 
     #[Test]
+    public function pages_advertise_the_log_feeds(): void
+    {
+        $siteFeedLink = '<link rel="alternate" type="application/rss+xml" title="Andy Swick’s Log" href="'.route('log.feed').'">';
+        $tipsFeedLink = '<link rel="alternate" type="application/rss+xml" title="Andy Swick’s Log · Tips" href="'.route('log.feed.type', 'tips').'">';
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee($siteFeedLink, false)
+            ->assertDontSee($tipsFeedLink, false);
+
+        $this->get('/log')
+            ->assertOk()
+            ->assertSee($siteFeedLink, false)
+            ->assertDontSee($tipsFeedLink, false);
+
+        $this->get('/log/tips')
+            ->assertOk()
+            ->assertSee($siteFeedLink, false)
+            ->assertSee($tipsFeedLink, false);
+    }
+
+    #[Test]
     public function no_log_entry_uses_the_feed_slug(): void
     {
         $slugs = Entry::query()->where('collection', Lately::COLLECTION)->get()->map->slug();

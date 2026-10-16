@@ -1,4 +1,4 @@
-@props(['title' => null, 'description' => null, 'socialTitle' => null, 'socialImage' => null, 'updatedAt' => null, 'hideEmail' => false])
+@props(['title' => null, 'description' => null, 'socialTitle' => null, 'socialImage' => null, 'updatedAt' => null, 'hideEmail' => false, 'rssFeedTitle' => null, 'rssFeedUrl' => null])
 
 @php
     use Carbon\CarbonInterface;
@@ -37,6 +37,10 @@
         <link rel="icon" href="/favicon.ico" sizes="32x32">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <link rel="alternate" type="application/rss+xml" title="Andy Swick’s Log" href="{{ route('log.feed') }}">
+        @if (filled($rssFeedTitle) && filled($rssFeedUrl))
+            <link rel="alternate" type="application/rss+xml" title="{{ $rssFeedTitle }}" href="{{ $rssFeedUrl }}">
+        @endif
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

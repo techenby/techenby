@@ -11,7 +11,12 @@
     $logPage = Entry::findByUri('/log');
 @endphp
 
-<x-layout :title="($activeFilter ? $filters[$activeFilter]['label'].' · ' : '').($logPage?->get('title') ?? 'Log')" :updated-at="$logPage?->lastModified()">
+<x-layout
+    :title="($activeFilter ? $filters[$activeFilter]['label'].' · ' : '').($logPage?->get('title') ?? 'Log')"
+    :updated-at="$logPage?->lastModified()"
+    :rss-feed-title="$activeFilter ? 'Andy Swick’s Log · '.$filters[$activeFilter]['label'] : null"
+    :rss-feed-url="$activeFilter ? route('log.feed.type', $activeFilter) : null"
+>
     <div class="space-y-10">
         <header class="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
             <div class="space-y-4">
