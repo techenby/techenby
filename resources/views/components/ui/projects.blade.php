@@ -8,7 +8,7 @@
 @endphp
 
 @if ($projects->isNotEmpty())
-    <section aria-labelledby="projects-heading" {{ $attributes->class('max-w-4xl') }}>
+    <section aria-labelledby="projects-heading" {{ $attributes }}>
         <div class="flex items-baseline justify-between gap-4 border-b border-zinc-950/10 pb-3 dark:border-white/10">
             <h2 id="projects-heading" class="font-display text-xl font-semibold tracking-tight text-zinc-800 dark:text-white">Things I build</h2>
             <a href="/projects" class="text-sm font-bold text-zinc-800 underline decoration-enby-purple decoration-3 underline-offset-5 dark:text-white">All projects</a>

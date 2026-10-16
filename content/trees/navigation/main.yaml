@@ -17,7 +17,7 @@ tree:
         entry: 69f9e00f-4c2c-45fd-b800-09eff10add18
   -
     id: 5cca456d-64ed-46a8-8101-8eee3a07a531
-    title: 'About Me'
+    title: 'About me'
     children:
       -
         id: c9175406-3e70-4812-9d0f-5d2960db95a4

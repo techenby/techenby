@@ -95,7 +95,7 @@
             <flux:spacer />
         </flux:header>
 
-        <flux:main inset class="lg:ms-0 lg:overscroll-x-auto! has-[[data-sticky-heading]]:scroll-pt-16">
+        <flux:main inset class="lg:ms-0 xl:px-20 lg:overscroll-x-auto! has-[[data-sticky-heading]]:scroll-pt-16">
             {{ $slot }}
 
             <x-ui.site-footer :$comms :$updatedAt class="mt-16" />

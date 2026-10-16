@@ -7,7 +7,7 @@
 @endphp
 
 <x-layout :$title :updated-at="$entry->lastModified()">
-    <div class="max-w-4xl space-y-12">
+    <div class="space-y-12">
         <x-ui.page-header
             :heading="$entry->get('title')"
             :subheading="$entry->get('subheading')"

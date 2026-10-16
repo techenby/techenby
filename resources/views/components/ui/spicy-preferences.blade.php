@@ -29,9 +29,9 @@
 >
     <flux:heading class="font-semibold">Reading comfort</flux:heading>
 
-    <div class="flex flex-col gap-2">
+    <div class="flex items-center justify-between gap-3">
         <flux:label class="font-normal text-zinc-600 dark:text-zinc-300">Text size</flux:label>
-        <flux:radio.group variant="segmented" size="sm" x-model="textSize" aria-label="Text size" class="w-full *:flex-1">
+        <flux:radio.group variant="segmented" size="sm" x-model="textSize" aria-label="Text size" class="w-auto">
             <flux:radio value="sm" aria-label="Small text"><span class="text-sm">A</span></flux:radio>
             <flux:radio value="base" aria-label="Default text"><span class="text-base">A</span></flux:radio>
             <flux:radio value="lg" aria-label="Large text"><span class="text-lg">A</span></flux:radio>

@@ -18,7 +18,7 @@ class MainNavigationTest extends TestCase
                 'href="/projects"', 'Projects',
                 'href="/uses"', 'Uses',
                 'href="/faq"', 'FAQ',
-                'About Me',
+                'About me',
                 'href="/now"', 'Now',
                 'href="/how-i-work"', 'How I work',
                 'href="/friends"', 'Friends',

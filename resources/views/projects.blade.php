@@ -5,7 +5,7 @@
 @endphp
 
 <x-layout :$title :updated-at="$last_modified ?? null">
-    <div class="max-w-4xl space-y-10">
+    <div class="space-y-10">
         <x-ui.page-header :heading="$heading ?? $title" :$subheading />
 
         <ul role="list" class="grid gap-4 md:grid-cols-2">
