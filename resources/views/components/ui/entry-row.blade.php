@@ -3,19 +3,25 @@
 @php
     $photos = collect($item['photos'] ?? []);
     $modal = 'photos-'.$item['id'];
-    $badge = $item['series']
+    $series = $item['series']
         ? $item['series'].(isset($item['part']) ? ' · Part '.$item['part'] : '')
-        : ($item['kind'] ?? null);
+        : null;
 @endphp
 
 <li {{ $attributes->class('grid gap-x-6 gap-y-1 py-5 sm:grid-cols-[7rem_minmax(0,1fr)]') }}>
-    <flux:text size="sm">
-        {{ $item['type'] }}
-        @if ($item['date'])
-            <span aria-hidden="true">·</span>
-            <time datetime="{{ $item['date']->toDateString() }}">{{ $item['date']->format($dateFormat) }}</time>
+    <div class="flex flex-wrap items-center gap-2 sm:flex-col sm:items-start">
+        <flux:text size="sm">
+            {{ $item['type'] }}
+            @if ($item['date'])
+                <span aria-hidden="true">·</span>
+                <time datetime="{{ $item['date']->toDateString() }}">{{ $item['date']->format($dateFormat) }}</time>
+            @endif
+        </flux:text>
+
+        @if ($item['kind'] ?? null)
+            <flux:badge size="sm">{{ $item['kind'] }}</flux:badge>
         @endif
-    </flux:text>
+    </div>
 
     <div class="space-y-3">
         @if ($photos->isNotEmpty())
@@ -38,8 +44,8 @@
         @endif
 
         <div class="space-y-2">
-            @if ($badge)
-                <flux:badge size="sm">{{ $badge }}</flux:badge>
+            @if ($series)
+                <x-ui.series-badge>{{ $series }}</x-ui.series-badge>
             @endif
 
             <h3 class="font-display text-xl font-semibold tracking-tight text-zinc-800 dark:text-white">

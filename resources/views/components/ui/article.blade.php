@@ -19,7 +19,11 @@
 <article class="space-y-10">
     <header class="max-w-[42.5rem] space-y-[1.125rem]">
         @if ($badge)
-            <flux:badge size="sm">{{ $badge }}</flux:badge>
+            @if ($series)
+                <x-ui.series-badge>{{ $badge }}</x-ui.series-badge>
+            @else
+                <flux:badge size="sm">{{ $badge }}</flux:badge>
+            @endif
         @endif
 
         <h1 class="font-display text-[2.25rem]/[2.625rem] font-semibold tracking-tight text-balance text-zinc-800 sm:text-5xl/[3.375rem] dark:text-white">{{ $entry->get('title') }}</h1>
