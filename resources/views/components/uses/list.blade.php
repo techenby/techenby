@@ -1,17 +1,15 @@
-<?php
-
-use Livewire\Component;
-
-new class extends Component
-{
-    public array $filters = [
-        'search' => '',
-        'types' => [],
-    ];
-};
-?>
-
-<section class="mt-6 grid gap-4 border-t-2 border-dashed border-neutral-300 pt-6 dark:border-white/10" aria-labelledby="uses-list-heading">
+<section
+    class="mt-6 grid gap-4 border-t-2 border-dashed border-neutral-300 pt-6 dark:border-white/10"
+    aria-labelledby="uses-list-heading"
+    x-data="{
+        search: '',
+        types: [],
+        matches(title, type) {
+            return title.toLowerCase().includes(this.search.trim().toLowerCase())
+                && (this.types.length === 0 || this.types.includes(type))
+        },
+    }"
+>
     <div class="flex flex-wrap items-end justify-between gap-3">
         <div>
             <p class="font-press-start text-[0.625rem] uppercase text-orange-700 dark:text-orange-400">Complete Inventory</p>
@@ -20,15 +18,15 @@ new class extends Component
     </div>
 
     <div class="flex gap-4">
-        <flux:input wire:model.live="filters.search" placeholder="looking for something?" aria-label="Search" icon="magnifying-glass" />
+        <flux:input x-model="search" placeholder="looking for something?" aria-label="Search" icon="magnifying-glass" />
 
         <flux:dropdown>
             <flux:button icon="funnel" icon:variant="outline">Filter</flux:button>
 
             <flux:menu keep-open>
-                <flux:menu.checkbox.group wire:model.live="filters.types">
+                <flux:menu.checkbox.group x-model="types">
                     <s:taxonomy:types>
-                        <flux:menu.checkbox :value="$id">{{ $title }}</flux:menu.checkbox>
+                        <flux:menu.checkbox :value="$slug">{{ $title }}</flux:menu.checkbox>
                     </s:taxonomy:types>
                 </flux:menu.checkbox.group>
             </flux:menu>
@@ -44,11 +42,8 @@ new class extends Component
             </flux:table.columns>
 
             <flux:table.rows>
-                <s:collection:uses
-                    title:contains="{{ $filters['search'] }}"
-                    taxonomy:types="{{ implode('|', $filters['types']) }}"
-                >
-                    <flux:table.row :key="$id">
+                <s:collection:uses>
+                    <flux:table.row :key="$id" x-show="matches({{ Js::from((string) $title) }}, {{ Js::from((string) ($types?->slug ?? '')) }})">
                         <flux:table.cell>{{ $title }}</flux:table.cell>
 
                         <flux:table.cell>{{ $types->title }}</flux:table.cell>

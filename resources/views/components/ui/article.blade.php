@@ -48,6 +48,8 @@
                 <x-blog.series-nav :$series :current="$entry" />
             @endif
 
+            <x-ui.newsletter />
+
             <x-ui.more-from-log :except="$entry->id()" />
         </div>
 

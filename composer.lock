@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "40d226eb265d08d72b746bee7589ac4c",
+    "content-hash": "65e2eec6ae3ac607ca6bc37af36c4cbc",
     "packages": [
         {
             "name": "ajthinking/archetype",
@@ -124,83 +124,6 @@
                 "source": "https://github.com/Bacon/BaconQrCode/tree/v3.1.1"
             },
             "time": "2026-04-05T21:06:35+00:00"
-        },
-        {
-            "name": "bentonow/bento-laravel-sdk",
-            "version": "v1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bentonow/bento-laravel-sdk.git",
-                "reference": "1c8241fc187ff24914ffbd6c64415885e21648b7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bentonow/bento-laravel-sdk/zipball/1c8241fc187ff24914ffbd6c64415885e21648b7",
-                "reference": "1c8241fc187ff24914ffbd6c64415885e21648b7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2",
-                "saloonphp/saloon": "^3.11.2 || ^4.0"
-            },
-            "require-dev": {
-                "laravel/pint": "^v1.21.2",
-                "laravel/prompts": "^0.3.5",
-                "orchestra/testbench": "^v9.12.0",
-                "pestphp/pest": "^v3.7.4",
-                "pestphp/pest-plugin-arch": "^3.0",
-                "pestphp/pest-plugin-laravel": "^v3.1.0",
-                "spatie/ray": "^1.41.6"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Bento": "Bentonow\\BentoLaravel\\Facades\\Bento"
-                    },
-                    "providers": [
-                        "Bentonow\\BentoLaravel\\BentoLaravelServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Bentonow\\BentoLaravel\\": "src/",
-                    "Bentonow\\BentoLaravel\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Aaron Francis",
-                    "email": "hello@aaronfrancis.com",
-                    "homepage": "https://aaronfrancis.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Zachary Oakes",
-                    "email": "zachary.oakes@gmail.com",
-                    "homepage": "https://www.zacharyoakes.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel SDK for Bento",
-            "homepage": "https://github.com/bentonow/bento-laravel-sdk",
-            "keywords": [
-                "bento",
-                "bentonow",
-                "email",
-                "laravel-driver",
-                "transactional"
-            ],
-            "support": {
-                "issues": "https://github.com/bentonow/bento-laravel-sdk/issues",
-                "source": "https://github.com/bentonow/bento-laravel-sdk/tree/v1.4.0"
-            },
-            "time": "2026-07-06T03:51:48+00:00"
         },
         {
             "name": "brick/math",
@@ -5048,88 +4971,6 @@
             "time": "2026-09-30T16:45:11+00:00"
         },
         {
-            "name": "saloonphp/saloon",
-            "version": "v4.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/saloonphp/saloon.git",
-                "reference": "2f45e526f9d1d10a138f864492b074b046d2e52e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/saloonphp/saloon/zipball/2f45e526f9d1d10a138f864492b074b046d2e52e",
-                "reference": "2f45e526f9d1d10a138f864492b074b046d2e52e",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^7.6 || ^8.0",
-                "guzzlehttp/promises": "^1.5 || ^2.0 || ^3.0",
-                "guzzlehttp/psr7": "^2.0 || ^3.0",
-                "php": "^8.2",
-                "psr/clock": "^1.0",
-                "psr/http-factory": "^1.0",
-                "psr/http-message": "^1.1 || ^2.0"
-            },
-            "conflict": {
-                "sammyjo20/saloon": "*"
-            },
-            "require-dev": {
-                "ext-simplexml": "*",
-                "friendsofphp/php-cs-fixer": "^3.5",
-                "illuminate/collections": "^10.0 || ^11.0 || ^12.0",
-                "league/flysystem": "^3.0",
-                "pestphp/pest": "^2.36.0 || ^3.8.2 || ^4.1.4",
-                "phpstan/phpstan": "^2.1.13",
-                "saloonphp/xml-wrangler": "^1.1",
-                "spatie/invade": "^2.1",
-                "symfony/dom-crawler": "^6.0 || ^7.0",
-                "symfony/var-dumper": "^6.3 || ^7.0"
-            },
-            "suggest": {
-                "illuminate/collections": "Required for the response collect() method.",
-                "saloonphp/xml-wrangler": "Required for the response xmlReader() method.",
-                "symfony/dom-crawler": "Required for the response dom() method.",
-                "symfony/var-dumper": "Required for default debugging drivers."
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Saloon\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sam Carré",
-                    "email": "29132017+Sammyjo20@users.noreply.github.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Build beautiful API integrations and SDKs with Saloon",
-            "homepage": "https://github.com/saloonphp/saloon",
-            "keywords": [
-                "api",
-                "api-integrations",
-                "saloon",
-                "sammyjo20",
-                "sdk"
-            ],
-            "support": {
-                "issues": "https://github.com/saloonphp/saloon/issues",
-                "source": "https://github.com/saloonphp/saloon/tree/v4.5.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sammyjo20",
-                    "type": "github"
-                }
-            ],
-            "time": "2026-10-03T14:00:29+00:00"
-        },
-        {
             "name": "scrivo/highlight.php",
             "version": "v9.18.1.10",
             "source": {
@@ -5707,6 +5548,55 @@
                 }
             ],
             "time": "2026-10-06T17:28:38+00:00"
+        },
+        {
+            "name": "statamic/ssg",
+            "version": "4.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/statamic/ssg.git",
+                "reference": "4700bfbba8cfb9e394a7c34f1bc5c11d487e41a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/statamic/ssg/zipball/4700bfbba8cfb9e394a7c34f1bc5c11d487e41a2",
+                "reference": "4700bfbba8cfb9e394a7c34f1bc5c11d487e41a2",
+                "shasum": ""
+            },
+            "require": {
+                "statamic/cms": "^6.5"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^10.0 || ^11.0",
+                "phpunit/phpunit": "^11.0 || ^12.0"
+            },
+            "suggest": {
+                "spatie/fork": "Required to generate pages concurrently (^0.0.4)."
+            },
+            "type": "statamic-addon",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Statamic\\StaticSite\\ServiceProvider"
+                    ]
+                },
+                "statamic": {
+                    "name": "Static Site Generator",
+                    "description": "Generate static sites with Statamic."
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Statamic\\StaticSite\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Generate static sites with Statamic.",
+            "support": {
+                "issues": "https://github.com/statamic/ssg/issues",
+                "source": "https://github.com/statamic/ssg/tree/4.1.0"
+            },
+            "time": "2026-03-09T09:55:49+00:00"
         },
         {
             "name": "statamic/stringy",

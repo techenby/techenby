@@ -1,31 +1,29 @@
 @php
     use App\Support\Lately;
+    use Statamic\Facades\Entry;
 
-    $filters = [
-        'writing' => ['label' => 'Writing', 'from' => 'blog'],
-        'tips' => ['label' => 'Tips', 'from' => 'tips'],
-        'makes' => ['label' => 'Makes', 'from' => 'makes'],
-        'moments' => ['label' => 'Moments', 'from' => 'moments'],
-    ];
-
-    $activeFilter = array_key_exists((string) request('type'), $filters) ? request('type') : null;
-    $from = $activeFilter ? $filters[$activeFilter]['from'] : collect($filters)->pluck('from')->implode('|');
+    $filters = Lately::FILTERS;
+    $activeFilter = isset($type) && array_key_exists($type, $filters) ? $type : null;
+    $from = $activeFilter ? $filters[$activeFilter]['collection'] : collect($filters)->pluck('collection')->implode('|');
     $lately = app(Lately::class);
+
+    // Filter pages are plain routes, so the heading always comes from the Log page entry.
+    $logPage = Entry::findByUri('/log');
 @endphp
 
 <x-layout>
     <div class="max-w-4xl space-y-10">
         <header class="space-y-4">
-            <h1 class="font-display text-4xl font-semibold tracking-tight text-zinc-800 xl:text-5xl dark:text-white">{{ $title }}</h1>
-            @if ((string) $subheading !== '')
-                <flux:text class="max-w-[60ch] text-lg text-pretty text-zinc-600 dark:text-zinc-300">{{ $subheading }}</flux:text>
+            <h1 class="font-display text-4xl font-semibold tracking-tight text-zinc-800 xl:text-5xl dark:text-white">{{ $logPage?->get('title') ?? 'Log' }}</h1>
+            @if (filled($logPage?->get('subheading')))
+                <flux:text class="max-w-[60ch] text-lg text-pretty text-zinc-600 dark:text-zinc-300">{{ $logPage->get('subheading') }}</flux:text>
             @endif
         </header>
 
         <nav aria-label="Filter the log" class="border-b border-zinc-950/10 pb-6 dark:border-white/10">
             <ul role="list" class="flex flex-wrap gap-2">
                 <li>
-                    <a href="{{ url()->current() }}" @if (! $activeFilter) aria-current="page" @endif @class([
+                    <a href="/log" @if (! $activeFilter) aria-current="page" @endif @class([
                         'inline-flex rounded-full px-3.5 py-2 text-sm font-semibold',
                         'bg-zinc-800 text-white dark:bg-white dark:text-zinc-900' => ! $activeFilter,
                         'text-zinc-600 ring-1 ring-zinc-950/10 ring-inset hover:bg-zinc-50 dark:text-zinc-300 dark:ring-white/10 dark:hover:bg-white/5' => $activeFilter,
@@ -33,7 +31,7 @@
                 </li>
                 @foreach ($filters as $key => $filter)
                     <li>
-                        <a href="{{ url()->current() }}?type={{ $key }}" @if ($activeFilter === $key) aria-current="page" @endif @class([
+                        <a href="/log/{{ $key }}" @if ($activeFilter === $key) aria-current="page" @endif @class([
                             'inline-flex rounded-full px-3.5 py-2 text-sm font-semibold',
                             'bg-zinc-800 text-white dark:bg-white dark:text-zinc-900' => $activeFilter === $key,
                             'text-zinc-600 ring-1 ring-zinc-950/10 ring-inset hover:bg-zinc-50 dark:text-zinc-300 dark:ring-white/10 dark:hover:bg-white/5' => $activeFilter !== $key,
@@ -68,12 +66,12 @@
                 <nav aria-label="Log pages" class="flex justify-between border-t border-zinc-950/10 pt-6 text-sm font-bold dark:border-white/10">
                     <div>
                         @if ($paginate['prev_page'])
-                            <a href="{{ request()->fullUrlWithQuery(['page' => $paginate['current_page'] - 1]) }}" class="text-zinc-800 underline decoration-enby-purple decoration-3 underline-offset-5 dark:text-white">Newer entries</a>
+                            <a href="{{ $paginate['prev_page'] }}" class="text-zinc-800 underline decoration-enby-purple decoration-3 underline-offset-5 dark:text-white">Newer entries</a>
                         @endif
                     </div>
                     <div>
                         @if ($paginate['next_page'])
-                            <a href="{{ request()->fullUrlWithQuery(['page' => $paginate['current_page'] + 1]) }}" class="text-zinc-800 underline decoration-enby-purple decoration-3 underline-offset-5 dark:text-white">Older entries</a>
+                            <a href="{{ $paginate['next_page'] }}" class="text-zinc-800 underline decoration-enby-purple decoration-3 underline-offset-5 dark:text-white">Older entries</a>
                         @endif
                     </div>
                 </nav>

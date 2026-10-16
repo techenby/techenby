@@ -25,6 +25,16 @@ class Lately
         'moments' => 'Moment',
     ];
 
+    /**
+     * @var array<string, array{label: string, collection: string}>
+     */
+    public const FILTERS = [
+        'writing' => ['label' => 'Writing', 'collection' => 'blog'],
+        'tips' => ['label' => 'Tips', 'collection' => 'tips'],
+        'makes' => ['label' => 'Makes', 'collection' => 'makes'],
+        'moments' => ['label' => 'Moments', 'collection' => 'moments'],
+    ];
+
     public function __construct(public BlogSeries $series) {}
 
     /**

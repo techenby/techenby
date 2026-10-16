@@ -19,7 +19,7 @@ class SocialCardTest extends TestCase
     {
         parent::setUp();
 
-        Storage::fake('local');
+        Storage::fake('social_cards');
     }
 
     protected function tearDown(): void
@@ -32,42 +32,54 @@ class SocialCardTest extends TestCase
     }
 
     #[Test]
-    public function a_published_post_has_a_social_card_image(): void
+    public function saving_a_published_post_draws_its_card(): void
     {
-        $this->makeEntry('blog', 'social-card-test-post', ['title' => 'Social card test post']);
+        $entry = $this->makeEntry('blog', 'social-card-test-post', ['title' => 'Social card test post']);
 
-        $response = $this->get('/social-cards/blog/social-card-test-post.png')
-            ->assertOk()
-            ->assertHeader('Content-Type', 'image/png');
+        $path = app(SocialCard::class)->path($entry);
 
-        [$width, $height] = getimagesizefromstring($response->getContent());
+        Storage::disk('social_cards')->assertExists($path);
+
+        [$width, $height] = getimagesizefromstring(Storage::disk('social_cards')->get($path));
 
         $this->assertSame([SocialCard::WIDTH, SocialCard::HEIGHT], [$width, $height]);
-        $this->assertCount(1, Storage::disk('local')->files('social-cards'));
     }
 
     #[Test]
-    public function the_card_is_rendered_again_when_the_title_changes(): void
+    public function a_new_title_replaces_the_old_card(): void
     {
         $entry = $this->makeEntry('tips', 'social-card-test-tip', ['title' => 'First title']);
-
-        $this->get('/social-cards/tips/social-card-test-tip.png')->assertOk();
+        $firstPath = app(SocialCard::class)->path($entry);
 
         $entry->set('title', 'Second title')->save();
 
-        $this->get('/social-cards/tips/social-card-test-tip.png')->assertOk();
-
-        $this->assertCount(2, Storage::disk('local')->files('social-cards'));
+        Storage::disk('social_cards')->assertMissing($firstPath);
+        Storage::disk('social_cards')->assertExists(app(SocialCard::class)->path($entry));
+        $this->assertCount(1, Storage::disk('social_cards')->files());
     }
 
     #[Test]
-    public function drafts_and_other_collections_have_no_social_card(): void
+    public function unpublishing_or_deleting_an_entry_removes_its_card(): void
+    {
+        $entry = $this->makeEntry('blog', 'social-card-test-unpublish', ['title' => 'Unpublish me']);
+
+        $entry->published(false)->save();
+
+        $this->assertSame([], Storage::disk('social_cards')->files());
+
+        $entry->published(true)->save();
+        $entry->delete();
+
+        $this->assertSame([], Storage::disk('social_cards')->files());
+    }
+
+    #[Test]
+    public function drafts_and_other_collections_get_no_card(): void
     {
         $this->makeEntry('blog', 'social-card-test-draft', ['title' => 'Draft'], published: false);
+        $this->makeEntry('moments', 'social-card-test-moment', ['title' => 'Moment']);
 
-        $this->get('/social-cards/blog/social-card-test-draft.png')->assertNotFound();
-        $this->get('/social-cards/blog/does-not-exist.png')->assertNotFound();
-        $this->get('/social-cards/makes/winter-village.png')->assertNotFound();
+        $this->assertSame([], Storage::disk('social_cards')->files());
     }
 
     #[Test]
@@ -83,15 +95,20 @@ class SocialCardTest extends TestCase
     }
 
     #[Test]
-    public function article_pages_point_link_previews_at_their_card(): void
+    public function article_pages_point_link_previews_at_their_card_and_draw_it_if_missing(): void
     {
-        $this->makeEntry('blog', 'social-card-test-meta', ['title' => 'Meta test post']);
+        $entry = $this->makeEntry('blog', 'social-card-test-meta', ['title' => 'Meta test post']);
+        $path = app(SocialCard::class)->path($entry);
+
+        Storage::disk('social_cards')->delete($path);
 
         $this->get('/blog/social-card-test-meta')
             ->assertOk()
             ->assertSee('<meta property="og:title" content="Meta test post">', false)
-            ->assertSee('<meta property="og:image" content="'.route('social-card', ['blog', 'social-card-test-meta']).'">', false)
+            ->assertSee('<meta property="og:image" content="'.Storage::disk('social_cards')->url($path).'">', false)
             ->assertSee('<meta name="twitter:card" content="summary_large_image">', false);
+
+        Storage::disk('social_cards')->assertExists($path);
     }
 
     /**
@@ -101,7 +118,7 @@ class SocialCardTest extends TestCase
     {
         $entry = Entry::make()
             ->collection($collection)
-            ->blueprint($collection === 'blog' ? 'blog' : 'tip')
+            ->blueprint(['blog' => 'blog', 'tips' => 'tip', 'moments' => 'moment'][$collection])
             ->slug($slug)
             ->published($published)
             ->date(now()->subDay())

@@ -1,13 +1,3 @@
-<?php
-
-use Livewire\Component;
-
-new class extends Component
-{
-
-};
-?>
-
 @php
     $sceneSlugs = Statamic\Facades\Entry::query()
         ->where('collection', 'uses_scenes')

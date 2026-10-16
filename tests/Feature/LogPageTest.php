@@ -53,7 +53,7 @@ class LogPageTest extends TestCase
     #[Test]
     public function the_writing_filter_only_shows_posts(): void
     {
-        $this->get('/log?type=writing')
+        $this->get('/log/writing')
             ->assertOk()
             ->assertSee('Log test post')
             ->assertDontSee('Log test tip');
@@ -62,19 +62,27 @@ class LogPageTest extends TestCase
     #[Test]
     public function the_tips_filter_only_shows_tips(): void
     {
-        $this->get('/log?type=tips')
+        $this->get('/log/tips')
             ->assertOk()
             ->assertSee('Log test tip')
             ->assertDontSee('Log test post');
     }
 
     #[Test]
-    public function an_unknown_filter_shows_everything(): void
+    public function an_unknown_filter_is_not_found(): void
     {
-        $this->get('/log?type=nonsense')
+        $this->get('/log/nonsense')->assertNotFound();
+    }
+
+    #[Test]
+    public function filter_pages_share_the_log_heading_and_link_to_each_other(): void
+    {
+        $this->get('/log/writing')
             ->assertOk()
-            ->assertSee('Log test post')
-            ->assertSee('Log test tip');
+            ->assertSee('<h1', false)
+            ->assertSee('href="/log"', false)
+            ->assertSeeInOrder(['aria-current="page"', 'Writing'], false)
+            ->assertSee('href="/log/moments"', false);
     }
 
     #[Test]
@@ -87,7 +95,7 @@ class LogPageTest extends TestCase
             'photos' => ['makes/puzzle/puzzle-01.jpg'],
         ], date: Carbon::parse('2026-07-20'));
 
-        $response = $this->get('/log?type=makes')
+        $response = $this->get('/log/makes')
             ->assertOk()
             ->assertSee('Log test make')
             ->assertSee('3D print')
@@ -110,7 +118,7 @@ class LogPageTest extends TestCase
             'content' => "First sentence here. Second sentence with a [link](https://example.com).\n\n<script>alert(1)</script>\n\nAnother paragraph.",
         ], date: Carbon::parse('2026-07-22'));
 
-        $this->get('/log?type=moments')
+        $this->get('/log/moments')
             ->assertOk()
             ->assertSee('Second sentence with a <a href="https://example.com">link</a>.', false)
             ->assertSee('<p>Another paragraph.</p>', false)
@@ -125,7 +133,7 @@ class LogPageTest extends TestCase
             'content' => 'The teaser sentence. The rest stays on the tip page.',
         ], date: Carbon::parse('2026-08-04'));
 
-        $this->get('/log?type=tips')
+        $this->get('/log/tips')
             ->assertOk()
             ->assertSee('The teaser sentence.')
             ->assertDontSee('The rest stays on the tip page.');
@@ -136,7 +144,7 @@ class LogPageTest extends TestCase
     {
         $this->makeEntry('moments', 'log-test-moment', ['title' => 'Log test moment'], date: Carbon::parse('2026-07-21'));
 
-        $this->get('/log?type=moments')
+        $this->get('/log/moments')
             ->assertOk()
             ->assertSee('Log test moment')
             ->assertSee('Moment')

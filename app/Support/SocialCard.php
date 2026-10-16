@@ -9,6 +9,11 @@ use Statamic\Contracts\Entries\Entry;
 
 class SocialCard
 {
+    /**
+     * @var list<string>
+     */
+    public const COLLECTIONS = ['blog', 'tips'];
+
     public const WIDTH = 1200;
 
     public const HEIGHT = 630;
@@ -25,11 +30,6 @@ class SocialCard
     private const TITLE_SIZES = [52, 46, 40, 34];
 
     public function __construct(public BlogSeries $series) {}
-
-    /**
-     * @var list<string>
-     */
-    public const COLLECTIONS = ['blog', 'tips'];
 
     public function supports(Entry $entry): bool
     {
