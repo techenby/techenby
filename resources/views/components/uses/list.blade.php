@@ -1,5 +1,5 @@
 <section
-    class="mt-6 grid gap-4 border-t-2 border-dashed border-neutral-300 pt-6 dark:border-white/10"
+    class="grid gap-4 border-t border-zinc-950/10 pt-8 dark:border-white/10"
     aria-labelledby="uses-list-heading"
     x-data="{
         search: '',
@@ -10,12 +10,7 @@
         },
     }"
 >
-    <div class="flex flex-wrap items-end justify-between gap-3">
-        <div>
-            <p class="font-press-start text-[0.625rem] uppercase text-orange-700 dark:text-orange-400">Complete Inventory</p>
-            <h2 id="uses-list-heading" class="mt-2 font-geist-mono text-2xl font-semibold text-neutral-900 dark:text-neutral-100">Everything I Use</h2>
-        </div>
-    </div>
+    <h2 id="uses-list-heading" class="font-display text-2xl font-semibold tracking-tight text-zinc-800 dark:text-white">Everything I use</h2>
 
     <div class="flex gap-4">
         <flux:input x-model="search" placeholder="looking for something?" aria-label="Search" icon="magnifying-glass" />

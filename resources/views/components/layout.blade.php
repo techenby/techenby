@@ -84,18 +84,12 @@
 
         <flux:header class="lg:hidden bg-white dark:bg-zinc-800">
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
+            <a href="/" class="ms-2 flex items-center gap-2.5 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-enby-purple">
+                <flux:avatar circle size="sm" src="https://unavatar.io/x/techenby" alt="" />
+                <span class="font-display font-semibold text-zinc-800 dark:text-white">Andy Swick</span>
+                <span class="text-sm text-zinc-500 dark:text-zinc-400">they/them</span>
+            </a>
             <flux:spacer />
-            <flux:dropdown position="top" align="start">
-                <flux:profile avatar="https://fluxui.dev/img/demo/user.png" />
-                <flux:menu>
-                    <flux:menu.radio.group>
-                        <flux:menu.radio checked>Olivia Martin</flux:menu.radio>
-                        <flux:menu.radio>Truly Delta</flux:menu.radio>
-                    </flux:menu.radio.group>
-                    <flux:menu.separator />
-                    <flux:menu.item icon="arrow-right-start-on-rectangle">Logout</flux:menu.item>
-                </flux:menu>
-            </flux:dropdown>
         </flux:header>
 
         <flux:main inset class="lg:ms-0 has-[[data-sticky-heading]]:scroll-pt-16">

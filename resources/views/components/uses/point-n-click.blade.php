@@ -8,7 +8,7 @@
     $activeScene = $sceneSlugs->contains($requestedScene) ? $requestedScene : 'desk';
 @endphp
 
-<section class="section uses-shell" data-uses>
+<section aria-label="Point-and-click tour" data-uses>
     <s:collection:uses_scenes scope="scene">
         <x-dynamic-component :component="$scene->component" :$scene :$activeScene />
     </s:collection:uses_scenes>

@@ -4,7 +4,8 @@ blueprint: pages
 title: FAQ
 template: faq
 eyebrow: 'Ask Trainer?'
-heading: 'FAQ Dex'
+heading: 'FAQ'
+subheading: 'Things people ask me often enough that I wrote the answers down.'
 author: 2de7d260-84a8-4dfc-9a2e-af5aae989cd3
 updated_by: 2de7d260-84a8-4dfc-9a2e-af5aae989cd3
 updated_at: 1778511771

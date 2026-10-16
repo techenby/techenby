@@ -107,6 +107,11 @@
         @apply border-t border-zinc-200 pt-7 text-[1.4375rem]/9 text-zinc-800 dark:border-white/10 dark:text-white;
     }
 
+    /* Short answers (like the FAQ) skip the article lede. */
+    .article-prose.no-lede > p:first-child {
+        @apply border-0 pt-0 text-lg/[1.875rem] text-zinc-700 dark:text-zinc-300;
+    }
+
     .article-prose :is(h2, h3) {
         @apply scroll-mt-6 font-display font-semibold tracking-tight text-balance text-zinc-800 dark:text-white;
     }

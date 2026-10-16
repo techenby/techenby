@@ -7,27 +7,39 @@
         ->get()
         ->sortBy(fn ($entry) => $entry->get('title'))
         ->values();
+
+    $socials = collect($andy->comms ?? [])->reject(fn ($method) => Str::startsWith((string) $method->url, 'mailto:'));
+    $underlines = ['decoration-enby-yellow', 'decoration-enby-purple', 'decoration-enby-black dark:decoration-white'];
 @endphp
 
-<x-layout :$andy bottomRight="FAQ Dex · {{ $faqs->count() }} Seen">
-    <x-fieldset.heading :$eyebrow :$subheading :heading="$heading ?? $title" />
+<x-layout>
+    <div class="max-w-[42.5rem] space-y-12">
+        <x-ui.page-header :heading="$heading ?? $title" :$subheading />
 
-    <div class="section">
-        <div class="grid gap-4">
+        <div class="divide-y divide-zinc-950/10 border-y border-zinc-950/10 dark:divide-white/10 dark:border-white/10">
             @foreach ($faqs as $faq)
-                <details class="group border-2 border-neutral-900 bg-stone-50 p-4 shadow-[4px_4px_0_0_#171717] open:bg-yellow-50 dark:border-white/15 dark:bg-white/5 dark:shadow-none dark:open:bg-white/10">
-                    <summary class="flex cursor-pointer list-none items-start justify-between gap-4 font-press-start text-[0.6875rem] text-neutral-900 select-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500 [&::-webkit-details-marker]:hidden dark:text-neutral-100">
-                        <span class="text-pretty">{{ $faq->get('title') }}</span>
-                        <span aria-hidden="true" class="text-orange-700 group-open:hidden dark:text-orange-400">&#9654;</span>
-                        <span aria-hidden="true" class="hidden text-orange-700 group-open:inline dark:text-orange-400">&#9660;</span>
-                    </summary>
-                    <div class="mt-4 border-t-2 border-dashed border-neutral-300 pt-4 font-geist text-base text-pretty text-neutral-700 dark:border-white/10 dark:text-neutral-300 [&_a]:text-orange-700 [&_a]:underline [&_a]:decoration-orange-700/40 [&_a]:underline-offset-4 [&_a:hover]:decoration-orange-700 dark:[&_a]:text-orange-400 dark:[&_a]:decoration-orange-400/40 dark:[&_a:hover]:decoration-orange-400 [&_p+p]:mt-4">
+                <section id="{{ $faq->slug() }}" aria-labelledby="{{ $faq->slug() }}-question" class="scroll-mt-6 space-y-3 py-8">
+                    <h2 id="{{ $faq->slug() }}-question" class="font-display text-2xl font-semibold tracking-tight text-balance text-zinc-800 dark:text-white">{{ $faq->get('title') }}</h2>
+                    <div class="article-prose no-lede">
                         {!! Str::markdown($faq->value('content') ?? '') !!}
                     </div>
-                </details>
+                </section>
             @endforeach
         </div>
-    </div>
 
-    @include('forms.faq-question')
+        @if ($socials->isNotEmpty())
+            <section aria-labelledby="ask-me-something" class="space-y-3 rounded-xl border border-zinc-200 bg-zinc-50 p-6 sm:p-8 dark:border-white/10 dark:bg-white/5">
+                <h2 id="ask-me-something" class="font-display text-xl font-semibold tracking-tight text-zinc-800 dark:text-white">Got a question I haven&rsquo;t answered?</h2>
+                <flux:text class="text-pretty">Ask me on social media. If it comes up more than once, it&rsquo;ll probably end up here.</flux:text>
+
+                <ul role="list" class="flex flex-wrap gap-x-6 gap-y-2 pt-1">
+                    @foreach ($socials as $method)
+                        <li>
+                            <a href="{{ $method->url }}" target="_blank" rel="noopener" class="text-[0.9375rem] font-bold text-zinc-800 underline decoration-3 underline-offset-5 dark:text-white {{ $underlines[$loop->index % count($underlines)] }}">{{ $method->label }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </section>
+        @endif
+    </div>
 </x-layout>
