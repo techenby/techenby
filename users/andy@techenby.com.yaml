@@ -17,3 +17,5 @@ preferences:
       view: list
     makes:
       view: list
+    log:
+      view: list
