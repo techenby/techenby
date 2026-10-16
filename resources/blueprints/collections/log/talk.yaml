@@ -1,0 +1,66 @@
+title: Talk
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: event
+            field:
+              type: text
+              display: Event
+              instructions: 'Where you gave it, like "Wire:Live 2025".'
+              width: 50
+          -
+            handle: description
+            field:
+              type: textarea
+              display: Description
+              instructions: 'One or two sentences about the talk, used in the Log and link previews.'
+          -
+            handle: video
+            field:
+              type: video
+              display: Video
+              instructions: 'A YouTube or Vimeo link. It gets embedded at the top of the page.'
+              width: 50
+          -
+            handle: slides
+            field:
+              type: text
+              input_type: url
+              display: Slides
+              width: 50
+          -
+            handle: photos
+            field:
+              type: assets
+              display: Photos
+              container: assets
+              folder: talks
+              instructions: 'Give every photo alt text, and only post people who said yes.'
+          -
+            handle: content
+            field:
+              type: markdown
+              display: Notes
+              localizable: true
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'

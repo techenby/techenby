@@ -25,6 +25,7 @@ class Lately
         'tip' => 'Tip',
         'make' => 'Make',
         'moment' => 'Moment',
+        'talk' => 'Talk',
     ];
 
     /**
@@ -40,6 +41,7 @@ class Lately
         'tips' => ['label' => 'Tips', 'blueprint' => 'tip'],
         'makes' => ['label' => 'Makes', 'blueprint' => 'make'],
         'moments' => ['label' => 'Moments', 'blueprint' => 'moment'],
+        'talks' => ['label' => 'Talks', 'blueprint' => 'talk'],
     ];
 
     public function __construct(public BlogSeries $series) {}
@@ -91,12 +93,17 @@ class Lately
         return self::TYPES[$entry->blueprint()->handle()] ?? Str::singular($entry->collection()->title());
     }
 
+    /**
+     * What sort of thing an entry is within its type: a make's kind, or the event a talk was given at.
+     */
     public function kind(Entry $entry): ?string
     {
         $kind = $entry->value('kind');
 
         if (! is_string($kind) || $kind === '') {
-            return null;
+            $event = $entry->value('event');
+
+            return is_string($event) && trim($event) !== '' ? trim($event) : null;
         }
 
         return $entry->blueprint()->field('kind')?->get('options')[$kind] ?? $kind;

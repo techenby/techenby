@@ -14,7 +14,7 @@ class SocialCard
      *
      * @var list<string>
      */
-    public const BLUEPRINTS = ['post', 'tip'];
+    public const BLUEPRINTS = ['post', 'tip', 'talk'];
 
     public const WIDTH = 1200;
 

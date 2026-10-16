@@ -10,6 +10,7 @@ lately:
   - tip
   - make
   - moment
+  - talk
 projects:
   - 7817dc56-63b8-4ad4-b200-9228508a656c
   - aa513557-10fc-4695-b60f-bae785764f90
