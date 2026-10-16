@@ -1,0 +1,122 @@
+title: 'How I work'
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: as_of
+            field:
+              type: date
+              display: 'As of'
+              instructions: 'Shown above the heading. Revisit the page at least once a year.'
+          -
+            handle: subheading
+            field:
+              type: textarea
+              display: Subheading
+          -
+            handle: tldr
+            field:
+              type: list
+              display: 'The 20-second version'
+              instructions: 'Three to five short lines. Start a line with "Prompt:" while it is still a placeholder.'
+          -
+            handle: sections
+            field:
+              type: replicator
+              display: Sections
+              instructions: 'Answers that start with "Prompt:" show in italics until you replace them.'
+              sets:
+                main:
+                  display: Main
+                  sets:
+                    question:
+                      display: Question
+                      fields:
+                        -
+                          handle: heading
+                          field:
+                            type: text
+                            display: Question
+                            validate:
+                              - required
+                        -
+                          handle: toc_label
+                          field:
+                            type: text
+                            display: 'On this page label'
+                            instructions: 'Short label for the page nav. Falls back to the question.'
+                        -
+                          handle: content
+                          field:
+                            type: markdown
+                            display: Answer
+                    topics:
+                      display: Topics
+                      fields:
+                        -
+                          handle: heading
+                          field:
+                            type: text
+                            display: Question
+                            validate:
+                              - required
+                        -
+                          handle: toc_label
+                          field:
+                            type: text
+                            display: 'On this page label'
+                        -
+                          handle: topics
+                          field:
+                            type: list
+                            display: Topics
+                        -
+                          handle: content
+                          field:
+                            type: markdown
+                            display: Answer
+                    do_dont:
+                      display: 'Do and don''t'
+                      fields:
+                        -
+                          handle: toc_label
+                          field:
+                            type: text
+                            display: 'On this page label'
+                            default: 'Do and don''t'
+                        -
+                          handle: do
+                          field:
+                            type: list
+                            display: 'Please do'
+                        -
+                          handle: dont
+                          field:
+                            type: list
+                            display: 'Please don''t'
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: template
+            field:
+              type: template
+              display: Template

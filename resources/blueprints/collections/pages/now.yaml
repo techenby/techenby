@@ -1,0 +1,61 @@
+title: Now
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: as_of
+            field:
+              type: date
+              display: 'As of'
+              instructions: 'Shown above the heading. Update it whenever you refresh the page.'
+          -
+            handle: subheading
+            field:
+              type: textarea
+              display: Subheading
+          -
+            handle: sections
+            field:
+              type: grid
+              display: Sections
+              mode: stacked
+              add_row: 'Add section'
+              fields:
+                -
+                  handle: heading
+                  field:
+                    type: text
+                    display: Heading
+                    validate:
+                      - required
+                -
+                  handle: content
+                  field:
+                    type: markdown
+                    display: Content
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: template
+            field:
+              type: template
+              display: Template

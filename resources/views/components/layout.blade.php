@@ -22,6 +22,10 @@
             <meta name="twitter:card" content="summary_large_image">
         @endif
 
+        <link rel="icon" href="/favicon.ico" sizes="32x32">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Recursive:wght,MONO@300..1000,0..1&family=Gaegu:wght@400;700&family=Pixelify+Sans:wght@400..700&family=DM+Serif+Display&family=Figtree:wght@300..900&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Lora:wght@400..700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
@@ -53,12 +57,15 @@
     </head>
     <body class="enby-stripe min-h-dvh bg-zinc-50 dark:bg-zinc-900">
         <flux:sidebar sticky collapsible="mobile" class="bg-zinc-50 dark:bg-zinc-900">
+            <a href="/" class="max-lg:hidden self-start rounded-lg px-2 pt-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-enby-purple">
+                <x-ui.wordmark class="h-8 w-auto" />
+            </a>
 
             <flux:sidebar.header class="justify-evenly">
                 <flux:avatar circle size="lg" src="https://unavatar.io/x/techenby" />
                 <div>
                     <flux:heading size="lg" class="font-display font-semibold">Andy Swick</flux:heading>
-                    <flux:text>they/them ⋅ TechEnby</flux:text>
+                    <flux:text>they/them</flux:text>
                 </div>
             </flux:sidebar.header>
             <flux:sidebar.nav>
@@ -84,10 +91,8 @@
 
         <flux:header class="lg:hidden bg-white dark:bg-zinc-800">
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
-            <a href="/" class="ms-2 flex items-center gap-2.5 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-enby-purple">
-                <flux:avatar circle size="sm" src="https://unavatar.io/x/techenby" alt="" />
-                <span class="font-display font-semibold text-zinc-800 dark:text-white">Andy Swick</span>
-                <span class="text-sm text-zinc-500 dark:text-zinc-400">they/them</span>
+            <a href="/" class="ms-2 flex items-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-enby-purple">
+                <x-ui.wordmark class="h-7 w-auto" />
             </a>
             <flux:spacer />
         </flux:header>

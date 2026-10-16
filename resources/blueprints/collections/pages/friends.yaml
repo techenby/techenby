@@ -1,0 +1,113 @@
+title: Friends
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: subheading
+            field:
+              type: textarea
+              display: Subheading
+          -
+            handle: groups
+            field:
+              type: grid
+              display: Groups
+              instructions: 'How you know them, never a ranking. Always ask before adding someone.'
+              mode: stacked
+              add_row: 'Add group'
+              fields:
+                -
+                  handle: heading
+                  field:
+                    type: text
+                    display: Heading
+                    validate:
+                      - required
+                -
+                  handle: friends
+                  field:
+                    type: grid
+                    display: Friends
+                    mode: stacked
+                    add_row: 'Add friend'
+                    fields:
+                      -
+                        handle: name
+                        field:
+                          type: text
+                          display: Name
+                          width: 50
+                          validate:
+                            - required
+                      -
+                        handle: pronouns
+                        field:
+                          type: text
+                          display: Pronouns
+                          instructions: 'Only what they publish. Leave it blank rather than guess.'
+                          width: 50
+                      -
+                        handle: url
+                        field:
+                          type: text
+                          input_type: url
+                          display: Site
+                          width: 50
+                      -
+                        handle: rss
+                        field:
+                          type: text
+                          input_type: url
+                          display: 'RSS feed'
+                          instructions: 'Added to friends.opml.'
+                          width: 50
+                      -
+                        handle: avatar
+                        field:
+                          type: assets
+                          container: assets
+                          folder: friends
+                          max_files: 1
+                          display: Avatar
+                      -
+                        handle: note
+                        field:
+                          type: text
+                          display: 'Why they''re here'
+                          instructions: 'One line in your voice.'
+          -
+            handle: outro_heading
+            field:
+              type: text
+              display: 'Closing heading'
+          -
+            handle: outro
+            field:
+              type: textarea
+              display: 'Closing text'
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: template
+            field:
+              type: template
+              display: Template

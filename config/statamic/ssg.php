@@ -43,6 +43,8 @@ return [
         public_path('assets') => 'assets',
         public_path('social-cards') => 'social-cards',
         public_path('favicon.ico') => 'favicon.ico',
+        public_path('favicon.svg') => 'favicon.svg',
+        public_path('apple-touch-icon.png') => 'apple-touch-icon.png',
         public_path('robots.txt') => 'robots.txt',
     ],
 
@@ -61,7 +63,7 @@ return [
     */
 
     'urls' => [
-        //
+        '/friends.opml',
     ],
 
     /*
