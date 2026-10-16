@@ -13,7 +13,8 @@ class HomeProjectsTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertSeeInOrder(['Lately', 'Things I build', 'Sunny Home', 'Your household, organized.', 'Make Ship Happen Podcast', 'Uke or Puke'])
-            ->assertSee('/assets/projects/sunny-logo.png', false);
+            ->assertSee('/assets/projects/sunny-logo.png', false)
+            ->assertSeeInOrder(['Things I build', 'href="/projects"', 'All projects'], false);
     }
 
     #[Test]

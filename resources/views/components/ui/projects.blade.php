@@ -13,10 +13,13 @@
 @endphp
 
 @if ($projects->isNotEmpty())
-    <section aria-labelledby="projects-heading" {{ $attributes->class('max-w-4xl space-y-4') }}>
-        <h2 id="projects-heading" class="font-display text-xl font-semibold tracking-tight text-zinc-800 dark:text-white">Things I build</h2>
+    <section aria-labelledby="projects-heading" {{ $attributes->class('max-w-4xl') }}>
+        <div class="flex items-baseline justify-between gap-4 border-b border-zinc-950/10 pb-3 dark:border-white/10">
+            <h2 id="projects-heading" class="font-display text-xl font-semibold tracking-tight text-zinc-800 dark:text-white">Things I build</h2>
+            <a href="/projects" class="text-sm font-bold text-zinc-800 underline decoration-enby-purple decoration-3 underline-offset-5 dark:text-white">All projects</a>
+        </div>
 
-        <ul role="list" class="grid gap-4 md:grid-cols-2">
+        <ul role="list" class="grid gap-4 pt-5 md:grid-cols-2">
             @foreach ($projects as $project)
                 @php
                     $logo = filled($project->value('header_image')) ? Asset::find('assets::'.$project->value('header_image')) : null;

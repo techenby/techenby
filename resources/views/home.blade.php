@@ -2,7 +2,7 @@
     use App\Support\Lately;
     use Statamic\Facades\Entry;
 
-    $lately = app(Lately::class)->items(Entry::find($id)?->value('lately') ?? []);
+    $lately = app(Lately::class)->items(Entry::find($id)?->value('lately') ?? [], $limit->value());
 @endphp
 
 <x-layout title="Andy Swick">

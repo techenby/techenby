@@ -18,8 +18,6 @@ class Lately
     public const COLLECTION = 'log';
 
     /**
-     * Log entry types, keyed by blueprint handle.
-     *
      * @var array<string, string>
      */
     public const TYPES = [
@@ -30,15 +28,11 @@ class Lately
     ];
 
     /**
-     * Short entries whose full caption is shown right in the Log, not just a summary.
-     *
      * @var list<string>
      */
     public const INLINE_CAPTIONS = ['moment', 'make'];
 
     /**
-     * The Log's filter pages, keyed by their URL segment under /log.
-     *
      * @var array<string, array{label: string, blueprint: string}>
      */
     public const FILTERS = [

@@ -34,6 +34,14 @@ tabs:
                 tip: Tips
                 make: Makes
                 moment: Moments
+              width: 66
+          -
+            handle: limit
+            field:
+              default: '5'
+              type: integer
+              display: Count
+              width: 33
           -
             handle: projects
             field:
