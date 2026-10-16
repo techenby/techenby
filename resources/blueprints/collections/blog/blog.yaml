@@ -13,15 +13,6 @@ tabs:
               validate:
                 - required
           -
-            handle: header_image
-            field:
-              container: assets
-              max_files: 2
-              type: assets
-              display: 'Header Image'
-              localizable: true
-              folder: blog
-          -
             handle: content
             field:
               type: bard
@@ -94,6 +85,12 @@ tabs:
                             instructions: 'Describe what happens in the GIF for people who can''t see it.'
                             validate:
                               - required
+                        -
+                          handle: caption
+                          field:
+                            type: text
+                            display: Caption
+                            instructions: 'Optional. Shows as a handwritten note under the GIF.'
                     video:
                       display: Video
                       fields:

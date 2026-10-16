@@ -1,92 +1,42 @@
 @php
+    use App\Support\ArticleOutline;
     use App\Support\BlogContent;
     use App\Support\BlogSeries;
-    use Illuminate\Support\Carbon;
-    use Illuminate\Support\Str;
-    use Statamic\Facades\Asset;
     use Statamic\Facades\Entry;
     use Statamic\Modifiers\Modify;
 
     $entry = Entry::find($id);
-    $entryTitle = $entry?->get('title') ?? $title;
-    $entryContent = $entry?->value('content') ?? [];
-    $tags = collect($entry?->value('tags') ?? []);
-    $updatedAt = $entry?->value('updated_at')
-        ? Carbon::createFromTimestamp($entry->value('updated_at'))->format('M j, Y')
-        : null;
+    $entryContent = $entry->value('content') ?? [];
+    $outline = new ArticleOutline;
 
-    $headerImages = collect($entry?->value('header_image') ?? [])
-        ->map(fn ($path) => Asset::find('assets::'.$path))
-        ->filter()
-        ->values();
+    $contentBlocks = collect(app(BlogContent::class)->blocks($entryContent))
+        ->map(fn (array $block) => $block['type'] === 'html' ? [...$block, 'html' => $outline->anchor($block['html'])] : $block);
 
-    $lightHeaderImage = $headerImages->first(fn ($asset) => Str::contains($asset->path(), '-light')) ?? $headerImages->first();
-    $darkHeaderImage = $headerImages->first(fn ($asset) => Str::contains($asset->path(), '-dark')) ?? $headerImages->first();
-    $hasModeHeaderImages = $headerImages->count() > 1;
-    $contentBlocks = app(BlogContent::class)->blocks($entryContent);
     $contentText = Modify::value($entryContent)->bardText()->fetch();
     $readingMinutes = max(1, (int) ceil(str_word_count($contentText) / 225));
-    $series = $entry ? app(BlogSeries::class)->for($entry) : null;
+    $series = app(BlogSeries::class)->for($entry);
 @endphp
 
-<x-layout :$andy :description="$entry?->get('description')" bottomRight="Blog Entry · {{ $readingMinutes }} Min">
-    <article class="min-w-0 space-y-8">
-        <header>
-            <x-atom.button variant="ghost" size="sm" href="/blog">
-                &larr; Blog
-            </x-atom.button>
-
-            @if ($series)
-                <div class="mt-8">
-                    <x-atom.eyebrow>{{ $series['title'] }}@isset($series['part']) &middot; Part {{ $series['part'] }}@endisset</x-atom.eyebrow>
-                </div>
+<x-layout
+    :description="$entry->get('description')"
+    :social-title="$entry->get('title')"
+    :social-image="app(App\Support\SocialCard::class)->url($entry)"
+>
+    <x-ui.article
+        :$entry
+        :badge="$series ? $series['title'].(isset($series['part']) ? ' · Part '.$series['part'] : '') : null"
+        :description="$entry->get('description')"
+        :$readingMinutes
+        :headings="$outline->headings()"
+        :$series
+        :comms="$andy->comms ?? []"
+    >
+        @foreach ($contentBlocks as $block)
+            @if ($block['type'] === 'html')
+                {!! $block['html'] !!}
+            @else
+                @includeIf('blog.sets.'.$block['set'], $block['values'])
             @endif
-
-            <h1 @class([
-                'max-w-[21ch] font-instrument-serif text-5xl tracking-tight text-pretty text-neutral-900 sm:text-6xl dark:text-neutral-100',
-                $series ? 'mt-3' : 'mt-8',
-            ])>
-                {{ $entryTitle }}
-            </h1>
-
-            <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 border-y-2 border-dashed border-neutral-300 py-4 font-geist-mono text-[0.6875rem] uppercase tracking-wide text-neutral-500 dark:border-white/10 dark:text-neutral-400">
-                @if ($updatedAt)
-                    <time datetime="{{ Carbon::createFromTimestamp($entry->value('updated_at'))->toDateString() }}">{{ $updatedAt }}</time>
-                    <span aria-hidden="true" class="text-orange-700 dark:text-orange-400">/</span>
-                @endif
-
-                <span>{{ $readingMinutes }} min read</span>
-
-                @if ($tags->isNotEmpty())
-                    <span aria-hidden="true" class="text-orange-700 dark:text-orange-400">/</span>
-                    <x-atom.tags :$tags />
-                @endif
-            </div>
-        </header>
-
-        @if ($headerImages->isNotEmpty())
-            <figure class="relative w-full bg-white p-2 outline-2 outline-neutral-900 shadow-[6px_6px_0_0_#171717] dark:bg-neutral-950 dark:outline-white/15 dark:shadow-none">
-                @if ($hasModeHeaderImages)
-                    <img src="{{ $lightHeaderImage->url() }}" alt="" class="w-full bg-white object-contain dark:hidden">
-                    <img src="{{ $darkHeaderImage->url() }}" alt="" class="hidden w-full bg-neutral-950 object-contain dark:block">
-                @else
-                    <img src="{{ $headerImages->first()->url() }}" alt="" class="w-full object-contain">
-                @endif
-            </figure>
-        @endif
-
-        <div class="blog-prose">
-            @foreach ($contentBlocks as $block)
-                @if ($block['type'] === 'html')
-                    {!! $block['html'] !!}
-                @else
-                    @includeIf('blog.sets.'.$block['set'], $block['values'])
-                @endif
-            @endforeach
-        </div>
-
-        @if ($series && $series['parts']->count() > 1)
-            <x-blog.series-nav :$series :current="$entry" />
-        @endif
-    </article>
+        @endforeach
+    </x-ui.article>
 </x-layout>

@@ -47,6 +47,15 @@ return [
             'report' => false,
         ],
 
+        'social_cards' => [
+            'driver' => 'local',
+            'root' => public_path('social-cards'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/') . '/social-cards',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

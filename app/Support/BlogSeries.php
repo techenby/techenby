@@ -15,7 +15,7 @@ class BlogSeries
      *
      * The current entry is always included, so a draft can be previewed in place.
      *
-     * @return array{title: string, part: ?int, parts: Collection<int, Entry>, previous: ?Entry, next: ?Entry}|null
+     * @return array{title: string, description: ?string, part: ?int, parts: Collection<int, Entry>, previous: ?Entry, next: ?Entry}|null
      */
     public function for(Entry $entry): ?array
     {
@@ -45,6 +45,7 @@ class BlogSeries
 
         return [
             'title' => $term->title(),
+            'description' => filled($term->get('description')) ? (string) $term->get('description') : null,
             'part' => $this->part($entry),
             'parts' => $parts,
             'previous' => $index > 0 ? $parts->get($index - 1) : null,

@@ -1,3 +1,5 @@
+@props(['description' => null, 'socialTitle' => null, 'socialImage' => null])
+
 <!doctype html>
 <html lang="{{ Statamic\Facades\Site::current()->shortLocale() }}" class="antialiased has-[[data-sticky-heading]]:scroll-pt-16">
     <head>
@@ -6,9 +8,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ $title ?? Statamic\Facades\Site::current()->name() }}</title>
 
+        @if (filled($description))
+            <meta name="description" content="{{ $description }}">
+            <meta property="og:description" content="{{ $description }}">
+        @endif
+
+        @if (filled($socialImage))
+            <meta property="og:type" content="article">
+            <meta property="og:title" content="{{ $socialTitle }}">
+            <meta property="og:image" content="{{ $socialImage }}">
+            <meta property="og:image:width" content="{{ App\Support\SocialCard::WIDTH }}">
+            <meta property="og:image:height" content="{{ App\Support\SocialCard::HEIGHT }}">
+            <meta name="twitter:card" content="summary_large_image">
+        @endif
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Recursive:wght@300..1000&family=Gaegu:wght@400;700&family=Pixelify+Sans:wght@400..700&family=DM+Serif+Display&family=Figtree:wght@300..900&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Lora:wght@400..700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Recursive:wght,MONO@300..1000,0..1&family=Gaegu:wght@400;700&family=Pixelify+Sans:wght@400..700&family=DM+Serif+Display&family=Figtree:wght@300..900&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Lora:wght@400..700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
         @vite(['resources/js/site.js', 'resources/css/site.css'])
 
         @fluxAppearance

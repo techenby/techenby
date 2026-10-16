@@ -81,7 +81,7 @@ class BlogSeriesTest extends TestCase
     }
 
     #[Test]
-    public function entry_page_shows_the_series_eyebrow_and_parts(): void
+    public function entry_page_shows_the_series_badge_and_parts(): void
     {
         $this->makeTerm();
 
@@ -90,15 +90,14 @@ class BlogSeriesTest extends TestCase
 
         $this->get('/blog/test-series-page-1')
             ->assertOk()
-            ->assertSee('Test Series &middot; Part 1', false)
-            ->assertSee('In this series')
-            ->assertSee('Page part zero')
-            ->assertSee('aria-current="page"', false)
-            ->assertSee('Previous');
+            ->assertSee('Test Series · Part 1')
+            ->assertSee('A series · 2 parts so far')
+            ->assertSee('href="/blog/test-series-page-0"', false)
+            ->assertSeeInOrder(['Page part zero', 'aria-current="page"', 'Page part one', 'you are here'], false);
     }
 
     #[Test]
-    public function entry_page_without_other_parts_shows_only_the_eyebrow(): void
+    public function the_first_part_of_a_series_still_shows_the_series_box(): void
     {
         $this->makeTerm();
 
@@ -106,8 +105,9 @@ class BlogSeriesTest extends TestCase
 
         $this->get('/blog/test-series-only-part')
             ->assertOk()
-            ->assertSee('Test Series &middot; Part 0', false)
-            ->assertDontSee('In this series');
+            ->assertSee('Test Series · Part 0')
+            ->assertSee('A series · 1 part so far')
+            ->assertSee('you are here');
     }
 
     private function makeTerm(): void

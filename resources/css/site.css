@@ -93,3 +93,112 @@
         padding-top: 16px;
     }
 }
+
+@layer components {
+    .article-prose {
+        @apply min-w-0 text-lg/[1.875rem] text-pretty text-zinc-700 dark:text-zinc-300;
+    }
+
+    .article-prose > * + * {
+        @apply mt-6;
+    }
+
+    .article-prose > p:first-child {
+        @apply border-t border-zinc-200 pt-7 text-[1.4375rem]/9 text-zinc-800 dark:border-white/10 dark:text-white;
+    }
+
+    .article-prose :is(h2, h3) {
+        @apply scroll-mt-6 font-display font-semibold tracking-tight text-balance text-zinc-800 dark:text-white;
+    }
+
+    .article-prose h2 {
+        @apply mt-14 text-[1.75rem]/[2.125rem];
+    }
+
+    .article-prose h3 {
+        @apply mt-10 text-xl/7;
+    }
+
+    .article-prose :is(h2, h3) + * {
+        @apply mt-4;
+    }
+
+    .article-prose a {
+        @apply font-semibold text-zinc-800 underline decoration-enby-purple decoration-2 underline-offset-4 hover:decoration-3 dark:text-white;
+    }
+
+    .article-prose strong {
+        @apply font-bold text-zinc-800 dark:text-white;
+    }
+
+    .article-prose :is(ul, ol) {
+        @apply space-y-2 pl-6 marker:text-zinc-400 dark:marker:text-zinc-500;
+    }
+
+    .article-prose ul {
+        @apply list-disc;
+    }
+
+    .article-prose ol {
+        @apply list-decimal;
+    }
+
+    .article-prose blockquote {
+        @apply border-l-4 border-enby-purple pl-5 text-zinc-600 italic dark:text-zinc-300;
+    }
+
+    .article-prose hr {
+        @apply my-12 border-zinc-200 dark:border-white/10;
+    }
+
+    .article-prose > p img,
+    .article-prose > img {
+        @apply rounded-xl border border-zinc-200 dark:border-white/10;
+    }
+
+    .article-prose :is(code, pre) {
+        font-family: var(--font-display);
+        font-variation-settings: 'MONO' 1;
+    }
+
+    .article-prose :not(pre) > code {
+        @apply rounded-md bg-zinc-100 px-1.5 py-0.5 text-[0.875em] text-zinc-800 dark:bg-white/10 dark:text-zinc-100;
+    }
+
+    .article-prose pre {
+        @apply overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-900 p-5 text-base/[1.625rem] text-zinc-100 dark:border-white/10 dark:bg-zinc-950;
+    }
+
+    .article-prose pre[data-language]::before {
+        @apply -mx-5 -mt-5 mb-5 block border-b border-zinc-700 bg-zinc-800 px-4 py-2 text-xs/4 font-semibold tracking-[0.04em] text-zinc-400 dark:border-white/10 dark:bg-zinc-900;
+        content: attr(data-language);
+    }
+
+    .article-prose pre :is(.hljs-comment, .hljs-quote) {
+        @apply text-zinc-500 italic;
+    }
+
+    .article-prose pre :is(.hljs-keyword, .hljs-selector-tag, .hljs-built_in, .hljs-type) {
+        @apply text-enby-purple-on-dark;
+    }
+
+    .article-prose pre :is(.hljs-string, .hljs-attr, .hljs-template-variable) {
+        @apply text-enby-yellow;
+    }
+
+    .article-prose pre :is(.hljs-number, .hljs-literal, .hljs-variable, .hljs-title) {
+        @apply text-sky-300;
+    }
+
+    .article-prose table {
+        @apply w-full text-left text-base;
+    }
+
+    .article-prose :is(th, td) {
+        @apply border-b border-zinc-200 py-2 pr-4 dark:border-white/10;
+    }
+
+    .article-prose th {
+        @apply font-semibold text-zinc-800 dark:text-white;
+    }
+}

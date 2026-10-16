@@ -1,3 +1,3 @@
-<x-layout :$andy bottomRight="404">
+<x-layout>
     <p>404 Page not found.</p>
 </x-layout>
