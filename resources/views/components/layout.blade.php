@@ -28,7 +28,7 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Recursive:wght,MONO@300..1000,0..1&family=Gaegu:wght@400;700&family=Pixelify+Sans:wght@400..700&family=DM+Serif+Display&family=Figtree:wght@300..900&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Lora:wght@400..700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Recursive:wght,MONO@300..1000,0..1&family=Gaegu:wght@400;700&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
         @vite(['resources/js/site.js', 'resources/css/site.css'])
 
         @fluxAppearance

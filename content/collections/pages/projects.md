@@ -1,6 +1,6 @@
 ---
 id: 11543fd2-48d9-44f9-85af-e593f79efe33
-blueprint: pages
+blueprint: page
 title: Projects
 template: projects
 eyebrow: 'Select Project'
