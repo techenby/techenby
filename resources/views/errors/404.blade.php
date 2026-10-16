@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="Page not found">
     <div class="max-w-[42.5rem] space-y-8">
         <x-ui.page-header heading="Page not found" subheading="Whatever was here has wandered off, or never existed in the first place." />
 

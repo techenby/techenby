@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout :$title>
     <div class="space-y-10">
         <x-ui.page-header :heading="$heading ?? $title" :$subheading />
 

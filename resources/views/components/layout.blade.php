@@ -1,4 +1,4 @@
-@props(['description' => null, 'socialTitle' => null, 'socialImage' => null])
+@props(['title' => null, 'description' => null, 'socialTitle' => null, 'socialImage' => null])
 
 <!doctype html>
 <html lang="{{ Statamic\Facades\Site::current()->shortLocale() }}" class="antialiased has-[[data-sticky-heading]]:scroll-pt-16">
@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ $title ?? Statamic\Facades\Site::current()->name() }}</title>
+        <title>{{ filled($title) ? $title.' · '.config('app.name') : config('app.name') }}</title>
 
         @if (filled($description))
             <meta name="description" content="{{ $description }}">

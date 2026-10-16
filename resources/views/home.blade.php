@@ -5,7 +5,7 @@
     $lately = app(Lately::class)->items(Entry::find($id)?->value('lately') ?? []);
 @endphp
 
-<x-layout>
+<x-layout title="Andy Swick">
     <div class="space-y-16">
         <div class="grid gap-8 md:grid-cols-[minmax(0,1fr)_20rem] md:gap-14">
             <div class="space-y-5">

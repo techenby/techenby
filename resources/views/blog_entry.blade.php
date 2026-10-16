@@ -18,6 +18,7 @@
 @endphp
 
 <x-layout
+    :title="$entry->get('title')"
     :description="$entry->get('description')"
     :social-title="$entry->get('title')"
     :social-image="app(App\Support\SocialCard::class)->url($entry)"

@@ -4,7 +4,7 @@
     $posts = app(Lately::class)->items(['blog'], PHP_INT_MAX);
 @endphp
 
-<x-layout>
+<x-layout :$title>
     <div class="max-w-4xl space-y-10">
         <x-ui.page-header :heading="$heading ?? $title" :$subheading />
 
