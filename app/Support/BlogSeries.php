@@ -33,6 +33,7 @@ class BlogSeries
 
         $parts = EntryFacade::query()
             ->where('collection', $entry->collectionHandle())
+            ->where('blueprint', $entry->blueprint()->handle())
             ->whereStatus('published')
             ->whereTaxonomy("series::{$slug}")
             ->get()

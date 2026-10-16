@@ -28,7 +28,7 @@ class ArticlePageTest extends TestCase
     #[Test]
     public function a_post_shows_its_header_outline_and_body(): void
     {
-        $this->makeEntry('blog', 'article-test-post', [
+        $this->makeEntry('post', 'article-test-post', [
             'title' => 'Article test post',
             'description' => 'A post for the article page.',
             'content' => [
@@ -48,7 +48,7 @@ class ArticlePageTest extends TestCase
             ],
         ]);
 
-        $this->get('/blog/article-test-post')
+        $this->get('/log/article-test-post')
             ->assertOk()
             ->assertSee('<meta name="description" content="A post for the article page.">', false)
             ->assertSeeInOrder(['Article test post', 'A post for the article page.', 'min read'])
@@ -64,14 +64,14 @@ class ArticlePageTest extends TestCase
     #[Test]
     public function a_post_in_a_series_shows_the_series_box(): void
     {
-        $this->makeEntry('blog', 'article-test-series-post', [
+        $this->makeEntry('post', 'article-test-series-post', [
             'title' => 'Article test series post',
             'series' => 'sunny-goes-native',
             'series_part' => 2,
             'content' => [$this->paragraph('Part two.')],
         ]);
 
-        $this->get('/blog/article-test-series-post')
+        $this->get('/log/article-test-series-post')
             ->assertOk()
             ->assertSee('Sunny Goes Native · Part 2')
             ->assertSee('Building a NativePHP mobile app for Sunny Home')
@@ -81,12 +81,12 @@ class ArticlePageTest extends TestCase
     #[Test]
     public function more_from_the_log_leaves_out_the_current_entry(): void
     {
-        $this->makeEntry('blog', 'article-test-newest', [
+        $this->makeEntry('post', 'article-test-newest', [
             'title' => 'Article test newest',
             'content' => [$this->paragraph('Newest.')],
         ], date: now()->subMinute());
 
-        $response = $this->get('/blog/article-test-newest')->assertOk();
+        $response = $this->get('/log/article-test-newest')->assertOk();
 
         $this->assertSame(1, substr_count($response->getContent(), 'Article test newest</'));
     }
@@ -94,12 +94,12 @@ class ArticlePageTest extends TestCase
     #[Test]
     public function a_tip_uses_the_article_layout_without_an_outline(): void
     {
-        $this->makeEntry('tips', 'article-test-tip', [
+        $this->makeEntry('tip', 'article-test-tip', [
             'title' => 'Article test tip',
             'content' => "Use `afterCreating` sparingly.\n\n```php\nreturn [];\n```",
         ]);
 
-        $this->get('/tips/article-test-tip')
+        $this->get('/log/article-test-tip')
             ->assertOk()
             ->assertSeeInOrder(['Tip', 'Article test tip', 'min read'])
             ->assertSee('<code>afterCreating</code>', false)
@@ -150,11 +150,11 @@ class ArticlePageTest extends TestCase
     /**
      * @param  array<string, mixed>  $data
      */
-    private function makeEntry(string $collection, string $slug, array $data, ?Carbon $date = null): void
+    private function makeEntry(string $blueprint, string $slug, array $data, ?Carbon $date = null): void
     {
         $entry = Entry::make()
-            ->collection($collection)
-            ->blueprint($collection === 'blog' ? 'blog' : 'tip')
+            ->collection('log')
+            ->blueprint($blueprint)
             ->slug($slug)
             ->published(true)
             ->date($date ?? Carbon::parse('2026-01-05'))

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Support\Lately;
 use Illuminate\Support\Carbon;
 use PHPUnit\Framework\Attributes\Test;
 use Statamic\Facades\Entry;
@@ -18,12 +19,12 @@ class LogPageTest extends TestCase
     {
         parent::setUp();
 
-        $this->makeEntry('blog', 'log-test-post', [
+        $this->makeEntry('post', 'log-test-post', [
             'title' => 'Log test post',
             'description' => 'A post for the log.',
         ], date: Carbon::parse('2026-09-12'));
 
-        $this->makeEntry('tips', 'log-test-tip', [
+        $this->makeEntry('tip', 'log-test-tip', [
             'title' => 'Log test tip',
             'content' => 'A tip for the log. With more after.',
         ], date: Carbon::parse('2026-08-03'));
@@ -86,9 +87,9 @@ class LogPageTest extends TestCase
     }
 
     #[Test]
-    public function makes_show_their_kind_photos_and_note_without_a_link(): void
+    public function makes_show_their_kind_photos_and_note_and_link_to_their_page(): void
     {
-        $this->makeEntry('makes', 'log-test-make', [
+        $this->makeEntry('make', 'log-test-make', [
             'title' => 'Log test make',
             'kind' => '3d-print',
             'note' => 'first try was stringy',
@@ -107,13 +108,13 @@ class LogPageTest extends TestCase
             ->assertDontSee('Log test post')
             ->assertDontSee('Log test tip');
 
-        $this->assertStringNotContainsString('>Log test make</a>', $response->getContent());
+        $this->assertStringContainsString('href="/log/log-test-make"', $response->getContent());
     }
 
     #[Test]
     public function makes_and_moments_show_their_full_caption_as_markdown(): void
     {
-        $this->makeEntry('moments', 'log-test-caption', [
+        $this->makeEntry('moment', 'log-test-caption', [
             'title' => 'Log test caption',
             'content' => "First sentence here. Second sentence with a [link](https://example.com).\n\n<script>alert(1)</script>\n\nAnother paragraph.",
         ], date: Carbon::parse('2026-07-22'));
@@ -128,7 +129,7 @@ class LogPageTest extends TestCase
     #[Test]
     public function posts_only_show_the_first_sentence(): void
     {
-        $this->makeEntry('tips', 'log-test-long-tip', [
+        $this->makeEntry('tip', 'log-test-long-tip', [
             'title' => 'Log test long tip',
             'content' => 'The teaser sentence. The rest stays on the tip page.',
         ], date: Carbon::parse('2026-08-04'));
@@ -142,7 +143,7 @@ class LogPageTest extends TestCase
     #[Test]
     public function the_moments_filter_only_shows_moments(): void
     {
-        $this->makeEntry('moments', 'log-test-moment', ['title' => 'Log test moment'], date: Carbon::parse('2026-07-21'));
+        $this->makeEntry('moment', 'log-test-moment', ['title' => 'Log test moment'], date: Carbon::parse('2026-07-21'));
 
         $this->get('/log/moments')
             ->assertOk()
@@ -154,8 +155,8 @@ class LogPageTest extends TestCase
     #[Test]
     public function drafts_and_scheduled_entries_are_hidden(): void
     {
-        $this->makeEntry('blog', 'log-test-draft', ['title' => 'Log test draft'], published: false);
-        $this->makeEntry('blog', 'log-test-scheduled', ['title' => 'Log test scheduled'], date: now()->addWeek());
+        $this->makeEntry('post', 'log-test-draft', ['title' => 'Log test draft'], published: false);
+        $this->makeEntry('post', 'log-test-scheduled', ['title' => 'Log test scheduled'], date: now()->addWeek());
 
         $this->get('/log')
             ->assertOk()
@@ -163,14 +164,49 @@ class LogPageTest extends TestCase
             ->assertDontSee('Log test scheduled');
     }
 
+    #[Test]
+    public function moments_and_makes_have_their_own_pages(): void
+    {
+        $this->makeEntry('moment', 'log-test-moment-page', [
+            'title' => 'Log test moment page',
+            'content' => 'A moment worth keeping.',
+            'photos' => ['makes/puzzle/puzzle-01.jpg'],
+        ]);
+
+        $this->makeEntry('make', 'log-test-make-page', [
+            'title' => 'Log test make page',
+            'kind' => '3d-print',
+            'note' => 'printed at the library',
+            'content' => 'A make worth sharing.',
+        ]);
+
+        $this->get('/log/log-test-moment-page')
+            ->assertOk()
+            ->assertSee('<title>Log test moment page', false)
+            ->assertSeeInOrder(['Moment', 'Log test moment page', 'alt="A finished jigsaw puzzle', 'A moment worth keeping.'], false)
+            ->assertDontSee('min read');
+
+        $this->get('/log/log-test-make-page')
+            ->assertOk()
+            ->assertSeeInOrder(['3D print', 'Log test make page', 'printed at the library', 'A make worth sharing.']);
+    }
+
+    #[Test]
+    public function no_log_entry_uses_a_slug_reserved_for_a_filter_page(): void
+    {
+        $slugs = Entry::query()->where('collection', Lately::COLLECTION)->get()->map->slug();
+
+        $this->assertEmpty($slugs->intersect(array_keys(Lately::FILTERS))->all());
+    }
+
     /**
      * @param  array<string, mixed>  $data
      */
-    private function makeEntry(string $collection, string $slug, array $data, bool $published = true, ?Carbon $date = null): \Statamic\Contracts\Entries\Entry
+    private function makeEntry(string $blueprint, string $slug, array $data, bool $published = true, ?Carbon $date = null): \Statamic\Contracts\Entries\Entry
     {
         $entry = Entry::make()
-            ->collection($collection)
-            ->blueprint(['blog' => 'blog', 'tips' => 'tip', 'makes' => 'make', 'moments' => 'moment'][$collection])
+            ->collection('log')
+            ->blueprint($blueprint)
             ->slug($slug)
             ->published($published)
             ->date($date ?? now()->subMinute())

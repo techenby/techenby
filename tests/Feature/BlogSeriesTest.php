@@ -31,10 +31,10 @@ class BlogSeriesTest extends TestCase
     }
 
     #[Test]
-    public function series_taxonomy_is_attached_to_the_blog(): void
+    public function series_taxonomy_is_attached_to_the_log(): void
     {
         $this->assertNotNull(Taxonomy::find('series'));
-        $this->assertContains('series', Collection::find('blog')->taxonomies()->map->handle()->all());
+        $this->assertContains('series', Collection::find('log')->taxonomies()->map->handle()->all());
         $this->assertSame('Sunny Goes Native', Term::find('series::sunny-goes-native')?->title());
     }
 
@@ -88,11 +88,11 @@ class BlogSeriesTest extends TestCase
         $this->makeEntry('test-series-page-0', 'Page part zero', ['series' => 'test-series', 'series_part' => 0]);
         $this->makeEntry('test-series-page-1', 'Page part one', ['series' => 'test-series', 'series_part' => 1]);
 
-        $this->get('/blog/test-series-page-1')
+        $this->get('/log/test-series-page-1')
             ->assertOk()
             ->assertSee('Test Series · Part 1')
             ->assertSee('A series · 2 parts so far')
-            ->assertSee('href="/blog/test-series-page-0"', false)
+            ->assertSee('href="/log/test-series-page-0"', false)
             ->assertSeeInOrder(['Page part zero', 'aria-current="page"', 'Page part one', 'you are here'], false);
     }
 
@@ -103,7 +103,7 @@ class BlogSeriesTest extends TestCase
 
         $this->makeEntry('test-series-only-part', 'Only part', ['series' => 'test-series', 'series_part' => 0]);
 
-        $this->get('/blog/test-series-only-part')
+        $this->get('/log/test-series-only-part')
             ->assertOk()
             ->assertSee('Test Series · Part 0')
             ->assertSee('A series · 1 part so far')
@@ -126,8 +126,8 @@ class BlogSeriesTest extends TestCase
     private function makeEntry(string $slug, string $title, array $data = [], bool $published = true): \Statamic\Contracts\Entries\Entry
     {
         $entry = Entry::make()
-            ->collection('blog')
-            ->blueprint('blog')
+            ->collection('log')
+            ->blueprint('post')
             ->slug($slug)
             ->published($published)
             ->data(['title' => $title, ...$data]);

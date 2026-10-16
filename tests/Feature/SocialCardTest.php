@@ -34,7 +34,7 @@ class SocialCardTest extends TestCase
     #[Test]
     public function saving_a_published_post_draws_its_card(): void
     {
-        $entry = $this->makeEntry('blog', 'social-card-test-post', ['title' => 'Social card test post']);
+        $entry = $this->makeEntry('post', 'social-card-test-post', ['title' => 'Social card test post']);
 
         $path = app(SocialCard::class)->path($entry);
 
@@ -48,7 +48,7 @@ class SocialCardTest extends TestCase
     #[Test]
     public function a_new_title_replaces_the_old_card(): void
     {
-        $entry = $this->makeEntry('tips', 'social-card-test-tip', ['title' => 'First title']);
+        $entry = $this->makeEntry('tip', 'social-card-test-tip', ['title' => 'First title']);
         $firstPath = app(SocialCard::class)->path($entry);
 
         $entry->set('title', 'Second title')->save();
@@ -61,7 +61,7 @@ class SocialCardTest extends TestCase
     #[Test]
     public function unpublishing_or_deleting_an_entry_removes_its_card(): void
     {
-        $entry = $this->makeEntry('blog', 'social-card-test-unpublish', ['title' => 'Unpublish me']);
+        $entry = $this->makeEntry('post', 'social-card-test-unpublish', ['title' => 'Unpublish me']);
 
         $entry->published(false)->save();
 
@@ -76,8 +76,8 @@ class SocialCardTest extends TestCase
     #[Test]
     public function drafts_and_other_collections_get_no_card(): void
     {
-        $this->makeEntry('blog', 'social-card-test-draft', ['title' => 'Draft'], published: false);
-        $this->makeEntry('moments', 'social-card-test-moment', ['title' => 'Moment']);
+        $this->makeEntry('post', 'social-card-test-draft', ['title' => 'Draft'], published: false);
+        $this->makeEntry('moment', 'social-card-test-moment', ['title' => 'Moment']);
 
         $this->assertSame([], Storage::disk('social_cards')->files());
     }
@@ -87,8 +87,8 @@ class SocialCardTest extends TestCase
     {
         $socialCard = app(SocialCard::class);
 
-        $post = $this->makeEntry('blog', 'social-card-test-series', ['title' => 'Series post', 'series' => 'sunny-goes-native', 'series_part' => 3]);
-        $tip = $this->makeEntry('tips', 'social-card-test-label-tip', ['title' => 'Label tip']);
+        $post = $this->makeEntry('post', 'social-card-test-series', ['title' => 'Series post', 'series' => 'sunny-goes-native', 'series_part' => 3]);
+        $tip = $this->makeEntry('tip', 'social-card-test-label-tip', ['title' => 'Label tip']);
 
         $this->assertSame('Sunny Goes Native · Part 3', $socialCard->label($post));
         $this->assertSame('Tip', $socialCard->label($tip));
@@ -97,12 +97,12 @@ class SocialCardTest extends TestCase
     #[Test]
     public function article_pages_point_link_previews_at_their_card_and_draw_it_if_missing(): void
     {
-        $entry = $this->makeEntry('blog', 'social-card-test-meta', ['title' => 'Meta test post']);
+        $entry = $this->makeEntry('post', 'social-card-test-meta', ['title' => 'Meta test post']);
         $path = app(SocialCard::class)->path($entry);
 
         Storage::disk('social_cards')->delete($path);
 
-        $this->get('/blog/social-card-test-meta')
+        $this->get('/log/social-card-test-meta')
             ->assertOk()
             ->assertSee('<meta property="og:title" content="Meta test post">', false)
             ->assertSee('<meta property="og:image" content="'.Storage::disk('social_cards')->url($path).'">', false)
@@ -114,11 +114,11 @@ class SocialCardTest extends TestCase
     /**
      * @param  array<string, mixed>  $data
      */
-    private function makeEntry(string $collection, string $slug, array $data, bool $published = true): \Statamic\Contracts\Entries\Entry
+    private function makeEntry(string $blueprint, string $slug, array $data, bool $published = true): \Statamic\Contracts\Entries\Entry
     {
         $entry = Entry::make()
-            ->collection($collection)
-            ->blueprint(['blog' => 'blog', 'tips' => 'tip', 'moments' => 'moment'][$collection])
+            ->collection('log')
+            ->blueprint($blueprint)
             ->slug($slug)
             ->published($published)
             ->date(now()->subDay())

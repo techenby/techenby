@@ -4,7 +4,7 @@
 
     $filters = Lately::FILTERS;
     $activeFilter = isset($type) && array_key_exists($type, $filters) ? $type : null;
-    $from = $activeFilter ? $filters[$activeFilter]['collection'] : collect($filters)->pluck('collection')->implode('|');
+    $blueprints = $activeFilter ? $filters[$activeFilter]['blueprint'] : collect($filters)->pluck('blueprint')->implode('|');
     $lately = app(Lately::class);
 
     // Filter pages are plain routes, so the heading always comes from the Log page entry.
@@ -41,7 +41,7 @@
             </ul>
         </nav>
 
-        <s:collection :from="$from" sort="date:desc" paginate="20" as="entries">
+        <s:collection :from="Lately::COLLECTION" :blueprint:in="$blueprints" sort="date:desc" paginate="20" as="entries">
             @php
                 $months = collect($entries)->groupBy(fn ($entry) => $entry->date()->format('F Y'));
             @endphp

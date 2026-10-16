@@ -25,8 +25,15 @@ tabs:
           -
             handle: lately
             field:
-              type: collections
+              type: checkboxes
               display: Lately
+              instructions: 'Which kinds of Log entries to show on the homepage.'
+              inline: true
+              options:
+                post: Writing
+                tip: Tips
+                make: Makes
+                moment: Moments
           -
             handle: projects
             field:

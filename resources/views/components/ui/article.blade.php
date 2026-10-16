@@ -31,9 +31,13 @@
         <p class="text-sm text-zinc-500 dark:text-zinc-400">
             @if ($date)
                 <time datetime="{{ $date->toDateString() }}">{{ $date->format('M j, Y') }}</time>
+            @endif
+            @if ($date && $readingMinutes)
                 <span aria-hidden="true">·</span>
             @endif
-            {{ $readingMinutes }} min read
+            @if ($readingMinutes)
+                {{ $readingMinutes }} min read
+            @endif
         </p>
     </header>
 

@@ -10,9 +10,11 @@ use Statamic\Contracts\Entries\Entry;
 class SocialCard
 {
     /**
+     * Log blueprints that get a social card.
+     *
      * @var list<string>
      */
-    public const COLLECTIONS = ['blog', 'tips'];
+    public const BLUEPRINTS = ['post', 'tip'];
 
     public const WIDTH = 1200;
 
@@ -33,7 +35,8 @@ class SocialCard
 
     public function supports(Entry $entry): bool
     {
-        return in_array($entry->collectionHandle(), self::COLLECTIONS, true);
+        return $entry->collectionHandle() === Lately::COLLECTION
+            && in_array($entry->blueprint()->handle(), self::BLUEPRINTS, true);
     }
 
     /**
@@ -84,7 +87,7 @@ class SocialCard
             return $series['title'].(isset($series['part']) ? ' · Part '.$series['part'] : '');
         }
 
-        return Lately::TYPES[$entry->collectionHandle()] ?? 'Writing';
+        return Lately::TYPES[$entry->blueprint()->handle()] ?? 'Writing';
     }
 
     public function render(string $label, string $title): string

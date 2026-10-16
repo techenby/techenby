@@ -1,5 +1,10 @@
-title: Moments
+title: Log
+route: '/log/{slug}'
+template: '@blueprint'
 propagate: true
+taxonomies:
+  - tags
+  - series
 date: true
 sort_dir: desc
 date_behavior:

@@ -23,7 +23,7 @@ class BlogEntryDescriptionTest extends TestCase
     {
         $this->makeEntry('description-test-post', ['description' => 'A post about "quotes" & things.']);
 
-        $this->get('/blog/description-test-post')
+        $this->get('/log/description-test-post')
             ->assertOk()
             ->assertSee('<meta name="description" content="A post about &quot;quotes&quot; &amp; things.">', false)
             ->assertSee('<meta property="og:description" content="A post about &quot;quotes&quot; &amp; things.">', false);
@@ -34,7 +34,7 @@ class BlogEntryDescriptionTest extends TestCase
     {
         $this->makeEntry('no-description-test-post');
 
-        $this->get('/blog/no-description-test-post')
+        $this->get('/log/no-description-test-post')
             ->assertOk()
             ->assertDontSee('<meta name="description"', false);
     }
@@ -45,8 +45,8 @@ class BlogEntryDescriptionTest extends TestCase
     private function makeEntry(string $slug, array $data = []): void
     {
         $this->createdEntry = Entry::make()
-            ->collection('blog')
-            ->blueprint('blog')
+            ->collection('log')
+            ->blueprint('post')
             ->slug($slug)
             ->published(true)
             ->data(['title' => 'Description test', ...$data]);

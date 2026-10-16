@@ -27,20 +27,20 @@ class LatelyTest extends TestCase
     #[Test]
     public function the_homepage_shows_recent_posts_and_tips(): void
     {
-        $this->makeEntry('blog', 'lately-test-post', [
+        $this->makeEntry('post', 'lately-test-post', [
             'title' => 'Lately test post',
             'description' => 'A description written for the homepage.',
             'series' => 'sunny-goes-native',
             'series_part' => 1,
         ], date: now()->subMinute());
 
-        $this->makeEntry('tips', 'lately-test-tip', ['title' => 'Lately test tip'], date: now()->subMinutes(2));
+        $this->makeEntry('tip', 'lately-test-tip', ['title' => 'Lately test tip'], date: now()->subMinutes(2));
 
         $this->get('/')
             ->assertOk()
             ->assertSee('id="lately-heading"', false)
             ->assertSee('Lately test post')
-            ->assertSee('href="/blog/lately-test-post"', false)
+            ->assertSee('href="/log/lately-test-post"', false)
             ->assertSee('A description written for the homepage.')
             ->assertSee('Sunny Goes Native · Part 1')
             ->assertSee('Lately test tip');
@@ -49,9 +49,9 @@ class LatelyTest extends TestCase
     #[Test]
     public function drafts_are_left_out(): void
     {
-        $this->makeEntry('blog', 'lately-test-draft', ['title' => 'Lately test draft'], published: false);
+        $this->makeEntry('post', 'lately-test-draft', ['title' => 'Lately test draft'], published: false);
 
-        $titles = app(Lately::class)->items(['blog', 'tips'])->pluck('title');
+        $titles = app(Lately::class)->items(['post', 'tip'])->pluck('title');
 
         $this->assertNotContains('Lately test draft', $titles);
     }
@@ -59,10 +59,10 @@ class LatelyTest extends TestCase
     #[Test]
     public function items_are_newest_first_and_limited(): void
     {
-        $this->makeEntry('blog', 'lately-test-older', ['title' => 'Older'], date: now()->subMinutes(2));
-        $this->makeEntry('tips', 'lately-test-newer', ['title' => 'Newer'], date: now()->subMinute());
+        $this->makeEntry('post', 'lately-test-older', ['title' => 'Older'], date: now()->subMinutes(2));
+        $this->makeEntry('tip', 'lately-test-newer', ['title' => 'Newer'], date: now()->subMinute());
 
-        $items = app(Lately::class)->items(['blog', 'tips'], limit: 2);
+        $items = app(Lately::class)->items(['post', 'tip'], limit: 2);
 
         $this->assertSame(['Newer', 'Older'], $items->pluck('title')->all());
         $this->assertSame(['Tip', 'Writing'], $items->pluck('type')->all());
@@ -71,9 +71,9 @@ class LatelyTest extends TestCase
     #[Test]
     public function scheduled_entries_stay_hidden_until_their_date(): void
     {
-        $this->makeEntry('blog', 'lately-test-scheduled', ['title' => 'Lately test scheduled'], date: now()->addWeek());
+        $this->makeEntry('post', 'lately-test-scheduled', ['title' => 'Lately test scheduled'], date: now()->addWeek());
 
-        $titles = app(Lately::class)->items(['blog', 'tips'])->pluck('title');
+        $titles = app(Lately::class)->items(['post', 'tip'])->pluck('title');
 
         $this->assertNotContains('Lately test scheduled', $titles);
     }
@@ -81,7 +81,7 @@ class LatelyTest extends TestCase
     #[Test]
     public function the_summary_falls_back_to_the_first_sentence_of_the_content(): void
     {
-        $tip = $this->makeEntry('tips', 'lately-test-tip', [
+        $tip = $this->makeEntry('tip', 'lately-test-tip', [
             'title' => 'Tip',
             'content' => "Use `factories` sparingly. They are slower than you think.\n\nMore detail here.",
         ]);
@@ -98,11 +98,11 @@ class LatelyTest extends TestCase
     /**
      * @param  array<string, mixed>  $data
      */
-    private function makeEntry(string $collection, string $slug, array $data, bool $published = true, ?Carbon $date = null): \Statamic\Contracts\Entries\Entry
+    private function makeEntry(string $blueprint, string $slug, array $data, bool $published = true, ?Carbon $date = null): \Statamic\Contracts\Entries\Entry
     {
         $entry = Entry::make()
-            ->collection($collection)
-            ->blueprint($collection === 'blog' ? 'blog' : 'tip')
+            ->collection('log')
+            ->blueprint($blueprint)
             ->slug($slug)
             ->published($published)
             ->date($date ?? now()->subMinute())

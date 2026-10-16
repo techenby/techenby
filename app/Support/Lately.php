@@ -15,40 +15,54 @@ use Statamic\Statamic;
 
 class Lately
 {
+    public const COLLECTION = 'log';
+
     /**
+     * Log entry types, keyed by blueprint handle.
+     *
      * @var array<string, string>
      */
     public const TYPES = [
-        'blog' => 'Writing',
-        'tips' => 'Tip',
-        'makes' => 'Make',
-        'moments' => 'Moment',
+        'post' => 'Writing',
+        'tip' => 'Tip',
+        'make' => 'Make',
+        'moment' => 'Moment',
     ];
 
     /**
-     * @var array<string, array{label: string, collection: string}>
+     * Short entries whose full caption is shown right in the Log, not just a summary.
+     *
+     * @var list<string>
+     */
+    public const INLINE_CAPTIONS = ['moment', 'make'];
+
+    /**
+     * The Log's filter pages, keyed by their URL segment under /log.
+     *
+     * @var array<string, array{label: string, blueprint: string}>
      */
     public const FILTERS = [
-        'writing' => ['label' => 'Writing', 'collection' => 'blog'],
-        'tips' => ['label' => 'Tips', 'collection' => 'tips'],
-        'makes' => ['label' => 'Makes', 'collection' => 'makes'],
-        'moments' => ['label' => 'Moments', 'collection' => 'moments'],
+        'writing' => ['label' => 'Writing', 'blueprint' => 'post'],
+        'tips' => ['label' => 'Tips', 'blueprint' => 'tip'],
+        'makes' => ['label' => 'Makes', 'blueprint' => 'make'],
+        'moments' => ['label' => 'Moments', 'blueprint' => 'moment'],
     ];
 
     public function __construct(public BlogSeries $series) {}
 
     /**
-     * @param  list<string>  $collections
+     * @param  list<string>  $blueprints
      * @return Collection<int, array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>}>
      */
-    public function items(array $collections, int $limit = 5): Collection
+    public function items(array $blueprints, int $limit = 5): Collection
     {
-        if ($collections === []) {
+        if ($blueprints === []) {
             return collect();
         }
 
         return EntryFacade::query()
-            ->whereIn('collection', $collections)
+            ->where('collection', self::COLLECTION)
+            ->whereIn('blueprint', $blueprints)
             ->whereStatus('published')
             ->get()
             ->map(fn (Entry $entry) => $this->item($entry))
@@ -64,18 +78,23 @@ class Lately
     {
         return [
             'id' => (string) $entry->id(),
-            'type' => self::TYPES[$entry->collectionHandle()] ?? Str::singular($entry->collection()->title()),
+            'type' => $this->type($entry),
             'date' => $this->date($entry),
             'title' => (string) $entry->get('title'),
             'url' => $entry->url() ?: null,
             'summary' => $this->summary($entry),
-            'caption' => $entry->url() ? null : $this->caption($entry),
+            'caption' => in_array($entry->blueprint()->handle(), self::INLINE_CAPTIONS, true) ? $this->caption($entry) : null,
             'series' => $this->seriesTitle($entry),
             'part' => $this->series->part($entry),
             'kind' => $this->kind($entry),
             'note' => filled($entry->value('note')) ? (string) $entry->value('note') : null,
             'photos' => $this->photos($entry),
         ];
+    }
+
+    public function type(Entry $entry): string
+    {
+        return self::TYPES[$entry->blueprint()->handle()] ?? Str::singular($entry->collection()->title());
     }
 
     public function kind(Entry $entry): ?string
@@ -151,7 +170,7 @@ class Lately
     }
 
     /**
-     * The full caption as HTML, for entries without a page of their own.
+     * The full caption as HTML, for short entries shown whole in the Log.
      */
     public function caption(Entry $entry): ?string
     {
