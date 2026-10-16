@@ -68,7 +68,7 @@
         </script>
     </head>
     <body class="enby-stripe min-h-dvh bg-zinc-50 dark:bg-zinc-900">
-        <flux:sidebar sticky collapsible="mobile" class="bg-zinc-50 dark:bg-zinc-900">
+        <flux:sidebar sticky collapsible="mobile" class="overscroll-x-auto! bg-zinc-50 dark:bg-zinc-900">
             <a href="/" class="max-lg:hidden self-start rounded-lg px-2 pt-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-enby-purple">
                 <x-ui.wordmark class="h-8 w-auto" />
             </a>
@@ -95,7 +95,7 @@
             <flux:spacer />
         </flux:header>
 
-        <flux:main inset class="lg:ms-0 has-[[data-sticky-heading]]:scroll-pt-16">
+        <flux:main inset class="lg:ms-0 lg:overscroll-x-auto! has-[[data-sticky-heading]]:scroll-pt-16">
             {{ $slot }}
 
             <x-ui.site-footer :$comms :$updatedAt class="mt-16" />
