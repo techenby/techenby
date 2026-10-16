@@ -18,4 +18,6 @@
             last tinkered with <time datetime="{{ $updatedAt->toDateString() }}">{{ $updatedAt->format('M j, Y') }}</time>
         </p>
     @endif
+
+    <p class="basis-full text-sm text-zinc-500 dark:text-zinc-400">&copy; {{ now()->year }} Andy Swick <span aria-hidden="true">·</span> TechEnby</p>
 </footer>

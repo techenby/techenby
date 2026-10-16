@@ -16,6 +16,10 @@ comms:
     label: GitHub
     url: 'https://github.com/techenby'
   -
+    id: fT_VVq7ahvkpjQ6B7JAGK
+    label: /dev/null
+    url: 'https://dev-null.sh/@techenby/'
+  -
     id: E37dMbjZuN5i1qJEsHJee
     label: Email
     url: 'mailto:andy@techenby.com'

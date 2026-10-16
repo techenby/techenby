@@ -7,9 +7,6 @@
         ->get()
         ->sortBy(fn ($entry) => $entry->get('title'))
         ->values();
-
-    $socials = collect($andy->comms ?? [])->reject(fn ($method) => Str::startsWith((string) $method->url, 'mailto:'));
-    $underlines = ['decoration-enby-yellow', 'decoration-enby-purple', 'decoration-enby-black dark:decoration-white'];
 @endphp
 
 <x-layout :$title :updated-at="$updated_at ?? null" hide-email>
@@ -27,19 +24,9 @@
             @endforeach
         </div>
 
-        @if ($socials->isNotEmpty())
-            <section aria-labelledby="ask-me-something" class="space-y-3 rounded-xl border border-zinc-200 bg-zinc-50 p-6 sm:p-8 dark:border-white/10 dark:bg-white/5">
-                <h2 id="ask-me-something" class="font-display text-xl font-semibold tracking-tight text-zinc-800 dark:text-white">Got a question I haven&rsquo;t answered?</h2>
-                <flux:text class="text-pretty">Ask me on social media. If it comes up more than once, it&rsquo;ll probably end up here.</flux:text>
-
-                <ul role="list" class="flex flex-wrap gap-x-6 gap-y-2 pt-1">
-                    @foreach ($socials as $method)
-                        <li>
-                            <a href="{{ $method->url }}" target="_blank" rel="noopener" class="text-[0.9375rem] font-bold text-zinc-800 underline decoration-3 underline-offset-5 dark:text-white {{ $underlines[$loop->index % count($underlines)] }}">{{ $method->label }}</a>
-                        </li>
-                    @endforeach
-                </ul>
-            </section>
-        @endif
+        <section aria-labelledby="ask-me-something" class="space-y-3 rounded-xl border border-zinc-200 bg-zinc-50 p-6 sm:p-8 dark:border-white/10 dark:bg-white/5">
+            <h2 id="ask-me-something" class="font-display text-xl font-semibold tracking-tight text-zinc-800 dark:text-white">Got a question I haven&rsquo;t answered?</h2>
+            <flux:text class="text-pretty">Ask me on any of the socials linked at the bottom of this page. If it comes up more than once, it&rsquo;ll probably end up here.</flux:text>
+        </section>
     </div>
 </x-layout>
