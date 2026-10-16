@@ -10,7 +10,7 @@ links:
   -
     id: dJbxg326J2aoMmWeKvrmw
     label: GitHub
-    url: 'https://techenby/sunny'
+    url: 'https://github.com/techenby/sunny'
 updated_by: 2de7d260-84a8-4dfc-9a2e-af5aae989cd3
 updated_at: 1792165339
 header_image: projects/sunny-logo.png

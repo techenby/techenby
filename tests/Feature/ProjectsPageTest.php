@@ -13,7 +13,7 @@ class ProjectsPageTest extends TestCase
         $this->get('/projects')
             ->assertOk()
             ->assertSeeInOrder(['<h1', 'Projects', 'A collection of apps and packages'], false)
-            ->assertSeeInOrder(['Sunny', 'My LifeOS application', 'href="https://sunnyhome.app"', 'Website'], false)
+            ->assertSeeInOrder(['Sunny Home', 'Your household, organized.', 'href="https://sunnyhome.app"', 'Website', 'href="https://github.com/techenby/sunny"', 'GitHub'], false)
             ->assertDontSee('Project Dex');
     }
 

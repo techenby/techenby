@@ -20,7 +20,7 @@ class PageTitleTest extends TestCase
             'faq' => ['/faq', 'FAQ'],
             'projects' => ['/projects', 'Projects'],
             'uses' => ['/uses', 'Uses'],
-            'blog post' => ['/log/signing-in-from-a-phone-2fa-tokens-and-a-race-condition', 'Signing in from a phone (2FA, tokens, and a race condition)'],
+            'post' => ['/log/building-sunnys-mobile-app-mostly-by-prompting', 'Building Sunny&#039;s mobile app, mostly by prompting.'],
             'tip' => ['/log/keep-factories-simple', 'Keep Factories Simple'],
         ];
     }
