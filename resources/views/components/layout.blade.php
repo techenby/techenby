@@ -68,21 +68,7 @@
                     <flux:text>they/them</flux:text>
                 </div>
             </flux:sidebar.header>
-            <flux:sidebar.nav>
-                <flux:sidebar.item href="/">Home</flux:sidebar.item>
-                <flux:sidebar.item href="/log">Log</flux:sidebar.item>
-                <flux:sidebar.item href="/projects">Projects</flux:sidebar.item>
-                <flux:sidebar.item href="/uses">Uses</flux:sidebar.item>
-                <flux:sidebar.item href="/faq">FAQ</flux:sidebar.item>
-            </flux:sidebar.nav>
-            <flux:separator />
-            <flux:sidebar.nav>
-                <flux:sidebar.group heading="About me" class="[&>div:first-child]:font-semibold [&>div:first-child]:text-zinc-800 dark:[&>div:first-child]:text-white">
-                    <flux:sidebar.item href="/now">Now</flux:sidebar.item>
-                    <flux:sidebar.item href="/how-i-work">How I work</flux:sidebar.item>
-                    <flux:sidebar.item href="/friends">Friends</flux:sidebar.item>
-                </flux:sidebar.group>
-            </flux:sidebar.nav>
+            <x-ui.main-nav />
 
             <flux:sidebar.spacer />
 

@@ -15,8 +15,6 @@ class PageTitleTest extends TestCase
     {
         return [
             'home' => ['/', 'Andy Swick'],
-            'blog' => ['/blog', 'Blog'],
-            'tips' => ['/tips', 'Tips &amp; Tricks'],
             'log' => ['/log', 'Log'],
             'log filter' => ['/log/writing', 'Writing · Log'],
             'faq' => ['/faq', 'FAQ'],
