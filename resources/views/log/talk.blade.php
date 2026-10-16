@@ -17,7 +17,7 @@
     :$description
     :social-title="$entry->get('title')"
     :social-image="app(SocialCard::class)->url($entry)"
-    :updated-at="$entry->value('updated_at')"
+    :updated-at="$entry->lastModified()"
 >
     <x-ui.article :$entry :badge="$lately->kind($entry) ?? 'Talk'" :description="$entry->value('description')" :reading-minutes="0">
         @if ($embedUrl)

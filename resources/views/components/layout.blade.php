@@ -2,16 +2,11 @@
 
 @php
     use Carbon\CarbonInterface;
-    use Illuminate\Support\Carbon;
     use Statamic\Facades\GlobalSet;
     use Statamic\Fields\Value;
 
-    $updatedAt = $updatedAt instanceof Value ? $updatedAt->raw() : $updatedAt;
-    $updatedAt = match (true) {
-        $updatedAt instanceof CarbonInterface => $updatedAt,
-        is_numeric($updatedAt) => Carbon::createFromTimestamp($updatedAt),
-        default => null,
-    };
+    $updatedAt = $updatedAt instanceof Value ? $updatedAt->value() : $updatedAt;
+    $updatedAt = $updatedAt instanceof CarbonInterface ? $updatedAt : null;
 
     $comms = collect(GlobalSet::findByHandle('andy')?->inCurrentSite()?->toAugmentedCollection()->get('comms')?->value() ?? [])
         ->when($hideEmail, fn ($comms) => $comms->reject(fn ($method) => str_starts_with((string) $method->url, 'mailto:')));

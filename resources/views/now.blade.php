@@ -1,13 +1,12 @@
 @php
-    use Illuminate\Support\Carbon;
     use Statamic\Facades\Entry;
 
     $entry = Entry::find($id);
-    $asOf = $entry->value('as_of') ? Carbon::parse($entry->value('as_of')) : null;
+    $asOf = $entry->augmentedValue('as_of')->value();
     $sections = collect($entry->value('sections') ?? [])->filter(fn (array $section) => filled($section['heading'] ?? null));
 @endphp
 
-<x-layout :$title :updated-at="$entry->value('updated_at')">
+<x-layout :$title :updated-at="$entry->lastModified()">
     <div class="max-w-4xl space-y-12">
         <x-ui.page-header
             :heading="$entry->get('title')"

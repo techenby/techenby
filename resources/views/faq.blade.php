@@ -4,12 +4,11 @@
 
     $faqs = Entry::query()
         ->where('collection', 'faqs')
-        ->get()
-        ->sortBy(fn ($entry) => $entry->get('title'))
-        ->values();
+        ->orderBy('title')
+        ->get();
 @endphp
 
-<x-layout :$title :updated-at="$updated_at ?? null" hide-email>
+<x-layout :$title :updated-at="$last_modified ?? null" hide-email>
     <div class="max-w-[42.5rem] space-y-12">
         <x-ui.page-header :heading="$heading ?? $title" :$subheading />
 

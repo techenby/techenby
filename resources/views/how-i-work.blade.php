@@ -1,10 +1,9 @@
 @php
-    use Illuminate\Support\Carbon;
     use Illuminate\Support\Str;
     use Statamic\Facades\Entry;
 
     $entry = Entry::find($id);
-    $asOf = $entry->value('as_of') ? Carbon::parse($entry->value('as_of')) : null;
+    $asOf = $entry->augmentedValue('as_of')->value();
     $tldr = collect($entry->value('tldr') ?? [])->filter();
 
     $sections = collect($entry->value('sections') ?? [])
@@ -23,7 +22,7 @@
     $isPrompt = fn (?string $text) => Str::startsWith(trim((string) $text), 'Prompt:');
 @endphp
 
-<x-layout :$title :updated-at="$entry->value('updated_at')">
+<x-layout :$title :updated-at="$entry->lastModified()">
     <div class="space-y-12">
         <div class="grid gap-x-16 xl:grid-cols-[minmax(0,42.5rem)_12.5rem]">
             <div class="min-w-0 space-y-10">

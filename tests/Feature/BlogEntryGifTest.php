@@ -2,14 +2,24 @@
 
 namespace Tests\Feature;
 
-use App\Support\BlogContent;
 use App\Support\GiphyUrl;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use Statamic\Contracts\Entries\Entry as EntryContract;
+use Statamic\Facades\Entry;
 use Tests\TestCase;
 
 class BlogEntryGifTest extends TestCase
 {
+    private ?EntryContract $post = null;
+
+    protected function tearDown(): void
+    {
+        $this->post?->delete();
+
+        parent::tearDown();
+    }
+
     /**
      * @return array<string, array{string}>
      */
@@ -40,34 +50,32 @@ class BlogEntryGifTest extends TestCase
     }
 
     #[Test]
-    public function bard_content_is_split_into_html_and_sets_in_order(): void
+    public function a_post_renders_its_text_and_sets_in_order(): void
     {
-        $blocks = app(BlogContent::class)->blocks([
+        $this->makePost([
             $this->paragraph('Before the gif'),
             $this->gifSet('https://giphy.com/gifs/yes-score-rmi45iyhIPuRG', 'Someone cheering'),
             $this->paragraph('After the gif'),
         ]);
 
-        $this->assertCount(3, $blocks);
-        $this->assertSame('html', $blocks[0]['type']);
-        $this->assertStringContainsString('Before the gif', $blocks[0]['html']);
-        $this->assertSame('set', $blocks[1]['type']);
-        $this->assertSame('gif', $blocks[1]['set']);
-        $this->assertSame('Someone cheering', $blocks[1]['values']['alt']);
-        $this->assertStringContainsString('After the gif', $blocks[2]['html']);
+        $this->get('/log/gif-test-post')
+            ->assertOk()
+            ->assertSeeInOrder(['<p>Before the gif</p>', 'src="https://media.giphy.com/media/rmi45iyhIPuRG/giphy.gif"', 'alt="Someone cheering"', '<p>After the gif</p>'], false);
     }
 
     #[Test]
     public function empty_paragraphs_around_a_set_are_dropped(): void
     {
-        $blocks = app(BlogContent::class)->blocks([
+        $this->makePost([
             ['type' => 'paragraph'],
             $this->gifSet('https://giphy.com/gifs/yes-score-rmi45iyhIPuRG', 'Someone cheering'),
             ['type' => 'paragraph'],
         ]);
 
-        $this->assertCount(1, $blocks);
-        $this->assertSame('set', $blocks[0]['type']);
+        $this->get('/log/gif-test-post')
+            ->assertOk()
+            ->assertSee('alt="Someone cheering"', false)
+            ->assertDontSee('<p></p>', false);
     }
 
     #[Test]
@@ -93,6 +101,21 @@ class BlogEntryGifTest extends TestCase
         ])->render();
 
         $this->assertSame('', trim($html));
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $content
+     */
+    private function makePost(array $content): void
+    {
+        $this->post = Entry::make()
+            ->collection('log')
+            ->blueprint('post')
+            ->slug('gif-test-post')
+            ->date(now()->subMinute())
+            ->data(['title' => 'Gif test post', 'content' => $content]);
+
+        $this->post->save();
     }
 
     /**

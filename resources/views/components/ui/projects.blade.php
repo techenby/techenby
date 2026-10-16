@@ -1,15 +1,10 @@
-@props(['ids' => []])
+@props(['projects' => null])
 
 @php
     use Illuminate\Support\Str;
-    use Statamic\Facades\Asset;
-    use Statamic\Facades\Entry;
 
-    $projects = $ids === []
-        ? collect()
-        : Entry::query()->whereIn('id', $ids)->whereStatus('published')->get()
-            ->sortBy(fn ($project) => array_search($project->id(), $ids, true))
-            ->values();
+    // An entries field hands back a query for the picks, in the order they were picked, already limited to published entries.
+    $projects = collect($projects?->get() ?? []);
 @endphp
 
 @if ($projects->isNotEmpty())
@@ -22,7 +17,7 @@
         <ul role="list" class="grid gap-4 pt-5 md:grid-cols-2">
             @foreach ($projects as $project)
                 @php
-                    $logo = filled($project->value('header_image')) ? Asset::find('assets::'.$project->value('header_image')) : null;
+                    $logo = $project->augmentedValue('header_image')->value();
                     $summary = Str::of(Str::markdown((string) $project->value('content')))->stripTags()->squish()->toString();
                 @endphp
 

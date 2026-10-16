@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Statamic\Contracts\Assets\Asset as AssetContract;
 use Statamic\Contracts\Entries\Entry;
-use Statamic\Facades\Asset;
 use Statamic\Facades\Entry as EntryFacade;
 use Statamic\Facades\Term;
 use Statamic\Statamic;
@@ -98,15 +97,15 @@ class Lately
      */
     public function kind(Entry $entry): ?string
     {
-        $kind = $entry->value('kind');
+        $kind = $entry->augmentedValue('kind')->value()?->label();
 
-        if (! is_string($kind) || $kind === '') {
-            $event = $entry->value('event');
-
-            return is_string($event) && trim($event) !== '' ? trim($event) : null;
+        if (filled($kind)) {
+            return $kind;
         }
 
-        return $entry->blueprint()->field('kind')?->get('options')[$kind] ?? $kind;
+        $event = $entry->value('event');
+
+        return is_string($event) && trim($event) !== '' ? trim($event) : null;
     }
 
     /**
@@ -114,9 +113,9 @@ class Lately
      */
     public function photos(Entry $entry): array
     {
-        return collect(Arr::wrap($entry->value('photos')))
-            ->map(fn ($path) => Asset::find("assets::{$path}"))
-            ->filter()
+        $photos = $entry->augmentedValue('photos')->value();
+
+        return collect($photos instanceof AssetContract ? [$photos] : ($photos?->get() ?? []))
             ->map(fn ($asset) => [
                 'square' => $this->glide($asset, ['width' => 400, 'height' => 400, 'fit' => 'crop_focal']),
                 'full' => $this->glide($asset, ['width' => 2000]),
@@ -142,9 +141,7 @@ class Lately
             return Carbon::instance($entry->date());
         }
 
-        $updatedAt = $entry->value('updated_at');
-
-        return is_numeric($updatedAt) ? Carbon::createFromTimestamp($updatedAt) : null;
+        return Carbon::instance($entry->lastModified());
     }
 
     public function summary(Entry $entry): ?string

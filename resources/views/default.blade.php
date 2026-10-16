@@ -6,7 +6,7 @@
     $content = trim((string) $entry->value('content'));
 @endphp
 
-<x-layout :$title :description="$entry->value('subheading')" :updated-at="$entry->value('updated_at')">
+<x-layout :$title :description="$entry->value('subheading')" :updated-at="$entry->lastModified()">
     <div class="max-w-[42.5rem] space-y-10">
         <x-ui.page-header :heading="$entry->value('heading') ?: $title" :subheading="$entry->value('subheading')" :eyebrow="$entry->value('eyebrow')" />
 

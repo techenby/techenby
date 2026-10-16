@@ -21,7 +21,7 @@
     $hasFeeds = $groups->flatMap(fn (array $group) => $group['friends'])->contains(fn (array $friend) => filled($friend['rss'] ?? null));
 @endphp
 
-<x-layout :$title :updated-at="$entry->value('updated_at')">
+<x-layout :$title :updated-at="$entry->lastModified()">
     <div class="space-y-12">
         <div class="flex flex-col gap-6 border-b border-zinc-950/10 pb-7 lg:flex-row lg:items-end lg:justify-between lg:gap-10 dark:border-white/10">
             <x-ui.page-header :heading="$entry->get('title')" :subheading="$entry->get('subheading')" class="max-w-[38.75rem]" />
