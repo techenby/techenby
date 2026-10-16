@@ -61,7 +61,7 @@
                 <x-ui.wordmark class="h-8 w-auto" />
             </a>
 
-            <flux:sidebar.header class="justify-evenly">
+            <flux:sidebar.header class="justify-start! gap-3 px-2">
                 <flux:avatar circle size="lg" src="https://unavatar.io/x/techenby" />
                 <div>
                     <flux:heading size="lg" class="font-display font-semibold">Andy Swick</flux:heading>
