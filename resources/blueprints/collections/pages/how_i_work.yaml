@@ -24,10 +24,16 @@ tabs:
               type: textarea
               display: Subheading
           -
+            handle: tldr_heading
+            field:
+              type: text
+              display: 'Summary heading'
+              instructions: 'Heading for the short summary list. Falls back to "The 20-second version".'
+          -
             handle: tldr
             field:
               type: list
-              display: 'The 20-second version'
+              display: Summary
               instructions: 'Three to five short lines. Start a line with "Prompt:" while it is still a placeholder.'
           -
             handle: sections

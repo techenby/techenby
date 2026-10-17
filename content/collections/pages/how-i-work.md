@@ -5,6 +5,7 @@ title: 'How I work'
 template: how-i-work
 as_of: '2026-10-15 00:00'
 subheading: "A user manual for working with me, whether we're coworkers, you're inviting me to speak, or you just want to chat."
+tldr_heading: 'TLDR;'
 tldr:
   - 'My name is Andy Swick and I use they/them pronouns'
   - 'The best way to reach me is Twitter or Bluesky DMs'

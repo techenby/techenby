@@ -5,6 +5,8 @@
     $entry = Entry::find($id);
     $asOf = $entry->augmentedValue('as_of')->value();
     $tldr = collect($entry->value('tldr') ?? [])->filter();
+    $tldrHeading = $entry->value('tldr_heading') ?: 'The 20-second version';
+    $tldrAnchor = Str::slug($tldrHeading);
 
     $sections = collect($entry->value('sections') ?? [])
         ->filter(fn (array $section) => $section['enabled'] ?? true)
@@ -15,7 +17,7 @@
         })
         ->values();
 
-    $toc = collect($tldr->isNotEmpty() ? [['id' => 'the-20-second-version', 'text' => 'The 20-second version']] : [])
+    $toc = collect($tldr->isNotEmpty() ? [['id' => $tldrAnchor, 'text' => $tldrHeading]] : [])
         ->concat($sections->map(fn (array $section) => ['id' => $section['anchor'], 'text' => $section['label']]))
         ->all();
 
@@ -33,9 +35,9 @@
                 />
 
                 @if ($tldr->isNotEmpty())
-                    <section id="the-20-second-version" aria-labelledby="the-20-second-version-heading" class="scroll-mt-6 space-y-3.5 rounded-xl border border-zinc-200 bg-zinc-50 p-6 dark:border-white/10 dark:bg-white/5">
+                    <section id="{{ $tldrAnchor }}" aria-labelledby="{{ $tldrAnchor }}-heading" class="scroll-mt-6 space-y-3.5 rounded-xl border border-zinc-200 bg-zinc-50 p-6 dark:border-white/10 dark:bg-white/5">
                         <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                            <h2 id="the-20-second-version-heading" class="font-display text-xl font-semibold tracking-tight text-zinc-800 dark:text-white">The 20-second version</h2>
+                            <h2 id="{{ $tldrAnchor }}-heading" class="font-display text-xl font-semibold tracking-tight text-zinc-800 dark:text-white">{{ $tldrHeading }}</h2>
                             <p class="-rotate-[1.5deg] font-hand text-[1.1875rem]/[1.375rem] text-enby-purple-text">if you read nothing else</p>
                         </div>
 
