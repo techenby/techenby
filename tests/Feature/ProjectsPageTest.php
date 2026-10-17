@@ -18,6 +18,14 @@ class ProjectsPageTest extends TestCase
     }
 
     #[Test]
+    public function projects_are_listed_in_the_collection_structure_order(): void
+    {
+        $this->get('/projects')
+            ->assertOk()
+            ->assertSeeInOrder(['Sunny Home', 'Make Ship Happen Podcast', 'Heartsong', 'Card Party', 'Uke or Puke']);
+    }
+
+    #[Test]
     public function a_project_without_a_logo_or_links_still_renders(): void
     {
         $this->get('/projects')

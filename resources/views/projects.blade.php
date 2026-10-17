@@ -9,7 +9,7 @@
         <x-ui.page-header :heading="$heading ?? $title" :$subheading />
 
         <ul role="list" class="grid gap-4 md:grid-cols-2">
-            <s:collection:projects sort="title" scope="project">
+            <s:collection:projects scope="project">
                 <li class="flex gap-4 rounded-xl border border-zinc-200 bg-white p-5 shadow-xs dark:border-white/10 dark:bg-white/5">
                     @if ($project->header_image)
                         <img src="{{ $project->header_image->url }}" alt="" class="size-12 shrink-0 rounded-lg object-contain">
