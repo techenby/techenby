@@ -68,11 +68,11 @@ sections:
     enabled: true
     toc_label: "Do and don't"
     do:
-      - 'Prompt: a habit that makes working together easy'
-      - 'Prompt: another one'
+      - 'Invite me into the conversation if you see me hovering'
+      - "Offer me a big hug if I seem overwhelmed and you're comfortable with it"
     dont:
-      - 'Prompt: something that makes things harder'
-      - 'Prompt: another one'
+      - "Email me unless I'm expecting it"
+      - 'Make a big deal of it if you misgender me'
   -
     id: hiw-speaking
     type: question
