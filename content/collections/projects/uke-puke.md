@@ -10,4 +10,4 @@ links:
     label: GitHub
     url: 'https://github.com/techenby/uke-or-puke'
 ---
-Guitar Hero meets SmartMusic, a rythem game where you actually learn how to play the instrument.
+Guitar Hero meets SmartMusic, a rhythm game where you actually learn how to play the instrument.
