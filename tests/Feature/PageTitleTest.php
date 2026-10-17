@@ -4,10 +4,25 @@ namespace Tests\Feature;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use Statamic\Facades\Entry;
 use Tests\TestCase;
 
 class PageTitleTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Entry::make()
+            ->collection('log')
+            ->blueprint('post')
+            ->slug('a-published-post')
+            ->published(true)
+            ->date('2026-01-05')
+            ->data(['title' => 'A published post'])
+            ->save();
+    }
+
     /**
      * @return array<string, array{string, string}>
      */
@@ -20,7 +35,7 @@ class PageTitleTest extends TestCase
             'faq' => ['/faq', 'FAQ'],
             'projects' => ['/projects', 'Projects'],
             'uses' => ['/uses', 'Uses'],
-            'post' => ['/log/building-sunnys-mobile-app-mostly-by-prompting', 'Building Sunny&#039;s mobile app, mostly by prompting.'],
+            'post' => ['/log/a-published-post', 'A published post'],
             'tip' => ['/log/keep-factories-simple', 'Keep Factories Simple'],
         ];
     }

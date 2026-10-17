@@ -4,10 +4,25 @@ namespace Tests\Feature;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use Statamic\Facades\Entry;
 use Tests\TestCase;
 
 class SiteFooterTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Entry::make()
+            ->collection('log')
+            ->blueprint('post')
+            ->slug('a-published-post')
+            ->published(true)
+            ->date('2026-01-05')
+            ->data(['title' => 'A published post'])
+            ->save();
+    }
+
     /**
      * @return array<string, array{string}>
      */
@@ -22,7 +37,7 @@ class SiteFooterTest extends TestCase
             'faq' => ['/faq'],
             'now' => ['/now'],
             'how i work' => ['/how-i-work'],
-            'post' => ['/log/building-sunnys-mobile-app-mostly-by-prompting'],
+            'post' => ['/log/a-published-post'],
             'tip' => ['/log/keep-factories-simple'],
             'make' => ['/log/key-hooks'],
         ];
