@@ -5,11 +5,11 @@ title: 'How I work'
 template: how-i-work
 as_of: '2026-10-15 00:00'
 subheading: "A user manual for working with me, whether we're coworkers, you're inviting me to speak, or you just want to chat."
-tldr_heading: 'TL;DR'
+tldr_heading: TL;DR
 tldr:
-  - 'My name is Andy Swick and I use they/them pronouns'
-  - 'The best way to reach me is Twitter or Bluesky DMs'
-  - 'Prompt: the one thing that makes meetings work for me'
+  - 'Name & pronouns: Andy Swick, they/them'
+  - 'Reaching me: Bluesky or Twitter DMs'
+  - "Meetings: tell me the topic ahead of time, and cameras on if you're comfortable"
   - 'Feedback: written first, direct but kind, and private'
 sections:
   -
@@ -87,5 +87,5 @@ sections:
     heading: 'About this site'
     content: "It's built for every brain, mine included. Text is set in Atkinson Hyperlegible, designed for low-vision readers. The reading comfort controls in the sidebar change the text size across the whole site and turn off motion, including the tilt on the Current Party card. Links are always underlined, and every image has real alt text."
 updated_by: 2de7d260-84a8-4dfc-9a2e-af5aae989cd3
-updated_at: 1792199568
+updated_at: 1792200448
 ---
