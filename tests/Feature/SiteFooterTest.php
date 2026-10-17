@@ -22,7 +22,6 @@ class SiteFooterTest extends TestCase
             'faq' => ['/faq'],
             'now' => ['/now'],
             'how i work' => ['/how-i-work'],
-            'friends' => ['/friends'],
             'post' => ['/log/building-sunnys-mobile-app-mostly-by-prompting'],
             'tip' => ['/log/keep-factories-simple'],
             'make' => ['/log/key-hooks'],

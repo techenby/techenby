@@ -3,6 +3,7 @@ id: 29217906-f9e6-4a3f-af3c-48a59c457dff
 blueprint: friends
 title: Friends
 template: friends
+published: false
 subheading: 'The people I build with, talk with, and learn from. Their sites are better than mine, so go read them.'
 groups:
   -

@@ -3,13 +3,27 @@
 namespace Tests\Feature;
 
 use PHPUnit\Framework\Attributes\Test;
+use Statamic\Facades\Entry;
 use Tests\TestCase;
 
 class FriendsPageTest extends TestCase
 {
     #[Test]
+    public function the_friends_page_is_hidden_while_unpublished(): void
+    {
+        $this->get('/friends')->assertNotFound();
+        $this->get('/friends.opml')->assertNotFound();
+
+        $this->get('/')
+            ->assertOk()
+            ->assertDontSee('href="/friends"', false);
+    }
+
+    #[Test]
     public function the_friends_page_lists_friends_by_group(): void
     {
+        $this->publishFriendsPage();
+
         $this->get('/friends')
             ->assertOk()
             ->assertSeeInOrder(['<h1', 'Friends', 'Subscribe to all of them', 'href="/friends.opml"'], false)
@@ -20,6 +34,8 @@ class FriendsPageTest extends TestCase
     #[Test]
     public function friends_opml_lists_each_feed_once(): void
     {
+        $this->publishFriendsPage();
+
         $response = $this->get('/friends.opml')
             ->assertOk()
             ->assertHeader('Content-Type', 'text/x-opml; charset=UTF-8');
@@ -31,5 +47,10 @@ class FriendsPageTest extends TestCase
         $this->assertCount(1, $opml->body->outline);
         $this->assertSame('https://example.com/feed.xml', (string) $opml->body->outline[0]['xmlUrl']);
         $this->assertSame('rss', (string) $opml->body->outline[0]['type']);
+    }
+
+    private function publishFriendsPage(): void
+    {
+        Entry::query()->where('collection', 'pages')->where('slug', 'friends')->first()->published(true)->save();
     }
 }

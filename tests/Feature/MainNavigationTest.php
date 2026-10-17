@@ -21,7 +21,6 @@ class MainNavigationTest extends TestCase
                 'About me',
                 'href="/now"', 'Now',
                 'href="/how-i-work"', 'How I work',
-                'href="/friends"', 'Friends',
             ], false);
     }
 

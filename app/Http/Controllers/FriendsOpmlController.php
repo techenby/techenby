@@ -14,7 +14,7 @@ class FriendsOpmlController extends Controller
     {
         $page = Entry::findByUri('/friends');
 
-        abort_if($page === null, 404);
+        abort_if($page === null || ! $page->published(), 404);
 
         $feeds = collect($page->value('groups') ?? [])
             ->flatMap(fn (array $group) => $group['friends'] ?? [])
