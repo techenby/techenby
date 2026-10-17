@@ -75,7 +75,7 @@ class SiteFooterTest extends TestCase
         $response = $this->get($uri)
             ->assertOk()
             ->assertSeeInOrder(['href="https://code.example.com/test"', 'href="https://social.example.com/@test"'], false)
-            ->assertSee('&copy; '.now()->year.' Andy Swick', false);
+            ->assertSee('&copy; ' . now()->year . ' Andy Swick', false);
 
         $this->assertSame(1, substr_count($response->getContent(), '<footer'));
     }
