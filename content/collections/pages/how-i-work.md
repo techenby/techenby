@@ -10,7 +10,7 @@ tldr:
   - 'My name is Andy Swick and I use they/them pronouns'
   - 'The best way to reach me is Twitter or Bluesky DMs'
   - 'Prompt: the one thing that makes meetings work for me'
-  - 'Prompt: how I like feedback'
+  - 'Feedback: written first, direct but kind, and private'
 sections:
   -
     id: hiw-reach
@@ -35,7 +35,7 @@ sections:
     enabled: true
     heading: 'How do you like feedback?'
     toc_label: Feedback
-    content: 'Prompt: written or spoken, direct or softened, right away or saved up. Say what "kind" feedback looks like to you.'
+    content: "I like feedback in writing first, so I can take it in at my own pace, and then a chance to talk it through if either of us needs to. Be direct, but kind. For me that means being specific, explaining why, and if you can, suggesting what you'd do instead. Small things are fine to mention right away. For bigger things, I'd rather we set aside time to talk. And please keep critical feedback between the two of us, at least at first."
   -
     id: hiw-ask
     type: topics
