@@ -19,7 +19,12 @@
         <ul role="list" class="divide-y divide-zinc-950/10 border-y border-zinc-950/10 dark:divide-white/10 dark:border-white/10">
             @foreach ($items as $item)
                 <li class="flex items-center gap-4 py-3.5">
-                    @if ($item['photos'] !== [])
+                    @if ($item['podcast'] ?? null)
+                        <a href="{{ $item['podcast']['audio'] ?? $item['url'] }}" class="flex size-14 shrink-0 items-center justify-center rounded-full bg-zinc-800 text-white hover:bg-zinc-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-enby-purple dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">
+                            <span class="sr-only">Play {{ $item['title'] }}</span>
+                            <svg aria-hidden="true" viewBox="0 0 18 18" class="size-4.5 fill-current"><path d="M5 3.5v11l9-5.5z" /></svg>
+                        </a>
+                    @elseif ($item['photos'] !== [])
                         <img src="{{ $item['photos'][0]['square'] }}" alt="" loading="lazy" class="size-14 shrink-0 rounded-md object-cover ring-1 ring-zinc-950/10 dark:ring-white/10">
                     @else
                         <div aria-hidden="true" class="size-14 shrink-0"></div>

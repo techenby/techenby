@@ -12,8 +12,9 @@ class LogFeedController extends Controller
      */
     public function __invoke(Lately $lately, ?string $type = null): Response
     {
-        $filter = $type ? Lately::FILTERS[$type] ?? abort(404) : null;
-        $blueprints = $filter ? [$filter['blueprint']] : array_column(Lately::FILTERS, 'blueprint');
+        $filters = $lately->filters();
+        $filter = $type ? $filters[$type] ?? abort(404) : null;
+        $blueprints = $filter ? [$filter['blueprint']] : array_column($filters, 'blueprint');
 
         return response()
             ->view('feeds.log', [

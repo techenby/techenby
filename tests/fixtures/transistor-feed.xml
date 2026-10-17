@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Make Ship Happen</title>
+    <link>https://makeshiphappen.transistor.fm</link>
+    <description>Shipping side projects, one episode at a time.</description>
+    <item>
+      <title>Shipping on a Sunday</title>
+      <link>https://makeshiphappen.transistor.fm/episodes/shipping-on-a-sunday</link>
+      <guid isPermaLink="false">b2a1c3d4-0012</guid>
+      <pubDate>Sat, 03 Oct 2026 14:00:00 -0500</pubDate>
+      <enclosure url="https://media.transistor.fm/b2a1c3d4/shipping-on-a-sunday.mp3" length="40320000" type="audio/mpeg"/>
+      <itunes:episode>12</itunes:episode>
+      <itunes:duration>2520</itunes:duration>
+      <description><![CDATA[<p>Why weekends are for shipping.</p>]]></description>
+    </item>
+    <item>
+      <title>Naming things &amp; other hard problems</title>
+      <link>https://makeshiphappen.transistor.fm/episodes/naming-things</link>
+      <guid isPermaLink="false">b2a1c3d4-0011</guid>
+      <pubDate>Thu, 20 Aug 2026 09:00:00 -0500</pubDate>
+      <enclosure url="https://media.transistor.fm/b2a1c3d4/naming-things.mp3" length="60000000" type="audio/mpeg"/>
+      <itunes:episode>11</itunes:episode>
+      <itunes:duration>1:02:03</itunes:duration>
+    </item>
+    <item>
+      <title>A trailer with no number</title>
+      <guid isPermaLink="false">b2a1c3d4-trailer</guid>
+      <pubDate>Mon, 01 Jun 2026 09:00:00 -0500</pubDate>
+      <enclosure url="https://media.transistor.fm/b2a1c3d4/trailer.mp3" length="1000000" type="audio/mpeg"/>
+      <itunes:duration>04:30</itunes:duration>
+    </item>
+    <item>
+      <title>Scheduled for later</title>
+      <link>https://makeshiphappen.transistor.fm/episodes/scheduled</link>
+      <guid isPermaLink="false">b2a1c3d4-0099</guid>
+      <pubDate>Fri, 01 Jan 2100 09:00:00 -0500</pubDate>
+      <itunes:episode>99</itunes:episode>
+    </item>
+    <item>
+      <title>No date at all</title>
+      <guid isPermaLink="false">b2a1c3d4-undated</guid>
+    </item>
+  </channel>
+</rss>

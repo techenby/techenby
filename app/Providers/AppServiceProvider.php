@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
-        SSG::addUrls(fn (): array => collect(array_keys(Lately::FILTERS))->map(fn (string $type) => "/log/{$type}")->all());
+        SSG::addUrls(fn (): array => collect(array_keys(app(Lately::class)->filters()))->map(fn (string $type) => "/log/{$type}")->all());
 
         SSG::after(function (): void {
             $destination = config('statamic.ssg.destination');

@@ -2,12 +2,16 @@
 
 namespace App\Support;
 
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Statamic\Contracts\Assets\Asset as AssetContract;
 use Statamic\Contracts\Entries\Entry;
+use Statamic\Extensions\Pagination\LengthAwarePaginator as StatamicPaginator;
+use Statamic\Facades\Blink;
 use Statamic\Facades\Entry as EntryFacade;
 use Statamic\Facades\Term;
 use Statamic\Modifiers\Modify;
@@ -26,7 +30,13 @@ class Lately
         'make' => 'Make',
         'moment' => 'Moment',
         'talk' => 'Talk',
+        'episode' => 'Episode',
     ];
+
+    /**
+     * Episodes aren't entries: they come from the podcast feed under this type.
+     */
+    public const EPISODE = 'episode';
 
     /**
      * @var list<string>
@@ -39,36 +49,106 @@ class Lately
     public const FILTERS = [
         'writing' => ['label' => 'Writing', 'blueprint' => 'post'],
         'tips' => ['label' => 'Tips', 'blueprint' => 'tip'],
+        'episodes' => ['label' => 'Episodes', 'blueprint' => self::EPISODE],
         'makes' => ['label' => 'Makes', 'blueprint' => 'make'],
         'moments' => ['label' => 'Moments', 'blueprint' => 'moment'],
         'talks' => ['label' => 'Talks', 'blueprint' => 'talk'],
     ];
 
-    public function __construct(public BlogSeries $series) {}
+    public function __construct(public BlogSeries $series, public Podcast $podcast) {}
+
+    /**
+     * The Log filters worth offering: Episodes only shows up once there's a podcast feed.
+     *
+     * @return array<string, array{label: string, blueprint: string}>
+     */
+    public function filters(): array
+    {
+        return array_filter(self::FILTERS, fn (array $filter) => $filter['blueprint'] !== self::EPISODE || $this->podcast->enabled());
+    }
 
     /**
      * @param  list<string>  $blueprints
-     * @return Collection<int, array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, minutes: ?int, event: ?string, links: list<array{label: string, url: string}>, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>}>
+     * @return Collection<int, array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, minutes: ?int, event: ?string, links: list<array{label: string, url: string}>, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>, podcast: ?array{show: string, number: ?int, minutes: ?int, audio: ?string}}>
      */
-    public function items(array $blueprints, int $limit = 5): Collection
+    public function items(array $blueprints, ?int $limit = 5): Collection
     {
-        if ($blueprints === []) {
-            return collect();
-        }
+        $entryBlueprints = array_values(array_diff($blueprints, [self::EPISODE]));
 
-        return EntryFacade::query()
+        $entries = $entryBlueprints === [] ? collect() : EntryFacade::query()
             ->where('collection', self::COLLECTION)
-            ->whereIn('blueprint', $blueprints)
+            ->whereIn('blueprint', $entryBlueprints)
             ->whereStatus('published')
             ->get()
-            ->map(fn (Entry $entry) => $this->item($entry))
+            ->map(fn (Entry $entry) => $this->item($entry));
+
+        $episodes = in_array(self::EPISODE, $blueprints, true)
+            ? $this->podcast->episodes()->map(fn (array $episode) => $this->episode($episode))
+            : collect();
+
+        return $entries
+            ->concat($episodes)
             ->sortByDesc(fn (array $item) => $item['date']?->timestamp ?? 0)
-            ->take($limit)
+            ->when($limit !== null, fn (Collection $items) => $items->take($limit))
             ->values();
     }
 
     /**
-     * @return array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, minutes: ?int, event: ?string, links: list<array{label: string, url: string}>, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>}
+     * A page of the Log, built the way Statamic's collection tag paginates so the static generator writes every page.
+     *
+     * @param  list<string>  $blueprints
+     */
+    public function paginate(array $blueprints, int $perPage = 20): LengthAwarePaginator
+    {
+        $items = $this->items($blueprints, null);
+        $page = Paginator::resolveCurrentPage();
+
+        $paginator = app()->makeWith(StatamicPaginator::class, [
+            'items' => $items->forPage($page, $perPage)->values(),
+            'total' => $items->count(),
+            'perPage' => $perPage,
+            'currentPage' => $page,
+            'options' => ['path' => Paginator::resolveCurrentPath(), 'pageName' => 'page'],
+        ])->withQueryString();
+
+        Blink::put('tag-paginator', $paginator);
+
+        return $paginator;
+    }
+
+    /**
+     * @param  array{guid: string, title: string, link: ?string, audio: ?string, date: Carbon, number: ?int, minutes: ?int, show: string}  $episode
+     * @return array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, minutes: ?int, event: ?string, links: list<array{label: string, url: string}>, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>, podcast: ?array{show: string, number: ?int, minutes: ?int, audio: ?string}}
+     */
+    public function episode(array $episode): array
+    {
+        return [
+            'id' => 'episode-'.md5($episode['guid']),
+            'type' => self::TYPES[self::EPISODE],
+            'date' => $episode['date'],
+            'title' => $episode['title'],
+            'url' => $episode['link'] ?? $episode['audio'],
+            'summary' => null,
+            'caption' => null,
+            'series' => null,
+            'part' => null,
+            'kind' => null,
+            'note' => null,
+            'minutes' => null,
+            'event' => null,
+            'links' => [],
+            'photos' => [],
+            'podcast' => [
+                'show' => $episode['show'],
+                'number' => $episode['number'],
+                'minutes' => $episode['minutes'],
+                'audio' => $episode['audio'],
+            ],
+        ];
+    }
+
+    /**
+     * @return array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, minutes: ?int, event: ?string, links: list<array{label: string, url: string}>, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>, podcast: ?array{show: string, number: ?int, minutes: ?int, audio: ?string}}
      */
     public function item(Entry $entry): array
     {
@@ -88,6 +168,7 @@ class Lately
             'event' => $entry->blueprint()->handle() === 'talk' ? $this->kind($entry) : null,
             'links' => $this->links($entry),
             'photos' => $this->photos($entry),
+            'podcast' => null,
         ];
     }
 
