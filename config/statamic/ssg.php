@@ -63,7 +63,7 @@ return [
     */
 
     'urls' => [
-        '/friends.opml',
+        //
     ],
 
     /*
