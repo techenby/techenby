@@ -7,6 +7,7 @@ use App\Support\BlogCodeHighlighter;
 use Illuminate\Support\Carbon;
 use PHPUnit\Framework\Attributes\Test;
 use Statamic\Facades\Entry;
+use Statamic\Facades\Term;
 use Tests\TestCase;
 
 class ArticlePageTest extends TestCase
@@ -64,17 +65,23 @@ class ArticlePageTest extends TestCase
     #[Test]
     public function a_post_in_a_series_shows_the_series_box(): void
     {
+        Term::make('article-test-series')
+            ->taxonomy('series')
+            ->blueprint('series')
+            ->data(['title' => 'Article Test Series', 'description' => 'A series for the article page.'])
+            ->save();
+
         $this->makeEntry('post', 'article-test-series-post', [
             'title' => 'Article test series post',
-            'series' => 'sunny-goes-native',
+            'series' => 'article-test-series',
             'series_part' => 2,
             'content' => [$this->paragraph('Part two.')],
         ]);
 
         $this->get('/log/article-test-series-post')
             ->assertOk()
-            ->assertSee('Sunny Goes Native · Part 2')
-            ->assertSee('Building a NativePHP mobile app for Sunny Home')
+            ->assertSee('Article Test Series · Part 2')
+            ->assertSee('A series for the article page.')
             ->assertSeeInOrder(['aria-current="page"', 'Article test series post', 'you are here'], false);
     }
 

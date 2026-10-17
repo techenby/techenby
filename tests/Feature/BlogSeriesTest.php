@@ -35,7 +35,6 @@ class BlogSeriesTest extends TestCase
     {
         $this->assertNotNull(Taxonomy::find('series'));
         $this->assertContains('series', Collection::find('log')->taxonomies()->map->handle()->all());
-        $this->assertSame('Sunny Goes Native', Term::find('series::sunny-goes-native')?->title());
     }
 
     #[Test]

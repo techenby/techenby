@@ -23,17 +23,15 @@ class DefaultPageTemplateTest extends TestCase
     {
         $this->makePage([
             'title' => 'Default page test',
-            'eyebrow' => 'A small note',
             'heading' => 'A heading for the page',
             'subheading' => 'A line under the heading.',
-            'content' => "Some **markdown** content.\n\n## A section",
         ]);
 
         $this->get('/default-page-test')
             ->assertOk()
             ->assertSee('<title>Default page test', false)
             ->assertSee('<meta name="description" content="A line under the heading.">', false)
-            ->assertSeeInOrder(['A small note', '<h1', 'A heading for the page', 'A line under the heading.', '<strong>markdown</strong>', '<h2>A section</h2>'], false)
+            ->assertSeeInOrder(['<h1', 'A heading for the page', 'A line under the heading.'], false)
             ->assertSee('<footer', false);
     }
 

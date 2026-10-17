@@ -1,11 +1,6 @@
 title: Heading
 fields:
   -
-    handle: eyebrow
-    field:
-      type: text
-      display: Eyebrow
-  -
     handle: heading
     field:
       type: text

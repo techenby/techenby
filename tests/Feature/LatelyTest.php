@@ -6,6 +6,7 @@ use App\Support\Lately;
 use Illuminate\Support\Carbon;
 use PHPUnit\Framework\Attributes\Test;
 use Statamic\Facades\Entry;
+use Statamic\Facades\Term;
 use Tests\TestCase;
 
 class LatelyTest extends TestCase
@@ -27,10 +28,14 @@ class LatelyTest extends TestCase
     #[Test]
     public function the_homepage_shows_recent_posts_and_tips(): void
     {
+        Term::make('lately-test-series')->taxonomy('series')->blueprint('series')->data(['title' => 'Lately Test Series'])->save();
+
+        $this->updatePage('/', ['lately' => ['post', 'tip'], 'limit' => 3]);
+
         $this->makeEntry('post', 'lately-test-post', [
             'title' => 'Lately test post',
             'description' => 'A description written for the homepage.',
-            'series' => 'sunny-goes-native',
+            'series' => 'lately-test-series',
             'series_part' => 1,
         ], date: now()->subMinute());
 
@@ -42,7 +47,7 @@ class LatelyTest extends TestCase
             ->assertSee('Lately test post')
             ->assertSee('href="/log/lately-test-post"', false)
             ->assertSee('A description written for the homepage.')
-            ->assertSee('Sunny Goes Native · Part 1')
+            ->assertSee('Lately Test Series · Part 1')
             ->assertSee('Lately test tip');
     }
 

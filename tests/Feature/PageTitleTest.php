@@ -21,6 +21,19 @@ class PageTitleTest extends TestCase
             ->date('2026-01-05')
             ->data(['title' => 'A published post'])
             ->save();
+
+        Entry::make()
+            ->collection('log')
+            ->blueprint('tip')
+            ->slug('a-published-tip')
+            ->published(true)
+            ->date('2026-01-05')
+            ->data(['title' => 'A published tip'])
+            ->save();
+
+        foreach (['/log' => 'Log test', '/faq' => 'FAQ test', '/projects' => 'Projects test', '/uses' => 'Uses test'] as $uri => $title) {
+            $this->updatePage($uri, ['title' => $title]);
+        }
     }
 
     /**
@@ -30,13 +43,13 @@ class PageTitleTest extends TestCase
     {
         return [
             'home' => ['/', 'Andy Swick'],
-            'log' => ['/log', 'Log'],
-            'log filter' => ['/log/writing', 'Writing · Log'],
-            'faq' => ['/faq', 'FAQ'],
-            'projects' => ['/projects', 'Projects'],
-            'uses' => ['/uses', 'Uses'],
+            'log' => ['/log', 'Log test'],
+            'log filter' => ['/log/writing', 'Writing · Log test'],
+            'faq' => ['/faq', 'FAQ test'],
+            'projects' => ['/projects', 'Projects test'],
+            'uses' => ['/uses', 'Uses test'],
             'post' => ['/log/a-published-post', 'A published post'],
-            'tip' => ['/log/keep-factories-simple', 'Keep Factories Simple'],
+            'tip' => ['/log/a-published-tip', 'A published tip'],
         ];
     }
 

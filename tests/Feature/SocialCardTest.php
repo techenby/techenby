@@ -6,6 +6,7 @@ use App\Support\SocialCard;
 use Illuminate\Support\Facades\Storage;
 use PHPUnit\Framework\Attributes\Test;
 use Statamic\Facades\Entry;
+use Statamic\Facades\Term;
 use Tests\TestCase;
 
 class SocialCardTest extends TestCase
@@ -87,10 +88,12 @@ class SocialCardTest extends TestCase
     {
         $socialCard = app(SocialCard::class);
 
-        $post = $this->makeEntry('post', 'social-card-test-series', ['title' => 'Series post', 'series' => 'sunny-goes-native', 'series_part' => 3]);
+        Term::make('social-card-test-series')->taxonomy('series')->blueprint('series')->data(['title' => 'Social Card Test Series'])->save();
+
+        $post = $this->makeEntry('post', 'social-card-test-series', ['title' => 'Series post', 'series' => 'social-card-test-series', 'series_part' => 3]);
         $tip = $this->makeEntry('tip', 'social-card-test-label-tip', ['title' => 'Label tip']);
 
-        $this->assertSame('Sunny Goes Native · Part 3', $socialCard->label($post));
+        $this->assertSame('Social Card Test Series · Part 3', $socialCard->label($post));
         $this->assertSame('Tip', $socialCard->label($tip));
     }
 
@@ -105,7 +108,7 @@ class SocialCardTest extends TestCase
         $this->get('/log/social-card-test-meta')
             ->assertOk()
             ->assertSee('<meta property="og:title" content="Meta test post">', false)
-            ->assertSee('<meta property="og:image" content="' . Storage::disk('social_cards')->url($path) . '">', false)
+            ->assertSee('<meta property="og:image" content="'.Storage::disk('social_cards')->url($path).'">', false)
             ->assertSee('<meta name="twitter:card" content="summary_large_image">', false);
 
         Storage::disk('social_cards')->assertExists($path);

@@ -11,34 +11,16 @@ class CurrentPartyTest extends TestCase
     #[Test]
     public function the_homepage_shows_every_current_party_member(): void
     {
-        $members = $this->currentParty();
+        GlobalSet::findByHandle('andy')->inDefaultSite()->set('current_party', [
+            ['id' => 'party-test-linked', 'label' => 'Linked member', 'url' => 'https://member.example.com?a=1&b=2', 'note' => 'A note about it.'],
+            ['id' => 'party-test-plain', 'label' => 'Plain member'],
+        ])->save();
 
-        $this->assertNotEmpty($members);
-        $this->assertLessThanOrEqual(6, count($members));
-
-        $response = $this->get('/')
+        $this->get('/')
             ->assertOk()
             ->assertSee('id="current-party-heading"', false)
-            ->assertSee(count($members) . '/6');
-
-        foreach ($members as $member) {
-            $response->assertSee($member['label']);
-
-            if (filled($member['url'] ?? null)) {
-                $response->assertSee('href="' . e($member['url']) . '"', false);
-            }
-
-            if (filled($member['note'] ?? null)) {
-                $response->assertSee($member['note']);
-            }
-        }
-    }
-
-    /**
-     * @return list<array{label: string, url?: string, note?: string}>
-     */
-    private function currentParty(): array
-    {
-        return GlobalSet::findByHandle('andy')->inDefaultSite()->get('current_party') ?? [];
+            ->assertSee('2/6')
+            ->assertSeeInOrder(['Linked member', 'A note about it.', 'Plain member'])
+            ->assertSee('href="https://member.example.com?a=1&amp;b=2"', false);
     }
 }

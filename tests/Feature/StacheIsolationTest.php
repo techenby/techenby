@@ -30,8 +30,8 @@ class StacheIsolationTest extends TestCase
             ->slug('stache-isolation-test')
             ->data(['title' => 'Stache isolation test']);
 
-        $this->assertStringStartsWith($this->fakeStacheDirectory . '/', $entry->path());
-        $this->assertStringStartsWith($this->fakeStacheDirectory . '/', $term->path());
+        $this->assertStringStartsWith($this->fakeStacheDirectory.'/', $entry->path());
+        $this->assertStringStartsWith($this->fakeStacheDirectory.'/', $term->path());
 
         $entry->save();
         $term->save();
@@ -40,7 +40,7 @@ class StacheIsolationTest extends TestCase
         $this->assertFileExists($term->path());
         $this->assertNotNull(Entry::find($entry->id()));
         $this->assertNotNull(Term::find($term->id()));
-        $this->assertFileDoesNotExist(base_path('content/collections/log/' . basename($entry->path())));
+        $this->assertFileDoesNotExist(base_path('content/collections/log/'.basename($entry->path())));
         $this->assertFileDoesNotExist(base_path('content/taxonomies/series/stache-isolation-test.yaml'));
 
         $entry->delete();
@@ -53,24 +53,25 @@ class StacheIsolationTest extends TestCase
     #[Test]
     public function editing_and_deleting_existing_content_leaves_the_real_files_untouched(): void
     {
-        $entry = Entry::findByUri('/friends');
-        $term = Term::find('series::sunny-goes-native');
-
-        $originalEntryPath = base_path('content/collections/pages/friends.md');
-        $originalTermPath = base_path('content/taxonomies/series/sunny-goes-native.yaml');
-        $originalEntry = File::get($originalEntryPath);
-        $originalTerm = File::get($originalTermPath);
+        $entry = Entry::findByUri('/');
+        $term = Term::query()->first();
 
         $this->assertNotNull($entry);
         $this->assertNotNull($term);
-        $this->assertStringStartsWith($this->fakeStacheDirectory . '/', $entry->path());
-        $this->assertStringStartsWith($this->fakeStacheDirectory . '/', $term->path());
 
-        $entry->set('title', 'Isolated friends')->save();
-        $term->set('title', 'Isolated series')->save();
+        $originalEntryPath = base_path('content/collections/pages/'.basename($entry->path()));
+        $originalTermPath = base_path('content/taxonomies/'.$term->taxonomyHandle().'/'.basename($term->path()));
+        $originalEntry = File::get($originalEntryPath);
+        $originalTerm = File::get($originalTermPath);
 
-        $this->assertStringContainsString('Isolated friends', File::get($entry->path()));
-        $this->assertStringContainsString('Isolated series', File::get($term->path()));
+        $this->assertStringStartsWith($this->fakeStacheDirectory.'/', $entry->path());
+        $this->assertStringStartsWith($this->fakeStacheDirectory.'/', $term->path());
+
+        $entry->set('title', 'Isolated page')->save();
+        $term->set('title', 'Isolated term')->save();
+
+        $this->assertStringContainsString('Isolated page', File::get($entry->path()));
+        $this->assertStringContainsString('Isolated term', File::get($term->path()));
         $this->assertSame($originalEntry, File::get($originalEntryPath));
         $this->assertSame($originalTerm, File::get($originalTermPath));
 

@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Statamic\Facades\Entry;
+use Statamic\Facades\GlobalSet;
 use Tests\TestCase;
 
 class SiteFooterTest extends TestCase
@@ -21,6 +22,30 @@ class SiteFooterTest extends TestCase
             ->date('2026-01-05')
             ->data(['title' => 'A published post'])
             ->save();
+
+        Entry::make()
+            ->collection('log')
+            ->blueprint('tip')
+            ->slug('a-published-tip')
+            ->published(true)
+            ->date('2026-01-05')
+            ->data(['title' => 'A published tip'])
+            ->save();
+
+        Entry::make()
+            ->collection('log')
+            ->blueprint('make')
+            ->slug('a-published-make')
+            ->published(true)
+            ->date('2026-01-05')
+            ->data(['title' => 'A published make'])
+            ->save();
+
+        GlobalSet::findByHandle('andy')->inDefaultSite()->set('comms', [
+            ['id' => 'footer-test-code', 'label' => 'Code', 'url' => 'https://code.example.com/test'],
+            ['id' => 'footer-test-social', 'label' => 'Social', 'url' => 'https://social.example.com/@test'],
+            ['id' => 'footer-test-email', 'label' => 'Email', 'url' => 'mailto:test@example.com'],
+        ])->save();
     }
 
     /**
@@ -38,8 +63,8 @@ class SiteFooterTest extends TestCase
             'now' => ['/now'],
             'how i work' => ['/how-i-work'],
             'post' => ['/log/a-published-post'],
-            'tip' => ['/log/keep-factories-simple'],
-            'make' => ['/log/key-hooks'],
+            'tip' => ['/log/a-published-tip'],
+            'make' => ['/log/a-published-make'],
         ];
     }
 
@@ -49,10 +74,8 @@ class SiteFooterTest extends TestCase
     {
         $response = $this->get($uri)
             ->assertOk()
-            ->assertSee('href="https://github.com/techenby"', false)
-            ->assertSee('href="https://bsky.app/profile/techenby.com"', false)
-            ->assertSee('href="https://dev-null.sh/@techenby/"', false)
-            ->assertSee('&copy; ' . now()->year . ' Andy Swick', false);
+            ->assertSeeInOrder(['href="https://code.example.com/test"', 'href="https://social.example.com/@test"'], false)
+            ->assertSee('&copy; '.now()->year.' Andy Swick', false);
 
         $this->assertSame(1, substr_count($response->getContent(), '<footer'));
     }
@@ -68,7 +91,7 @@ class SiteFooterTest extends TestCase
     #[Test]
     public function the_footer_lists_email_everywhere_but_the_faq(): void
     {
-        $this->get('/now')->assertOk()->assertSee('href="mailto:andy@techenby.com"', false);
+        $this->get('/now')->assertOk()->assertSee('href="mailto:test@example.com"', false);
 
         $this->get('/faq')->assertOk()->assertDontSee('mailto:', false);
     }
@@ -76,7 +99,7 @@ class SiteFooterTest extends TestCase
     #[Test]
     public function pages_with_an_entry_show_when_they_were_last_updated(): void
     {
-        $this->get('/log/keep-factories-simple')
+        $this->get('/log/a-published-tip')
             ->assertOk()
             ->assertSee('last tinkered with', false);
     }

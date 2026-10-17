@@ -3,8 +3,11 @@
 namespace Tests\Feature;
 
 use App\Support\Lately;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 use PHPUnit\Framework\Attributes\Test;
+use Statamic\Facades\Asset;
 use Statamic\Facades\Entry;
 use Tests\TestCase;
 
@@ -18,6 +21,10 @@ class LogPageTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        Storage::fake('assets');
+        Storage::disk('assets')->putFileAs('makes/test', UploadedFile::fake()->image('photo.jpg', 40, 30), 'photo.jpg');
+        Asset::find('assets::makes/test/photo.jpg')->set('alt', 'A test photo of a finished make.')->save();
 
         $this->makeEntry('post', 'log-test-post', [
             'title' => 'Log test post',
@@ -110,7 +117,7 @@ class LogPageTest extends TestCase
             'title' => 'Log test make',
             'kind' => '3d-print',
             'note' => 'first try was stringy',
-            'photos' => ['makes/puzzle/puzzle-01.jpg'],
+            'photos' => ['makes/test/photo.jpg'],
         ], date: Carbon::parse('2026-07-20'));
 
         $response = $this->get('/log/makes')
@@ -119,8 +126,8 @@ class LogPageTest extends TestCase
             ->assertSee('3D print')
             ->assertSee('first try was stringy')
             ->assertSee('aria-label="Photos of Log test make"', false)
-            ->assertSee('alt="A finished jigsaw puzzle of an illustrated fantasy city by the sea, on a wooden table."', false)
-            ->assertSeeInOrder(['<figcaption', 'A finished jigsaw puzzle of an illustrated fantasy city by the sea, on a wooden table.', '</figcaption>'], false)
+            ->assertSee('alt="A test photo of a finished make."', false)
+            ->assertSeeInOrder(['<figcaption', 'A test photo of a finished make.', '</figcaption>'], false)
             ->assertSee('/img/asset/', false)
             ->assertDontSee('Log test post')
             ->assertDontSee('Log test tip');
@@ -187,7 +194,7 @@ class LogPageTest extends TestCase
         $this->makeEntry('moment', 'log-test-moment-page', [
             'title' => 'Log test moment page',
             'content' => 'A moment worth keeping.',
-            'photos' => ['makes/puzzle/puzzle-01.jpg'],
+            'photos' => ['makes/test/photo.jpg'],
         ]);
 
         $this->makeEntry('make', 'log-test-make-page', [
@@ -200,7 +207,7 @@ class LogPageTest extends TestCase
         $this->get('/log/log-test-moment-page')
             ->assertOk()
             ->assertSee('<title>Log test moment page', false)
-            ->assertSeeInOrder(['Moment', 'Log test moment page', 'alt="A finished jigsaw puzzle', 'A moment worth keeping.'], false)
+            ->assertSeeInOrder(['Moment', 'Log test moment page', 'alt="A test photo of a finished make."', 'A moment worth keeping.'], false)
             ->assertDontSee('min read');
 
         $this->get('/log/log-test-make-page')
