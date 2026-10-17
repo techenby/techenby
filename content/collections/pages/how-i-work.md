@@ -79,7 +79,7 @@ sections:
     enabled: true
     heading: 'Speaking, podcasts, and mentoring'
     toc_label: Speaking
-    content: "I say yes to conference talks, podcast guest spots, meetups, and streams, and I'm happy to mentor [Larabelles](https://larabelles.com), whether you're brand new or have been around a while. For in-person events, I need travel and lodging covered. Please get my pronouns right in bios, intros, and promo. Podcasts and streams can come together on short notice, but for talks, especially anything with travel, the more lead time the better. This is the one place where email is welcome: [andy@techenby.com](mailto:andy@techenby.com). You can find my past talks in the [Log](/log/talks)."
+    content: "I say yes to conference talks, podcast guest spots, meetups, and streams, and I'm happy to mentor [Larabelles](https://larabelles.com), whether you're brand new or have been around a while. For in-person events, covering travel and lodging is a huge help. If that's not in the budget, even one or the other makes it much easier for me to say yes. Please get my pronouns right in bios, intros, and promo. Podcasts and streams can come together on short notice, but for talks, especially anything with travel, the more lead time the better. This is the one place where email is welcome: [andy@techenby.com](mailto:andy@techenby.com). You can find my past talks in the [Log](/log/talks)."
   -
     id: hiw-site
     type: question
