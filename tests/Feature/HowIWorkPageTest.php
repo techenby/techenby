@@ -29,14 +29,4 @@ class HowIWorkPageTest extends TestCase
             ->assertSee('id="reaching-me"', false)
             ->assertSee('id="about-this-site"', false);
     }
-
-    #[Test]
-    public function placeholder_prompts_are_styled_as_notes_until_replaced(): void
-    {
-        $response = $this->get('/how-i-work')->assertOk();
-
-        $this->assertMatchesRegularExpression('/class="[^"]*italic[^"]*"[^>]*>\s*<p>Prompt: your preferred channel/', $response->getContent());
-        $this->assertMatchesRegularExpression('/<p>It.{1,6}s built for every brain/', $response->getContent());
-        $this->assertDoesNotMatchRegularExpression('/class="[^"]*italic[^"]*"[^>]*>\s*<p>It.{1,6}s built for every brain/', $response->getContent());
-    }
 }
