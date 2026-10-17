@@ -5,7 +5,7 @@ password_hash: $2y$12$yTweR7NsxufjwFG1oIBoneIDXxMqbooMiR/7d.U8JrL.6OjLgTR5C
 preferences:
   collections:
     projects:
-      view: list
+      view: tree
     pages:
       view: tree
     blog:
@@ -13,3 +13,9 @@ preferences:
     uses:
       view: list
       after_save: continue_editing
+    moments:
+      view: list
+    makes:
+      view: list
+    log:
+      view: list

@@ -1,0 +1,39 @@
+title: Moment
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: photos
+            field:
+              type: assets
+              display: Photos
+              container: assets
+              folder: moments
+              instructions: 'The first photo leads. Give every photo alt text, and only post people who said yes.'
+          -
+            handle: content
+            field:
+              type: markdown
+              display: Caption
+              localizable: true
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'

@@ -1,0 +1,162 @@
+title: Post
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: content
+            field:
+              type: bard
+              display: Content
+              localizable: true
+              buttons:
+                - h2
+                - h3
+                - bold
+                - italic
+                - unorderedlist
+                - orderedlist
+                - removeformat
+                - quote
+                - anchor
+                - image
+                - table
+                - underline
+                - strikethrough
+                - small
+                - superscript
+                - subscript
+                - code
+                - codeblock
+                - horizontalrule
+              container: assets
+              remove_empty_nodes: false
+              sets:
+                fillers:
+                  display: Fillers
+                  sets:
+                    code:
+                      display: Code
+                      instructions: 'A code block with a labelled header.'
+                      fields:
+                        -
+                          handle: language
+                          field:
+                            type: text
+                            display: Language
+                            instructions: 'Shown on the left of the header, like PHP or SwiftUI. Also used for syntax highlighting.'
+                            width: 50
+                        -
+                          handle: note
+                          field:
+                            type: text
+                            display: Note
+                            instructions: 'Optional. Shown on the right of the header, like "the one-line fix".'
+                            width: 50
+                        -
+                          handle: code
+                          field:
+                            type: code
+                            display: Code
+                            mode_selectable: false
+                            validate:
+                              - required
+                    image:
+                      display: Image
+                      fields:
+                        -
+                          handle: image
+                          field:
+                            container: assets
+                            folder: blog
+                            dynamic: slug
+                            max_files: 1
+                            min_files: 1
+                            type: assets
+                            display: Image
+                    gif:
+                      display: GIF
+                      instructions: 'Paste any GIPHY link: the page, the embed or the media URL.'
+                      fields:
+                        -
+                          handle: url
+                          field:
+                            type: text
+                            display: 'GIPHY URL'
+                            validate:
+                              - required
+                              - url
+                        -
+                          handle: alt
+                          field:
+                            type: text
+                            display: 'Alt Text'
+                            instructions: 'Describe what happens in the GIF for people who can''t see it.'
+                            validate:
+                              - required
+                        -
+                          handle: caption
+                          field:
+                            type: text
+                            display: Caption
+                            instructions: 'Optional. Shows as a handwritten note under the GIF.'
+                    video:
+                      display: Video
+                      fields:
+                        -
+                          handle: video
+                          field:
+                            type: video
+                            display: Video
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: description
+            field:
+              type: textarea
+              display: Description
+              instructions: 'A sentence or two about the post. Used for search results and link previews; aim for about 160 characters.'
+              localizable: true
+          -
+            handle: tags
+            field:
+              taxonomies:
+                - tags
+              type: terms
+              display: Tags
+              localizable: true
+          -
+            handle: series
+            field:
+              taxonomies:
+                - series
+              type: terms
+              display: Series
+              max_items: 1
+              mode: select
+          -
+            handle: series_part
+            field:
+              type: integer
+              display: Part
+              instructions: 'Where this post falls in the series. Parts are listed in this order.'
+              if:
+                series: 'not empty'

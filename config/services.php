@@ -28,22 +28,15 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'transistor' => [
+        'feed_url' => env('TRANSISTOR_FEED_URL'),
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
-    ],
-
-    'bento' => [
-        'publishable_key' => env('BENTO_PUBLISHABLE_KEY'),
-        'secret_key' => env('BENTO_SECRET_KEY'),
-        'site_uuid' => env('BENTO_SITE_UUID'),
-    ],
-
-    'telegram' => [
-        'bot_token' => env('TELEGRAM_BOT_TOKEN'),
-        'chat_id' => env('TELEGRAM_CHAT_ID'),
     ],
 
 ];

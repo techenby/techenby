@@ -1,0 +1,66 @@
+title: Home
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: heading
+            field:
+              type: textarea
+              display: Heading
+          -
+            handle: subheading
+            field:
+              type: textarea
+              display: Subheading
+          -
+            handle: lately
+            field:
+              type: checkboxes
+              display: Lately
+              instructions: 'Which kinds of Log entries to show on the homepage.'
+              inline: true
+              options:
+                post: Writing
+                tip: Tips
+                episode: Episodes
+                make: Makes
+                moment: Moments
+                talk: Talks
+              width: 66
+          -
+            handle: limit
+            field:
+              default: '5'
+              type: integer
+              display: Limit
+              width: 33
+          -
+            handle: projects
+            field:
+              type: entries
+              display: Projects
+              instructions: 'Projects to feature under "Things I build", in this order. Unpublished picks stay hidden until they go live.'
+              collections:
+                - projects
+              mode: stack
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'

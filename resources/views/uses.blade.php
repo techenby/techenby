@@ -1,7 +1,9 @@
-<x-layout :$andy bottomRight="Uses PC · Online">
-    <x-fieldset.heading :$eyebrow :$subheading :heading="$heading ?? $title" />
+<x-layout :$title :updated-at="$last_modified ?? null">
+    <div class="space-y-10">
+        <x-ui.page-header :heading="$heading ?? $title" :$subheading />
 
-    <livewire:uses.point-n-click />
+        <x-uses.point-n-click />
 
-    <livewire:uses.list />
+        <x-uses.list />
+    </div>
 </x-layout>

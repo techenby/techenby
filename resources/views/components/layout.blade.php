@@ -1,54 +1,111 @@
-@props(['andy'])
+@props(['title' => null, 'description' => null, 'socialTitle' => null, 'socialImage' => null, 'updatedAt' => null, 'hideEmail' => false, 'rssFeedTitle' => null, 'rssFeedUrl' => null])
+
+@php
+    use Carbon\CarbonInterface;
+    use Statamic\Facades\GlobalSet;
+    use Statamic\Fields\Value;
+
+    $updatedAt = $updatedAt instanceof Value ? $updatedAt->value() : $updatedAt;
+    $updatedAt = $updatedAt instanceof CarbonInterface ? $updatedAt : null;
+
+    $comms = collect(GlobalSet::findByHandle('andy')?->inCurrentSite()?->toAugmentedCollection()->get('comms')?->value() ?? [])
+        ->when($hideEmail, fn ($comms) => $comms->reject(fn ($method) => str_starts_with((string) $method->url, 'mailto:')));
+@endphp
 
 <!doctype html>
-<html lang="{{ Statamic\Facades\Site::current()->shortLocale() }}" class="antialiased">
+<html lang="{{ Statamic\Facades\Site::current()->shortLocale() }}" class="antialiased has-[[data-sticky-heading]]:scroll-pt-16">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ $title ?? Statamic\Facades\Site::current()->name() }}</title>
+        <title>{{ filled($title) ? $title.' · '.config('app.name') : config('app.name') }}</title>
+
+        @if (filled($description))
+            <meta name="description" content="{{ $description }}">
+            <meta property="og:description" content="{{ $description }}">
+        @endif
+
+        @if (filled($socialImage))
+            <meta property="og:type" content="article">
+            <meta property="og:title" content="{{ $socialTitle }}">
+            <meta property="og:image" content="{{ $socialImage }}">
+            <meta property="og:image:width" content="{{ App\Support\SocialCard::WIDTH }}">
+            <meta property="og:image:height" content="{{ App\Support\SocialCard::HEIGHT }}">
+            <meta name="twitter:card" content="summary_large_image">
+        @endif
+
+        <link rel="icon" href="/favicon.ico" sizes="32x32">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <link rel="alternate" type="application/rss+xml" title="Andy Swick’s Log" href="{{ route('log.feed') }}">
+        @if (filled($rssFeedTitle) && filled($rssFeedUrl))
+            <link rel="alternate" type="application/rss+xml" title="{{ $rssFeedTitle }}" href="{{ $rssFeedUrl }}">
+        @endif
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@300..900&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Lora:wght@400..700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Recursive:wght,MONO@300..1000,0..1&family=Gaegu:wght@400;700&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
         @vite(['resources/js/site.js', 'resources/css/site.css'])
 
         @fluxAppearance
+
+        <script>
+            (() => {
+                const root = document.documentElement;
+                let textSize = null;
+                let reduceMotion = null;
+
+                try {
+                    textSize = localStorage.getItem('techenby:text-size');
+                    reduceMotion = localStorage.getItem('techenby:reduce-motion');
+                } catch {}
+
+                if (['sm', 'base', 'lg'].includes(textSize)) {
+                    root.dataset.textSize = textSize;
+                }
+
+                root.classList.toggle(
+                    'reduce-motion',
+                    reduceMotion === null ? matchMedia('(prefers-reduced-motion: reduce)').matches : reduceMotion === 'true',
+                );
+            })();
+        </script>
     </head>
-    <body class="font-sans">
-        <div class="relative isolate min-h-dvh overflow-hidden bg-stone-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
-            <div aria-hidden="true" class="pointer-events-none absolute inset-0 [background-image:repeating-linear-gradient(0deg,transparent_0_3px,rgba(0,0,0,0.04)_3px_4px)] dark:[background-image:repeating-linear-gradient(0deg,transparent_0_3px,rgba(255,255,255,0.035)_3px_4px)]"></div>
+    <body class="enby-stripe min-h-dvh bg-zinc-50 dark:bg-zinc-900">
+        <flux:sidebar sticky collapsible="mobile" class="overscroll-x-auto! bg-zinc-50 dark:bg-zinc-900">
+            <a href="/" class="max-lg:hidden self-start rounded-lg px-2 pt-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-enby-purple">
+                <x-ui.wordmark class="h-8 w-auto" />
+            </a>
 
-            <div class="relative mx-auto grid min-h-dvh max-w-3xl items-start lg:px-6 lg:py-16">
-                <div class="min-w-0 w-full">
-                    <div class="flex items-center justify-between px-6 pt-6 lg:p-0 lg:mr-2 gap-4 font-geist-mono text-xs font-medium tracking-wide text-neutral-500 dark:text-neutral-400">
-                        <x-atom.nav class="min-w-0 flex-1" />
-
-                        <x-comms align="bottom" :andy="$andy">
-                            <span class="shrink-0 font-geist-mono"><span class="uppercase">Trainer ID</span> @techenby</span>
-                        </x-comms>
-                    </div>
-
-                    <main class="mt-6 min-w-0 border-2 border-neutral-900 bg-white p-5 shadow-[6px_6px_0_0_#171717] sm:p-10 sm:shadow-[8px_8px_0_0_#171717] dark:border-white/10 dark:bg-neutral-900 dark:inset-ring dark:inset-ring-white/5 dark:shadow-none">
-                        {{ $slot }}
-                    </main>
-
-                    <div class="mt-6 flex items-center justify-between font-geist-mono text-[0.6875rem] uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-                        <div class="flex space-x-2">
-                            <span>&copy; {{ date('Y') }}</span>
-                            <details class="group flex space-x-1 normal-case">
-                                <summary class="cursor-pointer list-none hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500 [&::-webkit-details-marker]:hidden dark:hover:text-neutral-100">
-                                    Andy Swick
-                                </summary>
-                                <span> (previously Andy Newhouse)</span>
-                            </details>
-                        </div>
-                        @isset($bottomRight)
-                        <span>{{ $bottomRight }}</span>
-                        @endisset
-                    </div>
+            <flux:sidebar.header class="justify-start! gap-3 px-2">
+                <flux:avatar circle size="lg" src="https://unavatar.io/x/techenby" />
+                <div>
+                    <flux:heading size="lg" class="font-display font-semibold">Andy Swick</flux:heading>
+                    <flux:text>they/them</flux:text>
                 </div>
-            </div>
-        </div>
+            </flux:sidebar.header>
+            <x-ui.main-nav />
+
+            <flux:sidebar.spacer />
+
+            <x-ui.spicy-preferences />
+        </flux:sidebar>
+
+        <flux:header class="lg:hidden bg-white dark:bg-zinc-800">
+            <a href="/" class="flex items-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-enby-purple">
+                <x-ui.wordmark class="h-7 w-auto" />
+            </a>
+            <flux:spacer />
+            <flux:button variant="outline" size="sm" icon="bars-2" x-data x-on:click="$dispatch('flux-sidebar-toggle')" data-flux-sidebar-toggle>Menu</flux:button>
+        </flux:header>
+
+        <flux:main inset class="lg:ms-0 xl:px-20 lg:overscroll-x-auto! has-[[data-sticky-heading]]:scroll-pt-16">
+            {{ $slot }}
+
+            <x-ui.site-footer :$comms :$updatedAt class="mt-16" />
+
+            <x-ui.spicy-preferences class="mt-10 lg:hidden" />
+        </flux:main>
 
         @livewireScripts
         @fluxScripts

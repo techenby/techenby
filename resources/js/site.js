@@ -58,15 +58,16 @@ document.querySelectorAll('[data-uses]').forEach((uses) => {
     }
 
     const inspectItem = (hotspot) => {
-        hotspots.forEach((item) => item.classList.toggle('is-selected', item === hotspot))
+        hotspots.forEach((item) => item.toggleAttribute('data-selected', item === hotspot))
 
         const view = hotspot.closest('[data-uses-view]') || uses
         const panelName = view.querySelector('[data-uses-panel-name]')
         const panelType = view.querySelector('[data-uses-panel-type]')
         const panelDescription = view.querySelector('[data-uses-panel-description]')
         const panelLinks = view.querySelector('[data-uses-panel-links]')
+        const linkTemplate = view.querySelector('[data-uses-link-template]')
 
-        if (!panelName || !panelType || !panelDescription || !panelLinks) {
+        if (!panelName || !panelType || !panelDescription || !panelLinks || !linkTemplate) {
             return
         }
 
@@ -80,15 +81,12 @@ document.querySelectorAll('[data-uses]').forEach((uses) => {
         panelLinks.hidden = links.length === 0
 
         links.forEach((link) => {
-            const item = document.createElement('li')
-            const anchor = document.createElement('a')
+            const item = linkTemplate.content.firstElementChild.cloneNode(true)
+            const anchor = item.querySelector('a')
 
             anchor.href = link.url
             anchor.textContent = link.label
-            anchor.target = '_blank'
-            anchor.rel = 'noopener'
 
-            item.append(anchor)
             panelLinks.append(item)
         })
     }

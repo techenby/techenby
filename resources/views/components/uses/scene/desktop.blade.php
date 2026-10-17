@@ -1,52 +1,36 @@
 @props(['scene', 'activeScene' => 'desk'])
 
-<div data-uses-view="{{ $scene->slug }}" @if ($activeScene !== $scene->slug) hidden @endif>
-    <div class="uses-scene-grid">
-        <div class="overflow-hidden border-2 border-neutral-900 bg-stone-200 p-3 shadow-[6px_6px_0_0_#171717] dark:border-white/15 dark:bg-neutral-950 dark:shadow-none">
-            <div class="relative z-10 flex items-center justify-between border-2 border-neutral-900 bg-neutral-900 px-3 py-2 font-press-start text-[0.625rem] uppercase text-white dark:border-white/15">
-                <span>{{ $scene->title }}</span>
-                <button type="button" data-uses-view-button="desk" class="text-orange-300 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500">Back to desk</button>
-            </div>
+<x-uses.scene-frame
+    :$scene
+    :$activeScene
+    :heading="$scene->title"
+    type="Software"
+    description="Hover or tap an app to see what it is."
+>
+    <div class="absolute inset-0 flex items-center justify-center p-3 sm:p-6">
+        <div aria-label="Applications" class="max-h-full w-full max-w-3xl overflow-y-auto rounded-2xl border border-white/50 bg-white/70 p-4 shadow-lg backdrop-blur-xl sm:p-5 dark:border-white/15 dark:bg-zinc-900/70">
+            <p class="border-b border-zinc-950/10 pb-3 text-sm font-semibold text-zinc-700 dark:border-white/10 dark:text-zinc-200">Applications</p>
 
-            <div class="relative mt-3 aspect-4/3 overflow-hidden border-2 border-neutral-900 bg-stone-200 dark:border-white/15 dark:bg-neutral-950">
-                <img src="{{ $scene->background->url }}" alt="{{ $scene->background->alt }}" class="uses-scene-image">
-
-                <div class="absolute inset-0 z-10 flex items-center justify-center p-4 sm:p-6">
-                    <div class="grid max-h-full w-full max-w-184 overflow-y-auto rounded-[1.75rem] border border-white/45 bg-neutral-100/70 shadow-[0_24px_70px_rgba(0,0,0,0.28)] backdrop-blur-xl p-5 dark:border-white/15 dark:bg-neutral-900/65" aria-label="Applications">
-                        <div class="flex items-center border-b pb-3 border-neutral-400/45 font-geist font-medium text-neutral-700 dark:border-white/15 dark:text-neutral-100">
-                            <span>Software</span>
-                        </div>
-
-                        <div class="grid grid-cols-4 gap-x-5 gap-y-4 pt-5 sm:grid-cols-5 lg:grid-cols-4">
-                            <s:collection:uses :scene:is="$scene->id" >
-                                <button class="grid min-w-0 justify-items-center gap-2 text-center"
-                                    data-uses-item="{{ $slug }}"
-                                    data-uses-name="{{ $title }}"
-                                    data-uses-type="{{ $types->title }}"
-                                    data-uses-description="{{ $content }}"
-                                    data-uses-links="{{ base64_encode(json_encode($links)) }}"
-                                    @if ($action)
-                                        data-uses-action="{{ $action }}"
-                                    @endif
-                                    aria-label="Inspect {{ $title }}"
-                                >
-
-                                    <img src="{{ $icon->url }}" alt="" class="size-14 rounded-2xl object-contain ">
-                                    <span class="max-w-full truncate font-geist text-sm font-medium text-neutral-800 dark:text-neutral-100">{{ $title }}</span>
-                                </button>
-                            </s:collection:uses>
-                        </div>
-                    </div>
-                </div>
+            <div class="grid grid-cols-4 gap-x-2 gap-y-3 pt-4 sm:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
+                <s:collection:uses :scene:is="$scene->id">
+                    <button
+                        type="button"
+                        class="grid min-w-0 justify-items-center gap-1.5 rounded-xl p-2 text-center outline-none hover:bg-white/60 focus-visible:bg-white/60 focus-visible:ring-2 focus-visible:ring-enby-purple data-selected:bg-white/70 data-selected:ring-2 data-selected:ring-enby-purple dark:hover:bg-white/10 dark:focus-visible:bg-white/10 dark:data-selected:bg-white/10"
+                        data-uses-item="{{ $slug }}"
+                        data-uses-name="{{ $title }}"
+                        data-uses-type="{{ $types->title }}"
+                        data-uses-description="{{ $content }}"
+                        data-uses-links="{{ base64_encode(json_encode($links)) }}"
+                        @if ($action)
+                            data-uses-action="{{ $action }}"
+                        @endif
+                        aria-label="Inspect {{ $title }}"
+                    >
+                        <img src="{{ $icon->url }}" alt="" class="size-10 rounded-xl object-contain sm:size-12">
+                        <span class="max-w-full truncate text-xs font-medium text-zinc-800 sm:text-sm dark:text-zinc-100">{{ $title }}</span>
+                    </button>
+                </s:collection:uses>
             </div>
         </div>
-
-        <aside class="uses-panel" aria-live="polite" data-uses-panel>
-            <div class="uses-panel-label">Selected Item</div>
-            <h2 data-uses-panel-name>{{ $scene['label'] }}</h2>
-            <p class="uses-panel-type" data-uses-panel-type>Zoom scene</p>
-            <p data-uses-panel-description>Hover, focus, or tap an object.</p>
-            <ul class="uses-panel-links" data-uses-panel-links hidden></ul>
-        </aside>
     </div>
-</div>
+</x-uses.scene-frame>

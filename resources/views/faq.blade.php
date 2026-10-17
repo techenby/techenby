@@ -4,30 +4,33 @@
 
     $faqs = Entry::query()
         ->where('collection', 'faqs')
-        ->get()
-        ->sortBy(fn ($entry) => $entry->get('title'))
-        ->values();
+        ->orderBy('title')
+        ->get();
 @endphp
 
-<x-layout :$andy bottomRight="FAQ Dex · {{ $faqs->count() }} Seen">
-    <x-fieldset.heading :$eyebrow :$subheading :heading="$heading ?? $title" />
+<x-layout :$title :updated-at="$last_modified ?? null" hide-email>
+    <div class="max-w-[42.5rem] space-y-12">
+        <x-ui.page-header :heading="$heading ?? $title" :$subheading />
 
-    <div class="section">
-        <div class="grid gap-4">
+        <div class="divide-y divide-zinc-950/10 border-y border-zinc-950/10 dark:divide-white/10 dark:border-white/10">
             @foreach ($faqs as $faq)
-                <details class="group border-2 border-neutral-900 bg-stone-50 p-4 shadow-[4px_4px_0_0_#171717] open:bg-yellow-50 dark:border-white/15 dark:bg-white/5 dark:shadow-none dark:open:bg-white/10">
-                    <summary class="flex cursor-pointer list-none items-start justify-between gap-4 font-press-start text-[0.6875rem] text-neutral-900 select-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500 [&::-webkit-details-marker]:hidden dark:text-neutral-100">
-                        <span class="text-pretty">{{ $faq->get('title') }}</span>
-                        <span aria-hidden="true" class="text-orange-700 group-open:hidden dark:text-orange-400">&#9654;</span>
-                        <span aria-hidden="true" class="hidden text-orange-700 group-open:inline dark:text-orange-400">&#9660;</span>
-                    </summary>
-                    <div class="mt-4 border-t-2 border-dashed border-neutral-300 pt-4 font-geist text-base text-pretty text-neutral-700 dark:border-white/10 dark:text-neutral-300 [&_a]:text-orange-700 [&_a]:underline [&_a]:decoration-orange-700/40 [&_a]:underline-offset-4 [&_a:hover]:decoration-orange-700 dark:[&_a]:text-orange-400 dark:[&_a]:decoration-orange-400/40 dark:[&_a:hover]:decoration-orange-400 [&_p+p]:mt-4">
+                <section id="{{ $faq->slug() }}" aria-labelledby="{{ $faq->slug() }}-question" class="scroll-mt-6 space-y-3 py-8">
+                    <h2 id="{{ $faq->slug() }}-question" class="font-display text-2xl font-semibold tracking-tight text-balance text-zinc-800 dark:text-white">{{ $faq->get('title') }}</h2>
+                    <div class="article-prose no-lede">
                         {!! Str::markdown($faq->value('content') ?? '') !!}
                     </div>
-                </details>
+                </section>
             @endforeach
         </div>
-    </div>
 
-    @include('forms.faq-question')
+        <section aria-labelledby="ask-me-something" class="relative space-y-3 rounded-xl border border-zinc-200 bg-zinc-50 p-6 sm:p-8 dark:border-white/10 dark:bg-white/5">
+            <h2 id="ask-me-something" class="font-display text-xl font-semibold tracking-tight text-zinc-800 dark:text-white">Got a question I haven&rsquo;t answered?</h2>
+            <flux:text class="text-pretty">Ask me on any of the socials linked at the bottom of this page. If it comes up more than once, it&rsquo;ll probably end up here.</flux:text>
+
+            <svg aria-hidden="true" viewBox="0 0 64 96" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="pointer-events-none absolute -bottom-14 left-24 hidden h-24 w-16 text-enby-purple lg:block">
+                <path d="M14 6c9 1 25 6 30 17 4 9-1 18-9 19-7 1-12-5-8-11 5-7 17-3 20 8 3 12 0 30-3 47" />
+                <path d="M35 76c3 5 6 9 9 12 3-5 7-9 12-12" />
+            </svg>
+        </section>
+    </div>
 </x-layout>

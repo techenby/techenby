@@ -1,0 +1,91 @@
+---
+id: 1c8bda8b-6346-42b3-8673-ba5a1431c980
+blueprint: how_i_work
+title: 'How I work'
+template: how-i-work
+as_of: '2026-10-15 00:00'
+subheading: "A user manual for working with me, whether we're coworkers, you're inviting me to speak, or you just want to chat."
+tldr_heading: TL;DR
+tldr:
+  - 'Name & pronouns: Andy Swick, they/them'
+  - 'Reaching me: Bluesky or Twitter DMs'
+  - "Meetings: tell me the topic ahead of time, and cameras on if you're comfortable"
+  - 'Feedback: written first, direct but kind, and private'
+sections:
+  -
+    id: hiw-reach
+    type: question
+    enabled: true
+    heading: 'How do I reach you, and how fast will you reply?'
+    toc_label: 'Reaching me'
+    content: "The fastest way to reach me is through Bluesky or Twitter DMs, those I check daily. If we've chatted before Telegram is also a great way to reach me quickly. The slowest way is probably Discord. Please do not email me unless I'm expecting it."
+  -
+    id: hiw-meetings
+    type: question
+    enabled: true
+    heading: 'Meetings: what helps?'
+    toc_label: Meetings
+    content: |-
+      I don't mind whether there's a formal agenda, but I do like knowing what a meeting is about going in. For a pair session, that means knowing what we'll be pairing on. A vague "can we chat?" leaves me guessing, so even a one-line heads-up helps. I also like a little buffer between calls rather than being booked back-to-back, and I'm flexible on time of day, just not right before bed.
+
+      I like cameras on when you're comfortable with it. I pick up a lot from facial expressions and body language, and seeing them helps me make sure I'm reading the conversation right. During the meeting, it's hard for me to follow when people talk over each other, and if a yes or no will do, I'd rather have that than a long-winded answer. And if you misgender me, just correct yourself and move on. A quick "they, sorry" is all I need, and making a big deal of it only makes it more awkward for both of us.
+  -
+    id: hiw-feedback
+    type: question
+    enabled: true
+    heading: 'How do you like feedback?'
+    toc_label: Feedback
+    content: "I like feedback in writing first, so I can take it in at my own pace, and then a chance to talk it through if either of us needs to. Be direct, but kind. For me that means being specific, explaining why, and if you can, suggesting what you'd do instead. Small things are fine to mention right away. For bigger things, I'd rather we set aside time to talk. And please keep critical feedback between the two of us, at least at first."
+  -
+    id: hiw-ask
+    type: topics
+    enabled: true
+    heading: 'What can I ask you about?'
+    toc_label: 'Ask me about'
+    topics:
+      - Laravel
+      - 'Livewire & Flux'
+      - LEGO
+      - '3D printing'
+      - NativePHP
+      - 'One Piece'
+      - Statamic
+      - Testing
+    content: "In reality, I'll talk to just about anyone about just about anything. I'm just not great at starting conversations 😅."
+  -
+    id: hiw-hard
+    type: question
+    enabled: true
+    heading: "What's hard for you, and how can I help?"
+    toc_label: 'What helps'
+    content: |-
+      Like I said in the previous answer, starting conversations or feeling comfortable joining conversations has always been a bit nerve-wracking. If you see me kind of wandering or hovering it would be really nice to be invited to join.
+
+      At conferences especially, but in spaces with a lot of inputs I can get overwhelmed easily. When this happens I tend to get a bit scatter-brained or fidgety, if you see this and feel comfortable doing so, offer me a big tight hug.
+  -
+    id: hiw-do-dont
+    type: do_dont
+    enabled: true
+    toc_label: "Do and don't"
+    do:
+      - 'Invite me into the conversation if you see me hovering'
+      - "Offer me a big hug if I seem overwhelmed and you're comfortable with it"
+    dont:
+      - "Email me unless I'm expecting it"
+      - 'Make a big deal of it if you misgender me'
+  -
+    id: hiw-speaking
+    type: question
+    enabled: true
+    heading: 'Speaking, podcasts, and mentoring'
+    toc_label: Speaking
+    content: "I say yes to conference talks, podcast guest spots, meetups, and streams, and I'm happy to mentor [Larabelles](https://larabelles.com), whether you're brand new or have been around a while. For in-person events, covering travel and lodging is a huge help. If that's not in the budget, even one or the other makes it much easier for me to say yes. Please get my pronouns right in bios, intros, and promo. Podcasts and streams can come together on short notice, but for talks, especially anything with travel, the more lead time the better. This is the one place where email is welcome: [andy@techenby.com](mailto:andy@techenby.com). You can find my past talks in the [Log](/log/talks)."
+  -
+    id: hiw-site
+    type: question
+    enabled: true
+    heading: 'About this site'
+    content: "It's built for every brain, mine included. Text is set in Atkinson Hyperlegible, designed for low-vision readers. The reading comfort controls in the sidebar change the text size across the whole site and turn off motion, including the tilt on the Current Party card. Links are always underlined, and every image has real alt text."
+updated_by: 2de7d260-84a8-4dfc-9a2e-af5aae989cd3
+updated_at: 1792200448
+---

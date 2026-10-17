@@ -1,16 +1,22 @@
 ---
-title: Home
 id: home
+blueprint: home
+title: Home
 template: home
-blueprint: pages
+heading: "I write Laravel at Tighten, build an app that runs my house, and I'm still looking for the 1×2 plate missing from my LEGO Titanic."
+subheading: "I'm Andy: queer, nonbinary, neurodivergent, and a big fan of clear code and honest docs. This is where I write things down."
+lately:
+  - post
+  - tip
+  - make
+  - moment
+  - talk
+projects:
+  - 7817dc56-63b8-4ad4-b200-9228508a656c
+  - aa513557-10fc-4695-b60f-bae785764f90
+  - 411bc9c6-d84a-4aa7-8d3c-ca5073acd97f
+  - 5c2229e8-20fa-4a5f-9dc3-7c6c17b562ab
+updated_by: 2de7d260-84a8-4dfc-9a2e-af5aae989cd3
+updated_at: 1792187966
+limit: 3
 ---
-## Welcome to your brand new Statamic site!
-
-Not sure what to do next? Here are a few ideas, but feel free to explore in your own way, in your own time.
-
-- [Jump into the Control Panel](/cp) and edit this page or begin setting up your own collections and blueprints.
-- [Head to the docs](https://statamic.dev) and learn how Statamic works.
-- [Watch some Statamic videos](https://youtube.com/statamic) on YouTube.
-- [Join our Discord chat](https://statamic.com/discord) and meet thousands of other Statamic developers.
-- [Start a discussion](https://github.com/statamic/cms/discussions) and get answers to your questions.
-- [Star Statamic on Github](https://github.com/statamic/cms) if you enjoy using it!

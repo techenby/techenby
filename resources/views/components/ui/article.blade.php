@@ -1,0 +1,70 @@
+@props([
+    'entry',
+    'badge' => null,
+    'description' => null,
+    'readingMinutes' => 1,
+    'headings' => [],
+    'series' => null,
+])
+
+@php
+    use App\Support\Lately;
+
+    $date = app(Lately::class)->date($entry);
+@endphp
+
+<article class="space-y-10">
+    <header class="max-w-[42.5rem] space-y-[1.125rem]">
+        @if ($badge)
+            @if ($series)
+                <x-ui.series-badge>{{ $badge }}</x-ui.series-badge>
+            @else
+                <flux:badge size="sm">{{ $badge }}</flux:badge>
+            @endif
+        @endif
+
+        <h1 class="font-display text-[2rem]/[2.3125rem] font-semibold tracking-tight text-balance text-zinc-800 sm:text-5xl/[3.375rem] dark:text-white">{{ $entry->get('title') }}</h1>
+
+        @if (filled($description))
+            <p class="text-xl/8 text-pretty text-zinc-600 dark:text-zinc-300">{{ $description }}</p>
+        @endif
+
+        <div class="flex items-center gap-3 pt-1.5">
+            <flux:avatar circle size="sm" src="https://unavatar.io/x/techenby" alt="" class="size-9! ring-1 ring-zinc-200 ring-offset-2 ring-offset-white dark:ring-white/20 dark:ring-offset-zinc-800" />
+            <div>
+                <p class="text-[0.9375rem]/5 font-bold text-zinc-800 dark:text-white">Andy Swick</p>
+                <p class="text-sm/5 text-zinc-500 dark:text-zinc-400">
+                    @if ($date)
+                        <time datetime="{{ $date->toDateString() }}">{{ $date->format('M j, Y') }}</time>
+                    @endif
+                    @if ($date && $readingMinutes)
+                        <span aria-hidden="true">·</span>
+                    @endif
+                    @if ($readingMinutes)
+                        {{ $readingMinutes }} min read
+                    @endif
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <div class="grid gap-x-16 xl:grid-cols-[minmax(0,42.5rem)_12.5rem]">
+        <div class="min-w-0 space-y-12">
+            <div id="intro" class="article-prose">
+                {{ $slot }}
+            </div>
+
+            @if ($series && $series['parts']->isNotEmpty())
+                <x-blog.series-nav :$series :current="$entry" />
+            @endif
+
+            <x-ui.newsletter />
+
+            <x-ui.more-from-log :except="$entry->id()" />
+        </div>
+
+        @if (count($headings) > 1)
+            <x-ui.on-this-page :items="[['id' => 'intro', 'text' => 'Intro'], ...$headings]" class="hidden xl:block" />
+        @endif
+    </div>
+</article>

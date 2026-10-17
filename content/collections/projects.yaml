@@ -1,3 +1,16 @@
 title: Projects
-propagate: true
-
+icon: collections
+template: default
+layout: layout
+revisions: false
+sort_dir: asc
+date_behavior:
+  past: null
+  future: null
+preview_targets:
+  -
+    label: Entry
+    url: '{permalink}'
+    refresh: true
+structure:
+  root: false

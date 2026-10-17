@@ -1,0 +1,99 @@
+@php
+    use App\Support\Lately;
+    use Statamic\Facades\Entry;
+
+    $lately = app(Lately::class);
+    $filters = $lately->filters();
+    $activeFilter = isset($type) && array_key_exists($type, $filters) ? $type : null;
+
+    if (isset($type) && ! $activeFilter) {
+        abort(404);
+    }
+
+    $entries = $lately->paginate($activeFilter ? [$filters[$activeFilter]['blueprint']] : array_column($filters, 'blueprint'));
+    $months = $entries->getCollection()->groupBy(fn (array $item) => $item['date']->format('F Y'));
+
+    // Filter pages are plain routes, so the heading always comes from the Log page entry.
+    $logPage = Entry::findByUri('/log');
+@endphp
+
+<x-layout
+    :title="($activeFilter ? $filters[$activeFilter]['label'].' · ' : '').($logPage?->get('title') ?? 'Log')"
+    :updated-at="$logPage?->lastModified()"
+    :rss-feed-title="$activeFilter ? 'Andy Swick’s Log · '.$filters[$activeFilter]['label'] : null"
+    :rss-feed-url="$activeFilter ? route('log.feed.type', $activeFilter) : null"
+>
+    <div class="space-y-10">
+        <header class="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
+            <div class="space-y-4">
+                <h1 class="font-display text-4xl font-semibold tracking-tight text-zinc-800 xl:text-5xl dark:text-white">{{ $logPage?->get('title') ?? 'Log' }}</h1>
+                @if (filled($logPage?->get('subheading')))
+                    <flux:text class="max-w-[60ch] text-lg text-pretty text-zinc-600 dark:text-zinc-300">{{ $logPage->get('subheading') }}</flux:text>
+                @endif
+            </div>
+
+            <div class="space-y-1 sm:text-right">
+                <a href="{{ $activeFilter ? route('log.feed.type', $activeFilter, absolute: false) : route('log.feed', absolute: false) }}" class="text-[0.9375rem] font-bold text-zinc-800 underline decoration-enby-purple decoration-3 underline-offset-5 dark:text-white">
+                    {{ $activeFilter ? 'Subscribe to '.$filters[$activeFilter]['label'] : 'Subscribe to everything' }}
+                </a>
+                @unless ($activeFilter)
+                    <p class="max-sm:hidden text-[0.8125rem] text-zinc-500 dark:text-zinc-400">or pick a feed per type below</p>
+                @endunless
+            </div>
+        </header>
+
+        <nav aria-label="Filter the log" class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-zinc-950/10 pb-6 dark:border-white/10">
+            <ul role="list" class="flex flex-wrap gap-2">
+                <li>
+                    <a href="/log" @if (! $activeFilter) aria-current="page" @endif @class([
+                        'inline-flex rounded-full px-3.5 py-2 text-sm font-semibold',
+                        'bg-zinc-800 text-white dark:bg-white dark:text-zinc-900' => ! $activeFilter,
+                        'text-zinc-600 ring-1 ring-zinc-950/10 ring-inset hover:bg-zinc-50 dark:text-zinc-300 dark:ring-white/10 dark:hover:bg-white/5' => $activeFilter,
+                    ])>All</a>
+                </li>
+                @foreach ($filters as $key => $filter)
+                    <li>
+                        <a href="/log/{{ $key }}" @if ($activeFilter === $key) aria-current="page" @endif @class([
+                            'inline-flex rounded-full px-3.5 py-2 text-sm font-semibold',
+                            'bg-zinc-800 text-white dark:bg-white dark:text-zinc-900' => $activeFilter === $key,
+                            'text-zinc-600 ring-1 ring-zinc-950/10 ring-inset hover:bg-zinc-50 dark:text-zinc-300 dark:ring-white/10 dark:hover:bg-white/5' => $activeFilter !== $key,
+                        ])>{{ $filter['label'] }}</a>
+                    </li>
+                @endforeach
+            </ul>
+
+            <p class="max-sm:hidden text-[0.8125rem] text-zinc-500 dark:text-zinc-400">Each filter has its own RSS feed</p>
+        </nav>
+
+        @forelse ($months as $month => $monthItems)
+            <section aria-labelledby="log-{{ Str::slug($month) }}">
+                <h2 id="log-{{ Str::slug($month) }}" data-sticky-heading class="sticky top-0 z-10 bg-white font-display text-xl font-semibold tracking-tight text-zinc-800 @container-[scroll-state] lg:-top-10 dark:bg-zinc-800 dark:text-white">
+                    <span class="block border-b border-transparent py-3 stuck:border-zinc-950/5 dark:stuck:border-white/10">{{ $month }}</span>
+                </h2>
+
+                <ol role="list" class="divide-y divide-zinc-950/10 dark:divide-white/10">
+                    @foreach ($monthItems as $item)
+                        <x-ui.entry-row :$item date-format="M j" />
+                    @endforeach
+                </ol>
+            </section>
+        @empty
+            <p class="text-zinc-600 dark:text-zinc-300">Nothing here yet.</p>
+        @endforelse
+
+        @if ($entries->hasPages())
+            <nav aria-label="Log pages" class="flex justify-between border-t border-zinc-950/10 pt-6 text-sm font-bold dark:border-white/10">
+                <div>
+                    @if ($entries->previousPageUrl())
+                        <a href="{{ $entries->previousPageUrl() }}" class="text-zinc-800 underline decoration-enby-purple decoration-3 underline-offset-5 dark:text-white">Newer entries</a>
+                    @endif
+                </div>
+                <div>
+                    @if ($entries->nextPageUrl())
+                        <a href="{{ $entries->nextPageUrl() }}" class="text-zinc-800 underline decoration-enby-purple decoration-3 underline-offset-5 dark:text-white">Older entries</a>
+                    @endif
+                </div>
+            </nav>
+        @endif
+    </div>
+</x-layout>

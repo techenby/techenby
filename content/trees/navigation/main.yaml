@@ -2,15 +2,29 @@ tree:
   -
     id: 5ad21024-833a-406e-8cbe-2466798ccfdf
     entry: home
+    children:
+      -
+        id: 381c0c32-b389-4665-9d8d-1f58a0a19e0c
+        entry: c04cd5a4-a9c1-4590-a9af-124d50b27d43
+      -
+        id: 169591c5-9e4d-4de8-baa7-1caa8646ee44
+        entry: 11543fd2-48d9-44f9-85af-e593f79efe33
+      -
+        id: c42ddf4e-899b-440e-878f-4fc75f86854b
+        entry: 0daac519-2bc9-47d1-aaf4-a9d434c7ad61
+      -
+        id: 8616a728-90bd-4ba4-ab42-095c25c3bc27
+        entry: 69f9e00f-4c2c-45fd-b800-09eff10add18
   -
-    id: 169591c5-9e4d-4de8-baa7-1caa8646ee44
-    entry: 11543fd2-48d9-44f9-85af-e593f79efe33
-  -
-    id: d9fb660b-51c5-42e6-a11e-72512ca30193
-    entry: 58c24312-91f2-4e18-991f-045d25f506bc
-  -
-    id: 8616a728-90bd-4ba4-ab42-095c25c3bc27
-    entry: 69f9e00f-4c2c-45fd-b800-09eff10add18
-  -
-    id: c42ddf4e-899b-440e-878f-4fc75f86854b
-    entry: 0daac519-2bc9-47d1-aaf4-a9d434c7ad61
+    id: 5cca456d-64ed-46a8-8101-8eee3a07a531
+    title: 'About me'
+    children:
+      -
+        id: c9175406-3e70-4812-9d0f-5d2960db95a4
+        entry: bfea3a37-7907-4b16-8400-c3a676a6bf30
+      -
+        id: 37c97bda-e510-46db-b3d6-e5e7e16f17c4
+        entry: 1c8bda8b-6346-42b3-8673-ba5a1431c980
+      -
+        id: cec857a6-8bcb-4c7a-8638-767d3bd0480c
+        entry: 29217906-f9e6-4a3f-af3c-48a59c457dff

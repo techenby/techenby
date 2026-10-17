@@ -21,6 +21,19 @@ class BlogCodeHighlighter
     ];
 
     /**
+     * @var array<string, string>
+     */
+    private array $languageLabels = [
+        'css' => 'CSS',
+        'javascript' => 'JavaScript',
+        'json' => 'JSON',
+        'php' => 'PHP',
+        'typescript' => 'TypeScript',
+        'xml' => 'HTML',
+        'yaml' => 'YAML',
+    ];
+
+    /**
      * @var list<string>
      */
     private array $autodetectLanguages = [
@@ -99,6 +112,10 @@ class BlogCodeHighlighter
 
         $codeNode->appendChild($fragment);
         $codeNode->setAttribute('class', trim('hljs language-' . $highlighted->language));
+
+        if ($codeNode->parentNode instanceof DOMElement) {
+            $codeNode->parentNode->setAttribute('data-language', $this->languageLabels[$highlighted->language] ?? ucfirst($highlighted->language));
+        }
     }
 
     private function languageFromClass(string $class): ?string

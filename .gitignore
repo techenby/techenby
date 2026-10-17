@@ -15,6 +15,7 @@
 /node_modules
 /public/build
 /public/hot
+/public/social-cards
 /public/static
 /public/storage
 /public/vendor/statamic
@@ -40,3 +41,4 @@ GEMINI.md
 opencode.json
 .vapor/
 .env.staging
+/.playwright-mcp
