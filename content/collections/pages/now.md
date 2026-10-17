@@ -13,7 +13,7 @@ sections:
   -
     id: now-building
     heading: Building
-    content: "A NativePHP mobile app for [Sunny](https://sunnyhome.app), mostly by prompting. I'm writing it up as a series called [Sunny Goes Native](/blog). Also rebuilding this site, which you're looking at."
+    content: "A NativePHP mobile app for [Sunny](https://sunnyhome.app), mostly by prompting. I'm writing it up as a series called Sunny Goes Native, coming soon. Also rebuilding this site, which you're looking at."
   -
     id: now-making
     heading: Making
