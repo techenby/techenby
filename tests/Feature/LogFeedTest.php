@@ -109,8 +109,8 @@ class LogFeedTest extends TestCase
     #[Test]
     public function pages_advertise_the_log_feeds(): void
     {
-        $siteFeedLink = '<link rel="alternate" type="application/rss+xml" title="Andy Swick’s Log" href="'.route('log.feed').'">';
-        $tipsFeedLink = '<link rel="alternate" type="application/rss+xml" title="Andy Swick’s Log · Tips" href="'.route('log.feed.type', 'tips').'">';
+        $siteFeedLink = '<link rel="alternate" type="application/rss+xml" title="Andy Swick’s Log" href="' . route('log.feed') . '">';
+        $tipsFeedLink = '<link rel="alternate" type="application/rss+xml" title="Andy Swick’s Log · Tips" href="' . route('log.feed.type', 'tips') . '">';
 
         $this->get('/')
             ->assertOk()

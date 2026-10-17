@@ -43,13 +43,13 @@ class AppServiceProvider extends ServiceProvider
 
             // Flux and Livewire serve their JavaScript from routes the generator can't save, so copy the files over.
             $scripts = [
-                base_path('vendor/livewire/flux-pro/dist/'.($minified ? 'flux.min.js' : 'flux.js')) => $minified ? '/flux/flux.min.js' : '/flux/flux.js',
-                base_path('vendor/livewire/livewire/dist/'.($minified ? 'livewire.min.js' : 'livewire.js')) => EndpointResolver::scriptPath($minified),
+                base_path('vendor/livewire/flux-pro/dist/' . ($minified ? 'flux.min.js' : 'flux.js')) => $minified ? '/flux/flux.min.js' : '/flux/flux.js',
+                base_path('vendor/livewire/livewire/dist/' . ($minified ? 'livewire.min.js' : 'livewire.js')) => EndpointResolver::scriptPath($minified),
             ];
 
             foreach ($scripts as $source => $path) {
-                File::ensureDirectoryExists(dirname($destination.$path));
-                File::copy($source, $destination.$path);
+                File::ensureDirectoryExists(dirname($destination . $path));
+                File::copy($source, $destination . $path);
             }
         });
     }

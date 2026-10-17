@@ -30,8 +30,8 @@ class StacheIsolationTest extends TestCase
             ->slug('stache-isolation-test')
             ->data(['title' => 'Stache isolation test']);
 
-        $this->assertStringStartsWith($this->fakeStacheDirectory.'/', $entry->path());
-        $this->assertStringStartsWith($this->fakeStacheDirectory.'/', $term->path());
+        $this->assertStringStartsWith($this->fakeStacheDirectory . '/', $entry->path());
+        $this->assertStringStartsWith($this->fakeStacheDirectory . '/', $term->path());
 
         $entry->save();
         $term->save();
@@ -40,7 +40,7 @@ class StacheIsolationTest extends TestCase
         $this->assertFileExists($term->path());
         $this->assertNotNull(Entry::find($entry->id()));
         $this->assertNotNull(Term::find($term->id()));
-        $this->assertFileDoesNotExist(base_path('content/collections/log/'.basename($entry->path())));
+        $this->assertFileDoesNotExist(base_path('content/collections/log/' . basename($entry->path())));
         $this->assertFileDoesNotExist(base_path('content/taxonomies/series/stache-isolation-test.yaml'));
 
         $entry->delete();
@@ -63,8 +63,8 @@ class StacheIsolationTest extends TestCase
 
         $this->assertNotNull($entry);
         $this->assertNotNull($term);
-        $this->assertStringStartsWith($this->fakeStacheDirectory.'/', $entry->path());
-        $this->assertStringStartsWith($this->fakeStacheDirectory.'/', $term->path());
+        $this->assertStringStartsWith($this->fakeStacheDirectory . '/', $entry->path());
+        $this->assertStringStartsWith($this->fakeStacheDirectory . '/', $term->path());
 
         $entry->set('title', 'Isolated friends')->save();
         $term->set('title', 'Isolated series')->save();

@@ -46,7 +46,7 @@ class Podcast
             return collect();
         }
 
-        $key = 'podcast.episodes.'.md5($url);
+        $key = 'podcast.episodes.' . md5($url);
         $episodes = Cache::get($key);
 
         if (! is_array($episodes)) {
@@ -60,24 +60,6 @@ class Podcast
             ->reject(fn (array $episode) => $episode['date']->isFuture())
             ->sortByDesc(fn (array $episode) => $episode['date']->timestamp)
             ->values();
-    }
-
-    /**
-     * @return list<array{guid: string, title: string, link: ?string, audio: ?string, date: string, number: ?int, minutes: ?int, show: string}>|null
-     */
-    private function fetch(string $url): ?array
-    {
-        try {
-            $response = Http::timeout(5)->get($url);
-        } catch (ConnectionException) {
-            return null;
-        }
-
-        if (! $response->successful()) {
-            return null;
-        }
-
-        return $this->parse($response->body());
     }
 
     /**
@@ -148,6 +130,24 @@ class Podcast
         $seconds = collect(array_reverse($parts))->reduce(fn (int $total, string $part, int $index) => $total + (int) $part * 60 ** $index, 0);
 
         return $seconds > 0 ? max(1, (int) round($seconds / 60)) : null;
+    }
+
+    /**
+     * @return list<array{guid: string, title: string, link: ?string, audio: ?string, date: string, number: ?int, minutes: ?int, show: string}>|null
+     */
+    private function fetch(string $url): ?array
+    {
+        try {
+            $response = Http::timeout(5)->get($url);
+        } catch (ConnectionException) {
+            return null;
+        }
+
+        if (! $response->successful()) {
+            return null;
+        }
+
+        return $this->parse($response->body());
     }
 
     private function date(string $pubDate): ?Carbon

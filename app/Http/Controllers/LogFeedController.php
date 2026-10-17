@@ -18,7 +18,7 @@ class LogFeedController extends Controller
 
         return response()
             ->view('feeds.log', [
-                'title' => 'Andy Swick’s Log'.($filter ? ' · '.$filter['label'] : ''),
+                'title' => 'Andy Swick’s Log' . ($filter ? ' · ' . $filter['label'] : ''),
                 'link' => url($type ? "/log/{$type}" : '/log'),
                 'self' => url($type ? "/log/{$type}/feed" : '/log/feed'),
                 'items' => $lately->items($blueprints, 30),

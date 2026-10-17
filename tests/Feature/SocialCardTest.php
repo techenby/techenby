@@ -105,7 +105,7 @@ class SocialCardTest extends TestCase
         $this->get('/log/social-card-test-meta')
             ->assertOk()
             ->assertSee('<meta property="og:title" content="Meta test post">', false)
-            ->assertSee('<meta property="og:image" content="'.Storage::disk('social_cards')->url($path).'">', false)
+            ->assertSee('<meta property="og:image" content="' . Storage::disk('social_cards')->url($path) . '">', false)
             ->assertSee('<meta name="twitter:card" content="summary_large_image">', false);
 
         Storage::disk('social_cards')->assertExists($path);

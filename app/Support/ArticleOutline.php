@@ -36,7 +36,7 @@ class ArticleOutline
 
             $this->headings[] = ['id' => $id, 'text' => $text];
 
-            return '<h2 id="'.e($id).'"'.$matches['attributes'].'>'.$matches['text'].'</h2>';
+            return '<h2 id="' . e($id) . '"' . $matches['attributes'] . '>' . $matches['text'] . '</h2>';
         }, $html) ?? $html;
     }
 
@@ -54,6 +54,6 @@ class ArticleOutline
 
         $this->usedIds[$id] = $count + 1;
 
-        return $count === 0 ? $id : $id.'-'.($count + 1);
+        return $count === 0 ? $id : $id . '-' . ($count + 1);
     }
 }

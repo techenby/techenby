@@ -24,7 +24,7 @@ abstract class TestCase extends BaseTestCase
 
         config(['statamic.stache.cache_store' => 'array']);
 
-        $this->fakeStacheDirectory = sys_get_temp_dir().'/techenby-tests-'.Str::uuid();
+        $this->fakeStacheDirectory = sys_get_temp_dir() . '/techenby-tests-' . Str::uuid();
 
         $this->beforeApplicationDestroyed(function (): void {
             File::deleteDirectory($this->fakeStacheDirectory);

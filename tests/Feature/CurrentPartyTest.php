@@ -19,13 +19,13 @@ class CurrentPartyTest extends TestCase
         $response = $this->get('/')
             ->assertOk()
             ->assertSee('id="current-party-heading"', false)
-            ->assertSee(count($members).'/6');
+            ->assertSee(count($members) . '/6');
 
         foreach ($members as $member) {
             $response->assertSee($member['label']);
 
             if (filled($member['url'] ?? null)) {
-                $response->assertSee('href="'.e($member['url']).'"', false);
+                $response->assertSee('href="' . e($member['url']) . '"', false);
             }
 
             if (filled($member['note'] ?? null)) {

@@ -66,7 +66,7 @@ class SocialCard
     public function delete(Entry $entry): void
     {
         $this->disk()->delete(
-            collect($this->disk()->files())->filter(fn (string $file) => str_starts_with($file, $entry->id().'-'))->all()
+            collect($this->disk()->files())->filter(fn (string $file) => str_starts_with($file, $entry->id() . '-'))->all()
         );
     }
 
@@ -76,7 +76,7 @@ class SocialCard
      */
     public function path(Entry $entry): string
     {
-        return $entry->id().'-'.substr(md5($this->label($entry).'|'.$entry->get('title')), 0, 8).'.png';
+        return $entry->id() . '-' . substr(md5($this->label($entry) . '|' . $entry->get('title')), 0, 8) . '.png';
     }
 
     public function label(Entry $entry): string
@@ -84,7 +84,7 @@ class SocialCard
         $series = $this->series->for($entry);
 
         if ($series !== null) {
-            return $series['title'].(isset($series['part']) ? ' · Part '.$series['part'] : '');
+            return $series['title'] . (isset($series['part']) ? ' · Part ' . $series['part'] : '');
         }
 
         return Lately::TYPES[$entry->blueprint()->handle()] ?? 'Writing';
@@ -154,7 +154,7 @@ class SocialCard
         $line = '';
 
         foreach (preg_split('/\s+/', trim($text)) ?: [] as $word) {
-            $candidate = $line === '' ? $word : $line.' '.$word;
+            $candidate = $line === '' ? $word : $line . ' ' . $word;
             $box = imagettfbbox($size, 0, $font, $candidate);
 
             if ($line !== '' && $box[2] - $box[0] > self::TEXT_WIDTH) {

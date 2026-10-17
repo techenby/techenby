@@ -123,7 +123,7 @@ class Lately
     public function episode(array $episode): array
     {
         return [
-            'id' => 'episode-'.md5($episode['guid']),
+            'id' => 'episode-' . md5($episode['guid']),
             'type' => self::TYPES[self::EPISODE],
             'date' => $episode['date'],
             'title' => $episode['title'],
@@ -210,14 +210,6 @@ class Lately
             ])
             ->values()
             ->all();
-    }
-
-    /**
-     * @param  array<string, mixed>  $params
-     */
-    private function glide(AssetContract $asset, array $params): string
-    {
-        return (string) Statamic::tag('glide')->params(['src' => $asset, ...$params])->fetch();
     }
 
     /**
@@ -313,5 +305,13 @@ class Lately
         }
 
         return Term::find("series::{$slug}")?->title();
+    }
+
+    /**
+     * @param  array<string, mixed>  $params
+     */
+    private function glide(AssetContract $asset, array $params): string
+    {
+        return (string) Statamic::tag('glide')->params(['src' => $asset, ...$params])->fetch();
     }
 }

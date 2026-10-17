@@ -52,7 +52,7 @@ class SiteFooterTest extends TestCase
             ->assertSee('href="https://github.com/techenby"', false)
             ->assertSee('href="https://bsky.app/profile/techenby.com"', false)
             ->assertSee('href="https://dev-null.sh/@techenby/"', false)
-            ->assertSee('&copy; '.now()->year.' Andy Swick', false);
+            ->assertSee('&copy; ' . now()->year . ' Andy Swick', false);
 
         $this->assertSame(1, substr_count($response->getContent(), '<footer'));
     }
