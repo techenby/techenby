@@ -5,7 +5,7 @@ title: 'How I work'
 template: how-i-work
 as_of: '2026-10-15 00:00'
 subheading: "A user manual for working with me, whether we're coworkers, you're inviting me to speak, or you just want to chat."
-tldr_heading: 'TLDR;'
+tldr_heading: 'TL;DR'
 tldr:
   - 'My name is Andy Swick and I use they/them pronouns'
   - 'The best way to reach me is Twitter or Bluesky DMs'
@@ -25,7 +25,10 @@ sections:
     enabled: true
     heading: 'Meetings: what helps?'
     toc_label: Meetings
-    content: "Prompt: agendas ahead of time? Cameras on or off? Async instead of a call? What time of day you're sharpest? Anything that makes a meeting harder than it needs to be?"
+    content: |-
+      I don't mind whether there's a formal agenda, but I do like knowing what a meeting is about going in. For a pair session, that means knowing what we'll be pairing on. A vague "can we chat?" leaves me guessing, so even a one-line heads-up helps. I also like a little buffer between calls rather than being booked back-to-back, and I'm flexible on time of day, just not right before bed.
+
+      I like cameras on when you're comfortable with it. I pick up a lot from facial expressions and body language, and seeing them helps me make sure I'm reading the conversation right. During the meeting, it's hard for me to follow when people talk over each other, and if a yes or no will do, I'd rather have that than a long-winded answer. And if you misgender me, just correct yourself and move on. A quick "they, sorry" is all I need, and making a big deal of it only makes it more awkward for both of us.
   -
     id: hiw-feedback
     type: question
@@ -84,5 +87,5 @@ sections:
     heading: 'About this site'
     content: "It's built for every brain, mine included. Text is set in Atkinson Hyperlegible, designed for low-vision readers. The reading comfort controls in the sidebar change the text size across the whole site and turn off motion, including the tilt on the Current Party card. Links are always underlined, and every image has real alt text."
 updated_by: 2de7d260-84a8-4dfc-9a2e-af5aae989cd3
-updated_at: 1792197504
+updated_at: 1792199568
 ---

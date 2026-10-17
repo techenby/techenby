@@ -14,7 +14,7 @@ class HowIWorkPageTest extends TestCase
         $this->get('/how-i-work')
             ->assertOk()
             ->assertSeeInOrder(['As of October 2026. People change, and so will this page.', '<h1', 'How I work'], false)
-            ->assertSeeInOrder(['TLDR;', 'if you read nothing else'])
+            ->assertSeeInOrder(['TL;DR', 'if you read nothing else'])
             ->assertSee('How do I reach you, and how fast will you reply?')
             ->assertSeeInOrder(['What can I ask you about?', 'Laravel', '3D printing'])
             ->assertSeeInOrder(['Please do', "Please don't"], false)
