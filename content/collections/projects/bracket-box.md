@@ -2,7 +2,7 @@
 id: dd7bda96-4e05-447b-8aa0-3ad049971ed7
 blueprint: project
 title: 'Bracket Box'
-header_image: projects/logo.png
+header_image: projects/bracket-box-logo.png
 links:
   -
     id: wFNpMcFbt0_BV_jN3z-K0
