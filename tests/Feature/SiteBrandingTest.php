@@ -34,4 +34,22 @@ class SiteBrandingTest extends TestCase
             ->assertSee('role="img" aria-label="TechEnby"', false)
             ->assertSee('fill-enby-purple dark:fill-enby-yellow', false);
     }
+
+    #[Test]
+    public function the_sidebar_uses_the_avatar_from_the_globals(): void
+    {
+        $this->get('/log')
+            ->assertOk()
+            ->assertSee('src="/assets/avatar-2025-square.jpeg"', false)
+            ->assertDontSee('unavatar.io', false);
+    }
+
+    #[Test]
+    public function the_homepage_shows_the_avatar_on_mobile_in_addition_to_the_sidebar(): void
+    {
+        $response = $this->get('/')->assertOk();
+
+        $this->assertSame(2, substr_count($response->getContent(), 'src="/assets/avatar-2025-square.jpeg"'));
+        $response->assertSee('lg:hidden', false);
+    }
 }

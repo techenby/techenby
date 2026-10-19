@@ -140,7 +140,21 @@ class ArticlePageTest extends TestCase
 
         $this->get('/log/article-test-byline')
             ->assertOk()
-            ->assertSeeInOrder(['Article test byline', 'Andy Swick', 'Sep 12, 2026', '1 min read']);
+            ->assertSeeInOrder(['Article test byline', 'Sep 12, 2026', '1 min read']);
+    }
+
+    #[Test]
+    public function the_byline_does_not_show_the_author(): void
+    {
+        $this->makeEntry('post', 'article-test-byline-author', [
+            'title' => 'Article test byline author',
+            'content' => [$this->paragraph('A short post.')],
+        ]);
+
+        $content = $this->get('/log/article-test-byline-author')->assertOk()->getContent();
+
+        $this->assertSame(1, substr_count($content, 'src="/assets/avatar-2025-square.jpeg"'));
+        $this->assertSame(1, substr_count($content, '>Andy Swick</'));
     }
 
     #[Test]

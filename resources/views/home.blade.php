@@ -9,6 +9,7 @@
     <div class="space-y-16">
         <div class="grid gap-8 md:grid-cols-[minmax(0,1fr)_20rem] md:gap-14">
             <div class="space-y-5">
+                <x-ui.avatar size="xl" class="lg:hidden" />
                 <h1 class="font-display text-3xl font-semibold tracking-tight text-balance text-zinc-800 xl:text-[2.75rem]/13 dark:text-white">{{ $heading }}</h1>
                 <flux:text class="max-w-[35rem] text-lg text-pretty text-zinc-600 xl:text-[1.1875rem]/[1.875rem] dark:text-zinc-300">{{ $subheading }}</flux:text>
             </div>

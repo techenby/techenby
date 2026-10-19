@@ -29,23 +29,17 @@
             <p class="text-xl/8 text-pretty text-zinc-600 dark:text-zinc-300">{{ $description }}</p>
         @endif
 
-        <div class="flex items-center gap-3 pt-1.5">
-            <flux:avatar circle size="sm" src="https://unavatar.io/x/techenby" alt="" class="size-9! ring-1 ring-zinc-200 ring-offset-2 ring-offset-white dark:ring-white/20 dark:ring-offset-zinc-800" />
-            <div>
-                <p class="text-[0.9375rem]/5 font-bold text-zinc-800 dark:text-white">Andy Swick</p>
-                <p class="text-sm/5 text-zinc-500 dark:text-zinc-400">
-                    @if ($date)
-                        <time datetime="{{ $date->toDateString() }}">{{ $date->format('M j, Y') }}</time>
-                    @endif
-                    @if ($date && $readingMinutes)
-                        <span aria-hidden="true">·</span>
-                    @endif
-                    @if ($readingMinutes)
-                        {{ $readingMinutes }} min read
-                    @endif
-                </p>
-            </div>
-        </div>
+        <p class="pt-1.5 text-sm/5 text-zinc-500 dark:text-zinc-400">
+            @if ($date)
+                <time datetime="{{ $date->toDateString() }}">{{ $date->format('M j, Y') }}</time>
+            @endif
+            @if ($date && $readingMinutes)
+                <span aria-hidden="true">·</span>
+            @endif
+            @if ($readingMinutes)
+                {{ $readingMinutes }} min read
+            @endif
+        </p>
     </header>
 
     <div class="grid gap-x-16 xl:grid-cols-[minmax(0,42.5rem)_12.5rem]">

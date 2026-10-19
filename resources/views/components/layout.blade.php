@@ -78,7 +78,7 @@
             </a>
 
             <flux:sidebar.header class="justify-start! gap-3 px-2">
-                <flux:avatar circle size="lg" src="https://unavatar.io/x/techenby" />
+                <x-ui.avatar size="lg" />
                 <div>
                     <flux:heading size="lg" class="font-display font-semibold">Andy Swick</flux:heading>
                     <flux:text>they/them</flux:text>
