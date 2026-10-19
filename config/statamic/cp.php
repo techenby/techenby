@@ -53,7 +53,37 @@ return [
     */
 
     'widgets' => [
-        //
+        [
+            'type' => 'quick_capture',
+            'collection' => 'log',
+            'blueprints' => ['post', 'tip', 'make', 'moment', 'talk'],
+            'width' => 66,
+        ],
+        [
+            'type' => 'now_page',
+            'uri' => '/now',
+            'stale_after_days' => 30,
+            'width' => 33,
+        ],
+        [
+            'type' => 'drafts',
+            'collection' => 'log',
+            'limit' => 6,
+            'width' => 50,
+        ],
+        [
+            'type' => 'collection',
+            'collection' => 'log',
+            'title' => 'Recent log entries',
+            'limit' => 5,
+            'width' => 50,
+        ],
+        [
+            'type' => 'shortcuts',
+            'globals' => ['andy'],
+            'collections' => ['projects', 'uses', 'uses_scenes', 'faqs'],
+            'width' => 100,
+        ],
     ],
 
     /*
