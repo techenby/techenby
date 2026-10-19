@@ -1,0 +1,7 @@
+php_version: "8.5"
+node_version: "22"
+framework: statamic
+framework_version: "6"
+secured: true
+workers:
+  - vite

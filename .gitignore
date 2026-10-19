@@ -42,3 +42,4 @@ opencode.json
 .vapor/
 .env.staging
 /.playwright-mcp
+.env.before_lerd
