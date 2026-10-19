@@ -43,8 +43,8 @@ class NowPage extends Widget
         return match (true) {
             $daysOld === null => null,
             $daysOld === 0 => 'today',
-            $daysOld < 0 => 'in '.abs($daysOld).' '.str('day')->plural(abs($daysOld)),
-            default => $daysOld.' '.str('day')->plural($daysOld).' ago',
+            $daysOld < 0 => 'in ' . abs($daysOld) . ' ' . str('day')->plural(abs($daysOld)),
+            default => $daysOld . ' ' . str('day')->plural($daysOld) . ' ago',
         };
     }
 }
