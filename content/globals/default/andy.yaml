@@ -8,17 +8,17 @@ comms:
     label: Twitter
     url: 'https://twitter.com/techenby'
   -
-    id: umfIoSBacEZfMaZ3eF8S6
-    label: YouTube
-    url: 'https://youtube.com/@techenby'
+    id: fT_VVq7ahvkpjQ6B7JAGK
+    label: /dev/null
+    url: 'https://dev-null.sh/@techenby/'
   -
     id: qvqqq8Iz1HN9rMsTOFvUM
     label: GitHub
     url: 'https://github.com/techenby'
   -
-    id: fT_VVq7ahvkpjQ6B7JAGK
-    label: /dev/null
-    url: 'https://dev-null.sh/@techenby/'
+    id: umfIoSBacEZfMaZ3eF8S6
+    label: YouTube
+    url: 'https://youtube.com/@techenby'
   -
     id: E37dMbjZuN5i1qJEsHJee
     label: Email
@@ -36,20 +36,21 @@ current_party:
     note: 'runs my house. mostly.'
   -
     id: cp-lego-Hm5pK2yJd6
-    label: 'LEGO 10294'
-    url: 'https://www.lego.com/en-us/product/lego-titanic-10294'
-    note: 'still missing one 1×2 plate'
+    label: 'Make Ship Happen'
+    url: 'https://www.youtube.com/@MakeShipHappenOfficial'
+    note: 'weekly chats w/ Tilly'
   -
     id: cp-onepiece-Rt9sF4cGx0
-    label: 'One Piece Ep.1157'
+    label: 'Hunter x Hunter'
     note: 'no spoilers pls'
   -
     id: cp-lakeside-Ny6wB1eLu3
     label: 'Lakeside Pride'
     url: 'https://lakesidepride.org/'
+    note: 'next concert Nov. 21st'
   -
     id: cp-dietcoke-Pz8dM7aKs5
     label: 'Diet Coke'
-    note: fuel
+    note: 'best fuel ever'
 pixelated_avatar: avatar-2025-square-pizelated.jpeg
 avatar: avatar-2025-square.jpeg

@@ -3,13 +3,13 @@ id: bfea3a37-7907-4b16-8400-c3a676a6bf30
 blueprint: now
 title: Now
 template: now
-as_of: '2026-10-15 00:00'
+as_of: '2026-10-20 00:00'
 subheading: "What I'm focused on these days, a now page in the spirit of nownownow.com. If it's not on here, I'm probably saying no to it for a while."
 sections:
   -
     id: now-work
     heading: Work
-    content: 'Lead Programmer at [Tighten](https://tighten.com/), writing Laravel and helping teams ship.'
+    content: 'Lead Programmer at [Tighten](https://tighten.com/), where we build and rescue web apps and dev teams.'
   -
     id: now-building
     heading: Building
@@ -17,7 +17,7 @@ sections:
   -
     id: now-making
     heading: Making
-    content: "I'm not building anything right now, but trying to organize all my LEGO in my Storage Unit."
+    content: "I'm organizing all my LEGO in my storage unit and painting a couple of paint-by-numbers to decorate my new apartment."
   -
     id: now-playing
     heading: Playing
@@ -27,5 +27,5 @@ sections:
     heading: Watching
     content: 'Working my way through Hunter × Hunter, currently on episode 130. I also started One Piece over again for the fifth time, currenlty in the East Blue.'
 updated_by: 2de7d260-84a8-4dfc-9a2e-af5aae989cd3
-updated_at: 1792209809
+updated_at: 1792419202
 ---
