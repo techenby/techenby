@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+# Prepares a fresh Amp orb (Debian 12) to build, test, and run this Statamic site.
+# Runs once per fresh orb and again on stale snapshots, so every step must be idempotent.
+set -euo pipefail
+
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$repo_root"
+
+php_version="$(tr -d '[:space:]' < .php-version)"
+
+step() {
+  local name="$1"
+  shift
+  local start=$SECONDS
+  echo "==> $name"
+  "$@"
+  echo "<== $name ($((SECONDS - start))s)"
+}
+
+php_packages=(
+  "php${php_version}-cli"
+  "php${php_version}-bcmath"
+  "php${php_version}-curl"
+  "php${php_version}-gd"
+  "php${php_version}-intl"
+  "php${php_version}-mbstring"
+  "php${php_version}-sqlite3"
+  "php${php_version}-xml"
+  "php${php_version}-zip"
+)
+
+install_php() {
+  local missing=()
+  for pkg in "${php_packages[@]}"; do
+    dpkg-query -W -f='${Status}' "$pkg" 2>/dev/null | grep -q 'install ok installed' || missing+=("$pkg")
+  done
+  if [ "${#missing[@]}" -eq 0 ]; then
+    echo "PHP ${php_version} packages already installed"
+    return
+  fi
+
+  if [ ! -f /etc/apt/sources.list.d/php.list ]; then
+    sudo apt-get update -qq
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ca-certificates curl lsb-release
+    sudo curl -fsSL -o /usr/share/keyrings/deb.sury.org-php.gpg https://packages.sury.org/php/apt.gpg
+    echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" \
+      | sudo tee /etc/apt/sources.list.d/php.list > /dev/null
+  fi
+  sudo apt-get update -qq
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends "${missing[@]}"
+}
+
+install_composer() {
+  if command -v composer > /dev/null; then
+    sudo composer self-update --2 --quiet || true
+    return
+  fi
+  local installer
+  installer="$(mktemp)"
+  curl -fsSL https://getcomposer.org/installer -o "$installer"
+  sudo php "$installer" --quiet --install-dir=/usr/local/bin --filename=composer
+  rm -f "$installer"
+}
+
+install_php_dependencies() {
+  # Flux Pro is served from a private Composer repository. Pass the license only to this
+  # command through COMPOSER_AUTH so the credential is never written into the snapshot.
+  if [ -z "${FLUX_USERNAME:-}" ] || [ -z "${FLUX_LICENSE_KEY:-}" ]; then
+    echo "Set the FLUX_USERNAME and FLUX_LICENSE_KEY project secrets so Composer can install livewire/flux-pro." >&2
+    return 1
+  fi
+  COMPOSER_AUTH="$(php -r 'echo json_encode(["http-basic" => ["composer.fluxui.dev" => ["username" => getenv("FLUX_USERNAME"), "password" => getenv("FLUX_LICENSE_KEY")]]]);')" \
+    composer install --no-interaction --no-progress
+}
+
+prepare_app() {
+  [ -f .env ] || cp -- .env.example .env
+  grep -q '^APP_KEY=base64:' .env || php artisan key:generate --ansi --no-interaction
+  [ -f database/database.sqlite ] || touch database/database.sqlite
+  php artisan migrate --force --no-interaction
+}
+
+step "Install PHP ${php_version}" install_php
+step "Install Composer" install_composer
+step "composer install" install_php_dependencies
+step "npm ci" npm ci --ignore-scripts --no-audit --no-fund
+step "Prepare .env and database" prepare_app
+step "npm run build" npm run build

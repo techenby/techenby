@@ -28,7 +28,8 @@ Homestead.yaml
 Thumbs.db
 
 # Laravel Boost
-/.agents
+/.agents/*
+!/.agents/setup
 /.amp
 /.claude
 /.codex
