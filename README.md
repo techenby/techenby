@@ -6,7 +6,7 @@ Laravel, LEGO, 3D printing, and band nerd. Here's who's in my party right now:
 - [Lead Programmer @ Tighten](https://tighten.com/): the day job (it's a good one)
 - [Sunny](https://sunnyhome.app): runs my life. mostly.
 - [Make Ship Happen](https://www.youtube.com/@MakeShipHappenOfficial): weekly chats w/ Tilly
-- Hunter x Hunter: no spoilers pls
+- Naruto: episode 10
 - [Lakeside Pride](https://lakesidepride.org/): next concert Nov. 21st
 - Diet Coke: best fuel ever
 <!-- current-party:end -->
