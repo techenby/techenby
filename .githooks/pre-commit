@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Keep the README's Current Party list in step with the andy global
+if git diff --cached --name-only | grep -qx 'content/globals/default/andy.yaml'; then
+    php artisan readme:sync || exit 1
+    git add README.md
+fi
