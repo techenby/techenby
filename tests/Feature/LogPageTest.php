@@ -216,6 +216,27 @@ class LogPageTest extends TestCase
     }
 
     #[Test]
+    public function a_moment_description_is_used_for_link_previews_instead_of_the_caption(): void
+    {
+        $this->makeEntry('moment', 'log-test-moment-description', [
+            'title' => 'Log test moment description',
+            'description' => 'A preview written for link cards.',
+            'content' => "*Light spoilers ahead.*\n\nThe rest of the caption.",
+        ]);
+
+        $this->get('/log/log-test-moment-description')
+            ->assertOk()
+            ->assertSee('<meta name="description" content="A preview written for link cards.">', false)
+            ->assertDontSee('<meta name="description" content="Light spoilers ahead.">', false)
+            ->assertSee('The rest of the caption.');
+
+        $this->get('/log/moments')
+            ->assertOk()
+            ->assertSee('The rest of the caption.')
+            ->assertDontSee('A preview written for link cards.');
+    }
+
+    #[Test]
     public function no_log_entry_uses_a_slug_reserved_for_a_filter_page(): void
     {
         $slugs = Entry::query()->where('collection', Lately::COLLECTION)->get()->map->slug();

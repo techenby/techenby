@@ -58,3 +58,10 @@ tabs:
               type: slug
               localizable: true
               validate: 'max:200'
+          -
+            handle: description
+            field:
+              type: textarea
+              display: Description
+              instructions: 'Optional. A sentence for search results and link previews; without one, the first sentence of the caption is used.'
+              localizable: true
