@@ -217,7 +217,7 @@ class LogPageTest extends TestCase
     }
 
     #[Test]
-    public function a_moment_description_is_used_for_link_previews_instead_of_the_caption(): void
+    public function a_moment_description_is_used_in_the_log_and_link_previews_instead_of_the_caption(): void
     {
         $this->makeEntry('moment', 'log-test-moment-description', [
             'title' => 'Log test moment description',
@@ -233,8 +233,13 @@ class LogPageTest extends TestCase
 
         $this->get('/log/moments')
             ->assertOk()
-            ->assertSee('The rest of the caption.')
-            ->assertDontSee('A preview written for link cards.');
+            ->assertSee('A preview written for link cards.')
+            ->assertDontSee('The rest of the caption.');
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('A preview written for link cards.')
+            ->assertDontSee('The rest of the caption.');
     }
 
     #[Test]

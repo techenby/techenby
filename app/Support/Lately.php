@@ -159,7 +159,7 @@ class Lately
             'title' => (string) $entry->get('title'),
             'url' => $entry->url() ?: null,
             'summary' => $this->summary($entry),
-            'caption' => in_array($entry->blueprint()->handle(), self::INLINE_CAPTIONS, true) ? $this->caption($entry) : null,
+            'caption' => $this->inlineCaption($entry),
             'series' => $this->seriesTitle($entry),
             'part' => $this->series->part($entry),
             'kind' => $entry->blueprint()->handle() === 'talk' ? null : $this->kind($entry),
@@ -294,6 +294,24 @@ class Lately
         }
 
         return trim(Str::markdown($content, ['html_input' => 'strip', 'allow_unsafe_links' => false]));
+    }
+
+    /**
+     * The caption shown whole in the Log, unless a description was written to stand in for it.
+     */
+    public function inlineCaption(Entry $entry): ?string
+    {
+        if (! in_array($entry->blueprint()->handle(), self::INLINE_CAPTIONS, true)) {
+            return null;
+        }
+
+        $description = $entry->value('description');
+
+        if (is_string($description) && trim($description) !== '') {
+            return null;
+        }
+
+        return $this->caption($entry);
     }
 
     public function seriesTitle(Entry $entry): ?string
