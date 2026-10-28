@@ -24,6 +24,27 @@ class HomeProjectsTest extends TestCase
     }
 
     #[Test]
+    public function picked_projects_show_their_links(): void
+    {
+        $project = $this->makeProject('home-test-links', 'Linked pick', links: [
+            ['label' => 'GitHub', 'url' => 'https://github.com/techenby/linked-pick'],
+            ['label' => 'Website', 'url' => 'https://linked-pick.test'],
+            ['label' => 'Missing URL', 'url' => ''],
+        ]);
+
+        $this->updatePage('/', ['projects' => [$project->id()]]);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSeeInOrder([
+                'Linked pick',
+                'href="https://github.com/techenby/linked-pick"', 'GitHub',
+                'href="https://linked-pick.test"', 'Website',
+            ], false)
+            ->assertDontSee('Missing URL');
+    }
+
+    #[Test]
     public function unpublished_picks_stay_off_the_homepage(): void
     {
         $published = $this->makeProject('home-test-published', 'Published pick');
@@ -47,14 +68,17 @@ class HomeProjectsTest extends TestCase
             ->assertDontSee('Things I build');
     }
 
-    private function makeProject(string $slug, string $title, string $content = '', bool $published = true): EntryContract
+    /**
+     * @param  list<array{label: string, url: string}>  $links
+     */
+    private function makeProject(string $slug, string $title, string $content = '', bool $published = true, array $links = []): EntryContract
     {
         $project = Entry::make()
             ->collection('projects')
             ->blueprint('project')
             ->slug($slug)
             ->published($published)
-            ->data(['title' => $title, 'content' => $content]);
+            ->data(['title' => $title, 'content' => $content, 'links' => $links]);
 
         $project->save();
 

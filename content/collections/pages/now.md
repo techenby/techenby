@@ -3,7 +3,7 @@ id: bfea3a37-7907-4b16-8400-c3a676a6bf30
 blueprint: now
 title: Now
 template: now
-as_of: '2026-10-20 00:00'
+as_of: '2026-10-27 00:00'
 subheading: "What I'm focused on these days, a now page in the spirit of nownownow.com. If it's not on here, I'm probably saying no to it for a while."
 sections:
   -
@@ -25,7 +25,7 @@ sections:
   -
     id: now-watching
     heading: Watching
-    content: 'Working my way through Hunter × Hunter, currently on episode 130. I also started One Piece over again for the fifth time, currenlty in the East Blue.'
+    content: 'Just finished [Hunter × Hunter](/log/finished-hunter-x-hunter) and started Naruto. I also started One Piece over again for the fifth time, currently in the East Blue.'
 updated_by: 2de7d260-84a8-4dfc-9a2e-af5aae989cd3
-updated_at: 1792419202
+updated_at: 1793163001
 ---

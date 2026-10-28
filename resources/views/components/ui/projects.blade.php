@@ -5,6 +5,7 @@
 
     // An entries field hands back a query for the picks, in the order they were picked, already limited to published entries.
     $projects = collect($projects?->get() ?? []);
+    $underlines = ['decoration-enby-yellow', 'decoration-enby-purple', 'decoration-enby-black dark:decoration-white'];
 @endphp
 
 @if ($projects->isNotEmpty())
@@ -19,6 +20,7 @@
                 @php
                     $logo = $project->augmentedValue('header_image')->value();
                     $summary = Str::of(Str::markdown((string) $project->value('content')))->stripTags()->squish()->toString();
+                    $links = collect($project->value('links') ?? [])->filter(fn (array $link) => filled($link['label'] ?? null) && filled($link['url'] ?? null));
                 @endphp
 
                 <li class="flex items-start gap-4 rounded-xl border border-zinc-200 p-[1.125rem] dark:border-white/10">
@@ -33,6 +35,16 @@
 
                         @if ($summary !== '')
                             <p class="text-[0.9375rem]/[1.4375rem] text-pretty text-zinc-600 dark:text-zinc-300">{{ $summary }}</p>
+                        @endif
+
+                        @if ($links->isNotEmpty())
+                            <ul role="list" class="flex flex-wrap gap-x-5 gap-y-1 pt-1">
+                                @foreach ($links->values() as $link)
+                                    <li>
+                                        <a href="{{ $link['url'] }}" target="_blank" rel="noopener" class="text-[0.9375rem] font-bold text-zinc-800 underline decoration-3 underline-offset-5 dark:text-white {{ $underlines[$loop->index % count($underlines)] }}">{{ $link['label'] }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         @endif
                     </div>
                 </li>

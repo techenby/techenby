@@ -8,7 +8,7 @@ subheading: "A user manual for working with me, whether we're coworkers, you're 
 tldr_heading: TL;DR
 tldr:
   - 'Name & pronouns: Andy Swick, they/them'
-  - 'Reaching me: Bluesky or Twitter DMs'
+  - 'Reaching me: /dev/null, Bluesky, or Twitter DMs'
   - "Meetings: tell me the topic ahead of time, and cameras on if you're comfortable"
   - 'Feedback: written first, direct but kind, and private'
 sections:
@@ -87,5 +87,5 @@ sections:
     heading: 'About this site'
     content: "It's built for every brain, mine included. Text is set in Atkinson Hyperlegible, designed for low-vision readers. The reading comfort controls in the sidebar change the text size across the whole site and turn off motion, including the tilt on the Current Party card. Links are always underlined, and every image has real alt text."
 updated_by: 2de7d260-84a8-4dfc-9a2e-af5aae989cd3
-updated_at: 1792200448
+updated_at: 1793163091
 ---
