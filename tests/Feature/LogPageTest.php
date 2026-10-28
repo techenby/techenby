@@ -208,6 +208,7 @@ class LogPageTest extends TestCase
             ->assertOk()
             ->assertSee('<title>Log test moment page', false)
             ->assertSeeInOrder(['Moment', 'Log test moment page', 'alt="A test photo of a finished make."', 'A moment worth keeping.'], false)
+            ->assertSee('aria-label="Photos of Log test moment page"', false)
             ->assertDontSee('min read');
 
         $this->get('/log/log-test-make-page')

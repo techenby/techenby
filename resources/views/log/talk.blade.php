@@ -43,9 +43,9 @@
             </ul>
         @endif
 
-        @foreach ($photos as $photo)
-            <img src="{{ $photo['full'] }}" alt="{{ $photo['alt'] }}" width="{{ $photo['width'] }}" height="{{ $photo['height'] }}" loading="lazy" class="h-auto max-h-[80vh] w-auto max-w-full rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10">
-        @endforeach
+        @if ($photos)
+            <x-ui.photo-carousel :$photos :title="$entry->get('title')" :name="'photos-'.$entry->id()" slide="w-1/2 sm:w-1/3" />
+        @endif
 
         {!! $lately->caption($entry) !!}
     </x-ui.article>
