@@ -19,3 +19,7 @@ preferences:
       view: list
     log:
       view: list
+      columns:
+        - title
+        - date
+        - status

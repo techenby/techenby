@@ -1,11 +1,15 @@
-@props(['model', 'title', 'compact' => false])
+@props(['model', 'title', 'several' => false, 'compact' => false])
+
+@php
+    $label = '3D model of '.$title.($several ? ': '.$model['filename'] : '');
+@endphp
 
 @if ($compact)
     <div {{ $attributes->class('group relative aspect-square overflow-hidden rounded-lg bg-zinc-50 ring-1 ring-zinc-950/10 dark:bg-white/5 dark:ring-white/10') }} data-stl-viewer data-stl-compact data-stl-url="{{ $model['url'] }}">
         <canvas
             data-stl-canvas
             role="img"
-            aria-label="3D model of {{ $title }}"
+            aria-label="{{ $label }}"
             class="block size-full cursor-grab active:cursor-grabbing"
         ></canvas>
 
@@ -34,7 +38,7 @@
             <canvas
                 data-stl-canvas
                 role="img"
-                aria-label="3D model of {{ $title }}"
+                aria-label="{{ $label }}"
                 class="block size-full cursor-grab touch-none active:cursor-grabbing"
             ></canvas>
 
@@ -46,7 +50,7 @@
 
             <span class="flex items-center gap-4">
                 <button type="button" data-stl-reset class="font-semibold text-zinc-800 underline decoration-enby-purple decoration-2 underline-offset-4 hover:decoration-3 dark:text-white">Reset view</button>
-                <a href="{{ $model['url'] }}" download="{{ $model['filename'] }}">Download STL</a>
+                <a href="{{ $model['url'] }}" download="{{ $model['filename'] }}">Download {{ $several ? $model['filename'] : 'STL' }}</a>
             </span>
         </figcaption>
     </figure>

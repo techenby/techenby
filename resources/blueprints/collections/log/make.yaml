@@ -35,14 +35,13 @@ tabs:
               instructions: 'The first photo leads. Give every photo alt text.'
               min_files: 1
           -
-            handle: model
+            handle: models
             field:
               type: assets
-              display: '3D Model'
+              display: '3D Models'
               container: assets
               folder: makes
-              max_files: 1
-              instructions: 'Optional. An .stl file people can spin around on the page.'
+              instructions: 'Optional. .stl files people can spin around on the page.'
               if:
                 kind: 'equals 3d-print'
           -

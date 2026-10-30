@@ -5,7 +5,7 @@
 
     $lately = app(Lately::class);
     $photos = $lately->photos($entry);
-    $model = $lately->model($entry);
+    $models = $lately->models($entry);
     $note = filled($entry->value('note')) ? (string) $entry->value('note') : null;
 @endphp
 
@@ -21,8 +21,8 @@
 
         {!! $lately->caption($entry) !!}
 
-        @if ($model)
-            <x-ui.stl-viewer :$model :title="$entry->get('title')" />
-        @endif
+        @foreach ($models as $model)
+            <x-ui.stl-viewer :$model :title="$entry->get('title')" :several="count($models) > 1" />
+        @endforeach
     </x-ui.article>
 </x-layout>

@@ -25,6 +25,7 @@ class LogPageTest extends TestCase
         Storage::fake('assets', ['url' => '/assets']);
         Storage::disk('assets')->putFileAs('makes/test', UploadedFile::fake()->image('photo.jpg', 40, 30), 'photo.jpg');
         Storage::disk('assets')->putFileAs('makes/test', UploadedFile::fake()->create('holder.stl', 4, 'model/stl'), 'holder.stl');
+        Storage::disk('assets')->putFileAs('makes/test', UploadedFile::fake()->create('lid.stl', 4, 'model/stl'), 'lid.stl');
         Asset::find('assets::makes/test/photo.jpg')->set('alt', 'A test photo of a finished make.')->save();
 
         $this->makeEntry('post', 'log-test-post', [
@@ -223,7 +224,7 @@ class LogPageTest extends TestCase
         $this->makeEntry('make', 'log-test-make-model', [
             'title' => 'Log test make model',
             'kind' => '3d-print',
-            'model' => 'makes/test/holder.stl',
+            'models' => ['makes/test/holder.stl'],
             'content' => 'A make you can spin.',
         ]);
 
@@ -242,7 +243,7 @@ class LogPageTest extends TestCase
             'title' => 'Log test make model row',
             'kind' => '3d-print',
             'photos' => ['makes/test/photo.jpg'],
-            'model' => 'makes/test/holder.stl',
+            'models' => ['makes/test/holder.stl'],
         ]);
 
         foreach (['/log/makes', '/'] as $uri) {
@@ -251,6 +252,40 @@ class LogPageTest extends TestCase
                 ->assertSeeInOrder(['aria-label="Photos of Log test make model row"', 'alt="A test photo of a finished make."', 'data-stl-compact', 'aria-label="3D model of Log test make model row"', 'Log test make model row'], false)
                 ->assertSee('data-stl-url="/assets/makes/test/holder.stl"', false);
         }
+    }
+
+    #[Test]
+    public function a_make_with_several_stl_models_shows_a_3d_viewer_for_each(): void
+    {
+        $this->makeEntry('make', 'log-test-make-models', [
+            'title' => 'Log test make models',
+            'kind' => '3d-print',
+            'photos' => ['makes/test/photo.jpg'],
+            'models' => ['makes/test/holder.stl', 'makes/test/photo.jpg', 'makes/test/lid.stl'],
+            'content' => 'A make in pieces.',
+        ]);
+
+        $this->get('/log/log-test-make-models')
+            ->assertOk()
+            ->assertSeeInOrder([
+                'A make in pieces.',
+                'data-stl-url="/assets/makes/test/holder.stl"',
+                'aria-label="3D model of Log test make models: holder.stl"',
+                'Download holder.stl',
+                'data-stl-url="/assets/makes/test/lid.stl"',
+                'aria-label="3D model of Log test make models: lid.stl"',
+                'Download lid.stl',
+            ], false)
+            ->assertDontSee('data-stl-url="/assets/makes/test/photo.jpg"', false);
+
+        $this->get('/log/makes')
+            ->assertOk()
+            ->assertSeeInOrder([
+                'alt="A test photo of a finished make."',
+                'aria-label="3D model of Log test make models: holder.stl"',
+                'aria-label="3D model of Log test make models: lid.stl"',
+                'Log test make models',
+            ], false);
     }
 
     #[Test]
@@ -264,7 +299,7 @@ class LogPageTest extends TestCase
         $this->makeEntry('make', 'log-test-make-photo-model', [
             'title' => 'Log test make photo model',
             'kind' => '3d-print',
-            'model' => 'makes/test/photo.jpg',
+            'models' => ['makes/test/photo.jpg'],
         ]);
 
         $this->get('/log/log-test-make-no-model')

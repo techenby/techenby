@@ -69,7 +69,7 @@ class Lately
 
     /**
      * @param  list<string>  $blueprints
-     * @return Collection<int, array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, minutes: ?int, event: ?string, links: list<array{label: string, url: string}>, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>, model: ?array{url: string, filename: string}, podcast: ?array{show: string, number: ?int, minutes: ?int, audio: ?string}}>
+     * @return Collection<int, array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, minutes: ?int, event: ?string, links: list<array{label: string, url: string}>, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>, models: list<array{url: string, filename: string}>, podcast: ?array{show: string, number: ?int, minutes: ?int, audio: ?string}}>
      */
     public function items(array $blueprints, ?int $limit = 5): Collection
     {
@@ -118,7 +118,7 @@ class Lately
 
     /**
      * @param  array{guid: string, title: string, link: ?string, audio: ?string, date: Carbon, number: ?int, minutes: ?int, show: string}  $episode
-     * @return array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, minutes: ?int, event: ?string, links: list<array{label: string, url: string}>, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>, model: ?array{url: string, filename: string}, podcast: ?array{show: string, number: ?int, minutes: ?int, audio: ?string}}
+     * @return array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, minutes: ?int, event: ?string, links: list<array{label: string, url: string}>, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>, models: list<array{url: string, filename: string}>, podcast: ?array{show: string, number: ?int, minutes: ?int, audio: ?string}}
      */
     public function episode(array $episode): array
     {
@@ -138,7 +138,7 @@ class Lately
             'event' => null,
             'links' => [],
             'photos' => [],
-            'model' => null,
+            'models' => [],
             'podcast' => [
                 'show' => $episode['show'],
                 'number' => $episode['number'],
@@ -149,7 +149,7 @@ class Lately
     }
 
     /**
-     * @return array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, minutes: ?int, event: ?string, links: list<array{label: string, url: string}>, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>, model: ?array{url: string, filename: string}, podcast: ?array{show: string, number: ?int, minutes: ?int, audio: ?string}}
+     * @return array{id: string, type: string, date: ?Carbon, title: string, url: ?string, summary: ?string, caption: ?string, series: ?string, part: ?int, kind: ?string, note: ?string, minutes: ?int, event: ?string, links: list<array{label: string, url: string}>, photos: list<array{square: string, full: string, width: int, height: int, alt: string}>, models: list<array{url: string, filename: string}>, podcast: ?array{show: string, number: ?int, minutes: ?int, audio: ?string}}
      */
     public function item(Entry $entry): array
     {
@@ -169,7 +169,7 @@ class Lately
             'event' => $entry->blueprint()->handle() === 'talk' ? $this->kind($entry) : null,
             'links' => $this->links($entry),
             'photos' => $this->photos($entry),
-            'model' => $this->model($entry),
+            'models' => $this->models($entry),
             'podcast' => null,
         ];
     }
@@ -215,22 +215,22 @@ class Lately
     }
 
     /**
-     * A make's 3D model, when it has an STL to spin around.
+     * A make's 3D models, for the STLs worth spinning around.
      *
-     * @return array{url: string, filename: string}|null
+     * @return list<array{url: string, filename: string}>
      */
-    public function model(Entry $entry): ?array
+    public function models(Entry $entry): array
     {
-        $asset = $entry->augmentedValue('model')->value();
+        $models = $entry->augmentedValue('models')->value();
 
-        if (! $asset instanceof AssetContract || strtolower($asset->extension()) !== 'stl') {
-            return null;
-        }
-
-        return [
-            'url' => (string) $asset->url(),
-            'filename' => $asset->basename(),
-        ];
+        return collect($models instanceof AssetContract ? [$models] : ($models?->get() ?? []))
+            ->filter(fn ($asset) => strtolower($asset->extension()) === 'stl')
+            ->map(fn ($asset) => [
+                'url' => (string) $asset->url(),
+                'filename' => $asset->basename(),
+            ])
+            ->values()
+            ->all();
     }
 
     /**
