@@ -5,6 +5,7 @@
 
     $lately = app(Lately::class);
     $photos = $lately->photos($entry);
+    $model = $lately->model($entry);
     $note = filled($entry->value('note')) ? (string) $entry->value('note') : null;
 @endphp
 
@@ -19,5 +20,9 @@
         @endif
 
         {!! $lately->caption($entry) !!}
+
+        @if ($model)
+            <x-ui.stl-viewer :$model :title="$entry->get('title')" />
+        @endif
     </x-ui.article>
 </x-layout>

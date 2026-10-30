@@ -2,6 +2,7 @@
 
 @php
     $photos = collect($item['photos'] ?? []);
+    $model = $item['model'] ?? null;
     $modal = 'photos-'.$item['id'];
     $series = $item['series']
         ? $item['series'].(isset($item['part']) ? ' · Part '.$item['part'] : '')
@@ -54,8 +55,8 @@
         </div>
     @else
         <div class="space-y-3">
-            @if ($photos->isNotEmpty())
-                <x-ui.photo-carousel :$photos :title="$item['title']" :name="$modal" />
+            @if ($photos->isNotEmpty() || $model)
+                <x-ui.photo-carousel :$photos :$model :title="$item['title']" :name="$modal" />
             @endif
 
             <div class="space-y-2">

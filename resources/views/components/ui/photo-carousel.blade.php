@@ -1,4 +1,4 @@
-@props(['photos', 'title', 'name', 'slide' => 'w-1/3 sm:w-1/4 lg:w-1/5'])
+@props(['photos', 'title', 'name', 'model' => null, 'slide' => 'w-1/3 sm:w-1/4 lg:w-1/5'])
 
 @php
     $photos = collect($photos);
@@ -21,6 +21,12 @@
                 </flux:modal.trigger>
             </flux:carousel.slide>
         @endforeach
+
+        @if ($model)
+            <flux:carousel.slide :class="$slide">
+                <x-ui.stl-viewer :$model :$title compact />
+            </flux:carousel.slide>
+        @endif
     </flux:carousel>
 
     <flux:modal :$name variant="bare" class="m-0 h-dvh max-h-none w-full max-w-none overflow-hidden p-0 text-white backdrop:bg-zinc-950/95!">

@@ -119,3 +119,9 @@ document.querySelectorAll('[data-avatar-toggle]').forEach((avatarToggle) => {
         avatarToggle.setAttribute('aria-pressed', avatarToggle.getAttribute('aria-pressed') === 'true' ? 'false' : 'true')
     })
 })
+
+document.querySelectorAll('[data-stl-viewer]').forEach(async (viewer) => {
+    const { mountStlViewer } = await import('./stl-viewer.js')
+
+    mountStlViewer(viewer)
+})
