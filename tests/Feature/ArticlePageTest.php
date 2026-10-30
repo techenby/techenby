@@ -58,7 +58,7 @@ class ArticlePageTest extends TestCase
             ->assertSeeInOrder(['On this page', 'href="#intro"', 'href="#first-section"', 'href="#second-section"'], false)
             ->assertSee('alt="A man pulls his elbow down in triumph."', false)
             ->assertSee('me, reading the announcement')
-            ->assertSeeInOrder(['Get Enby&middot;Mail', 'name="fields_first_name"', 'name="email"', 'More from the Log'], false)
+            ->assertSeeInOrder(['Get Enby·Mail', 'name="fields_first_name"', 'name="email"', 'More from the Log'], false)
             ->assertSee('action="https://track.bentonow.com/forms/f84032af03a501454edca73113402d0d/%24subscribe?hardened=true"', false);
     }
 

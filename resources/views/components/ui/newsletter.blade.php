@@ -1,5 +1,7 @@
+@props(['heading' => 'Get Enby·Mail', 'description' => 'Monthly-ish updates: notes on Laravel, prints in progress, the occasional missing 1×2 plate.'])
+
 {{-- Bento FormKit form: posts straight to Bento, which redirects back here with ?bento_form=rdlmvzzr on success. --}}
-<flux:card>
+<flux:card {{ $attributes }}>
     <form
         action="https://track.bentonow.com/forms/f84032af03a501454edca73113402d0d/%24subscribe?hardened=true"
         method="POST"
@@ -9,8 +11,10 @@
         aria-labelledby="bento-formkit-rdlmvzzr-title"
     >
         <div class="space-y-1.5">
-            <flux:heading level="2" id="bento-formkit-rdlmvzzr-title" class="font-display text-xl font-semibold tracking-tight text-zinc-800 dark:text-white">Get Enby&middot;Mail</flux:heading>
-            <flux:text class="text-pretty">Monthly-ish updates: notes on Laravel, prints in progress, the occasional missing 1&times;2 plate.</flux:text>
+            <flux:heading level="2" id="bento-formkit-rdlmvzzr-title" class="font-display text-xl font-semibold tracking-tight text-zinc-800 dark:text-white">{{ $heading }}</flux:heading>
+            @if (filled($description))
+                <flux:text class="text-pretty">{{ $description }}</flux:text>
+            @endif
         </div>
 
         <input type="hidden" name="redirect" value="https://techenby.com" />
