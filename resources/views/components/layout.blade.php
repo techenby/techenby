@@ -54,10 +54,12 @@
                 const root = document.documentElement;
                 let textSize = null;
                 let reduceMotion = null;
+                let readingComfortCollapsed = null;
 
                 try {
                     textSize = localStorage.getItem('techenby:text-size');
                     reduceMotion = localStorage.getItem('techenby:reduce-motion');
+                    readingComfortCollapsed = localStorage.getItem('techenby:reading-comfort-collapsed');
                 } catch {}
 
                 if (['sm', 'base', 'lg'].includes(textSize)) {
@@ -68,6 +70,8 @@
                     'reduce-motion',
                     reduceMotion === null ? matchMedia('(prefers-reduced-motion: reduce)').matches : reduceMotion === 'true',
                 );
+
+                root.toggleAttribute('data-reading-comfort-collapsed', readingComfortCollapsed === 'true');
             })();
         </script>
     </head>
