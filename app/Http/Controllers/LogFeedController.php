@@ -20,7 +20,7 @@ class LogFeedController extends Controller
             ->view('feeds.log', [
                 'title' => 'Andy Swick’s Log' . ($filter ? ' · ' . $filter['label'] : ''),
                 'link' => url($type ? "/log/{$type}" : '/log'),
-                'self' => url($type ? "/log/{$type}/feed" : '/log/feed'),
+                'self' => $type ? route('log.feed.type', $type) : route('log.feed'),
                 'items' => $lately->items($blueprints, 30),
             ])
             ->header('Content-Type', 'application/rss+xml; charset=UTF-8');

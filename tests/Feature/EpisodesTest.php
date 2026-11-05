@@ -42,7 +42,7 @@ class EpisodesTest extends TestCase
             ->assertDontSee('href="/log/episodes"', false);
 
         $this->get('/log/episodes')->assertNotFound();
-        $this->get('/log/episodes/feed')->assertNotFound();
+        $this->get('/log/episodes/feed.xml')->assertNotFound();
 
         Http::assertNothingSent();
     }
@@ -111,7 +111,7 @@ class EpisodesTest extends TestCase
 
         $this->assertTrue(app(Podcast::class)->episodes()->isEmpty());
 
-        $this->get('/log/feed')->assertOk();
+        $this->get('/log/feed.xml')->assertOk();
     }
 
     #[Test]
@@ -188,7 +188,7 @@ class EpisodesTest extends TestCase
     {
         $this->fakeFeed();
 
-        $rss = simplexml_load_string($this->get('/log/episodes/feed')->assertOk()->getContent());
+        $rss = simplexml_load_string($this->get('/log/episodes/feed.xml')->assertOk()->getContent());
         $items = collect(iterator_to_array($rss->channel->item, false));
 
         $this->assertStringContainsString('Episodes', (string) $rss->channel->title);
@@ -197,7 +197,7 @@ class EpisodesTest extends TestCase
         $this->assertSame('Episode', (string) $items->first()->category);
         $this->assertSame('https://media.transistor.fm/b2a1c3d4/trailer.mp3', (string) $items->last()->link);
 
-        $everything = collect(iterator_to_array(simplexml_load_string($this->get('/log/feed')->getContent())->channel->item, false))
+        $everything = collect(iterator_to_array(simplexml_load_string($this->get('/log/feed.xml')->getContent())->channel->item, false))
             ->map(fn ($item) => (string) $item->title);
 
         $this->assertContains('Shipping on a Sunday', $everything);

@@ -42,7 +42,7 @@ class LogFeedTest extends TestCase
     #[Test]
     public function the_log_feed_lists_every_type(): void
     {
-        $response = $this->get('/log/feed')
+        $response = $this->get('/log/feed.xml')
             ->assertOk()
             ->assertHeader('Content-Type', 'application/rss+xml; charset=UTF-8');
 
@@ -66,7 +66,7 @@ class LogFeedTest extends TestCase
     #[Test]
     public function each_filter_has_its_own_feed(): void
     {
-        $response = $this->get('/log/tips/feed')->assertOk();
+        $response = $this->get('/log/tips/feed.xml')->assertOk();
 
         $rss = simplexml_load_string($response->getContent());
         $titles = collect(iterator_to_array($rss->channel->item, false))->map(fn ($item) => (string) $item->title);
@@ -79,7 +79,7 @@ class LogFeedTest extends TestCase
     #[Test]
     public function an_unknown_filter_has_no_feed(): void
     {
-        $this->get('/log/nonsense/feed')->assertNotFound();
+        $this->get('/log/nonsense/feed.xml')->assertNotFound();
     }
 
     #[Test]
@@ -87,7 +87,7 @@ class LogFeedTest extends TestCase
     {
         $this->makeEntry('post', 'feed-test-draft', ['title' => 'Feed test draft'], published: false);
 
-        $this->get('/log/feed')
+        $this->get('/log/feed.xml')
             ->assertOk()
             ->assertDontSee('Feed test draft');
     }
@@ -97,12 +97,12 @@ class LogFeedTest extends TestCase
     {
         $this->get('/log')
             ->assertOk()
-            ->assertSee('href="/log/feed"', false)
+            ->assertSee('href="/log/feed.xml"', false)
             ->assertSee('Subscribe to everything');
 
         $this->get('/log/tips')
             ->assertOk()
-            ->assertSee('href="/log/tips/feed"', false)
+            ->assertSee('href="/log/tips/feed.xml"', false)
             ->assertSee('Subscribe to Tips');
     }
 

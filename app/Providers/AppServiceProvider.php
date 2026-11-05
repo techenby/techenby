@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Mechanisms\FrontendAssets\FrontendAssets;
 use Livewire\Mechanisms\HandleRequests\EndpointResolver;
+use Statamic\Facades\Entry;
 use Statamic\StaticSite\SSG;
 
 class AppServiceProvider extends ServiceProvider
@@ -35,7 +36,17 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
-        SSG::addUrls(fn (): array => collect(array_keys(app(Lately::class)->filters()))->map(fn (string $type) => "/log/{$type}")->all());
+        // Plain Laravel routes aren't crawled by the generator, so list the Log filters, their feeds, and the friends OPML.
+        SSG::addUrls(function (): array {
+            $types = array_keys(app(Lately::class)->filters());
+            $friends = Entry::findByUri('/friends');
+
+            return collect($types)
+                ->flatMap(fn (string $type) => ["/log/{$type}", "/log/{$type}/feed.xml"])
+                ->push('/log/feed.xml')
+                ->when($friends?->published(), fn ($urls) => $urls->push('/friends.opml'))
+                ->all();
+        });
 
         SSG::after(function (): void {
             $destination = config('statamic.ssg.destination');
