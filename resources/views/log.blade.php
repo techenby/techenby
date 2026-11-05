@@ -19,6 +19,8 @@
 
 <x-layout
     :title="($activeFilter ? $filters[$activeFilter]['label'].' · ' : '').($logPage?->get('title') ?? 'Log')"
+    :social-title="$logPage?->get('title')"
+    :social-image="$logPage ? app(App\Support\SocialCard::class)->url($logPage) : null"
     :updated-at="$logPage?->lastModified()"
     :rss-feed-title="$activeFilter ? 'Andy Swick’s Log · '.$filters[$activeFilter]['label'] : null"
     :rss-feed-url="$activeFilter ? route('log.feed.type', $activeFilter) : null"

@@ -4,7 +4,7 @@
     $entry = Entry::find($id);
 @endphp
 
-<x-layout :$title :description="$entry->get('subheading')" :updated-at="$entry->lastModified()">
+<x-layout :$title :description="$entry->get('subheading')" :social-title="$entry->get('title')" :social-image="app(App\Support\SocialCard::class)->url($entry)" :updated-at="$entry->lastModified()">
     <div class="max-w-[42.5rem] space-y-12">
         <x-ui.page-header :heading="$entry->get('heading') ?? $entry->get('title')" :subheading="$entry->get('subheading')" />
 

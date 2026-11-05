@@ -6,7 +6,7 @@
     $sections = collect($entry->value('sections') ?? [])->filter(fn (array $section) => filled($section['heading'] ?? null));
 @endphp
 
-<x-layout :$title :updated-at="$entry->lastModified()">
+<x-layout :$title :social-title="$entry->get('title')" :social-image="app(App\Support\SocialCard::class)->url($entry)" :updated-at="$entry->lastModified()">
     <div class="space-y-12">
         <x-ui.page-header
             :heading="$entry->get('title')"

@@ -5,7 +5,12 @@
     $lately = app(Lately::class)->items(Entry::find($id)?->value('lately') ?? [], $limit->value());
 @endphp
 
-<x-layout title="Andy Swick" :updated-at="$last_modified ?? null">
+<x-layout
+    title="Andy Swick"
+    social-title="Andy Swick"
+    :social-image="app(App\Support\SocialCard::class)->url(Entry::find($id))"
+    :updated-at="$last_modified ?? null"
+>
     <div class="space-y-16">
         <div class="grid gap-8 md:grid-cols-[minmax(0,1fr)_20rem] md:gap-14">
             <div class="space-y-5">

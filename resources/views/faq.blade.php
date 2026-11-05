@@ -2,13 +2,15 @@
     use Illuminate\Support\Str;
     use Statamic\Facades\Entry;
 
+    $entry = Entry::find($id);
+
     $faqs = Entry::query()
         ->where('collection', 'faqs')
         ->orderBy('title')
         ->get();
 @endphp
 
-<x-layout :$title :updated-at="$last_modified ?? null" hide-email>
+<x-layout :$title :social-title="$entry->get('title')" :social-image="app(App\Support\SocialCard::class)->url($entry)" :updated-at="$last_modified ?? null" hide-email>
     <div class="max-w-[42.5rem] space-y-12">
         <x-ui.page-header :heading="$heading ?? $title" :$subheading />
 

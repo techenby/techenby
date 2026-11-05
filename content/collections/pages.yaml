@@ -13,5 +13,9 @@ preview_targets:
     label: Entry
     url: '{permalink}'
     refresh: true
+  -
+    label: 'Social card'
+    url: /social-card-preview
+    refresh: true
 structure:
   root: true
