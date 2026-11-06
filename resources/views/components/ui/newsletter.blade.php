@@ -1,4 +1,4 @@
-@props(['heading' => 'Get Enby·Mail', 'description' => 'Monthly-ish updates: notes on Laravel, prints in progress, the occasional missing 1×2 plate.'])
+@props(['heading' => 'Get Enby·Mail', 'description' => 'Weekly updates, Friday afternoons: notes on Laravel, prints in progress, the occasional missing 1×2 plate.'])
 
 {{-- Bento FormKit form: posts straight to Bento, which redirects back here with ?bento_form=rdlmvzzr on success. --}}
 <flux:card {{ $attributes }}>

@@ -24,7 +24,7 @@
                 </li>
                 <li class="py-4">
                     <p class="font-semibold text-zinc-800 dark:text-white">Nothing else</p>
-                    <flux:text class="text-pretty">Monthly-ish, and only what you signed up for. Unsubscribe from any email.</flux:text>
+                    <flux:text class="text-pretty">Once a week on Friday afternoons, and only what you signed up for. Unsubscribe from any email.</flux:text>
                 </li>
             </ul>
         </section>

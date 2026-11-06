@@ -19,7 +19,7 @@ class NewsletterPageTest extends TestCase
             ->assertSeeInOrder(['<form', 'Sign up', 'name="fields_first_name"', 'name="email"', 'Subscribe', '</form>'], false)
             ->assertSee('action="https://track.bentonow.com/forms/', false)
             ->assertDontSee('Get Enby·Mail')
-            ->assertDontSee('Monthly-ish updates:')
+            ->assertDontSee('Weekly updates, Friday afternoons:')
             ->assertSee('What lands in your inbox');
     }
 
