@@ -1,0 +1,41 @@
+title: Issue
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              display: Subject
+              instructions: 'The subject line it went out with.'
+              required: true
+              validate:
+                - required
+          -
+            handle: content
+            field:
+              type: markdown
+              display: Content
+              instructions: 'The issue as sent, minus the footer.'
+              localizable: true
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: description
+            field:
+              type: textarea
+              display: Description
+              instructions: 'Optional. A sentence for search results and link previews.'
+              localizable: true

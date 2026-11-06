@@ -99,6 +99,17 @@ class SocialCardTest extends TestCase
     }
 
     #[Test]
+    public function newsletter_issues_get_a_card_labelled_with_the_newsletter_name(): void
+    {
+        $socialCard = app(SocialCard::class);
+
+        $issue = $this->makeEntry('issue', 'social-card-test-issue', ['title' => 'Issue subject'], collection: 'newsletter');
+
+        $this->assertSame('Enby·Mail', $socialCard->label($issue));
+        Storage::disk('social_cards')->assertExists($socialCard->path($issue));
+    }
+
+    #[Test]
     public function makes_are_labelled_with_their_kind_and_moments_as_moments(): void
     {
         $socialCard = app(SocialCard::class);

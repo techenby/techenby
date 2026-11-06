@@ -20,6 +20,10 @@ class SocialCard
 
     public const PAGES_COLLECTION = 'pages';
 
+    public const NEWSLETTER_COLLECTION = 'newsletter';
+
+    public const NEWSLETTER_LABEL = 'Enby·Mail';
+
     /**
      * Part of every card's file name, so bumping it redraws every card after a design change.
      */
@@ -64,13 +68,13 @@ class SocialCard
     public function __construct(public BlogSeries $series, public Lately $lately) {}
 
     /**
-     * Every Log entry type except episodes, and every page.
+     * Every Log entry type except episodes, every page, and every newsletter issue.
      */
     public function supports(Entry $entry): bool
     {
         return match ($entry->collectionHandle()) {
             Lately::COLLECTION => in_array($entry->blueprint()->handle(), self::BLUEPRINTS, true),
-            self::PAGES_COLLECTION => true,
+            self::PAGES_COLLECTION, self::NEWSLETTER_COLLECTION => true,
             default => false,
         };
     }
@@ -136,12 +140,16 @@ class SocialCard
     }
 
     /**
-     * The purple line above the title: the series, a make's kind, or the entry type. Pages have none.
+     * The purple line above the title: the series, a make's kind, the entry type, or the newsletter's name. Pages have none.
      */
     public function label(Entry $entry): ?string
     {
         if ($entry->collectionHandle() === self::PAGES_COLLECTION) {
             return null;
+        }
+
+        if ($entry->collectionHandle() === self::NEWSLETTER_COLLECTION) {
+            return self::NEWSLETTER_LABEL;
         }
 
         $series = $this->series->for($entry);

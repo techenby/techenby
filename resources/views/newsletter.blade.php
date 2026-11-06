@@ -2,6 +2,7 @@
     use Statamic\Facades\Entry;
 
     $entry = Entry::find($id);
+    $issues = Entry::query()->where('collection', 'newsletter')->whereStatus('published')->orderBy('date', 'desc')->get();
 @endphp
 
 <x-layout :$title :description="$entry->get('subheading')" :social-title="$entry->get('title')" :social-image="app(App\Support\SocialCard::class)->url($entry)" :updated-at="$entry->lastModified()">
@@ -28,6 +29,21 @@
                 </li>
             </ul>
         </section>
+
+        @if ($issues->isNotEmpty())
+            <section id="past-issues" aria-labelledby="newsletter-past-issues" class="space-y-4">
+                <h2 id="newsletter-past-issues" class="font-display text-xl font-semibold tracking-tight text-zinc-800 dark:text-white">Past issues</h2>
+
+                <ul role="list" class="divide-y divide-zinc-950/10 border-y border-zinc-950/10 dark:divide-white/10 dark:border-white/10">
+                    @foreach ($issues as $issue)
+                        <li class="grid gap-x-6 gap-y-1 py-4 sm:grid-cols-[7rem_minmax(0,1fr)]">
+                            <time datetime="{{ $issue->date()->toDateString() }}" class="text-sm/6 text-zinc-500 dark:text-zinc-400">{{ $issue->date()->format('M j, Y') }}</time>
+                            <a href="{{ $issue->url() }}" class="font-semibold text-zinc-800 underline decoration-enby-purple decoration-2 underline-offset-4 dark:text-white">{{ $issue->get('title') }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </section>
+        @endif
 
         <flux:text class="text-pretty">
             Rather use a feed reader? <a href="{{ route('log.feed') }}" class="font-semibold text-zinc-800 underline decoration-enby-purple decoration-2 underline-offset-4 dark:text-white">Subscribe to the Log&rsquo;s RSS feed</a> instead.
